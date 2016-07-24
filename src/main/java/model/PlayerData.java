@@ -2,6 +2,12 @@ package model;
 
 public class PlayerData {
 	private String name;
+	private Long id;
+	private Long x;
+	private Long y;
+	
+	private Long mouseX;
+	private Long mouseY;
 	
 	public String getName() {
 		return name;
@@ -39,19 +45,12 @@ public class PlayerData {
 	public void setMouseY(Long mouseY) {
 		this.mouseY = mouseY;
 	}
-	private Long id;
-	private Long x;
-	private Long y;
 	
-	private Long mouseX;
-	private Long mouseY;
-
 	public PlayerData() {
 		super();
 	}
 	
 	public PlayerData(Long id, String name) {
-		super();
 		this.name = name;
 		this.id = id;
 		this.x = 0L;

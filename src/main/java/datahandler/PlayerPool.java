@@ -1,9 +1,14 @@
 package datahandler;
 
+import java.util.HashMap;
 import java.util.Map;
+
+import org.springframework.stereotype.Component;
 
 import model.PlayerData;
 
+
+@Component
 public class PlayerPool {
 	private Map<Long, PlayerData> playerPool;
 	
@@ -11,8 +16,8 @@ public class PlayerPool {
 		return playerPool;
 	}
 	
-	public PlayerPool(Map<Long, PlayerData> playerPool){
-		this.playerPool = playerPool;
+	public PlayerPool(){
+		playerPool = new HashMap<Long, PlayerData>();
 	}
 	
 	public boolean registerPlayer(Long id, String name){

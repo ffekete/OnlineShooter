@@ -15,14 +15,16 @@
         }
         
         function connect() {
-            var socket = new SockJS('/hello');
+            var socket = new SockJS('/registerPlayer');
             stompClient = Stomp.over(socket);            
             stompClient.connect({}, function(frame) {
                 setConnected(true);
                 console.log('Connected: ' + frame);
-                stompClient.subscribe('/topic/greetings', function(greeting){
-                    showGreeting(JSON.parse(greeting.body).content);
+                
+                stompClient.subscribe('/playerRegistered', function(playerStatus){
+                    showStatus(JSON.parse(playerStatus.body).name);
                 });
+                
             });
         }
         
@@ -36,14 +38,14 @@
         
         function sendName() {
             var name = document.getElementById('name').value;
-            stompClient.send("/app/hello", {}, JSON.stringify({ 'name': name }));
+            stompClient.send("/app/registerPlayer", {}, name);
         }
         
-        function showGreeting(message) {
+        function showStatus(message) {
             var response = document.getElementById('response');
             var p = document.createElement('p');
             p.style.wordWrap = 'break-word';
-            p.appendChild(document.createTextNode(message));
+            p.appendChild(document.createTextNode("Player successfully registered with name: " + message));
             response.appendChild(p);
         }
     </script>
