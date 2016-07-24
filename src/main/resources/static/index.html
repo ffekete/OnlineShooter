@@ -4,51 +4,7 @@
     <title>Hello WebSocket</title>
     <script src="sockjs-0.3.4.js"></script>
     <script src="stomp.js"></script>
-    <script type="text/javascript">
-        var stompClient = null;
-        
-        function setConnected(connected) {
-            document.getElementById('connect').disabled = connected;
-            document.getElementById('disconnect').disabled = !connected;
-            document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
-            document.getElementById('response').innerHTML = '';
-        }
-        
-        function connect() {
-            var socket = new SockJS('/registerPlayer');
-            stompClient = Stomp.over(socket);            
-            stompClient.connect({}, function(frame) {
-                setConnected(true);
-                console.log('Connected: ' + frame);
-                
-                stompClient.subscribe('/playerRegistered', function(playerStatus){
-                    showStatus(JSON.parse(playerStatus.body).name);
-                });
-                
-            });
-        }
-        
-        function disconnect() {
-            if (stompClient != null) {
-                stompClient.disconnect();
-            }
-            setConnected(false);
-            console.log("Disconnected");
-        }
-        
-        function sendName() {
-            var name = document.getElementById('name').value;
-            stompClient.send("/app/registerPlayer", {}, name);
-        }
-        
-        function showStatus(message) {
-            var response = document.getElementById('response');
-            var p = document.createElement('p');
-            p.style.wordWrap = 'break-word';
-            p.appendChild(document.createTextNode("Player successfully registered with name: " + message));
-            response.appendChild(p);
-        }
-    </script>
+    <script type="text/javascript" src="registerForm.js"> </script>
 </head>
 <body onload="disconnect()">
 <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being enabled. Please enable
@@ -60,7 +16,7 @@
     </div>
     <div id="conversationDiv">
         <label>What is your name?</label><input type="text" id="name" />
-        <button id="sendName" onclick="sendName();">Send</button>
+        <button id="sendName" onclick="registerPlayerWithName();">Send</button>
         <p id="response"></p>
     </div>
 </div>
