@@ -9,6 +9,8 @@ public class PlayerData {
 	private Long mouseX;
 	private Long mouseY;
 	
+	private Double angle;
+	
 	public String getName() {
 		return name;
 	}
@@ -39,6 +41,12 @@ public class PlayerData {
 	public void setMouseX(Long mouseX) {
 		this.mouseX = mouseX;
 	}
+	public Double getAngle() {
+		return angle;
+	}
+	public void setAngle(Double angle) {
+		this.angle = angle;
+	}
 	public Long getMouseY() {
 		return mouseY;
 	}
@@ -57,6 +65,7 @@ public class PlayerData {
 		this.y = 0L;
 		this.mouseX = 0L;
 		this.mouseY = 0L;
+		this.angle = 0.0d;
 	}
 	
 	public String toString(){
