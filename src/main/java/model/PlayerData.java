@@ -58,4 +58,8 @@ public class PlayerData {
 		this.mouseX = 0L;
 		this.mouseY = 0L;
 	}
+	
+	public String toString(){
+		return this.name + " " + this.mouseX + " " + this.mouseY;
+	}
 }

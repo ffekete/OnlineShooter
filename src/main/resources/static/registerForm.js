@@ -29,10 +29,13 @@ function disconnect() {
 }
 
 function responseArrivedForRegisterPlayer(playerStatus) {
-	var playerData = JSON.parse(playerStatus.body); 
-	if (playerData.registered) {
-		//var id = JSON.parse(playerStatus.body).id;
-		document.getElementById("response").innerHTML = "Redirecting to game area, please wait...";
+	var QualifiedPlayerData = JSON.parse(playerStatus.body); 
+	if (QualifiedPlayerData.registered) {
+		var id = QualifiedPlayerData.playerData.id;
+		
+		window.sessionStorage.setItem("playerId", id);
+		
+		document.getElementById("response").innerHTML = "Redirecting to game area, please wait..." + id;
 		window.location.replace("/game_area.html");
 
 	} else {
