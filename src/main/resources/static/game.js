@@ -9,7 +9,7 @@ var playerData = {
 	id: window.sessionStorage.getItem("playerId"),
 	mouseX : 0,
 	mouseY : 0,
-	shipAngle: 30
+	shipAngle: 0.0
 };
 
 function connect() {
@@ -23,10 +23,7 @@ function connect() {
 }
 
 function playerDataArrived(playerDataFromServer){
-	console.log("New data arrived: " + playerDataFromServer.body);
 	playerData.shipAngle = JSON.parse(playerDataFromServer.body).angle;
-	console.log("Fakk:" + playerData.shipAngle);
-	
 }
 
 function drawBorder(){
@@ -61,11 +58,11 @@ function drawPlayerShip(){
 	var ctx = c.getContext("2d");
 	ctx.save();
 	
+	ctx.fillStyle = "red";	
 	ctx.translate(410,310);
 	ctx.rotate(playerData.shipAngle * Math.PI / 180);
 	ctx.fillRect(-10, -10, 20, 20);
-	ctx.fillStyle = "red";
-	
+
 	ctx.restore();
 }
 

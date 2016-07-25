@@ -35,6 +35,7 @@ public class PlayerRegisterController {
 		if(playerPool.registerPlayer(newId, name)){
 			PlayerData playerData = playerPool.getPlayerById(newId);
 			qualifiedPlayerData = playerDataToQualifiedPlayerDataTransformer.tranform(playerData, true);
+			System.out.println("Player registered with id " + newId + ".");
 		}
 		
 		return qualifiedPlayerData;
