@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import config.CanvasConstants;
 import datahandler.PlayerPool;
 import model.PlayerData;
 
@@ -16,7 +17,7 @@ public class PlayerDataProcessor {
 	PlayerPool playerPool;
 	
 	private double calculateAngle(Long targetX, Long targetY) {
-	    double angle = Math.toDegrees(Math.atan2(targetY - 0, targetX - 0));
+	    double angle = Math.toDegrees(Math.atan2(targetY - CanvasConstants.CANVAS_HALF_HEIGHT, targetX - CanvasConstants.CANVAS_HALF_WIDTH));
 
 	    if(angle < 0){
 	        angle += 360;
@@ -26,10 +27,11 @@ public class PlayerDataProcessor {
 	}
 	
 	public void updateShipAngles() throws InterruptedException{
-		System.out.println("Scheduled");
+		
 		if(playerPool != null){
 			Iterator<Long> shipIds = playerPool.getPool().keySet().iterator();
 			
+			System.out.println("****************************************");
 			while(shipIds.hasNext()){
 				Long nextShipId = shipIds.next();
 				PlayerData nextShip = playerPool.getPlayerById(nextShipId);
