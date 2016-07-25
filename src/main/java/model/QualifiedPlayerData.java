@@ -1,9 +1,11 @@
 package model;
 
+/** This data will be sent to the client side after a registration attempt. */
 public class QualifiedPlayerData {
 	private PlayerData playerData;
 	private boolean registered;
 	
+	/* Getters/setters and constructor */
 	public PlayerData getPlayerData() {
 		return playerData;
 	}

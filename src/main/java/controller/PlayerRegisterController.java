@@ -13,6 +13,7 @@ import model.PlayerData;
 import model.QualifiedPlayerData;
 import transformer.PlayerDataToQualifiedPlayerDataTransformer;
 
+/** Serves all incoming register new player requests. */
 @Controller
 public class PlayerRegisterController {
 
@@ -22,6 +23,7 @@ public class PlayerRegisterController {
 	@Autowired
 	PlayerDataToQualifiedPlayerDataTransformer playerDataToQualifiedPlayerDataTransformer;
 	
+	/** Receives new player registration request on endpoint REGISTER_PLAYER and sends answers by broker REGISTER_PLAYERED_STATUS. */
 	@MessageMapping(EndpointPaths.REGISTER_PLAYER)
 	@SendTo(BrokerPaths.PLAYER_REGISTERED_STATUS)
 	public QualifiedPlayerData registerNewPlayer(String name){
