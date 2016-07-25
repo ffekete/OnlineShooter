@@ -36,7 +36,7 @@ public class PlayerDataProcessor {
 			while(shipIds.hasNext()){
 				Long nextShipId = shipIds.next();
 				PlayerData nextShip = playerPool.getPlayerById(nextShipId);
-				nextShip.setAngle(calculateAngle(nextShip.getMouseX(), nextShip.getMouseY(), CanvasConstants.CANVAS_HALF_HEIGHT, CanvasConstants.CANVAS_HALF_WIDTH));	
+				nextShip.setAngle(calculateAngle(nextShip.getMouseX(), nextShip.getMouseY(), CanvasConstants.CANVAS_HALF_WIDTH, CanvasConstants.CANVAS_HALF_HEIGHT));	
 				System.out.println(nextShip.getAngle());
 			}
 		}

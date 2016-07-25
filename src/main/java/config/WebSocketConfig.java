@@ -20,7 +20,8 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 	/** configuring all message brokers to send messages to clients. */
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry config) {
-		config.enableSimpleBroker(BrokerPaths.PLAYER_REGISTERED_STATUS);
+		config.enableSimpleBroker(BrokerPaths.PLAYER_REGISTERED_STATUS, BrokerPaths.PROVIDE_PLAYER_DATA);
+		
 		config.setApplicationDestinationPrefixes("/app");
 	}
 
@@ -29,6 +30,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		registry.addEndpoint(EndpointPaths.REGISTER_PLAYER).withSockJS();
 		registry.addEndpoint(EndpointPaths.UPDATE_PLAYER_DATA).withSockJS();
+		registry.addEndpoint(EndpointPaths.REQUEST_PLAYER_DATA).withSockJS();
 	}
 
 }

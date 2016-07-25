@@ -1,19 +1,32 @@
 
 var stompClient = null;
 
+var playerDataFromServer = {
+	
+};
+
 var playerData = {
 	id: window.sessionStorage.getItem("playerId"),
 	mouseX : 0,
-	mouseY : 0
+	mouseY : 0,
+	shipAngle: 30
 };
 
 function connect() {
-	var socket = new SockJS('/updatePlayerData');
+	var socket = new SockJS('/requestPlayerData');
 	stompClient = Stomp.over(socket);
 	stompClient.connect({}, function(frame) {
-		setConnected(true);
 		console.log('Connected: ' + frame);
+		
+		stompClient.subscribe('/providePlayerData', playerDataArrived);
 	});
+}
+
+function playerDataArrived(playerDataFromServer){
+	console.log("New data arrived: " + playerDataFromServer.body);
+	playerData.shipAngle = JSON.parse(playerDataFromServer.body).angle;
+	console.log("Fakk:" + playerData.shipAngle);
+	
 }
 
 function drawBorder(){
@@ -40,6 +53,24 @@ function draw(){
 	var ctx = c.getContext("2d");
 	ctx.clearRect(0,0, c.width, c.height);
 	drawBorder();
+	drawPlayerShip();
+}
+
+function drawPlayerShip(){
+	var c = document.getElementById("gameArea");
+	var ctx = c.getContext("2d");
+	ctx.save();
+	
+	ctx.translate(410,310);
+	ctx.rotate(playerData.shipAngle * Math.PI / 180);
+	ctx.fillRect(-10, -10, 20, 20);
+	ctx.fillStyle = "red";
+	
+	ctx.restore();
+}
+
+function pollPlayerData(){
+	stompClient.send("/app/requestPlayerData", {}, playerData.id);
 }
 
 function updatePlayerData(){
@@ -55,8 +86,12 @@ function updatePlayerData(){
 function start(){
 	drawBorder();
 	connect();
-	setInterval(draw, 10);
-	setInterval(updatePlayerData, 100);
+	setInterval(draw, 30);
+	setInterval(updatePlayerData, 30);
+	setInterval(pollPlayerData, 30);
+	var c = document.getElementById("gameArea");
+	var ctx = c.getContext("2d");
+	ctx.rotate(0*Math.PI*180);
 }
 
 function updateMouseCoordinates(event){
