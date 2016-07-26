@@ -11,6 +11,8 @@ public class SentPlayerData {
 	
 	private Long connectionId;
 	
+	List<PlayerData> visiblePlayers;
+	
 	List<BulletData> visibleBullets;
 
 	public Long getId() {
@@ -55,6 +57,14 @@ public class SentPlayerData {
 
 	public List<BulletData> getVisibleBullets() {
 		return visibleBullets;
+	}
+	
+	public List<PlayerData> getVisiblePlayers() {
+		return visiblePlayers;
+	}
+
+	public void setVisiblePlayers(List<PlayerData> visiblePlayers) {
+		this.visiblePlayers = visiblePlayers;
 	}
 
 	public void setVisibleBullets(List<BulletData> visibleBullets) {

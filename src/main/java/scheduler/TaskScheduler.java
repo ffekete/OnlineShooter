@@ -37,5 +37,7 @@ public class TaskScheduler {
 		/* Do the math */
 		playerDataPrcessor.updateShipAngles();
 		
+		playerDataPrcessor.updatePlayerCoordinates();
+		
 	}
 }

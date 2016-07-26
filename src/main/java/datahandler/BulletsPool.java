@@ -25,15 +25,15 @@ public class BulletsPool {
 	
 	
 	
-	public List<BulletData> getBulletPool() {
+	public synchronized List<BulletData> getBulletPool() {
 		return bulletPool;
 	}
 
-	public void setBulletPool(List<BulletData> bulletPool) {
+	public synchronized void setBulletPool(List<BulletData> bulletPool) {
 		this.bulletPool = bulletPool;
 	}
 
-	public List<BulletData> getAllBulletsOnScreen(Long playerId){
+	public synchronized List<BulletData> getAllBulletsOnScreen(Long playerId){
 		ArrayList<BulletData> allBulletsOnScreen = new ArrayList<BulletData>();
 		Iterator<BulletData> bit = bulletPool.iterator();
 		
@@ -52,7 +52,7 @@ public class BulletsPool {
 		return allBulletsOnScreen;
 	}
 	
-	public void addBullet(Long playerId){
+	public synchronized void addBullet(Long playerId){
 		PlayerData player = playerPool.getPlayerById(playerId);
 		bulletPool.add(new BulletData(player.getX(), player.getY(), player.getShipAngle()));
 	}

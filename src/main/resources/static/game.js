@@ -31,6 +31,9 @@ function shootBullet(){
 function playerDataArrived(playerDataFromServer){
 	playerData.shipAngle = JSON.parse(playerDataFromServer.body).shipAngle;	
 	playerData.bullets = JSON.parse(playerDataFromServer.body).visibleBullets;
+	playerData.otherPlayers = JSON.parse(playerDataFromServer.body).visiblePlayers;
+	playerData.x = JSON.parse(playerDataFromServer.body).x;
+	playerData.y = JSON.parse(playerDataFromServer.body).y;
 }
 
 function drawBorder(){
@@ -57,7 +60,17 @@ function draw(){
 	var ctx = c.getContext("2d");
 	ctx.clearRect(0,0, c.width, c.height);
 	drawBorder();
-	drawPlayerShip();
+	drawShip(410, 310, playerData.shipAngle, playerData.name);
+	if(playerData.otherPlayers){
+		for(var i in playerData.otherPlayers){
+			var actualShip = playerData.otherPlayers[i];
+			
+			var dx = playerData.x - actualShip.x;
+			var dy = playerData.y - actualShip.y;
+			console.log("***************"+ playerData.x + "  " + actualShip.x);
+			drawShip(410+dx,310+dy, actualShip.shipAngle, actualShip.name);
+		}
+	}
 	drawBullets();
 }
 
@@ -65,23 +78,27 @@ function drawBullets(){
 	var c = document.getElementById("gameArea");
 	var ctx = c.getContext("2d");
 	
-	console.log("++++++++" + playerData.bullets);
+	ctx.fillText(playerData.x + " " + playerData.y, 10,10);
+	
 	for(var bullets in playerData.bullets){
-		console.log("********** " + playerData.bullets[bullets].x + " "+ playerData.bullets[bullets].y);
 		ctx.beginPath();
-		ctx.arc(410 + playerData.bullets[bullets].x,310 + playerData.bullets[bullets].y,5,0,2*Math.PI);
+		
+		var dx = playerData.x - playerData.bullets[bullets].x;
+		var dy = playerData.y - playerData.bullets[bullets].y;
+		
+		ctx.arc(410 + dx,310 + dy, 5, 0, 2*Math.PI);
 		ctx.stroke();
 	}
 }
 
-function drawPlayerShip(){
+function drawShip(x, y, angle, name){
 	var c = document.getElementById("gameArea");
 	var ctx = c.getContext("2d");
 	ctx.save();
 	
 	ctx.fillStyle = "red";	
-	ctx.translate(410,310);
-	ctx.rotate(playerData.shipAngle * Math.PI / 180);
+	ctx.translate(x,y);
+	ctx.rotate(angle * Math.PI / 180);
 	ctx.beginPath();
 	ctx.moveTo(-15, -10);
 	ctx.lineTo(10, 0);
@@ -92,14 +109,13 @@ function drawPlayerShip(){
 	ctx.moveTo(-15,10)
 	ctx.lineTo(-5, 0);
 	
-	
 	ctx.moveTo(-15, 10);
 	ctx.lineTo(10, 0);
 	
 	ctx.stroke();
 	ctx.rotate(90 * Math.PI / 180);
 	ctx.textAlign ="center";
-	ctx.fillText(playerData.name, 0, 30);
+	ctx.fillText(name, 0, 30);
 	ctx.restore();
 }
 

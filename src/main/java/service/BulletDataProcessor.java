@@ -23,8 +23,8 @@ public class BulletDataProcessor {
 			double resulty;
 			double angle = bullet.getAngle() * Math.PI / 180;
 			
-			resultx = bullet.getX() + GameConfig.BULLET_INITIAL_SPEED * Math.cos(angle);
-			resulty = bullet.getY() + GameConfig.BULLET_INITIAL_SPEED * Math.sin(angle);
+			resultx = bullet.getX() - GameConfig.BULLET_INITIAL_SPEED * Math.cos(angle);
+			resulty = bullet.getY() - GameConfig.BULLET_INITIAL_SPEED * Math.sin(angle);
 			 	
 			
 			bullet.setX((long)resultx);

@@ -1,11 +1,15 @@
 package datahandler;
 
+import java.util.ArrayList;
+import java.util.Currency;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import config.CanvasConstants;
 import config.ConnectionPreferences;
 import connection.ConnectionPool;
 import model.PlayerData;
@@ -20,12 +24,12 @@ public class PlayerPool {
 	private Map<Long, PlayerData> playerPool;
 
 	/** A convenient alis to store a new player. Returns true if registration was successful. */
-	public boolean registerPlayer(Long id, String name) {
+	public synchronized boolean registerPlayer(Long id, String name) {
 		return storePlayer(id, name);
 	}
 
 	/** Stores a new player to a bean called playerPool. Returns true if the player id was unique and the store was successful. */
-	public boolean storePlayer(Long id, String name) {
+	public synchronized boolean storePlayer(Long id, String name) {
 
 		if (playerPool.containsKey(id)) {
 			return false;
@@ -43,7 +47,7 @@ public class PlayerPool {
 		}
 	}
 
-	public void increasePlayerInactivityCounters(){
+	public synchronized void increasePlayerInactivityCounters(){
 		for(Long i : playerPool.keySet()){
 			PlayerData currentPlayer = playerPool.get(i);
 			
@@ -51,7 +55,7 @@ public class PlayerPool {
 		}
 	}
 	
-	public void removeInactivePlayers(){
+	public synchronized void removeInactivePlayers(){
 		for(Long i : playerPool.keySet()){
 			PlayerData currentPlayer = playerPool.get(i);
 			
@@ -63,7 +67,7 @@ public class PlayerPool {
 		}
 	}
 	
-	public void resetInactivityOfPlayer(Long id){
+	public synchronized void resetInactivityOfPlayer(Long id){
 		PlayerData player = null;
 
 		if (playerPool.containsKey(id)) {
@@ -73,7 +77,7 @@ public class PlayerPool {
 	}
 	
 	/** Searches playerPool and tries to find the user with a given id. Returns null, if the player was not found. */
-	public PlayerData getPlayerById(Long id) {
+	public synchronized PlayerData getPlayerById(Long id) {
 		PlayerData player = null;
 
 		if (playerPool.containsKey(id)) {
@@ -91,5 +95,23 @@ public class PlayerPool {
 	/* Getters/setters */
 	public Map<Long, PlayerData> getPool() {
 		return playerPool;
+	}
+	
+	public synchronized List<PlayerData> getAllPlayersOnScreen(Long playerId){
+		ArrayList<PlayerData> visiblePlayers = new ArrayList<>();
+		
+		PlayerData player = playerPool.get(playerId);
+		
+		for(Long id: playerPool.keySet()){
+			PlayerData currentPlayer = playerPool.get(id);
+			if(currentPlayer.getId() != playerId){
+				if((Math.abs(currentPlayer.getX() - player.getX()) <= CanvasConstants.CANVAS_HALF_WIDTH) &&
+				   (Math.abs(currentPlayer.getY() - player.getY()) <= CanvasConstants.CANVAS_HALF_HEIGHT)){
+					visiblePlayers.add(currentPlayer);				
+				}
+			}
+		}
+		
+		return visiblePlayers;
 	}
 }
