@@ -67,8 +67,7 @@ function draw(){
 			
 			var dx = playerData.x - actualShip.x;
 			var dy = playerData.y - actualShip.y;
-			console.log("***************"+ playerData.x + "  " + actualShip.x);
-			drawShip(410+dx,310+dy, actualShip.shipAngle, actualShip.name);
+			drawShip(410-dx,310-dy, actualShip.shipAngle, actualShip.name);
 		}
 	}
 	drawBullets();
@@ -86,7 +85,7 @@ function drawBullets(){
 		var dx = playerData.x - playerData.bullets[bullets].x;
 		var dy = playerData.y - playerData.bullets[bullets].y;
 		
-		ctx.arc(410 + dx,310 + dy, 5, 0, 2*Math.PI);
+		ctx.arc(410 - dx,310 - dy, 5, 0, 2*Math.PI);
 		ctx.stroke();
 	}
 }
@@ -100,17 +99,17 @@ function drawShip(x, y, angle, name){
 	ctx.translate(x,y);
 	ctx.rotate(angle * Math.PI / 180);
 	ctx.beginPath();
-	ctx.moveTo(-15, -10);
-	ctx.lineTo(10, 0);
+	ctx.moveTo(15, -10);
+	ctx.lineTo(-10, 0);
 	
-	ctx.moveTo(-15,-10)
-	ctx.lineTo(-5, 0);
+	ctx.moveTo(15,-10)
+	ctx.lineTo(5, 0);
 	
-	ctx.moveTo(-15,10)
-	ctx.lineTo(-5, 0);
+	ctx.moveTo(15,10)
+	ctx.lineTo(5, 0);
 	
-	ctx.moveTo(-15, 10);
-	ctx.lineTo(10, 0);
+	ctx.moveTo(15, 10);
+	ctx.lineTo(-10, 0);
 	
 	ctx.stroke();
 	ctx.rotate(90 * Math.PI / 180);
