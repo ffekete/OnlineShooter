@@ -62,8 +62,13 @@ function drawPlayerShip(){
 	ctx.fillStyle = "red";	
 	ctx.translate(410,310);
 	ctx.rotate(playerData.shipAngle * Math.PI / 180);
-	ctx.fillRect(-10, -10, 20, 20);
-
+	//ctx.fillRect(-10, -10, 20, 20);
+	ctx.beginPath();
+	ctx.moveTo(-15, -10);
+	ctx.lineTo(10, 0);
+	ctx.moveTo(-15, 10);
+	ctx.lineTo(10, 0);
+	ctx.stroke();
 	ctx.restore();
 }
 

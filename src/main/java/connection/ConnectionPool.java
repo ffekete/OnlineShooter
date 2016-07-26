@@ -18,7 +18,7 @@ public class ConnectionPool {
 	private Map<Long, ConnectionNode> connectionPool;
 	
 	public void removeConnectionNode(Long playerId){
-		System.out.println("Connection node removed for player id " + playerId);
+		System.out.println("Connection node removed with id " + connectionPool.get(playerId).getId());
 		connectionPool.remove(playerId);
 	}
 	
