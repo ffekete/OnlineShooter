@@ -32,8 +32,10 @@ function responseArrivedForRegisterPlayer(playerStatus) {
 	var QualifiedPlayerData = JSON.parse(playerStatus.body); 
 	if (QualifiedPlayerData.registered) {
 		var id = QualifiedPlayerData.playerData.id;
+		var connectionId = QualifiedPlayerData.playerData.connectionId;
 		
 		window.sessionStorage.setItem("playerId", id);
+		window.sessionStorage.setItem("connectionId", connectionId);
 		
 		document.getElementById("response").innerHTML = "Redirecting to game area, please wait..." + id;
 		window.location.replace("/game_area.html");

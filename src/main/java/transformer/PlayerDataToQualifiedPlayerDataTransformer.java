@@ -12,7 +12,7 @@ public class PlayerDataToQualifiedPlayerDataTransformer {
 		QualifiedPlayerData qualifiedPlayerData = new QualifiedPlayerData();
 		qualifiedPlayerData.setPlayerData(playerData);
 		qualifiedPlayerData.setRegistered(registrartionStatus);
-		
+	
 		return qualifiedPlayerData;
 	}
 	

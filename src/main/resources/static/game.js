@@ -7,18 +7,19 @@ var playerDataFromServer = {
 
 var playerData = {
 	id: window.sessionStorage.getItem("playerId"),
+	connectionId: window.sessionStorage.getItem("connectionId"),
 	mouseX : 0,
 	mouseY : 0,
 	shipAngle: 0.0
 };
 
 function connect() {
-	var socket = new SockJS('/requestPlayerData');
+	var socket = new SockJS('/requestPlayerData_node' + playerData.connectionId);
 	stompClient = Stomp.over(socket);
 	stompClient.connect({}, function(frame) {
 		console.log('Connected: ' + frame);
 		
-		stompClient.subscribe('/providePlayerData', playerDataArrived);
+		stompClient.subscribe('/providePlayerData_node' + playerData.connectionId, playerDataArrived);
 	});
 }
 
@@ -67,7 +68,7 @@ function drawPlayerShip(){
 }
 
 function pollPlayerData(){
-	stompClient.send("/app/requestPlayerData", {}, playerData.id);
+	stompClient.send("/app/requestPlayerData_node" + playerData.connectionId, {}, playerData.id);
 }
 
 function updatePlayerData(){

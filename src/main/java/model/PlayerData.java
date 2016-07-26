@@ -13,14 +13,33 @@ public class PlayerData {
 	
 	private Double shipAngle;
 	
+	private Long connectionId;
+	
 	public void increaseInactivityCounter(){
 		inactivityCounter++;
 	}
 	
 	/* Getters/setters and constructors */
+		
 	public String getName() {
 		return name;
 	}
+	public Double getShipAngle() {
+		return shipAngle;
+	}
+
+	public void setShipAngle(Double shipAngle) {
+		this.shipAngle = shipAngle;
+	}
+
+	public Long getConnectionId() {
+		return connectionId;
+	}
+
+	public void setConnectionId(Long connectionId) {
+		this.connectionId = connectionId;
+	}
+
 	public int getInactivityCounter() {
 		return inactivityCounter;
 	}
@@ -79,6 +98,7 @@ public class PlayerData {
 		this.mouseX = 0L;
 		this.mouseY = 0L;
 		this.shipAngle = 0.0d;
+		this.connectionId = 0L;
 	}
 	
 	public String toString(){

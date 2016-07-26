@@ -7,11 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import config.ConnectionPreferences;
+import connection.ConnectionPool;
 import model.PlayerData;
 
 /** All registered players are stored here. Players are identified by their id. */
 @Component
 public class PlayerPool {
+	
+	@Autowired
+	ConnectionPool connectionPool;
+	
 	private Map<Long, PlayerData> playerPool;
 
 	/** A convenient alis to store a new player. Returns true if registration was successful. */
@@ -26,8 +31,15 @@ public class PlayerPool {
 			return false;
 		} else {
 			PlayerData newPlayer = new PlayerData(id, name);
-			playerPool.put(id, newPlayer);
-			return true;
+			Long connectionId = connectionPool.registerNewConnection(id);
+			
+			
+			if(connectionId != null){
+				newPlayer.setConnectionId(connectionId);
+				playerPool.put(id, newPlayer);
+				return true;
+			}
+			return false;
 		}
 	}
 
@@ -44,6 +56,8 @@ public class PlayerPool {
 			PlayerData currentPlayer = playerPool.get(i);
 			
 			if(currentPlayer.getInactivityCounter() >= ConnectionPreferences.PLAYER_INACTIVITY_LIMIT){
+				connectionPool.removeConnectionNode(i);
+				System.out.println("Removing inactive player with id " + i + ".");
 				playerPool.remove(i);
 			}
 		}

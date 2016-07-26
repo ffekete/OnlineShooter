@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /** Main entry point of the server-side application. */
-@SpringBootApplication(scanBasePackages = {"config", "controller", "datahandler", "transformer", "service", "scheduler"})
+@SpringBootApplication(scanBasePackages = {"config", "controller", "datahandler", "transformer", "service", "scheduler", "connection"})
 public class Application {
 	
     public static void main(String[] args) throws InterruptedException {

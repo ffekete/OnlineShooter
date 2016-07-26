@@ -4,10 +4,17 @@ package model;
 public class QualifiedPlayerData {
 	private PlayerData playerData;
 	private boolean registered;
+	private Long connectionId;
 	
 	/* Getters/setters and constructor */
 	public PlayerData getPlayerData() {
 		return playerData;
+	}
+	public Long getConnectionId() {
+		return connectionId;
+	}
+	public void setConnectionId(Long connectionId) {
+		this.connectionId = connectionId;
 	}
 	public void setPlayerData(PlayerData playerData) {
 		this.playerData = playerData;
@@ -22,5 +29,6 @@ public class QualifiedPlayerData {
 	public QualifiedPlayerData(){
 		this.playerData = null;
 		this.registered = false;
+		this.connectionId = 0L;
 	}
 }
