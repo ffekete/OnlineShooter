@@ -6,6 +6,7 @@ var playerDataFromServer = {
 };
 
 var playerData = {
+	name: window.sessionStorage.getItem("playerName"), 
 	id: window.sessionStorage.getItem("playerId"),
 	connectionId: window.sessionStorage.getItem("connectionId"),
 	mouseX : 0,
@@ -21,6 +22,10 @@ function connect() {
 		
 		stompClient.subscribe('/providePlayerData_node' + playerData.connectionId, playerDataArrived);
 	});
+}
+
+function shootBullet(){
+	stompClient.send("/app/createBullet", {}, playerData.id);
 }
 
 function playerDataArrived(playerDataFromServer){
@@ -62,13 +67,24 @@ function drawPlayerShip(){
 	ctx.fillStyle = "red";	
 	ctx.translate(410,310);
 	ctx.rotate(playerData.shipAngle * Math.PI / 180);
-	//ctx.fillRect(-10, -10, 20, 20);
 	ctx.beginPath();
 	ctx.moveTo(-15, -10);
 	ctx.lineTo(10, 0);
+	
+	ctx.moveTo(-15,-10)
+	ctx.lineTo(-5, 0);
+	
+	ctx.moveTo(-15,10)
+	ctx.lineTo(-5, 0);
+	
+	
 	ctx.moveTo(-15, 10);
 	ctx.lineTo(10, 0);
+	
 	ctx.stroke();
+	ctx.rotate(90 * Math.PI / 180);
+	ctx.textAlign ="center";
+	ctx.fillText(playerData.name, 0, 30);
 	ctx.restore();
 }
 
@@ -89,9 +105,9 @@ function updatePlayerData(){
 function start(){
 	drawBorder();
 	connect();
-	setInterval(draw, 30);
-	setInterval(updatePlayerData, 30);
-	setInterval(pollPlayerData, 30);
+	setInterval(draw, 20);
+	setInterval(updatePlayerData, 20);
+	setInterval(pollPlayerData, 20);
 	var c = document.getElementById("gameArea");
 	var ctx = c.getContext("2d");
 	ctx.rotate(0*Math.PI*180);

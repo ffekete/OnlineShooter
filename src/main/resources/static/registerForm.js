@@ -37,6 +37,9 @@ function responseArrivedForRegisterPlayer(playerStatus) {
 		window.sessionStorage.setItem("playerId", id);
 		window.sessionStorage.setItem("connectionId", connectionId);
 		
+		var name = document.getElementById('name').value;
+		window.sessionStorage.setItem("playerName", name);
+		
 		document.getElementById("response").innerHTML = "Redirecting to game area, please wait..." + id;
 		window.location.replace("/game_area.html");
 

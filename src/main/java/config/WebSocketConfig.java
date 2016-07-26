@@ -53,6 +53,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 		registry.addEndpoint(EndpointPaths.REQUEST_PLAYER_DATA+"8").withSockJS();
 		registry.addEndpoint(EndpointPaths.REQUEST_PLAYER_DATA+"9").withSockJS();
 		registry.addEndpoint(EndpointPaths.REQUEST_PLAYER_DATA+"10").withSockJS();
+		registry.addEndpoint(EndpointPaths.CREATE_BULLET).withSockJS();
 	}
 
 }
