@@ -11,7 +11,7 @@ var playerData = {
 	connectionId: window.sessionStorage.getItem("connectionId"),
 	mouseX : 0,
 	mouseY : 0,
-	shipAngle: 0.0
+	shipAngle: 0.0,
 };
 
 function connect() {
@@ -29,7 +29,8 @@ function shootBullet(){
 }
 
 function playerDataArrived(playerDataFromServer){
-	playerData.shipAngle = JSON.parse(playerDataFromServer.body).angle;
+	playerData.shipAngle = JSON.parse(playerDataFromServer.body).shipAngle;	
+	playerData.bullets = JSON.parse(playerDataFromServer.body).visibleBullets;
 }
 
 function drawBorder(){
@@ -57,6 +58,20 @@ function draw(){
 	ctx.clearRect(0,0, c.width, c.height);
 	drawBorder();
 	drawPlayerShip();
+	drawBullets();
+}
+
+function drawBullets(){
+	var c = document.getElementById("gameArea");
+	var ctx = c.getContext("2d");
+	
+	console.log("++++++++" + playerData.bullets);
+	for(var bullets in playerData.bullets){
+		console.log("********** " + playerData.bullets[bullets].x + " "+ playerData.bullets[bullets].y);
+		ctx.beginPath();
+		ctx.arc(410 + playerData.bullets[bullets].x,310 + playerData.bullets[bullets].y,10,0,2*Math.PI);
+		ctx.stroke();
+	}
 }
 
 function drawPlayerShip(){
@@ -101,6 +116,8 @@ function updatePlayerData(){
 	
 	stompClient.send("/app/updatePlayerData", {}, JSON.stringify(playerDataToSend));
 }
+
+
 
 function start(){
 	drawBorder();

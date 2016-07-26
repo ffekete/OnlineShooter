@@ -5,6 +5,7 @@ import java.util.Iterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import config.GameConfig;
 import datahandler.BulletsPool;
 import model.BulletData;
 
@@ -22,8 +23,8 @@ public class BulletDataProcessor {
 			double resulty;
 			double angle = bullet.getAngle() * Math.PI / 180;
 			
-			resultx = bullet.getX() + 2.0 * Math.cos(angle);
-			resulty = bullet.getY() + 2.0 * Math.sin(angle);
+			resultx = bullet.getX() + GameConfig.BULLET_INITIAL_SPEED * Math.cos(angle);
+			resulty = bullet.getY() + GameConfig.BULLET_INITIAL_SPEED * Math.sin(angle);
 			 	
 			
 			bullet.setX((long)resultx);

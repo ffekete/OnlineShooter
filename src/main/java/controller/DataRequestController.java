@@ -1,7 +1,6 @@
 package controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -10,88 +9,93 @@ import config.BrokerPaths;
 import config.EndpointPaths;
 import datahandler.PlayerPool;
 import model.PlayerData;
+import model.SentPlayerData;
+import transformer.PlayerDataToSentPlayerDataTransformer;
 
 /** Clients can poll REQUEST_PLAYER_DATA channel to receive server-side information about the given player. */
 @Controller
 public class DataRequestController {
 	
 	@Autowired
+	PlayerDataToSentPlayerDataTransformer playerDataToSentPlayerDataTransformer;
+	
+	@Autowired
 	private PlayerPool playerPool;
 	
-	private PlayerData handleRequest(Long id){
+	private SentPlayerData handleRequest(Long id){
 		if(id != null){
 			PlayerData currentPlayer = playerPool.getPlayerById(id);
 			if(currentPlayer != null){
 				playerPool.resetInactivityOfPlayer(id);
 			}
-			return currentPlayer;
+			return playerDataToSentPlayerDataTransformer.transform(currentPlayer);
 		}
 		return null;
 	}
 	
 	@MessageMapping(EndpointPaths.REQUEST_PLAYER_DATA + "0")
 	@SendTo(BrokerPaths.PROVIDE_PLAYER_DATA + "0")
-	public PlayerData getUserData_0(Long id){
+	public SentPlayerData getUserData_0(Long id){
 		return handleRequest(id);
 	}
 	
 	@MessageMapping(EndpointPaths.REQUEST_PLAYER_DATA + "1")
 	@SendTo(BrokerPaths.PROVIDE_PLAYER_DATA + "1")
-	public PlayerData getUserData_1(Long id){
+	public SentPlayerData getUserData_1(Long id){
 		return handleRequest(id);
 	}
 	
 	@MessageMapping(EndpointPaths.REQUEST_PLAYER_DATA + "2")
 	@SendTo(BrokerPaths.PROVIDE_PLAYER_DATA + "2")
-	public PlayerData getUserData_2(Long id){
+	public SentPlayerData getUserData_2(Long id){
 		return handleRequest(id);
 	}
 	
 	@MessageMapping(EndpointPaths.REQUEST_PLAYER_DATA + "3")
 	@SendTo(BrokerPaths.PROVIDE_PLAYER_DATA + "3")
-	public PlayerData getUserData_3(Long id){
+	public SentPlayerData getUserData_3(Long id){
 		return handleRequest(id);
 	}
 	
 	@MessageMapping(EndpointPaths.REQUEST_PLAYER_DATA + "4")
 	@SendTo(BrokerPaths.PROVIDE_PLAYER_DATA + "4")
-	public PlayerData getUserData_4(Long id){
+	public SentPlayerData getUserData_4(Long id){
 		return handleRequest(id);
 	}
 	
 	@MessageMapping(EndpointPaths.REQUEST_PLAYER_DATA + "5")
 	@SendTo(BrokerPaths.PROVIDE_PLAYER_DATA + "5")
-	public PlayerData getUserData_5(Long id){
+	public SentPlayerData getUserData_5(Long id){
 		return handleRequest(id);
 	}
 	
 	@MessageMapping(EndpointPaths.REQUEST_PLAYER_DATA + "6")
 	@SendTo(BrokerPaths.PROVIDE_PLAYER_DATA + "6")
-	public PlayerData getUserData_6(Long id){
+	public SentPlayerData getUserData_6(Long id){
 		return handleRequest(id);
 	}
 	
 	@MessageMapping(EndpointPaths.REQUEST_PLAYER_DATA + "7")
 	@SendTo(BrokerPaths.PROVIDE_PLAYER_DATA + "7")
-	public PlayerData getUserData_7(Long id){
+	public SentPlayerData getUserData_7(Long id){
 		return handleRequest(id);
 	}
 	
 	@MessageMapping(EndpointPaths.REQUEST_PLAYER_DATA + "8")
 	@SendTo(BrokerPaths.PROVIDE_PLAYER_DATA + "8")
-	public PlayerData getUserData_8(Long id){
+	public SentPlayerData getUserData_8(Long id){
 		return handleRequest(id);
 	}
 	
 	@MessageMapping(EndpointPaths.REQUEST_PLAYER_DATA + "9")
 	@SendTo(BrokerPaths.PROVIDE_PLAYER_DATA + "9")
-	public PlayerData getUserData_9(Long id){
+	public SentPlayerData getUserData_9(Long id){
 		return handleRequest(id);
 	}
 	
 	@MessageMapping(EndpointPaths.REQUEST_PLAYER_DATA + "10")
 	@SendTo(BrokerPaths.PROVIDE_PLAYER_DATA + "10")
-	public PlayerData getUserData_10(Long id){
+	public SentPlayerData getUserData_10(Long id){
 		return handleRequest(id);
 	}
 }
