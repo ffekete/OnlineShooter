@@ -24,13 +24,15 @@ public class PlayerDataUpdateHandler {
 	/** Function that handles update player data requests when a new message arrives to destination endpoint UPDATE_PLAYER_DATA. */
 	@MessageMapping(EndpointPaths.UPDATE_PLAYER_DATA)
 	public void updateplayerData(ReceivedPlayerData receivedPlayerData){
-		PlayerData playerData = receivedPlayerDataToPlayerDataTransformer.transform(receivedPlayerData);
-		if(playerData != null){
-			//System.out.println("Player data updated: " + playerData.getId() + " " + playerPool.getPlayerById(playerData.getId()));
+		if(receivedPlayerData != null){
+			PlayerData playerData = receivedPlayerDataToPlayerDataTransformer.transform(receivedPlayerData);
+			if(playerData == null){
+				System.out.println("Failed to update player data: " + receivedPlayerData.getId());
+			}
 		}
 		else
 		{
-			System.out.println("Failed to update player data: " + receivedPlayerData.getId());
+			System.out.println("!!!Error: Player data received with null reference. ");
 		}
 	}
 }

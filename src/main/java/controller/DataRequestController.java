@@ -21,10 +21,13 @@ public class DataRequestController {
 	@MessageMapping(EndpointPaths.REQUEST_PLAYER_DATA)
 	@SendTo(BrokerPaths.PROVIDE_PLAYER_DATA)
 	public PlayerData getUserData(Long id){
-		PlayerData currentPlayer = playerPool.getPlayerById(id);
-		if(currentPlayer != null){
-			playerPool.resetInactivityOfPlayer(id);
+		if(id != null){
+			PlayerData currentPlayer = playerPool.getPlayerById(id);
+			if(currentPlayer != null){
+				playerPool.resetInactivityOfPlayer(id);
+			}
+			return currentPlayer;
 		}
-		return currentPlayer;
+		return null;
 	}
 }

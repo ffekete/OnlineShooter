@@ -29,6 +29,5 @@ public class TaskScheduler {
 		/* Do the math */
 		playerDataPrcessor.updateShipAngles();
 		
-		System.out.println(playerPool.getPool().size());
 	}
 }
