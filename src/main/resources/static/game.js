@@ -69,7 +69,7 @@ function drawBullets(){
 	for(var bullets in playerData.bullets){
 		console.log("********** " + playerData.bullets[bullets].x + " "+ playerData.bullets[bullets].y);
 		ctx.beginPath();
-		ctx.arc(410 + playerData.bullets[bullets].x,310 + playerData.bullets[bullets].y,10,0,2*Math.PI);
+		ctx.arc(410 + playerData.bullets[bullets].x,310 + playerData.bullets[bullets].y,5,0,2*Math.PI);
 		ctx.stroke();
 	}
 }
