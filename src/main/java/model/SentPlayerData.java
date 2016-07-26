@@ -4,8 +4,8 @@ import java.util.List;
 
 public class SentPlayerData {
 	private Long id;
-	private Long x;
-	private Long y;
+	private double x;
+	private double y;
 	
 	private Double shipAngle;
 	
@@ -23,19 +23,19 @@ public class SentPlayerData {
 		this.id = id;
 	}
 
-	public Long getX() {
+	public double getX() {
 		return x;
 	}
 
-	public void setX(Long x) {
+	public void setX(double x) {
 		this.x = x;
 	}
 
-	public Long getY() {
+	public double getY() {
 		return y;
 	}
 
-	public void setY(Long y) {
+	public void setY(double y) {
 		this.y = y;
 	}
 

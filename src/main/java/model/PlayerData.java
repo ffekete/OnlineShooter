@@ -3,8 +3,8 @@ package model;
 public class PlayerData {
 	private String name;
 	private Long id;
-	private Long x;
-	private Long y;
+	private double x;
+	private double y;
 	
 	private int inactivityCounter = 0;
 	
@@ -55,16 +55,16 @@ public class PlayerData {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getX() {
+	public double getX() {
 		return x;
 	}
-	public void setX(Long x) {
+	public void setX(double x) {
 		this.x = x;
 	}
-	public Long getY() {
+	public double getY() {
 		return y;
 	}
-	public void setY(Long y) {
+	public void setY(double y) {
 		this.y = y;
 	}
 	public Long getMouseX() {
@@ -93,8 +93,8 @@ public class PlayerData {
 	public PlayerData(Long id, String name) {
 		this.name = name;
 		this.id = id;
-		this.x = 0L;
-		this.y = 0L;
+		this.x = 0.0d;
+		this.y = 0.0d;
 		this.mouseX = 0L;
 		this.mouseY = 0L;
 		this.shipAngle = 0.0d;

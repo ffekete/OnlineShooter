@@ -18,7 +18,7 @@ public class PlayerDataProcessor {
 	PlayerPool playerPool;
 	
 	/** Calculates an angle using two points. */
-	private double calculateAngle(Long targetX, Long targetY, Long baseX, Long baseY) {
+	private double calculateAngle(double targetX, double targetY, double baseX, double baseY) {
 	    double angle = Math.toDegrees(Math.atan2(targetY - baseY, targetX - baseX));
 
 	    if(angle < 0){
@@ -36,7 +36,7 @@ public class PlayerDataProcessor {
 			while(shipIds.hasNext()){
 				Long nextShipId = shipIds.next();
 				PlayerData nextShip = playerPool.getPlayerById(nextShipId);
-				nextShip.setAngle(calculateAngle(nextShip.getMouseX(), nextShip.getMouseY(), CanvasConstants.CANVAS_HALF_WIDTH, CanvasConstants.CANVAS_HALF_HEIGHT));	
+				nextShip.setAngle(calculateAngle(nextShip.getMouseX(), nextShip.getMouseY(), (double)CanvasConstants.CANVAS_HALF_WIDTH, (double)CanvasConstants.CANVAS_HALF_HEIGHT));	
 			}
 		}
 	}
@@ -51,13 +51,13 @@ public class PlayerDataProcessor {
 				
 				double resultx;
 				double resulty;
-				double angle = nextShip.getAngle() * Math.PI / 180;
+				double angle = nextShip.getAngle() * Math.PI / 180.0d;
 				
 				resultx = nextShip.getX() + GameConfig.SHIP_INITIAL_SPEED * Math.cos(angle);
 				resulty = nextShip.getY() + GameConfig.SHIP_INITIAL_SPEED * Math.sin(angle);
 				
-				nextShip.setX((long)resultx);
-				nextShip.setY((long)resulty);
+				nextShip.setX(resultx);
+				nextShip.setY(resulty);
 			}
 		}
 	}

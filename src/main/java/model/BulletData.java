@@ -1,8 +1,8 @@
 package model;
 
 public class BulletData {
-	private long x;
-	private long y;
+	private double x;
+	private double y;
 	private double angle;
 	
 	public double getAngle() {
@@ -13,28 +13,26 @@ public class BulletData {
 		this.angle = angle;
 	}
 
-	public BulletData(long x, long y, double angle) {
+	public BulletData(double x, double y, double angle) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.angle = angle;
 	}
 	
-	public long getX() {
+	public double getX() {
 		return x;
 	}
 	
-	public void setX(long x) {
+	public void setX(double x) {
 		this.x = x;
 	}
 	
-	public long getY() {
+	public double getY() {
 		return y;
 	}
 	
-	public void setY(long y) {
+	public void setY(double y) {
 		this.y = y;
 	}
-	
-	
 }

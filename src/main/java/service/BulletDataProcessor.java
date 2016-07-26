@@ -21,14 +21,14 @@ public class BulletDataProcessor {
 			BulletData bullet = bit.next();
 			double resultx;
 			double resulty;
-			double angle = bullet.getAngle() * Math.PI / 180;
+			double angle = bullet.getAngle() * Math.PI / 180.0d;
 			
-			resultx = bullet.getX() - GameConfig.BULLET_INITIAL_SPEED * Math.cos(angle);
-			resulty = bullet.getY() - GameConfig.BULLET_INITIAL_SPEED * Math.sin(angle);
+			resultx = (double)bullet.getX() - GameConfig.BULLET_INITIAL_SPEED * Math.cos(angle);
+			resulty = (double)bullet.getY() - GameConfig.BULLET_INITIAL_SPEED * Math.sin(angle);
 			 	
 			
-			bullet.setX((long)resultx);
-			bullet.setY((long)resulty);
+			bullet.setX(resultx);
+			bullet.setY(resulty);
 			//System.out.println("Updated: " + resultx + " " + resulty + " " + bullet.getAngle());
 		}
 	}
