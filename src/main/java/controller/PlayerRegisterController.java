@@ -27,15 +27,18 @@ public class PlayerRegisterController {
 	@MessageMapping(EndpointPaths.REGISTER_PLAYER)
 	@SendTo(BrokerPaths.PLAYER_REGISTERED_STATUS)
 	public QualifiedPlayerData registerNewPlayer(String name){
-		Long newId = PlayerIdGenerator.generateNewId();
 		QualifiedPlayerData qualifiedPlayerData = new QualifiedPlayerData();
 		
-		System.out.println("New player registration request received with name " + name + ".");
-		
-		if(playerPool.registerPlayer(newId, name)){
-			PlayerData playerData = playerPool.getPlayerById(newId);
-			qualifiedPlayerData = playerDataToQualifiedPlayerDataTransformer.tranform(playerData, true);
-			System.out.println("Player registered with id " + newId + ".");
+		if(name != null){
+			Long newId = PlayerIdGenerator.generateNewId();
+					
+			System.out.println("New player registration request received with name " + name + ".");
+			
+			if(playerPool.registerPlayer(newId, name)){
+				PlayerData playerData = playerPool.getPlayerById(newId);
+				qualifiedPlayerData = playerDataToQualifiedPlayerDataTransformer.tranform(playerData, true);
+				System.out.println("Player registered with id " + newId + " and name " + name + ".");
+			}
 		}
 		
 		return qualifiedPlayerData;
