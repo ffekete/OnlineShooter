@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import config.ConnectionPreferences;
 import model.PlayerData;
 
 /** All registered players are stored here. Players are identified by their id. */
@@ -30,6 +31,33 @@ public class PlayerPool {
 		}
 	}
 
+	public void increasePlayerInactivityCounters(){
+		for(Long i : playerPool.keySet()){
+			PlayerData currentPlayer = playerPool.get(i);
+			
+			currentPlayer.increaseInactivityCounter();
+		}
+	}
+	
+	public void removeInactivePlayers(){
+		for(Long i : playerPool.keySet()){
+			PlayerData currentPlayer = playerPool.get(i);
+			
+			if(currentPlayer.getInactivityCounter() >= ConnectionPreferences.PLAYER_INACTIVITY_LIMIT){
+				playerPool.remove(i);
+			}
+		}
+	}
+	
+	public void resetInactivityOfPlayer(Long id){
+		PlayerData player = null;
+
+		if (playerPool.containsKey(id)) {
+			player = playerPool.get(id);
+			player.setInactivityCounter(0);
+		}
+	}
+	
 	/** Searches playerPool and tries to find the user with a given id. Returns null, if the player was not found. */
 	public PlayerData getPlayerById(Long id) {
 		PlayerData player = null;

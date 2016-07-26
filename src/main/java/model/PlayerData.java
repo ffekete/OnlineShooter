@@ -6,14 +6,26 @@ public class PlayerData {
 	private Long x;
 	private Long y;
 	
+	private int inactivityCounter = 0;
+	
 	private Long mouseX;
 	private Long mouseY;
 	
 	private Double shipAngle;
 	
+	public void increaseInactivityCounter(){
+		inactivityCounter++;
+	}
+	
 	/* Getters/setters and constructors */
 	public String getName() {
 		return name;
+	}
+	public int getInactivityCounter() {
+		return inactivityCounter;
+	}
+	public void setInactivityCounter(int inactivityCounter) {
+		this.inactivityCounter = inactivityCounter;
 	}
 	public void setName(String name) {
 		this.name = name;
