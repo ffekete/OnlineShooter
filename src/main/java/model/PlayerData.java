@@ -21,6 +21,26 @@ public class PlayerData {
 	
 	private long connectionId;
 	
+	private long rateOfFire;
+	
+	private long rateOfFireCooldown = 0L;
+	
+	public boolean canShoot(){
+		return rateOfFireCooldown < 1L;
+	}
+	
+	public void startShootingRateCooldownEffect(){
+		rateOfFireCooldown = this.rateOfFire;
+	}
+	
+	public void decreaseRateOfFireCooldownValue(long value){
+		if(rateOfFireCooldown > 0L)
+		{
+			rateOfFireCooldown -= value;
+			if(rateOfFireCooldown < 0L) rateOfFireCooldown = 0L;
+		}
+	}
+	
 	public void increaseInactivityCounter(){
 		inactivityCounter++;
 	}
@@ -31,6 +51,7 @@ public class PlayerData {
 		inactivityCounter = 0;
 		hp = GameConfig.SHIP_INITIAL_HP;
 		invulnerabilityCounter = GameConfig.INVULN_CTR_MAX_VALUE;
+		rateOfFire = GameConfig.DEF_RATE_OF_FIRE;
 	}
 	
 	public void decreaseHp(long value){
@@ -53,6 +74,15 @@ public class PlayerData {
 	public String getName() {
 		return name;
 	}
+	
+	public long getRateOfFire() {
+		return rateOfFire;
+	}
+
+	public void setRateOfFire(long rateOfFire) {
+		this.rateOfFire = rateOfFire;
+	}
+
 	public long getInvulnerabilityCounter() {
 		return invulnerabilityCounter;
 	}
@@ -145,6 +175,7 @@ public class PlayerData {
 		this.shipAngle = 0.0d;
 		this.connectionId = 0L;
 		this.hp = GameConfig.SHIP_INITIAL_HP;
+		this.rateOfFire = GameConfig.DEF_RATE_OF_FIRE;
 	}
 	
 	public String toString(){
