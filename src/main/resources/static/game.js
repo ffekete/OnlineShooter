@@ -1,6 +1,8 @@
 
 var stompClient = null;
 
+var shootBulletSwitch=false;
+
 var playerDataFromServer = {
 	
 };
@@ -141,6 +143,20 @@ function start(){
 	var c = document.getElementById("gameArea");
 	var ctx = c.getContext("2d");
 	ctx.rotate(0*Math.PI*180);
+	
+	setInterval(function(){
+		if (shootBulletSwitch){
+			stompClient.send("/app/createBullet", {}, playerData.id);
+		}
+	}, 50);
+
+	$('#gameArea').mousedown(function(){
+		shootBulletSwitch = true;
+	});
+
+	$('#gameArea').mouseup(function(){
+		shootBulletSwitch = false;
+	});
 }
 
 function updateMouseCoordinates(event){
