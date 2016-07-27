@@ -1,6 +1,5 @@
 package datahandler;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -33,7 +32,7 @@ public class BulletsPool {
 	}
 
 	public synchronized List<BulletData> getAllBulletsOnScreen(Long playerId){
-		ArrayList<BulletData> allBulletsOnScreen = new ArrayList<BulletData>();
+		CopyOnWriteArrayList<BulletData> allBulletsOnScreen = new CopyOnWriteArrayList<BulletData>();
 		Iterator<BulletData> bit = bulletPool.iterator();
 		
 		while(bit.hasNext()){
@@ -53,7 +52,7 @@ public class BulletsPool {
 	
 	public synchronized void addBullet(Long playerId){
 		PlayerData player = playerPool.getPlayerById(playerId);
-		bulletPool.add(new BulletData(player.getX(), player.getY(), player.getShipAngle()));
+		bulletPool.add(new BulletData(player.getX(), player.getY(), player.getShipAngle(), player.getId()));
 	}
 	
 }

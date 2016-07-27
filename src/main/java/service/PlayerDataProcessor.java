@@ -1,14 +1,16 @@
 package service;
 
 import java.util.Iterator;
-import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import config.CanvasConstants;
 import config.GameConfig;
+import datahandler.BulletsPool;
 import datahandler.PlayerPool;
+import model.BulletData;
 import model.PlayerData;
 
 /** Basic class to calculate player related values e.g. ship angles,... */
@@ -16,6 +18,9 @@ import model.PlayerData;
 public class PlayerDataProcessor {
 	@Autowired
 	PlayerPool playerPool;
+	
+	@Autowired
+	BulletsPool bulletPool;
 	
 	/** Calculates an angle using two points. */
 	private double calculateAngle(double targetX, double targetY, double baseX, double baseY) {
@@ -26,6 +31,31 @@ public class PlayerDataProcessor {
 	    }
 
 	    return angle;
+	}
+	
+	public void checkAllBulletsHitEffect(){
+		for(Long id : playerPool.getPool().keySet()){
+			PlayerData player = playerPool.getPlayerById(id);
+			checkBulletHits(player);
+		}
+	}
+	
+	public void checkBulletHits(PlayerData player){
+		CopyOnWriteArrayList<BulletData> bullets = (CopyOnWriteArrayList<BulletData>) bulletPool.getAllBulletsOnScreen(player.getId());
+		
+		Iterator<BulletData> bulletIterator = bullets.iterator();
+		
+		while(bulletIterator.hasNext()){
+			BulletData actualBullet = bulletIterator.next();
+			
+			if(actualBullet.getPlayerId() != player.getId() && Math.abs(actualBullet.getX() - player.getX()) < 10.0d && Math.abs(actualBullet.getY() - player.getY()) < 10.0d){
+				bulletPool.getBulletPool().remove(actualBullet);
+				player.setHp(player.getHp() - 1);
+				if(player.getHp() < 1){
+					playerPool.removePlayer(player);
+				}
+			}
+		}
 	}
 	
 	public void updateShipAngles() throws InterruptedException{

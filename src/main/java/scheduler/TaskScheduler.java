@@ -39,5 +39,7 @@ public class TaskScheduler {
 		
 		playerDataPrcessor.updatePlayerCoordinates();
 		
+		playerDataPrcessor.checkAllBulletsHitEffect();
+		
 	}
 }

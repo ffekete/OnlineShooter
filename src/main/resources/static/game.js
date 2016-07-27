@@ -64,14 +64,14 @@ function draw(){
 	ctx.clearRect(0,0, c.width, c.height);
 	drawBackground();
 	drawBorder();
-	drawShip(410, 310, playerData.shipAngle, playerData.name);
+	drawShip(410, 310, playerData.shipAngle, playerData.name, playerData.hp);
 	if(playerData.otherPlayers){
 		for(var i in playerData.otherPlayers){
 			var actualShip = playerData.otherPlayers[i];
 			
 			var dx = playerData.x - actualShip.x;
 			var dy = playerData.y - actualShip.y;
-			drawShip(410-dx,310-dy, actualShip.shipAngle, actualShip.name);
+			drawShip(410-dx,310-dy, actualShip.shipAngle, actualShip.name, actualShip.hp);
 		}
 	}
 	drawBullets();
@@ -107,7 +107,7 @@ function drawBullets(){
 	}
 }
 
-function drawShip(x, y, angle, name){
+function drawShip(x, y, angle, name, hp){
 	var c = document.getElementById("gameArea");
 	var ctx = c.getContext("2d");
 
@@ -122,7 +122,7 @@ function drawShip(x, y, angle, name){
 	
 	
 	ctx.fillStyle = "green";
-	ctx.fillRect(-35,-10,5,playerData.hp);
+	ctx.fillRect(-35,-10,5,hp);
 
 	
 	
