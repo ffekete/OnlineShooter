@@ -106,8 +106,8 @@ function drawBackground(){
 	var c = document.getElementById("gameArea");
 	var ctx = c.getContext("2d");
 	var img = document.getElementById("bg");
-	for(var i = -3; i < 6; i++)
-	for(var j = -3; j < 6; j++)
+	for(var i = -2; i < 5; i++)
+	for(var j = -2; j < 5; j++)
 		{
 		ctx.drawImage(img, 0 + j* 250-(playerData.x % 250), 0 + i* 246-(playerData.y % 246));
 		}
@@ -123,15 +123,13 @@ function drawBullets(){
 	
 	ctx.save();
 	
-	//ctx.fillText(playerData.x + " " + playerData.y, 10,10);
-	
 	for(var bullets in playerData.bullets){
 		ctx.beginPath();
 		
 		var dx = playerData.x - playerData.bullets[bullets].x;
 		var dy = playerData.y - playerData.bullets[bullets].y;
 		
-		ctx.arc(410 - dx,310 - dy, 5, 0, 2*Math.PI);
+		ctx.arc(410 - dx,310 - dy, 2, 0, 2*Math.PI);
 		ctx.stroke();
 	}
 	
@@ -205,9 +203,9 @@ function updatePlayerData(){
 function start(){
 	drawBorder();
 	connect();
-	setInterval(draw, 25);
-	setInterval(updatePlayerData, 20);
-	setInterval(pollPlayerData, 10);
+	setInterval(draw, 20);
+	setInterval(updatePlayerData, 25);
+	setInterval(pollPlayerData, 25);
 	var c = document.getElementById("gameArea");
 	var ctx = c.getContext("2d");
 	ctx.rotate(0*Math.PI*180);
