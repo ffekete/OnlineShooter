@@ -35,11 +35,6 @@ public class TaskScheduler {
 		playerPool.removeInactivePlayers();
 		
 		/* Do the math */
-		playerDataPrcessor.updateShipAngles();
-		
-		playerDataPrcessor.updatePlayerCoordinates();
-		
-		playerDataPrcessor.checkAllBulletsHitEffect();
-		
+		playerDataPrcessor.updatePlayerData();
 	}
 }

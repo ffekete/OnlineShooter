@@ -31,6 +31,7 @@ public class PlayerDataToSentPlayerDataTransformer {
 		sentPlayerData.setY(playerData.getY());
 		sentPlayerData.setVisiblePlayers(playerPool.getAllPlayersOnScreen(playerId));
 		sentPlayerData.setShipHp(playerData.getHp());
+		sentPlayerData.setInvulnerable(playerData.getInvulnerabilityCounter() > 0L);
 		return sentPlayerData;
 	}
 }

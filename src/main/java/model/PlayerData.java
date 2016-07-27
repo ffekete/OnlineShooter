@@ -4,30 +4,63 @@ import config.GameConfig;
 
 public class PlayerData {
 	private String name;
-	private Long id;
+	private long id;
 	private double x;
 	private double y;
 	
 	private int inactivityCounter = 0;
 	
-	private Long mouseX;
-	private Long mouseY;
+	private long invulnerabilityCounter = GameConfig.INVULN_CTR_MAX_VALUE;
 	
-	private Long hp;
+	private long mouseX;
+	private long mouseY;
+	
+	private long hp;
 	
 	private Double shipAngle;
 	
-	private Long connectionId;
+	private long connectionId;
 	
 	public void increaseInactivityCounter(){
 		inactivityCounter++;
 	}
 	
+	public void kill(){
+		x = 0;
+		y = 0;
+		inactivityCounter = 0;
+		hp = GameConfig.SHIP_INITIAL_HP;
+		invulnerabilityCounter = GameConfig.INVULN_CTR_MAX_VALUE;
+	}
+	
+	public void decreaseHp(long value){
+		hp -= value;
+		if(hp < 0L ) {
+			hp = 0L;
+		}
+	}
+	
+	public void decreaseInvulnerabilityCounter(long value){
+		if(invulnerabilityCounter > 0L){
+			invulnerabilityCounter -= value;
+			if(invulnerabilityCounter < 0L){
+				invulnerabilityCounter = 0L;
+			}
+		}
+	}
+	
 	/* Getters/setters and constructors */
-		
 	public String getName() {
 		return name;
 	}
+	public long getInvulnerabilityCounter() {
+		return invulnerabilityCounter;
+	}
+
+	public void setInvulnerabilityCounter(long invulnerabilityCounter) {
+		this.invulnerabilityCounter = invulnerabilityCounter;
+	}
+
 	public Double getShipAngle() {
 		return shipAngle;
 	}

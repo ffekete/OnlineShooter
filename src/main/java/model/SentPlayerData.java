@@ -13,12 +13,22 @@ public class SentPlayerData {
 	
 	private Long shipHp;
 	
+	private boolean invulnerable;
+	
 	List<PlayerData> visiblePlayers;
 	
 	List<BulletData> visibleBullets;
 
 	public Long getId() {
 		return id;
+	}
+
+	public boolean isInvulnerable() {
+		return invulnerable;
+	}
+
+	public void setInvulnerable(boolean invulnerable) {
+		this.invulnerable = invulnerable;
 	}
 
 	public Long getShipHp() {
