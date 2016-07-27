@@ -80,8 +80,8 @@ function drawBackground(){
 	var c = document.getElementById("gameArea");
 	var ctx = c.getContext("2d");
 	var img = document.getElementById("bg");
-	for(var i = -1; i < 4; i++)
-	for(var j = -1; j < 4; j++)
+	for(var i = -3; i < 6; i++)
+	for(var j = -3; j < 6; j++)
 		{
 		ctx.drawImage(img, 0 + j* 250-(playerData.x % 250), 0 + i* 246-(playerData.y % 246));
 		}
@@ -109,6 +109,7 @@ function drawBullets(){
 function drawShip(x, y, angle, name){
 	var c = document.getElementById("gameArea");
 	var ctx = c.getContext("2d");
+
 	ctx.save();
 	
 	ctx.fillStyle = "red";	
@@ -128,6 +129,7 @@ function drawShip(x, y, angle, name){
 	ctx.lineTo(10, 0);
 	
 	ctx.stroke();
+	
 	ctx.rotate(90 * Math.PI / 180);
 	ctx.textAlign ="center";
 	ctx.fillText(name, 0, 30);
