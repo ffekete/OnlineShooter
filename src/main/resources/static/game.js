@@ -80,8 +80,8 @@ function drawBackground(){
 	var c = document.getElementById("gameArea");
 	var ctx = c.getContext("2d");
 	var img = document.getElementById("bg");
-	for(var i = -1; i < 5; i++)
-	for(var j = -1; j < 5; j++)
+	for(var i = -1; i < 4; i++)
+	for(var j = -1; j < 4; j++)
 		{
 		ctx.drawImage(img, 0 + j* 250-(playerData.x % 250), 0 + i* 246-(playerData.y % 246));
 		}
