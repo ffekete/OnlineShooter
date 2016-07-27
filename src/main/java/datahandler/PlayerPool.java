@@ -1,10 +1,9 @@
 package datahandler;
 
 import java.util.ArrayList;
-import java.util.Currency;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -89,7 +88,7 @@ public class PlayerPool {
 
 	/** Creates a new HashMap to store player data. */
 	public PlayerPool() {
-		this.playerPool = new HashMap<Long, PlayerData>();
+		this.playerPool = new ConcurrentHashMap<Long, PlayerData>();
 	}
 
 	/* Getters/setters */

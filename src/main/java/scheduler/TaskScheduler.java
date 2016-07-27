@@ -28,7 +28,7 @@ public class TaskScheduler {
 	@Scheduled(fixedRate = TimerValues.GAME_MAIN_PERIOD_IN_MS)
 	public void run() throws InterruptedException{
 		
-		bulletDataProcessor.updateBulletCoordinates();
+		bulletDataProcessor.processBulletData();
 		
 		/* handle player inactivity counters */
 		playerPool.increasePlayerInactivityCounters();

@@ -132,8 +132,6 @@ function updatePlayerData(){
 	stompClient.send("/app/updatePlayerData", {}, JSON.stringify(playerDataToSend));
 }
 
-
-
 function start(){
 	drawBorder();
 	connect();
@@ -146,6 +144,6 @@ function start(){
 }
 
 function updateMouseCoordinates(event){
-	playerData.mouseX = event.clientX;
-	playerData.mouseY = event.clientY;
+	playerData.mouseX = event.clientX - 10; // -10: the canvas starts with coordinates x = 10,y = 10
+	playerData.mouseY = event.clientY - 10;
 }
