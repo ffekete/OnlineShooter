@@ -99,17 +99,17 @@ function drawShip(x, y, angle, name){
 	ctx.translate(x,y);
 	ctx.rotate(angle * Math.PI / 180);
 	ctx.beginPath();
-	ctx.moveTo(15, -10);
-	ctx.lineTo(-10, 0);
+	ctx.moveTo(-15, -10);
+	ctx.lineTo(10, 0);
 	
-	ctx.moveTo(15,-10)
-	ctx.lineTo(5, 0);
+	ctx.moveTo(-15,-10)
+	ctx.lineTo(-5, 0);
 	
-	ctx.moveTo(15,10)
-	ctx.lineTo(5, 0);
+	ctx.moveTo(-15,10)
+	ctx.lineTo(-5, 0);
 	
-	ctx.moveTo(15, 10);
-	ctx.lineTo(-10, 0);
+	ctx.moveTo(-15, 10);
+	ctx.lineTo(10, 0);
 	
 	ctx.stroke();
 	ctx.rotate(90 * Math.PI / 180);
