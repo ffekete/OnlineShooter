@@ -30,6 +30,7 @@ public class PlayerDataToSentPlayerDataTransformer {
 		sentPlayerData.setX(playerData.getX());
 		sentPlayerData.setY(playerData.getY());
 		sentPlayerData.setVisiblePlayers(playerPool.getAllPlayersOnScreen(playerId));
+		sentPlayerData.setShipHp(playerData.getHp());
 		return sentPlayerData;
 	}
 }

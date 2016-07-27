@@ -1,5 +1,7 @@
 package model;
 
+import config.GameConfig;
+
 public class PlayerData {
 	private String name;
 	private Long id;
@@ -10,6 +12,8 @@ public class PlayerData {
 	
 	private Long mouseX;
 	private Long mouseY;
+	
+	private Long hp;
 	
 	private Double shipAngle;
 	
@@ -90,6 +94,14 @@ public class PlayerData {
 		super();
 	}
 	
+	public Long getHp() {
+		return hp;
+	}
+
+	public void setHp(Long hp) {
+		this.hp = hp;
+	}
+
 	public PlayerData(Long id, String name) {
 		this.name = name;
 		this.id = id;
@@ -99,6 +111,7 @@ public class PlayerData {
 		this.mouseY = 0L;
 		this.shipAngle = 0.0d;
 		this.connectionId = 0L;
+		this.hp = GameConfig.SHIP_INITIAL_HP;
 	}
 	
 	public String toString(){

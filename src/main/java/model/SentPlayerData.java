@@ -11,12 +11,22 @@ public class SentPlayerData {
 	
 	private Long connectionId;
 	
+	private Long shipHp;
+	
 	List<PlayerData> visiblePlayers;
 	
 	List<BulletData> visibleBullets;
 
 	public Long getId() {
 		return id;
+	}
+
+	public Long getShipHp() {
+		return shipHp;
+	}
+
+	public void setShipHp(Long shipHp) {
+		this.shipHp = shipHp;
 	}
 
 	public void setId(Long id) {

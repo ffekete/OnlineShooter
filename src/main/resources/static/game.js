@@ -36,6 +36,7 @@ function playerDataArrived(playerDataFromServer){
 	playerData.otherPlayers = JSON.parse(playerDataFromServer.body).visiblePlayers;
 	playerData.x = JSON.parse(playerDataFromServer.body).x;
 	playerData.y = JSON.parse(playerDataFromServer.body).y;
+	playerData.hp = JSON.parse(playerDataFromServer.body).shipHp;
 }
 
 function drawBorder(){
@@ -115,6 +116,16 @@ function drawShip(x, y, angle, name){
 	ctx.fillStyle = "red";	
 	ctx.translate(x,y);
 	ctx.rotate(angle * Math.PI / 180);
+	
+	ctx.fillStyle = "red";
+	ctx.fillRect(-37,-11,8,22);
+	
+	
+	ctx.fillStyle = "green";
+	ctx.fillRect(-35,-10,5,playerData.hp);
+
+	
+	
 	ctx.beginPath();
 	ctx.moveTo(-15, -10);
 	ctx.lineTo(10, 0);
@@ -130,9 +141,12 @@ function drawShip(x, y, angle, name){
 	
 	ctx.stroke();
 	
+	
 	ctx.rotate(90 * Math.PI / 180);
 	ctx.textAlign ="center";
-	ctx.fillText(name, 0, 30);
+	ctx.fillText(name, 0, 25);
+	//ctx.fillText(playerData.hp, 0, 60);
+	
 	ctx.restore();
 }
 
