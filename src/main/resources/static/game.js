@@ -83,7 +83,7 @@ function drawBackground(){
 	for(var i = -1; i < 5; i++)
 	for(var j = -1; j < 5; j++)
 		{
-		ctx.drawImage(img, 0 + i* 250-(playerData.x % 250), 0 + j* 250-(playerData.y % 250));
+		ctx.drawImage(img, 0 + j* 250-(playerData.x % 250), 0 + i* 246-(playerData.y % 246));
 		}
 	
 	
