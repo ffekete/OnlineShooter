@@ -91,6 +91,12 @@ public class PlayerDataProcessor {
 		resultx = player.getX() + GameConfig.SHIP_INITIAL_SPEED * Math.cos(angle);
 		resulty = player.getY() + GameConfig.SHIP_INITIAL_SPEED * Math.sin(angle);
 
+		if(resultx > GameConfig.STAGE_POS_LIMIT_X) resultx = GameConfig.STAGE_NEG_LIMIT_X;
+		if(resultx < GameConfig.STAGE_NEG_LIMIT_X) resultx = GameConfig.STAGE_POS_LIMIT_X;
+		
+		if(resulty > GameConfig.STAGE_POS_LIMIT_Y) resulty = GameConfig.STAGE_NEG_LIMIT_Y;
+		if(resulty < GameConfig.STAGE_NEG_LIMIT_Y) resulty = GameConfig.STAGE_POS_LIMIT_Y;		
+		
 		player.setX(resultx);
 		player.setY(resulty);
 	}

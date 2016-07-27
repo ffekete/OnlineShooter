@@ -20,18 +20,24 @@ public class PlayerDataToSentPlayerDataTransformer {
 	BulletsPool bulletPool;
 	
 	public SentPlayerData transform(PlayerData playerData){
-		SentPlayerData sentPlayerData = new SentPlayerData();
-		Long playerId = playerData.getId();
-		
-		sentPlayerData.setConnectionId(playerData.getConnectionId());
-		sentPlayerData.setId(playerId);
-		sentPlayerData.setShipAngle(playerData.getShipAngle());
-		sentPlayerData.setVisibleBullets(bulletPool.getAllBulletsOnScreen(playerId));
-		sentPlayerData.setX(playerData.getX());
-		sentPlayerData.setY(playerData.getY());
-		sentPlayerData.setVisiblePlayers(playerPool.getAllPlayersOnScreen(playerId));
-		sentPlayerData.setShipHp(playerData.getHp());
-		sentPlayerData.setInvulnerable(playerData.getInvulnerabilityCounter() > 0L);
-		return sentPlayerData;
+		if(playerData != null){
+			SentPlayerData sentPlayerData = new SentPlayerData();
+			Long playerId = playerData.getId();
+			
+			sentPlayerData.setConnectionId(playerData.getConnectionId());
+			sentPlayerData.setId(playerId);
+			sentPlayerData.setShipAngle(playerData.getShipAngle());
+			sentPlayerData.setVisibleBullets(bulletPool.getAllBulletsOnScreen(playerId));
+			sentPlayerData.setX(playerData.getX());
+			sentPlayerData.setY(playerData.getY());
+			sentPlayerData.setVisiblePlayers(playerPool.getAllPlayersOnScreen(playerId));
+			sentPlayerData.setShipHp(playerData.getHp());
+			sentPlayerData.setInvulnerable(playerData.getInvulnerabilityCounter() > 0L);
+			return sentPlayerData;
+		}
+		else
+		{
+			return null;
+		}
 	}
 }

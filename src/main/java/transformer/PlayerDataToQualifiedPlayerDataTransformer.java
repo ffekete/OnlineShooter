@@ -9,11 +9,14 @@ import model.QualifiedPlayerData;
 public class PlayerDataToQualifiedPlayerDataTransformer {
 
 	public QualifiedPlayerData tranform(PlayerData playerData, boolean registrartionStatus){
-		QualifiedPlayerData qualifiedPlayerData = new QualifiedPlayerData();
-		qualifiedPlayerData.setPlayerData(playerData);
-		qualifiedPlayerData.setRegistered(registrartionStatus);
-	
-		return qualifiedPlayerData;
+		if(playerData != null){
+			QualifiedPlayerData qualifiedPlayerData = new QualifiedPlayerData();
+			qualifiedPlayerData.setPlayerData(playerData);
+			qualifiedPlayerData.setRegistered(registrartionStatus);
+		
+			return qualifiedPlayerData;
+		}
+		return null;
 	}
 	
 }

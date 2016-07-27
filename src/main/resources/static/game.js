@@ -1,4 +1,10 @@
 
+var X_MIN_LIMIT = -500;
+var Y_MIN_LIMIT = -500;
+
+var X_MAX_LIMIT = 500;
+var Y_MAX_LIMIT = 500;
+
 var stompClient = null;
 
 var shootBulletSwitch=false;
@@ -100,6 +106,7 @@ function draw(){
 		}
 	}
 	drawBullets();
+	
 }
 
 function drawBackground(){
@@ -113,8 +120,22 @@ function drawBackground(){
 		}
 	
 	ctx.fillText("Fps: " + requestAnimFrame(), 10,10);
+	ctx.fillText("X: " + playerData.x + " Y: " + playerData.y, 10,25);
+	
+	ctx.save();
+	
+	//ctx.translate(playerData.x, playerData.y);	
+	
+	var dx = Math.abs(playerData.x - X_MIN_LIMIT);
+	var dy = Math.abs(playerData.y - Y_MIN_LIMIT);
+	
+	var dxm = Math.abs(X_MIN_LIMIT) + X_MAX_LIMIT;
+	var dym = Math.abs(Y_MIN_LIMIT) + Y_MAX_LIMIT;
 	
 	
+	ctx.rect(400 - dx, 300 - dy, dxm, dym);
+	
+	ctx.restore();
 }
 
 function drawBullets(){

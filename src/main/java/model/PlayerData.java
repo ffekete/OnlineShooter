@@ -1,8 +1,15 @@
 package model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import config.GameConfig;
+import service.PlayerSpawner;
 
 public class PlayerData {
+	
+	@Autowired
+	private PlayerSpawner playerSpawner = new PlayerSpawner();
+	
 	private String name;
 	private long id;
 	private double x;
@@ -46,8 +53,7 @@ public class PlayerData {
 	}
 	
 	public void kill(){
-		x = 0;
-		y = 0;
+		playerSpawner.spawn(this); 
 		inactivityCounter = 0;
 		hp = GameConfig.SHIP_INITIAL_HP;
 		invulnerabilityCounter = GameConfig.INVULN_CTR_MAX_VALUE;
