@@ -61,6 +61,7 @@ function draw(){
 	var c = document.getElementById("gameArea");
 	var ctx = c.getContext("2d");
 	ctx.clearRect(0,0, c.width, c.height);
+	drawBackground();
 	drawBorder();
 	drawShip(410, 310, playerData.shipAngle, playerData.name);
 	if(playerData.otherPlayers){
@@ -73,6 +74,19 @@ function draw(){
 		}
 	}
 	drawBullets();
+}
+
+function drawBackground(){
+	var c = document.getElementById("gameArea");
+	var ctx = c.getContext("2d");
+	var img = document.getElementById("bg");
+	for(var i = -1; i < 5; i++)
+	for(var j = -1; j < 5; j++)
+		{
+		ctx.drawImage(img, 0 + i* 250-(playerData.x % 250), 0 + j* 250-(playerData.y % 250));
+		}
+	
+	
 }
 
 function drawBullets(){
@@ -157,6 +171,8 @@ function start(){
 	$('#gameArea').mouseup(function(){
 		shootBulletSwitch = false;
 	});
+	
+	$('#bg').css("display", "none"); // hide the background image
 }
 
 function updateMouseCoordinates(event){
