@@ -83,8 +83,8 @@ public class PlayerDataProcessor {
 					&& Math.abs(actualBullet.getY() - player.getY()) < 10.0d;
 
 			if (invulnerabilityCheck && playerIdCheck && areaCheck) {
+				player.decreaseHp(actualBullet.getDamage());
 				bulletPool.getBulletPool().remove(actualBullet);
-				player.decreaseHp(1L); // todo: weapon damage!!!
 				
 			}
 		}

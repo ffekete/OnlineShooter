@@ -1,9 +1,11 @@
+var screen_x = $("#gameArea").width();
+var screen_y = $("#gameArea").height();
 
-var X_MIN_LIMIT = -500;
-var Y_MIN_LIMIT = -500;
+var X_MIN_LIMIT = -1000;
+var Y_MIN_LIMIT = -1000;
 
-var X_MAX_LIMIT = 500;
-var Y_MAX_LIMIT = 500;
+var X_MAX_LIMIT = 1000;
+var Y_MAX_LIMIT = 1000;
 
 var stompClient = null;
 
@@ -95,7 +97,7 @@ function draw(){
 	var ctx = c.getContext("2d");
 	drawBackground();
 	drawBorder();
-	drawShip(410, 310, playerData.shipAngle, playerData.name, playerData.hp, playerData.invulnerable);
+	drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.name, playerData.hp, playerData.invulnerable);
 	
 	if(playerData.otherPlayers){
 		for(var i in playerData.otherPlayers){
@@ -103,7 +105,7 @@ function draw(){
 			
 			var dx = playerData.x - actualShip.x;
 			var dy = playerData.y - actualShip.y;
-			drawShip(410-dx,310-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.invulnerable);
+			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.invulnerable);
 		}
 	}
 	drawBullets();
@@ -135,7 +137,7 @@ function drawBackground(){
 	var dym = Math.abs(Y_MIN_LIMIT) + Y_MAX_LIMIT;
 	
 	
-	ctx.rect(400 - dx, 300 - dy, dxm, dym);
+	ctx.rect((screen_x / 2) - dx, (screen_y / 2) - dy, dxm, dym);
 	
 	ctx.restore();
 }
@@ -152,10 +154,10 @@ function drawItems(){
 		var dx = playerData.x - playerData.itemsOnScreen[items].x;
 		var dy = playerData.y - playerData.itemsOnScreen[items].y;
 		
-		ctx.arc(410 - dx,310 - dy, 5, 0, 2*Math.PI);
+		ctx.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 5, 0, 2*Math.PI);
 		ctx.stroke();
 		ctx.textAlign ="center";
-		ctx.fillText(playerData.itemsOnScreen[items].name, 410 - dx,310 - dy + 15);
+		ctx.fillText(playerData.itemsOnScreen[items].name, (screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy + 15);
 	}
 	
 	ctx.restore();
@@ -173,7 +175,7 @@ function drawBullets(){
 		var dx = playerData.x - playerData.bullets[bullets].x;
 		var dy = playerData.y - playerData.bullets[bullets].y;
 		
-		ctx.arc(410 - dx,310 - dy, 2, 0, 2*Math.PI);
+		ctx.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 2, 0, 2*Math.PI);
 		ctx.stroke();
 	}
 	
@@ -267,6 +269,9 @@ function start(){
 	$('#gameArea').mouseup(function(){
 		shootBulletSwitch = false;
 	});
+	
+	screen_x = $("#gameArea").width();
+	screen_y = $("#gameArea").height();
 	
 	$('#bg').css("display", "none"); // hide the background image
 }

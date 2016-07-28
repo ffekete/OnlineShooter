@@ -53,7 +53,7 @@ public class BulletsPool {
 	public synchronized void addBullet(Long playerId){
 		PlayerData player = playerPool.getPlayerById(playerId);
 		if(player.getWeapon().canShoot()){
-			bulletPool.add(new BulletData(player.getX(), player.getY(), player.getShipAngle(), player.getId()));
+			bulletPool.add(new BulletData(player.getX(), player.getY(), player.getShipAngle(), player.getId(), player.getWeapon().getDamage()));
 			player.getWeapon().startShootingRateCooldownEffect();
 			player.getWeapon().decreaseAmmo(1L);
 		}

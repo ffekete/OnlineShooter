@@ -6,6 +6,7 @@ public class BulletData {
 	private double angle;
 	private long age;
 	private long playerId;
+	private long damage;
 		
 	public double getAngle() {
 		return angle;
@@ -23,13 +24,22 @@ public class BulletData {
 		this.playerId = playerId;
 	}
 
-	public BulletData(double x, double y, double angle, long playerId) {
+	public long getDamage() {
+		return damage;
+	}
+
+	public void setDamage(long damage) {
+		this.damage = damage;
+	}
+
+	public BulletData(double x, double y, double angle, long playerId, long damage) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.angle = angle;
 		this.age = 0L;
 		this.playerId = playerId;
+		this.damage = damage;
 	}
 	
 	public void increaseAge(){
