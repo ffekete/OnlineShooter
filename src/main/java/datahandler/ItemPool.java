@@ -8,6 +8,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.springframework.stereotype.Component;
 
 import Items.HealthPack;
+import Items.IncreaseDamage;
+import Items.IncreaseRateOfFire;
 import builder.WeaponFactory;
 import config.CanvasConstants;
 import config.GameConfig;
@@ -44,25 +46,31 @@ public class ItemPool {
 		return allItemsOnScreen;
 	}
 
-	public void removeItem(SpawnableItem item){
+	public void removeItem(SpawnableItem item) {
 		itemPool.remove(item);
 	}
-	
+
 	public void createNewRandomItem() {
 		Random random = new Random();
 		SpawnableItem newItem = null;
 
-		if(itemPool.size() < GameConfig.MAX_ITEMS_ON_STAGE)
-		{
+		if (itemPool.size() < GameConfig.MAX_ITEMS_ON_STAGE) {
 			int i = random.nextInt(500);
-	
+
 			switch (i) {
 			case 1:
 				newItem = (SpawnableItem) new WeaponFactory().createWeapon(WeaponId.GATLING_GUN);
 				break;
 			case 2:
+				newItem = (SpawnableItem) new IncreaseDamage();
+				break;
+			case 3:
 				newItem = (SpawnableItem) new HealthPack();
 				break;
+			case 4:
+				newItem = (SpawnableItem) new IncreaseRateOfFire();
+				break;
+			
 			default:
 				break;
 			}

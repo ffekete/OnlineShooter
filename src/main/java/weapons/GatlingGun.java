@@ -18,4 +18,16 @@ public class GatlingGun extends WeaponParent{
 	public void applyEffect(PlayerData player) {
 		player.setWeapon(this);		
 	}
+
+	@Override
+	public void increaseDamage(long amount) {
+		this.setDamage(this.getDamage() + amount);		
+	}
+	
+	@Override
+	public void increaseRateOfFire(long amount) {
+		long rof = this.getRateOfFire();
+		
+		this.setRateOfFire(rof - amount);		
+	}
 } 

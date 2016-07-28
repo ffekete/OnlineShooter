@@ -9,4 +9,6 @@ public interface Weapon {
 	public void decreaseRateOfFireCooldownValue(long value);
 	public void startShootingRateCooldownEffect();
 	public boolean canShoot();
+	public void increaseDamage(long amount);
+	public void increaseRateOfFire(long amount);
 }

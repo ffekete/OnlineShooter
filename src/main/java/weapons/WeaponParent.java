@@ -34,7 +34,6 @@ public abstract class WeaponParent implements SpawnableItem, Weapon {
 	
 	@Override
 	public long getDamage() {
-		// TODO Auto-generated method stub
 		return this.damage;
 	}
 
@@ -100,6 +99,7 @@ public abstract class WeaponParent implements SpawnableItem, Weapon {
 	
 	public void setRateOfFire(long rateOfFire) {
 		this.rateOfFire = rateOfFire;
+		if(rateOfFire < 1L) rateOfFire = 1L;
 	}
 	
 	public long getRateOfFireCooldown() {
@@ -121,4 +121,6 @@ public abstract class WeaponParent implements SpawnableItem, Weapon {
 			if(rateOfFireCooldown < 0L) rateOfFireCooldown = 0L;
 		}
 	}
+	
+	
 }
