@@ -13,6 +13,8 @@ public class PlayerData implements Spawnable{
 	private double x;
 	private double y;
 	
+	private double previousAngle = 0.0d;
+	
 	private int inactivityCounter = 0;
 	
 	private long invulnerabilityCounter = GameConfig.INVULN_CTR_MAX_VALUE;
@@ -62,6 +64,14 @@ public class PlayerData implements Spawnable{
 		return name;
 	}
 	
+	public double getPreviousAngle() {
+		return previousAngle;
+	}
+
+	public void setPreviousAngle(double previousAngle) {
+		this.previousAngle = previousAngle;
+	}
+
 	public long getInvulnerabilityCounter() {
 		return invulnerabilityCounter;
 	}

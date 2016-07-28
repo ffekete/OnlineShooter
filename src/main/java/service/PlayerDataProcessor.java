@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import config.CanvasConstants;
 import config.GameConfig;
+import config.Physics;
 import datahandler.BulletsPool;
 import datahandler.ItemPool;
 import datahandler.PlayerPool;
@@ -28,14 +29,36 @@ public class PlayerDataProcessor {
 	ItemPool itemPool;
 
 	/** Calculates an angle using two points. */
-	private double calculateAngle(double targetX, double targetY, double baseX, double baseY) {
+	private double calculateAngle(double targetX, double targetY, double baseX, double baseY, double previousAngle) {
 		double angle = Math.toDegrees(Math.atan2(targetY - baseY, targetX - baseX));
+		double smoothedValue = previousAngle;
 
 		if (angle < 0) {
 			angle += 360;
 		}
 
-		return angle;
+
+		if(previousAngle - angle > 180.0){
+			angle = 360.0 + angle; 
+		}
+		
+		else if(angle - previousAngle > 180.0){
+			angle = angle - 360.0; 
+		}
+		
+     	smoothedValue += (angle - smoothedValue) / Physics.SMOOTHING;
+     	
+     	if(smoothedValue > 360.0d)
+     	{
+     		smoothedValue -=360.0d;
+     	}
+     	else if(smoothedValue <0.0d)
+     	{
+     		smoothedValue +=360.0d;
+     	}
+
+				
+		return smoothedValue;
 	}
 
 	private void checkBulletHits(PlayerData player) {
@@ -68,8 +91,11 @@ public class PlayerDataProcessor {
 	}
 
 	private void updateShipAngles(PlayerData player) throws InterruptedException {
-		player.setAngle(calculateAngle(player.getMouseX(), player.getMouseY(),
-				(double) CanvasConstants.CANVAS_HALF_WIDTH, (double) CanvasConstants.CANVAS_HALF_HEIGHT));
+		double angle = calculateAngle(player.getMouseX(), player.getMouseY(),
+				(double) CanvasConstants.CANVAS_HALF_WIDTH, (double) CanvasConstants.CANVAS_HALF_HEIGHT,
+				player.getPreviousAngle());
+		player.setPreviousAngle(player.getAngle());
+		player.setAngle(angle);
 	}
 
 	/**
@@ -94,7 +120,8 @@ public class PlayerDataProcessor {
 	}
 
 	public void applyItemEffectsOnPlayer(PlayerData player) {
-		CopyOnWriteArrayList<SpawnableItem> items = (CopyOnWriteArrayList<SpawnableItem>) itemPool.getAllItemsOnScreen(player);
+		CopyOnWriteArrayList<SpawnableItem> items = (CopyOnWriteArrayList<SpawnableItem>) itemPool
+				.getAllItemsOnScreen(player);
 
 		Iterator<SpawnableItem> itemIterator = items.iterator();
 
@@ -102,8 +129,8 @@ public class PlayerDataProcessor {
 			SpawnableItem actualItem = itemIterator.next();
 			boolean areaCheck = Math.abs(actualItem.getX() - player.getX()) < 10.0d
 					&& Math.abs(actualItem.getY() - player.getY()) < 10.0d;
-			
-			if(areaCheck){
+
+			if (areaCheck) {
 				actualItem.applyEffect(player);
 				itemPool.removeItem(actualItem);
 			}
