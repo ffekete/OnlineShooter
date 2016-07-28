@@ -2,6 +2,7 @@ package model;
 
 import builder.WeaponFactory;
 import config.GameConfig;
+import config.Physics;
 import config.WeaponId;
 import interfaces.Spawnable;
 import interfaces.Weapon;
@@ -30,6 +31,8 @@ public class PlayerData implements Spawnable{
 	
 	private Weapon weapon;
 	
+	private double maneuverability;
+	
 	public void increaseInactivityCounter(){
 		inactivityCounter++;
 	}
@@ -40,6 +43,7 @@ public class PlayerData implements Spawnable{
 		hp = GameConfig.SHIP_INITIAL_HP;
 		invulnerabilityCounter = GameConfig.INVULN_CTR_MAX_VALUE;
 		this.weapon = new WeaponFactory().createWeapon(WeaponId.MACHINEGUN);
+		this.maneuverability = Physics.SMOOTHING;
 	}
 	
 	public void decreaseHp(long value){
@@ -167,6 +171,14 @@ public class PlayerData implements Spawnable{
 		this.weapon = weapon;
 	}
 
+	public double getManeuverability() {
+		return maneuverability;
+	}
+
+	public void setManeuverability(double maneuverability) {
+		this.maneuverability = maneuverability;
+	}
+
 	public PlayerData(Long id, String name) {
 		this.name = name;
 		this.id = id;
@@ -179,6 +191,7 @@ public class PlayerData implements Spawnable{
 		this.connectionId = 0L;
 		this.hp = GameConfig.SHIP_INITIAL_HP;
 		this.weapon = new WeaponFactory().createWeapon(WeaponId.MACHINEGUN);
+		this.maneuverability = Physics.SMOOTHING;
 	}
 	
 	public String toString(){

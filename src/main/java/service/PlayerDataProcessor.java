@@ -29,14 +29,16 @@ public class PlayerDataProcessor {
 	ItemPool itemPool;
 
 	/** Calculates an angle using two points. */
-	private double calculateAngle(double targetX, double targetY, double baseX, double baseY, double previousAngle) {
+	private double calculateAngleAndFilterIt(PlayerData player, double baseX, double baseY) {
+		double targetX = player.getMouseX();
+		double targetY = player.getMouseY();
 		double angle = Math.toDegrees(Math.atan2(targetY - baseY, targetX - baseX));
+		double previousAngle = player.getPreviousAngle();
 		double smoothedValue = previousAngle;
 
 		if (angle < 0) {
 			angle += 360;
 		}
-
 
 		if(previousAngle - angle > 180.0){
 			angle = 360.0 + angle; 
@@ -46,7 +48,7 @@ public class PlayerDataProcessor {
 			angle = angle - 360.0; 
 		}
 		
-     	smoothedValue += (angle - smoothedValue) / Physics.SMOOTHING;
+     	smoothedValue += (angle - smoothedValue) / player.getManeuverability();
      	
      	if(smoothedValue > 360.0d)
      	{
@@ -91,9 +93,7 @@ public class PlayerDataProcessor {
 	}
 
 	private void updateShipAngles(PlayerData player) throws InterruptedException {
-		double angle = calculateAngle(player.getMouseX(), player.getMouseY(),
-				(double) CanvasConstants.CANVAS_HALF_WIDTH, (double) CanvasConstants.CANVAS_HALF_HEIGHT,
-				player.getPreviousAngle());
+		double angle = calculateAngleAndFilterIt(player, (double) CanvasConstants.CANVAS_HALF_WIDTH, (double) CanvasConstants.CANVAS_HALF_HEIGHT);
 		player.setPreviousAngle(player.getAngle());
 		player.setAngle(angle);
 	}
