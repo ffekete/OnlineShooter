@@ -7,8 +7,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.springframework.stereotype.Component;
 
+import Items.HealthPack;
 import builder.WeaponFactory;
 import config.CanvasConstants;
+import config.GameConfig;
 import config.WeaponId;
 import interfaces.Spawnable;
 import interfaces.SpawnableItem;
@@ -42,24 +44,31 @@ public class ItemPool {
 		return allItemsOnScreen;
 	}
 
+	public void removeItem(SpawnableItem item){
+		itemPool.remove(item);
+	}
+	
 	public void createNewRandomItem() {
 		Random random = new Random();
 		SpawnableItem newItem = null;
 
-		int i = random.nextInt(100);
-
-		switch (i) {
-		case 0:
-			newItem = (SpawnableItem) new WeaponFactory().createWeapon(WeaponId.MACHINEGUN);
-			break;
-		case 1:
-			newItem = (SpawnableItem) new WeaponFactory().createWeapon(WeaponId.GATLING_GUN);
-			break;
-		default:
-			break;
-		}
-		if (newItem != null) {
-			addItem(newItem);
+		if(itemPool.size() < GameConfig.MAX_ITEMS_ON_STAGE)
+		{
+			int i = random.nextInt(500);
+	
+			switch (i) {
+			case 1:
+				newItem = (SpawnableItem) new WeaponFactory().createWeapon(WeaponId.GATLING_GUN);
+				break;
+			case 2:
+				newItem = (SpawnableItem) new HealthPack();
+				break;
+			default:
+				break;
+			}
+			if (newItem != null) {
+				addItem(newItem);
+			}
 		}
 	}
 }

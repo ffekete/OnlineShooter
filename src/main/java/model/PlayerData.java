@@ -142,6 +142,7 @@ public class PlayerData implements Spawnable{
 
 	public void setHp(Long hp) {
 		this.hp = hp;
+		if(this.hp > GameConfig.SHIP_MAX_HP) this.hp = GameConfig.SHIP_MAX_HP; 
 	}
 
 	public boolean isInvulnerable(){

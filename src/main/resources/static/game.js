@@ -63,6 +63,7 @@ function playerDataArrived(playerDataFromServer){
 	playerData.y = JSON.parse(playerDataFromServer.body).y;
 	playerData.hp = JSON.parse(playerDataFromServer.body).shipHp;
 	playerData.invulnerable = JSON.parse(playerDataFromServer.body).invulnerable;
+	playerData.itemsOnScreen = JSON.parse(playerDataFromServer.body).items;
 }
 
 function drawBorder(){
@@ -106,6 +107,7 @@ function draw(){
 		}
 	}
 	drawBullets();
+	drawItems();
 	
 }
 
@@ -134,6 +136,27 @@ function drawBackground(){
 	
 	
 	ctx.rect(400 - dx, 300 - dy, dxm, dym);
+	
+	ctx.restore();
+}
+
+function drawItems(){
+	var c = document.getElementById("gameArea");
+	var ctx = c.getContext("2d");
+	
+	ctx.save();
+	
+	for(var items in playerData.itemsOnScreen){
+		ctx.beginPath();
+		
+		var dx = playerData.x - playerData.itemsOnScreen[items].x;
+		var dy = playerData.y - playerData.itemsOnScreen[items].y;
+		
+		ctx.arc(410 - dx,310 - dy, 5, 0, 2*Math.PI);
+		ctx.stroke();
+		ctx.textAlign ="center";
+		ctx.fillText(playerData.itemsOnScreen[items].name, 410 - dx,310 - dy + 15);
+	}
 	
 	ctx.restore();
 }

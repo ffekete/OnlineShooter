@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 import config.CanvasConstants;
 import config.GameConfig;
 import datahandler.BulletsPool;
+import datahandler.ItemPool;
 import datahandler.PlayerPool;
+import interfaces.SpawnableItem;
 import model.BulletData;
 import model.PlayerData;
 
@@ -21,6 +23,9 @@ public class PlayerDataProcessor {
 
 	@Autowired
 	BulletsPool bulletPool;
+
+	@Autowired
+	ItemPool itemPool;
 
 	/** Calculates an angle using two points. */
 	private double calculateAngle(double targetX, double targetY, double baseX, double baseY) {
@@ -42,11 +47,16 @@ public class PlayerDataProcessor {
 		while (bulletIterator.hasNext()) {
 			BulletData actualBullet = bulletIterator.next();
 
-			boolean invulnerabilityCheck = player.getInvulnerabilityCounter() < 1L; // true, if player is no invulnerable
-			boolean playerIdCheck = actualBullet.getPlayerId() != player.getId(); 
+			boolean invulnerabilityCheck = player.getInvulnerabilityCounter() < 1L; // true,
+																					// if
+																					// player
+																					// is
+																					// no
+																					// invulnerable
+			boolean playerIdCheck = actualBullet.getPlayerId() != player.getId();
 			boolean areaCheck = Math.abs(actualBullet.getX() - player.getX()) < 10.0d
 					&& Math.abs(actualBullet.getY() - player.getY()) < 10.0d;
-			
+
 			if (invulnerabilityCheck && playerIdCheck && areaCheck) {
 				bulletPool.getBulletPool().remove(actualBullet);
 				player.decreaseHp(1L);
@@ -76,10 +86,28 @@ public class PlayerDataProcessor {
 			updateShipAngles(player);
 			updatePlayerCoordinates(player);
 			checkBulletHits(player);
+			applyItemEffectsOnPlayer(player);
 			player.decreaseInvulnerabilityCounter(1L);
 			player.getWeapon().decreaseRateOfFireCooldownValue(1L);
 		}
 
+	}
+
+	public void applyItemEffectsOnPlayer(PlayerData player) {
+		CopyOnWriteArrayList<SpawnableItem> items = (CopyOnWriteArrayList<SpawnableItem>) itemPool.getAllItemsOnScreen(player);
+
+		Iterator<SpawnableItem> itemIterator = items.iterator();
+
+		while (itemIterator.hasNext()) {
+			SpawnableItem actualItem = itemIterator.next();
+			boolean areaCheck = Math.abs(actualItem.getX() - player.getX()) < 10.0d
+					&& Math.abs(actualItem.getY() - player.getY()) < 10.0d;
+			
+			if(areaCheck){
+				actualItem.applyEffect(player);
+				itemPool.removeItem(actualItem);
+			}
+		}
 	}
 
 	/** Updates a given players coordinate. */
@@ -91,12 +119,16 @@ public class PlayerDataProcessor {
 		resultx = player.getX() + GameConfig.SHIP_INITIAL_SPEED * Math.cos(angle);
 		resulty = player.getY() + GameConfig.SHIP_INITIAL_SPEED * Math.sin(angle);
 
-		if(resultx > GameConfig.STAGE_POS_LIMIT_X) resultx = GameConfig.STAGE_NEG_LIMIT_X;
-		if(resultx < GameConfig.STAGE_NEG_LIMIT_X) resultx = GameConfig.STAGE_POS_LIMIT_X;
-		
-		if(resulty > GameConfig.STAGE_POS_LIMIT_Y) resulty = GameConfig.STAGE_NEG_LIMIT_Y;
-		if(resulty < GameConfig.STAGE_NEG_LIMIT_Y) resulty = GameConfig.STAGE_POS_LIMIT_Y;		
-		
+		if (resultx > GameConfig.STAGE_POS_LIMIT_X)
+			resultx = GameConfig.STAGE_NEG_LIMIT_X;
+		if (resultx < GameConfig.STAGE_NEG_LIMIT_X)
+			resultx = GameConfig.STAGE_POS_LIMIT_X;
+
+		if (resulty > GameConfig.STAGE_POS_LIMIT_Y)
+			resulty = GameConfig.STAGE_NEG_LIMIT_Y;
+		if (resulty < GameConfig.STAGE_NEG_LIMIT_Y)
+			resulty = GameConfig.STAGE_POS_LIMIT_Y;
+
 		player.setX(resultx);
 		player.setY(resulty);
 	}
