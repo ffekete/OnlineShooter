@@ -5,8 +5,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import config.TimerValues;
-import connection.ConnectionPool;
-import datahandler.BulletsPool;
 import datahandler.PlayerPool;
 import service.BulletDataProcessor;
 import service.PlayerDataProcessor;

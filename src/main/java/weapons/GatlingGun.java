@@ -1,8 +1,6 @@
 package weapons;
 
 import config.WeaponConfig;
-import interfaces.Spawnable;
-import interfaces.Weapon;
 import service.Spawner;
 
 public class GatlingGun extends WeaponParent{
