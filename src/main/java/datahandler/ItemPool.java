@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import Items.HealthPack;
 import Items.IncreaseDamage;
+import Items.IncreaseMAneuverability;
 import Items.IncreaseRateOfFire;
 import builder.WeaponFactory;
 import config.CanvasConstants;
@@ -73,7 +74,10 @@ public class ItemPool {
 				break;
 			case 5:
 				newItem = (SpawnableItem) new WeaponFactory().createWeapon(WeaponId.LASER_CANNON);
-				break;			
+				break;
+			case 6:
+				newItem = (SpawnableItem) new IncreaseMAneuverability();
+				break;
 			default:
 				break;
 			}

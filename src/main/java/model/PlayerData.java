@@ -179,6 +179,11 @@ public class PlayerData implements Spawnable{
 		this.maneuverability = maneuverability;
 	}
 
+	public void increaseManeuverablility(double value){
+		this.maneuverability -= value;
+		if(this.maneuverability < 1.0d) this.maneuverability = 1.0d;
+	}
+	
 	public PlayerData(Long id, String name) {
 		this.name = name;
 		this.id = id;
