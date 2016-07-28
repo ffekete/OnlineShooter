@@ -2,6 +2,7 @@ package weapons;
 
 import interfaces.SpawnableItem;
 import interfaces.Weapon;
+import model.PlayerData;
 
 public abstract class WeaponParent implements SpawnableItem, Weapon {
 	private long rateOfFireCooldown;
@@ -16,6 +17,23 @@ public abstract class WeaponParent implements SpawnableItem, Weapon {
 	private double y;
 	
 	private long damage;
+	
+	@Override
+	public void applyEffect(PlayerData player) {
+		player.setWeapon(this);
+	}
+
+	@Override
+	public void increaseDamage(long amount) {
+		this.setDamage(this.getDamage() + amount);
+	}
+
+	@Override
+	public void increaseRateOfFire(long amount) {
+		long rof = this.getRateOfFire();
+
+		this.setRateOfFire(rof - amount);
+	}
 	
 	public boolean canShoot(){
 		return this.hasAmmo() && this.rateOfFireCooldown < 1L;

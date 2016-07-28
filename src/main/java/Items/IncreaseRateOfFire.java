@@ -25,7 +25,7 @@ public class IncreaseRateOfFire implements SpawnableItem{
 
 	@Override
 	public void applyEffect(PlayerData player) {
-		player.getWeapon().increaseDamage(1L);
+		player.getWeapon().increaseRateOfFire(1L);
 	}
 
 	@Override

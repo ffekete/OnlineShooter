@@ -18,6 +18,7 @@ import interfaces.Spawnable;
 import interfaces.SpawnableItem;
 import model.BulletData;
 import model.PlayerData;
+import weapons.LaserCannon;
 
 @Component
 public class ItemPool {
@@ -70,7 +71,9 @@ public class ItemPool {
 			case 4:
 				newItem = (SpawnableItem) new IncreaseRateOfFire();
 				break;
-			
+			case 5:
+				newItem = (SpawnableItem) new WeaponFactory().createWeapon(WeaponId.LASER_CANNON);
+				break;			
 			default:
 				break;
 			}
