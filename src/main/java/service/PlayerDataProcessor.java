@@ -84,10 +84,8 @@ public class PlayerDataProcessor {
 
 			if (invulnerabilityCheck && playerIdCheck && areaCheck) {
 				bulletPool.getBulletPool().remove(actualBullet);
-				player.decreaseHp(1L);
-				if (player.getHp() < 1L) {
-					player.kill();
-				}
+				player.decreaseHp(1L); // todo: weapon damage!!!
+				
 			}
 		}
 	}
@@ -112,14 +110,14 @@ public class PlayerDataProcessor {
 			updateShipAngles(player);
 			updatePlayerCoordinates(player);
 			checkBulletHits(player);
-			applyItemEffectsOnPlayer(player);
+			checkIfPlayerGetsAnItem(player);
 			player.decreaseInvulnerabilityCounter(1L);
 			player.getWeapon().decreaseRateOfFireCooldownValue(1L);
 		}
 
 	}
 
-	public void applyItemEffectsOnPlayer(PlayerData player) {
+	public void checkIfPlayerGetsAnItem(PlayerData player) {
 		CopyOnWriteArrayList<SpawnableItem> items = (CopyOnWriteArrayList<SpawnableItem>) itemPool
 				.getAllItemsOnScreen(player);
 
@@ -143,8 +141,8 @@ public class PlayerDataProcessor {
 		double resulty;
 		double angle = player.getAngle() * Math.PI / 180.0d;
 
-		resultx = player.getX() + GameConfig.SHIP_INITIAL_SPEED * Math.cos(angle);
-		resulty = player.getY() + GameConfig.SHIP_INITIAL_SPEED * Math.sin(angle);
+		resultx = player.getX() + player.getSpeed() * Math.cos(angle);
+		resulty = player.getY() + player.getSpeed() * Math.sin(angle);
 
 		if (resultx > GameConfig.STAGE_POS_LIMIT_X)
 			resultx = GameConfig.STAGE_NEG_LIMIT_X;

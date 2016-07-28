@@ -33,6 +33,8 @@ public class PlayerData implements Spawnable{
 	
 	private double maneuverability;
 	
+	private double speed;
+	
 	public void increaseInactivityCounter(){
 		inactivityCounter++;
 	}
@@ -44,12 +46,13 @@ public class PlayerData implements Spawnable{
 		invulnerabilityCounter = GameConfig.INVULN_CTR_MAX_VALUE;
 		this.weapon = new WeaponFactory().createWeapon(WeaponId.MACHINEGUN);
 		this.maneuverability = Physics.SMOOTHING;
+		this.speed = GameConfig.SHIP_INIT_SPEED;
 	}
 	
 	public void decreaseHp(long value){
 		hp -= value;
-		if(hp < 0L ) {
-			hp = 0L;
+		if(hp < 1L ) {
+			kill();
 		}
 	}
 	
@@ -62,12 +65,24 @@ public class PlayerData implements Spawnable{
 		}
 	}
 	
+	public void increaseSpeed(double value){
+		this.speed += value;
+	}
+	
 	/* Getters/setters and constructors */
 		
 	public String getName() {
 		return name;
 	}
 	
+	public double getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+
 	public double getPreviousAngle() {
 		return previousAngle;
 	}
@@ -197,6 +212,7 @@ public class PlayerData implements Spawnable{
 		this.hp = GameConfig.SHIP_INITIAL_HP;
 		this.weapon = new WeaponFactory().createWeapon(WeaponId.MACHINEGUN);
 		this.maneuverability = Physics.SMOOTHING;
+		this.speed = GameConfig.SHIP_INIT_SPEED;
 	}
 	
 	public String toString(){

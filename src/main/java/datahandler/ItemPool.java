@@ -11,6 +11,7 @@ import Items.HealthPack;
 import Items.IncreaseDamage;
 import Items.IncreaseMAneuverability;
 import Items.IncreaseRateOfFire;
+import Items.IncreaseSpeed;
 import builder.WeaponFactory;
 import config.CanvasConstants;
 import config.GameConfig;
@@ -57,7 +58,7 @@ public class ItemPool {
 		SpawnableItem newItem = null;
 
 		if (itemPool.size() < GameConfig.MAX_ITEMS_ON_STAGE) {
-			int i = random.nextInt(500);
+			int i = random.nextInt(800);
 
 			switch (i) {
 			case 1:
@@ -77,6 +78,9 @@ public class ItemPool {
 				break;
 			case 6:
 				newItem = (SpawnableItem) new IncreaseMAneuverability();
+				break;
+			case 7:
+				newItem = (SpawnableItem) new IncreaseSpeed();
 				break;
 			default:
 				break;
