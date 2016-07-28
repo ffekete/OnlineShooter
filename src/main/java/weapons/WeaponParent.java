@@ -1,9 +1,9 @@
 package weapons;
 
-import interfaces.Spawnable;
+import interfaces.SpawnableItem;
 import interfaces.Weapon;
 
-public abstract class WeaponParent implements Spawnable, Weapon {
+public abstract class WeaponParent implements SpawnableItem, Weapon {
 	private long rateOfFireCooldown;
 
 	private long rateOfFire;

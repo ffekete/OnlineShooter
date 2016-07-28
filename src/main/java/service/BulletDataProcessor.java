@@ -44,7 +44,7 @@ public class BulletDataProcessor {
 		}
 	}
 	
-	public void processBulletData(){
+	public void updateBulletData(){
 		Iterator<BulletData> bit = bulletPool.getBulletPool().iterator();
 		
 		while(bit.hasNext()){

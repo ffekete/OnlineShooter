@@ -24,6 +24,11 @@ public class PlayerPool {
 
 	private Map<Long, PlayerData> playerPool;
 
+	public void updatePlayerPoolData(){
+		increasePlayerInactivityCounters();
+		removeInactivePlayers();
+	}
+	
 	/**
 	 * A convenient alis to store a new player. Returns true if registration was
 	 * successful.
@@ -53,7 +58,7 @@ public class PlayerPool {
 		}
 	}
 
-	public synchronized void increasePlayerInactivityCounters() {
+	private synchronized void increasePlayerInactivityCounters() {
 		for (Long i : playerPool.keySet()) {
 			PlayerData currentPlayer = playerPool.get(i);
 
@@ -70,7 +75,7 @@ public class PlayerPool {
 		playerPool.remove(playerId);
 	}
 
-	public synchronized void removeInactivePlayers() {
+	private synchronized void removeInactivePlayers() {
 		for (Long i : playerPool.keySet()) {
 			PlayerData currentPlayer = playerPool.get(i);
 

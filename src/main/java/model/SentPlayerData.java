@@ -2,12 +2,15 @@ package model;
 
 import java.util.List;
 
+import interfaces.SpawnableItem;
 import interfaces.Weapon;
 
 public class SentPlayerData {
 	private Long id;
 	private double x;
 	private double y;
+	
+	private List<SpawnableItem> items;
 	
 	private Double shipAngle;
 	
@@ -37,6 +40,14 @@ public class SentPlayerData {
 
 	public boolean isInvulnerable() {
 		return invulnerable;
+	}
+
+	public List<SpawnableItem> getItems() {
+		return items;
+	}
+
+	public void setItems(List<SpawnableItem> items) {
+		this.items = items;
 	}
 
 	public void setInvulnerable(boolean invulnerable) {

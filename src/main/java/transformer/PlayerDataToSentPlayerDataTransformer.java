@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import datahandler.BulletsPool;
+import datahandler.ItemPool;
 import datahandler.PlayerPool;
 import model.PlayerData;
 import model.SentPlayerData;
@@ -18,6 +19,9 @@ public class PlayerDataToSentPlayerDataTransformer {
 	
 	@Autowired
 	BulletsPool bulletPool;
+	
+	@Autowired
+	ItemPool itemPool;
 	
 	public SentPlayerData transform(PlayerData playerData){
 		if(playerData != null){
@@ -34,6 +38,7 @@ public class PlayerDataToSentPlayerDataTransformer {
 			sentPlayerData.setShipHp(playerData.getHp());
 			sentPlayerData.setInvulnerable(playerData.isInvulnerable());
 			sentPlayerData.setWeapon(playerData.getWeapon());
+			sentPlayerData.setItems(itemPool.getAllItemsOnScreen(playerData));
 			return sentPlayerData;
 		}
 		else
