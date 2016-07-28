@@ -13,5 +13,7 @@ public class GameConfig {
 	public final static long STAGE_NEG_LIMIT_Y = -1000L;
 	public final static long STAGE_POS_LIMIT_X = 1000L;
 	public final static long STAGE_POS_LIMIT_Y = 1000L;
+	
+	public final static long PLAYER_SCORE_VALUE = 100l;
 		
 }

@@ -10,6 +10,8 @@ public class SentPlayerData {
 	private double x;
 	private double y;
 	
+	private long score;
+	
 	private List<SpawnableItem> items;
 	
 	private Double shipAngle;
@@ -40,6 +42,14 @@ public class SentPlayerData {
 
 	public boolean isInvulnerable() {
 		return invulnerable;
+	}
+
+	public long getScore() {
+		return score;
+	}
+
+	public void setScore(long score) {
+		this.score = score;
 	}
 
 	public List<SpawnableItem> getItems() {

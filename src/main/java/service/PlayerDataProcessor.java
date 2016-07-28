@@ -83,7 +83,11 @@ public class PlayerDataProcessor {
 					&& Math.abs(actualBullet.getY() - player.getY()) < 10.0d;
 
 			if (invulnerabilityCheck && playerIdCheck && areaCheck) {
-				player.decreaseHp(actualBullet.getDamage());
+				long hpRemaining = player.decreaseHp(actualBullet.getDamage());
+				if(hpRemaining < 1L){
+					PlayerData playerWhoKilledMe = playerPool.getPlayerById(actualBullet.getPlayerId());
+					playerWhoKilledMe.increaseScore(GameConfig.PLAYER_SCORE_VALUE);
+				}
 				bulletPool.getBulletPool().remove(actualBullet);
 				
 			}

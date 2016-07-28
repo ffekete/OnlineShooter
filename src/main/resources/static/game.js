@@ -66,6 +66,7 @@ function playerDataArrived(playerDataFromServer){
 	playerData.hp = JSON.parse(playerDataFromServer.body).shipHp;
 	playerData.invulnerable = JSON.parse(playerDataFromServer.body).invulnerable;
 	playerData.itemsOnScreen = JSON.parse(playerDataFromServer.body).items;
+	playerData.score = JSON.parse(playerDataFromServer.body).score;
 }
 
 function drawBorder(){
@@ -117,14 +118,14 @@ function drawBackground(){
 	var c = document.getElementById("gameArea");
 	var ctx = c.getContext("2d");
 	var img = document.getElementById("bg");
-	for(var i = -2; i < 5; i++)
-	for(var j = -2; j < 5; j++)
+	for(var i = -2; i < 6; i++)
+	for(var j = -2; j < 6; j++)
 		{
 		ctx.drawImage(img, 0 + j* 250-(playerData.x % 250), 0 + i* 246-(playerData.y % 246));
 		}
 	
 	ctx.fillText("Fps: " + requestAnimFrame(), 10,10);
-	ctx.fillText("X: " + playerData.x + " Y: " + playerData.y, 10,25);
+	ctx.fillText(playerData.score, 10,25);
 	
 	ctx.save();
 	

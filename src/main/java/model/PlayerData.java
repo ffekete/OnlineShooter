@@ -23,6 +23,8 @@ public class PlayerData implements Spawnable{
 	private long mouseX;
 	private long mouseY;
 	
+	private long score;
+	
 	private long hp;
 	
 	private Double shipAngle;
@@ -47,13 +49,16 @@ public class PlayerData implements Spawnable{
 		this.weapon = new WeaponFactory().createWeapon(WeaponId.MACHINEGUN);
 		this.maneuverability = Physics.SMOOTHING;
 		this.speed = GameConfig.SHIP_INIT_SPEED;
+		this.score = 0l;
 	}
 	
-	public void decreaseHp(long value){
+	public long decreaseHp(long value){
 		hp -= value;
+		long hpAfterReduction = hp;
 		if(hp < 1L ) {
 			kill();
 		}
+		return hpAfterReduction; 
 	}
 	
 	public void decreaseInvulnerabilityCounter(long value){
@@ -213,6 +218,19 @@ public class PlayerData implements Spawnable{
 		this.weapon = new WeaponFactory().createWeapon(WeaponId.MACHINEGUN);
 		this.maneuverability = Physics.SMOOTHING;
 		this.speed = GameConfig.SHIP_INIT_SPEED;
+		this.score = 0l;
+	}
+	
+	public long getScore() {
+		return score;
+	}
+
+	public void setScore(long score) {
+		this.score = score;
+	}
+
+	public void increaseScore(long value){
+		score += value;
 	}
 	
 	public String toString(){

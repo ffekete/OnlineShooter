@@ -39,6 +39,7 @@ public class PlayerDataToSentPlayerDataTransformer {
 			sentPlayerData.setInvulnerable(playerData.isInvulnerable());
 			sentPlayerData.setWeapon(playerData.getWeapon());
 			sentPlayerData.setItems(itemPool.getAllItemsOnScreen(playerData));
+			sentPlayerData.setScore(playerData.getScore());
 			return sentPlayerData;
 		}
 		else
