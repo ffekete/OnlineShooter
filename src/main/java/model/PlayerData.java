@@ -3,12 +3,13 @@ package model;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import config.GameConfig;
-import service.PlayerSpawner;
+import interfaces.Spawnable;
+import service.Spawner;
 
-public class PlayerData {
+public class PlayerData implements Spawnable{
 	
 	@Autowired
-	private PlayerSpawner playerSpawner = new PlayerSpawner();
+	private Spawner playerSpawner = new Spawner();
 	
 	private String name;
 	private long id;
@@ -174,8 +175,9 @@ public class PlayerData {
 	public PlayerData(Long id, String name) {
 		this.name = name;
 		this.id = id;
-		this.x = 0.0d;
-		this.y = 0.0d;
+		
+		playerSpawner.spawn(this);
+		
 		this.mouseX = 0L;
 		this.mouseY = 0L;
 		this.shipAngle = 0.0d;
