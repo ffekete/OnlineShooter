@@ -2,6 +2,8 @@ package model;
 
 import java.util.List;
 
+import interfaces.Weapon;
+
 public class SentPlayerData {
 	private Long id;
 	private double x;
@@ -15,12 +17,22 @@ public class SentPlayerData {
 	
 	private boolean invulnerable;
 	
+	Weapon weapon;
+	
 	List<PlayerData> visiblePlayers;
 	
 	List<BulletData> visibleBullets;
 
 	public Long getId() {
 		return id;
+	}
+
+	public Weapon getWeapon() {
+		return weapon;
+	}
+
+	public void setWeapon(Weapon weapon) {
+		this.weapon = weapon;
 	}
 
 	public boolean isInvulnerable() {

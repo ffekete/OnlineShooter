@@ -1,16 +1,13 @@
 package model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
+import builder.WeaponFactory;
 import config.GameConfig;
+import config.WeaponId;
 import interfaces.Spawnable;
+import interfaces.Weapon;
 import service.Spawner;
 
 public class PlayerData implements Spawnable{
-	
-	@Autowired
-	private Spawner playerSpawner = new Spawner();
-	
 	private String name;
 	private long id;
 	private double x;
@@ -29,16 +26,16 @@ public class PlayerData implements Spawnable{
 	
 	private long connectionId;
 	
-	private long rateOfFire;
-	
 	private long rateOfFireCooldown = 0L;
+	
+	private Weapon weapon;
 	
 	public boolean canShoot(){
 		return rateOfFireCooldown < 1L;
 	}
 	
 	public void startShootingRateCooldownEffect(){
-		rateOfFireCooldown = this.rateOfFire;
+		rateOfFireCooldown = this.weapon.getRateOfFire();
 	}
 	
 	public void decreaseRateOfFireCooldownValue(long value){
@@ -54,11 +51,11 @@ public class PlayerData implements Spawnable{
 	}
 	
 	public void kill(){
-		playerSpawner.spawn(this); 
+		Spawner.spawn(this); 
 		inactivityCounter = 0;
 		hp = GameConfig.SHIP_INITIAL_HP;
 		invulnerabilityCounter = GameConfig.INVULN_CTR_MAX_VALUE;
-		rateOfFire = GameConfig.DEF_RATE_OF_FIRE;
+		this.weapon = new WeaponFactory().createWeapon(WeaponId.MACHINEGUN);
 	}
 	
 	public void decreaseHp(long value){
@@ -78,18 +75,11 @@ public class PlayerData implements Spawnable{
 	}
 	
 	/* Getters/setters and constructors */
+		
 	public String getName() {
 		return name;
 	}
 	
-	public long getRateOfFire() {
-		return rateOfFire;
-	}
-
-	public void setRateOfFire(long rateOfFire) {
-		this.rateOfFire = rateOfFire;
-	}
-
 	public long getInvulnerabilityCounter() {
 		return invulnerabilityCounter;
 	}
@@ -172,18 +162,30 @@ public class PlayerData implements Spawnable{
 		this.hp = hp;
 	}
 
+	public boolean isInvulnerable(){
+		return this.getInvulnerabilityCounter() > 0L;
+	}
+	
+	public Weapon getWeapon() {
+		return weapon;
+	}
+
+	public void setWeapon(Weapon weapon) {
+		this.weapon = weapon;
+	}
+
 	public PlayerData(Long id, String name) {
 		this.name = name;
 		this.id = id;
 		
-		playerSpawner.spawn(this);
+		Spawner.spawn(this);
 		
 		this.mouseX = 0L;
 		this.mouseY = 0L;
 		this.shipAngle = 0.0d;
 		this.connectionId = 0L;
 		this.hp = GameConfig.SHIP_INITIAL_HP;
-		this.rateOfFire = GameConfig.DEF_RATE_OF_FIRE;
+		this.weapon = new WeaponFactory().createWeapon(WeaponId.MACHINEGUN);
 	}
 	
 	public String toString(){
