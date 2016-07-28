@@ -26,25 +26,7 @@ public class PlayerData implements Spawnable{
 	
 	private long connectionId;
 	
-	private long rateOfFireCooldown = 0L;
-	
 	private Weapon weapon;
-	
-	public boolean canShoot(){
-		return rateOfFireCooldown < 1L;
-	}
-	
-	public void startShootingRateCooldownEffect(){
-		rateOfFireCooldown = this.weapon.getRateOfFire();
-	}
-	
-	public void decreaseRateOfFireCooldownValue(long value){
-		if(rateOfFireCooldown > 0L)
-		{
-			rateOfFireCooldown -= value;
-			if(rateOfFireCooldown < 0L) rateOfFireCooldown = 0L;
-		}
-	}
 	
 	public void increaseInactivityCounter(){
 		inactivityCounter++;

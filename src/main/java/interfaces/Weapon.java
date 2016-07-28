@@ -6,4 +6,7 @@ public interface Weapon {
 	public boolean hasAmmo();
 	public long getRateOfFire();
 	public void setRateOfFire(long value);
+	public void decreaseRateOfFireCooldownValue(long value);
+	public void startShootingRateCooldownEffect();
+	public boolean canShoot();
 }

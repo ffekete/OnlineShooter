@@ -77,7 +77,7 @@ public class PlayerDataProcessor {
 			updatePlayerCoordinates(player);
 			checkBulletHits(player);
 			player.decreaseInvulnerabilityCounter(1L);
-			player.decreaseRateOfFireCooldownValue(1L);
+			player.getWeapon().decreaseRateOfFireCooldownValue(1L);
 		}
 
 	}
