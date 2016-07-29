@@ -12,6 +12,8 @@ public class SentPlayerData {
 	
 	List<String> scores;
 	
+	private long respawnTime;
+	
 	private long score;
 	
 	private List<SpawnableItem> items;
@@ -104,6 +106,14 @@ public class SentPlayerData {
 
 	public void setX(double x) {
 		this.x = x;
+	}
+
+	public long getRespawnTime() {
+		return respawnTime;
+	}
+
+	public void setRespawnTime(long respawnTime) {
+		this.respawnTime = respawnTime;
 	}
 
 	public double getY() {

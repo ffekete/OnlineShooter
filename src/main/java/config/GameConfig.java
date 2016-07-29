@@ -16,4 +16,6 @@ public class GameConfig {
 	
 	public final static long PLAYER_SCORE_VALUE = 100l;
 	public final static long ITEM_SCORE_VALUE = 10l;
+	
+	public final static long PLAYER_RESPAWN_TIME = 300l;
 }

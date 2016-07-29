@@ -17,6 +17,8 @@ public class PlayerData implements Spawnable{
 	private double x;
 	private double y;
 	
+	private long respawnTime;
+	
 	private Shield shield;
 	
 	private double previousAngle = 0.0d;
@@ -44,8 +46,24 @@ public class PlayerData implements Spawnable{
 	
 	private double maxSpeed;
 	
-	public void increaseInactivityCounter(){
-		inactivityCounter++;
+	public PlayerData(Long id, String name) {
+		this.name = name;
+		this.id = id;
+		
+		Spawner.spawn(this);
+		
+		this.mouseX = 0L;
+		this.mouseY = 0L;
+		this.shipAngle = 0.0d;
+		this.connectionId = 0L;
+		this.hp = GameConfig.SHIP_INITIAL_HP;
+		this.weapon = new WeaponFactory().createWeapon(WeaponId.MACHINEGUN);
+		this.maneuverability = Physics.SMOOTHING;
+		this.speed = GameConfig.SHIP_INIT_SPEED;
+		this.maxSpeed = GameConfig.SHIP_INIT_SPEED;
+		this.score = 0l;
+		this.shield = new ShieldFactory().createShield(ShieldId.NORMAL_SHIELD);
+		this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
 	}
 	
 	public void kill(){
@@ -58,7 +76,26 @@ public class PlayerData implements Spawnable{
 		this.speed = GameConfig.SHIP_INIT_SPEED;
 		this.maxSpeed = GameConfig.SHIP_INIT_SPEED;
 		this.score = 0l;
-		this.shield = new ShieldFactory().createShield(ShieldId.NORMAL_SHIELD);		
+		this.shield = new ShieldFactory().createShield(ShieldId.NORMAL_SHIELD);	
+		this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
+	}
+	
+	public long getRespawnTime() {
+		return respawnTime;
+	}
+
+	public boolean isSpawned(){
+		if(this.respawnTime == 0L) return true;
+		return false;
+	}
+	
+	public void decreasePlayerRespawnTime(){
+		if(this.respawnTime > 0L)
+			this.respawnTime--;
+	}
+	
+	public void increaseInactivityCounter(){
+		inactivityCounter++;
 	}
 	
 	public void increaseShieldPower(){
@@ -230,25 +267,6 @@ public class PlayerData implements Spawnable{
 	public void increaseManeuverablility(double value){
 		this.maneuverability -= value;
 		if(this.maneuverability < 1.0d) this.maneuverability = 1.0d;
-	}
-	
-	public PlayerData(Long id, String name) {
-		this.name = name;
-		this.id = id;
-		
-		Spawner.spawn(this);
-		
-		this.mouseX = 0L;
-		this.mouseY = 0L;
-		this.shipAngle = 0.0d;
-		this.connectionId = 0L;
-		this.hp = GameConfig.SHIP_INITIAL_HP;
-		this.weapon = new WeaponFactory().createWeapon(WeaponId.MACHINEGUN);
-		this.maneuverability = Physics.SMOOTHING;
-		this.speed = GameConfig.SHIP_INIT_SPEED;
-		this.maxSpeed = GameConfig.SHIP_INIT_SPEED;
-		this.score = 0l;
-		this.shield = new ShieldFactory().createShield(ShieldId.NORMAL_SHIELD);
 	}
 	
 	public Shield getShield() {

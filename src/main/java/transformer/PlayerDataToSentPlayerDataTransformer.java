@@ -47,6 +47,7 @@ public class PlayerDataToSentPlayerDataTransformer {
 			sentPlayerData.setScores(highScoreTable.getThreeBestScores());
 			sentPlayerData.setShieldAmount(playerData.getShield().getProtection());
 			sentPlayerData.setMaxShieldAmount(playerData.getShield().getMaxProtectionValue());
+			sentPlayerData.setRespawnTime(playerData.getRespawnTime());
 			return sentPlayerData;
 		}
 		else

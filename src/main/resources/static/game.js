@@ -43,6 +43,39 @@ var playerData = {
 	shipAngle: 0.0,
 };
 
+function draw(){
+	var c = document.getElementById("gameArea");
+	var ctx = c.getContext("2d");
+	drawBackground();
+	drawBorder();
+	
+	
+	if(playerData.respawnTime == 0){
+		drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.name, playerData.hp, playerData.invulnerable, playerData.shieldAmount, playerData.maxShieldAmount);
+	}
+	else
+	{
+		ctx.save();
+		ctx.textAlign ="center";
+		ctx.font="40px Arial";
+		ctx.fillText("Respawning in seconds: " + playerData.respawnTime / 100 + 1, screen_x / 2 + 10, screen_y /2 +10);
+		ctx.restore();
+	}
+	
+	if(playerData.otherPlayers){
+		for(var i in playerData.otherPlayers){
+			var actualShip = playerData.otherPlayers[i];
+			
+			var dx = playerData.x - actualShip.x;
+			var dy = playerData.y - actualShip.y;
+			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue);
+		}
+	}
+	drawBullets();
+	drawItems();
+	drawHighScores();
+}
+
 function connect() {
 	var socket = new SockJS('/requestPlayerData_node' + playerData.connectionId);
 	stompClient = Stomp.over(socket);
@@ -70,6 +103,7 @@ function playerDataArrived(playerDataFromServer){
 	playerData.highScores = JSON.parse(playerDataFromServer.body).scores;
 	playerData.shieldAmount = JSON.parse(playerDataFromServer.body).shieldAmount;
 	playerData.maxShieldAmount = JSON.parse(playerDataFromServer.body).maxShieldAmount;
+	playerData.respawnTime = JSON.parse(playerDataFromServer.body).respawnTime;
 }
 
 function drawBorder(){
@@ -94,27 +128,6 @@ function drawBorder(){
 	ctx.stroke();
 	
 	ctx.restore();
-}
-
-function draw(){
-	var c = document.getElementById("gameArea");
-	var ctx = c.getContext("2d");
-	drawBackground();
-	drawBorder();
-	drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.name, playerData.hp, playerData.invulnerable, playerData.shieldAmount, playerData.maxShieldAmount);
-	
-	if(playerData.otherPlayers){
-		for(var i in playerData.otherPlayers){
-			var actualShip = playerData.otherPlayers[i];
-			
-			var dx = playerData.x - actualShip.x;
-			var dy = playerData.y - actualShip.y;
-			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue);
-		}
-	}
-	drawBullets();
-	drawItems();
-	drawHighScores();
 }
 
 function drawHighScores(){
@@ -224,10 +237,6 @@ function drawShip(x, y, angle, name, hp, invulnerability, shield, maxShield){
 	{
 		ctx.strokeStyle = "aqua";
 	}
-	
-	console.log("***************" + shield / maxShield);
-	
-	
 	
 	ctx.beginPath();
 	

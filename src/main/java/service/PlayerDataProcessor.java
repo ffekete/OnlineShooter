@@ -148,17 +148,23 @@ public class PlayerDataProcessor {
 		while (shipIds.hasNext()) {
 			Long playerId = shipIds.next();
 			PlayerData player = playerPool.getPlayerById(playerId);
-			updateShipAngles(player);
-			updatePlayerCoordinates(player);
-			updatePlayerSpeed(player);
-			updatePlayerCollisions(player);
-			checkBulletHits(player);
-			checkIfPlayerGetsAnItem(player);
-			player.decreaseInvulnerabilityCounter(1L);
-			player.getWeapon().decreaseRateOfFireCooldownValue(1L);
-			if (taskScheduler.getTimer() == 0) // increases shield value in
-												// every 5th loop
-				player.increaseShieldPower();
+			if (player.isSpawned()) {
+				updateShipAngles(player);
+				updatePlayerCoordinates(player);
+				updatePlayerSpeed(player);
+				updatePlayerCollisions(player);
+				checkBulletHits(player);
+				checkIfPlayerGetsAnItem(player);
+				player.decreaseInvulnerabilityCounter(1L);
+				player.getWeapon().decreaseRateOfFireCooldownValue(1L);
+				if (taskScheduler.getTimer() == 0) { // increases shield value in every 5th loop
+					player.increaseShieldPower();
+				}
+			}
+			else
+			{
+				player.decreasePlayerRespawnTime();
+			}
 		}
 
 	}
@@ -184,12 +190,14 @@ public class PlayerDataProcessor {
 	private void updatePlayerCollisions(PlayerData player1) {
 		for (Long j : playerPool.getPool().keySet()) {
 			PlayerData player2 = playerPool.getPlayerById(j);
-			if (player1.getId() != player2.getId() && Math.abs(player1.getX() - player2.getX()) <= 15
-					&& Math.abs(player1.getY() - player2.getY()) <= 15) {
-				player1.getShield().setProtection(0L);
-				player1.decreaseHp(Physics.COLLISION_STRENGTH);
-				player2.getShield().setProtection(0L);
-				player2.decreaseHp(Physics.COLLISION_STRENGTH);
+			if (player2.isSpawned() &&
+				player1.getId() != player2.getId() && 
+				Math.abs(player1.getX() - player2.getX()) <= 15
+				&& Math.abs(player1.getY() - player2.getY()) <= 15) {
+					player1.getShield().setProtection(0L);
+					player1.decreaseHp(Physics.COLLISION_STRENGTH);
+					player2.getShield().setProtection(0L);
+					player2.decreaseHp(Physics.COLLISION_STRENGTH);
 			}
 		}
 	}
