@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import config.GameConfig;
-import datahandler.BulletsPool;
+import datahandler.BulletPool;
 import model.BulletData;
 
 @Component
 public class BulletDataProcessor {
 	
 	@Autowired
-	private BulletsPool bulletPool;
+	private BulletPool bulletPool;
 	
 	private void updateBulletCoordinates(BulletData bullet){
 		double resultx;

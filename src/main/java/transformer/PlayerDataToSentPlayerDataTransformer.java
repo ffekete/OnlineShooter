@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import datahandler.BulletsPool;
+import datahandler.BulletPool;
 import datahandler.HighScoreTable;
 import datahandler.ItemPool;
 import datahandler.PlayerPool;
@@ -19,7 +19,7 @@ public class PlayerDataToSentPlayerDataTransformer {
 	PlayerPool playerPool;
 	
 	@Autowired
-	BulletsPool bulletPool;
+	BulletPool bulletPool;
 	
 	@Autowired
 	ItemPool itemPool;

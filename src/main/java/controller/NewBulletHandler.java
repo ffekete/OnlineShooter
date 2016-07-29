@@ -5,13 +5,13 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 
 import config.EndpointPaths;
-import datahandler.BulletsPool;
+import datahandler.BulletPool;
 
 @Controller
 public class NewBulletHandler {
 
 	@Autowired
-	BulletsPool bulletPool;
+	BulletPool bulletPool;
 	
 	@MessageMapping(EndpointPaths.CREATE_BULLET)
 	public void handleNewBulletRequest(Long playerId){

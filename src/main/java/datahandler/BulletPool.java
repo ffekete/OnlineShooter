@@ -1,0 +1,63 @@
+package datahandler;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import config.CanvasConstants;
+import model.BulletData;
+import model.PlayerData;
+
+@Component
+public class BulletPool {
+	
+	@Autowired
+	PlayerPool playerPool;
+	
+	private List<BulletData> bulletPool;
+	
+	public BulletPool(){
+		bulletPool = new CopyOnWriteArrayList<BulletData>();
+	}
+
+	public synchronized List<BulletData> getBulletPool() {
+		return bulletPool;
+	}
+
+	public synchronized List<BulletData> getAllBulletsOnScreen(Long playerId){
+		CopyOnWriteArrayList<BulletData> allBulletsOnScreen = new CopyOnWriteArrayList<BulletData>();
+		
+		if(playerId != null){
+			Iterator<BulletData> bit = bulletPool.iterator();
+			
+			while(bit.hasNext()){
+				PlayerData player = playerPool.getPlayerById(playerId);
+				
+				if(player != null){
+					BulletData actualBullet = bit.next();
+					if((Math.abs(actualBullet.getX() - player.getX()) <= CanvasConstants.CANVAS_HALF_WIDTH) &&
+							(Math.abs(actualBullet.getY() - player.getY()) <= CanvasConstants.CANVAS_HALF_HEIGHT)){
+						allBulletsOnScreen.add(actualBullet);
+					}
+				}
+			}
+		}
+		
+		return allBulletsOnScreen;
+	}
+	
+	public synchronized void addBullet(Long playerId){
+		if(playerId != null){
+			PlayerData player = playerPool.getPlayerById(playerId);
+			if(player.getWeapon().canShoot()){
+				bulletPool.add(new BulletData(player.getX(), player.getY(), player.getShipAngle(), player.getId(), player.getWeapon().getDamage()));
+				player.getWeapon().startShootingRateCooldownEffect();
+				player.getWeapon().decreaseAmmo(1L);
+			}
+		}
+	}
+	
+}

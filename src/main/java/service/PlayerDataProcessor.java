@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import config.CanvasConstants;
 import config.GameConfig;
-import datahandler.BulletsPool;
+import datahandler.BulletPool;
 import datahandler.HighScoreTable;
 import datahandler.ItemPool;
 import datahandler.PlayerPool;
@@ -24,7 +24,7 @@ public class PlayerDataProcessor {
 	PlayerPool playerPool;
 
 	@Autowired
-	BulletsPool bulletPool;
+	BulletPool bulletPool;
 
 	@Autowired
 	ItemPool itemPool;
