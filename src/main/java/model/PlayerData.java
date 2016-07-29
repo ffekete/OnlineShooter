@@ -1,11 +1,11 @@
 package model;
 
-import builder.ShieldFactory;
-import builder.WeaponFactory;
 import config.GameConfig;
 import config.Physics;
 import config.ShieldId;
 import config.WeaponId;
+import factory.ShieldFactory;
+import factory.WeaponFactory;
 import interfaces.Shield;
 import interfaces.Spawnable;
 import interfaces.Weapon;
