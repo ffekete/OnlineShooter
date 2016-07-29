@@ -184,6 +184,7 @@ function drawItems(){
 		ctx.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 5, 0, 2*Math.PI);
 		ctx.stroke();
 		ctx.textAlign ="center";
+		ctx.font="15px Arial";
 		ctx.fillText(playerData.itemsOnScreen[items].name, (screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy + 15);
 	}
 	

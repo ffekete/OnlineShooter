@@ -95,7 +95,7 @@ public class ItemPool {
 				newItem = (SpawnableItem) new ShieldFactory().createShield(ShieldId.ATOM_SHIELD);
 				break;
 			case 13:
-				newItem = (SpawnableItem) new ShieldFactory().createShield(ShieldId.NORMAL_SHIELD);
+				newItem = (SpawnableItem) new ShieldFactory().createShield(ShieldId.PLASMA_SHIELD);
 				break;
 			default:
 				break;
