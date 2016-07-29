@@ -89,7 +89,7 @@ function connect() {
 }
 
 function messageArrived(message){
-	$("#messagebox").append(message.body);
+	$("#messagebox").append(message.body + "\n");
 }
 
 function shootBullet(){
