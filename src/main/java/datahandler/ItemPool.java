@@ -97,6 +97,12 @@ public class ItemPool {
 			case 13:
 				newItem = (SpawnableItem) new ShieldFactory().createShield(ShieldId.PLASMA_SHIELD);
 				break;
+			case 14:
+				newItem = (SpawnableItem) new WeaponFactory().createWeapon(WeaponId.DOUBLE_GATLING);
+				break;
+			case 15:
+				newItem = (SpawnableItem) new WeaponFactory().createWeapon(WeaponId.SHOTGUN);
+				break;
 			default:
 				break;
 			}

@@ -1,8 +1,11 @@
 package weapons;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Items.ItemParent;
-import interfaces.SpawnableItem;
 import interfaces.Weapon;
+import model.BulletData;
 import model.PlayerData;
 
 public abstract class WeaponParent extends ItemParent implements Weapon {
@@ -104,5 +107,12 @@ public abstract class WeaponParent extends ItemParent implements Weapon {
 		}
 	}
 	
+	public List<BulletData> createBullet(PlayerData player){
+		ArrayList<BulletData> bulletsToCreate = new ArrayList<>();
+		
+		bulletsToCreate.add(new BulletData(player.getX(), player.getY(), player.getShipAngle(), player.getId(), player.getWeapon().getDamage()));
+		
+		return bulletsToCreate;
+	}
 	
 }

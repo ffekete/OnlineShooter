@@ -53,9 +53,16 @@ public class BulletPool {
 		if(playerId != null){
 			PlayerData player = playerPool.getPlayerById(playerId);
 			if(player.getWeapon().canShoot()){
-				bulletPool.add(new BulletData(player.getX(), player.getY(), player.getShipAngle(), player.getId(), player.getWeapon().getDamage()));
+				List<BulletData> bulletsToCreate = player.getWeapon().createBullet(player);
+				
+				Iterator<BulletData> it = bulletsToCreate.iterator();
+				while(it.hasNext()){
+					bulletPool.add(it.next());
+				}
 				player.getWeapon().startShootingRateCooldownEffect();
 				player.getWeapon().decreaseAmmo(1L);
+				if(player.getWeapon().getAmmo() == 0L)
+					player.initWeapon();
 			}
 		}
 	}

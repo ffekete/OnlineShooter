@@ -89,6 +89,10 @@ public class PlayerData implements Spawnable{
 		return false;
 	}
 	
+	public void initWeapon(){
+		this.weapon = new WeaponFactory().createWeapon(WeaponId.MACHINEGUN);
+	}
+	
 	public void decreasePlayerRespawnTime(){
 		if(this.respawnTime > 0L)
 			this.respawnTime--;

@@ -2,9 +2,11 @@ package factory;
 
 import config.WeaponId;
 import interfaces.Weapon;
+import weapons.DoubleGatlingGun;
 import weapons.GatlingGun;
 import weapons.LaserCannon;
 import weapons.Machinegun;
+import weapons.Shotgun;
 
 public class WeaponFactory {
 
@@ -22,7 +24,12 @@ public class WeaponFactory {
 		case LASER_CANNON:
 			weapon = new LaserCannon();
 			break;
-
+		case DOUBLE_GATLING:
+			weapon = new DoubleGatlingGun();
+			break;
+		case SHOTGUN:
+			weapon = new Shotgun();
+			break;
 		default:
 			break;
 		}

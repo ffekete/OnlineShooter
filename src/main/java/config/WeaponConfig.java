@@ -8,6 +8,10 @@ public class WeaponConfig {
 	public static final long GATLING_GUN_INIT_DAMAGE = 1L; 
 	public static final long GATLING_GUN_INIT_AMMO = 1000L;
 	public static final long GATLING_GUN_INIT_RATE_OF_FIRE = 2L;
+
+	public static final long SHOTGUN_INIT_DAMAGE = 5L; 
+	public static final long SHOTGUN_INIT_AMMO = 50L;
+	public static final long SHOTGUN_INIT_RATE_OF_FIRE = 15L;
 	
 	public static final long LASER_CANNON_INIT_DAMAGE = 10L; 
 	public static final long LASER_CANNON_INIT_AMMO = 100L;
