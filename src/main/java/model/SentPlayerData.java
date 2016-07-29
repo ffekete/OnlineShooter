@@ -10,6 +10,8 @@ public class SentPlayerData {
 	private double x;
 	private double y;
 	
+	List<String> scores;
+	
 	private long score;
 	
 	private List<SpawnableItem> items;
@@ -74,6 +76,14 @@ public class SentPlayerData {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public List<String> getScores() {
+		return scores;
+	}
+
+	public void setScores(List<String> scores) {
+		this.scores = scores;
 	}
 
 	public double getX() {

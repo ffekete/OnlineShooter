@@ -5,6 +5,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import config.TimerValues;
+import datahandler.HighScoreTable;
 import datahandler.PlayerPool;
 import service.BulletDataProcessor;
 import service.ItemProcessor;
@@ -26,6 +27,9 @@ public class TaskScheduler {
 	@Autowired
 	PlayerDataProcessor playerDataPrcessor;
 	
+	@Autowired
+	HighScoreTable highScoreTable;
+	
 	/** Main game loop. */
 	@Scheduled(fixedRate = TimerValues.GAME_MAIN_PERIOD_IN_MS)
 	public void run() throws InterruptedException{
@@ -39,7 +43,5 @@ public class TaskScheduler {
 		
 		/* Do the math */
 		playerDataPrcessor.updatePlayerData();
-		
-		
 	}
 }

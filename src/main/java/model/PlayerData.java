@@ -50,6 +50,7 @@ public class PlayerData implements Spawnable{
 		this.maneuverability = Physics.SMOOTHING;
 		this.speed = GameConfig.SHIP_INIT_SPEED;
 		this.score = 0l;
+		
 	}
 	
 	public long decreaseHp(long value){

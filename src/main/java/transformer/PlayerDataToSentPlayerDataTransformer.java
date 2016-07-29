@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import datahandler.BulletsPool;
+import datahandler.HighScoreTable;
 import datahandler.ItemPool;
 import datahandler.PlayerPool;
 import model.PlayerData;
@@ -23,6 +24,9 @@ public class PlayerDataToSentPlayerDataTransformer {
 	@Autowired
 	ItemPool itemPool;
 	
+	@Autowired
+	HighScoreTable highScoreTable;
+	
 	public SentPlayerData transform(PlayerData playerData){
 		if(playerData != null){
 			SentPlayerData sentPlayerData = new SentPlayerData();
@@ -40,6 +44,7 @@ public class PlayerDataToSentPlayerDataTransformer {
 			sentPlayerData.setWeapon(playerData.getWeapon());
 			sentPlayerData.setItems(itemPool.getAllItemsOnScreen(playerData));
 			sentPlayerData.setScore(playerData.getScore());
+			sentPlayerData.setScores(highScoreTable.getThreeBestScores());
 			return sentPlayerData;
 		}
 		else

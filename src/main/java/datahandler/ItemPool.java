@@ -11,6 +11,7 @@ import Items.HealthPack;
 import Items.IncreaseDamage;
 import Items.IncreaseMAneuverability;
 import Items.IncreaseRateOfFire;
+import Items.IncreaseScore;
 import Items.IncreaseSpeed;
 import builder.WeaponFactory;
 import config.CanvasConstants;
@@ -82,6 +83,13 @@ public class ItemPool {
 			case 7:
 				newItem = (SpawnableItem) new IncreaseSpeed();
 				break;
+			case 8:
+			case 9:
+			case 10:
+			case 11:
+				newItem = (SpawnableItem) new IncreaseScore();
+				break;				
+				
 			default:
 				break;
 			}

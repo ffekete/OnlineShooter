@@ -8,12 +8,13 @@ import org.springframework.stereotype.Component;
 
 import config.CanvasConstants;
 import config.GameConfig;
-import config.Physics;
 import datahandler.BulletsPool;
+import datahandler.HighScoreTable;
 import datahandler.ItemPool;
 import datahandler.PlayerPool;
 import interfaces.SpawnableItem;
 import model.BulletData;
+import model.HighScore;
 import model.PlayerData;
 
 /** Basic class to calculate player related values e.g. ship angles,... */
@@ -27,6 +28,9 @@ public class PlayerDataProcessor {
 
 	@Autowired
 	ItemPool itemPool;
+	
+	@Autowired
+	HighScoreTable highScores;
 
 	/** Calculates an angle using two points. */
 	private double calculateAngleAndFilterIt(PlayerData player, double baseX, double baseY) {
@@ -83,10 +87,18 @@ public class PlayerDataProcessor {
 					&& Math.abs(actualBullet.getY() - player.getY()) < 10.0d;
 
 			if (invulnerabilityCheck && playerIdCheck && areaCheck) {
+				PlayerData playerToSave = player;
 				long hpRemaining = player.decreaseHp(actualBullet.getDamage());
 				if(hpRemaining < 1L){
 					PlayerData playerWhoKilledMe = playerPool.getPlayerById(actualBullet.getPlayerId());
 					playerWhoKilledMe.increaseScore(GameConfig.PLAYER_SCORE_VALUE);
+					
+					/* Save the killed player only if he/she has more than 0 points */
+					if(playerToSave.getScore() > 0L){
+							highScores.addScore(new HighScore(playerToSave.getScore(), playerToSave.getName()));
+					}
+					
+					highScores.addScore(new HighScore(playerWhoKilledMe.getScore(), playerWhoKilledMe.getName()));
 				}
 				bulletPool.getBulletPool().remove(actualBullet);
 				

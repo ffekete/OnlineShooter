@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import config.CanvasConstants;
 import config.ConnectionPreferences;
 import connection.ConnectionPool;
+import model.HighScore;
 import model.PlayerData;
 
 /**
@@ -22,6 +23,9 @@ public class PlayerPool {
 	@Autowired
 	ConnectionPool connectionPool;
 
+	@Autowired
+	HighScoreTable highScores;
+	
 	private Map<Long, PlayerData> playerPool;
 
 	public void updatePlayerPoolData(){
@@ -80,6 +84,7 @@ public class PlayerPool {
 			PlayerData currentPlayer = playerPool.get(i);
 
 			if (currentPlayer.getInactivityCounter() >= ConnectionPreferences.PLAYER_INACTIVITY_LIMIT) {
+				highScores.addScore(new HighScore(currentPlayer.getScore(), currentPlayer.getName()));
 				connectionPool.removeConnectionNode(i);
 				System.out.println("Removing inactive player with id " + i + ".");
 				playerPool.remove(i);

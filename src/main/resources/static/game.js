@@ -67,6 +67,7 @@ function playerDataArrived(playerDataFromServer){
 	playerData.invulnerable = JSON.parse(playerDataFromServer.body).invulnerable;
 	playerData.itemsOnScreen = JSON.parse(playerDataFromServer.body).items;
 	playerData.score = JSON.parse(playerDataFromServer.body).score;
+	playerData.highScores = JSON.parse(playerDataFromServer.body).scores;
 }
 
 function drawBorder(){
@@ -111,7 +112,18 @@ function draw(){
 	}
 	drawBullets();
 	drawItems();
-	
+	drawHighScores();
+}
+
+function drawHighScores(){
+	var c = document.getElementById("gameArea");
+	var ctx = c.getContext("2d");
+	ctx.fillText("High score table: ", 10 ,25);
+	var y = 35;
+	for(var i in playerData.highScores){
+		ctx.fillText(playerData.highScores[i], 10 ,y);
+		y+=10;
+	}
 }
 
 function drawBackground(){
@@ -124,8 +136,7 @@ function drawBackground(){
 		ctx.drawImage(img, 0 + j* 250-(playerData.x % 250), 0 + i* 246-(playerData.y % 246));
 		}
 	
-	ctx.fillText("Fps: " + requestAnimFrame(), 10,10);
-	ctx.fillText(playerData.score, 10,25);
+	ctx.fillText("Your score: " + playerData.score, 10,15);
 	
 	ctx.save();
 	
