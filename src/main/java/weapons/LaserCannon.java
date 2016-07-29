@@ -1,7 +1,6 @@
 package weapons;
 
 import config.WeaponConfig;
-import model.PlayerData;
 import service.Spawner;
 
 public class LaserCannon extends WeaponParent {
