@@ -83,7 +83,13 @@ function connect() {
 		console.log('Connected: ' + frame);
 		
 		stompClient.subscribe('/providePlayerData_node' + playerData.connectionId, playerDataArrived);
+		//stompClient.subscribe('/events', playerDataArrived);
+		stompClient.subscribe('/messages', messageArrived);
 	});
+}
+
+function messageArrived(message){
+	$("#messagebox").append(message.body);
 }
 
 function shootBullet(){

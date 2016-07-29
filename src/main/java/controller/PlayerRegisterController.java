@@ -18,6 +18,9 @@ import transformer.PlayerDataToQualifiedPlayerDataTransformer;
 public class PlayerRegisterController {
 
 	@Autowired
+	MessageSender messageSender;
+	
+	@Autowired
 	private PlayerPool playerPool;
 	
 	@Autowired
@@ -38,6 +41,7 @@ public class PlayerRegisterController {
 				PlayerData playerData = playerPool.getPlayerById(newId);
 				qualifiedPlayerData = playerDataToQualifiedPlayerDataTransformer.tranform(playerData, true);
 				System.out.println("Player registered with id " + newId + " and name " + name + ". Connection id is " + playerData.getConnectionId());
+				messageSender.broadCastMessage("Player " + name + " entered the game." );
 			}
 		}
 		
