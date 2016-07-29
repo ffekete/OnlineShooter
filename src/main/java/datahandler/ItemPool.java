@@ -13,9 +13,11 @@ import Items.IncreaseMAneuverability;
 import Items.IncreaseRateOfFire;
 import Items.IncreaseScore;
 import Items.IncreaseSpeed;
+import builder.ShieldFactory;
 import builder.WeaponFactory;
 import config.CanvasConstants;
 import config.GameConfig;
+import config.ShieldId;
 import config.WeaponId;
 import interfaces.Spawnable;
 import interfaces.SpawnableItem;
@@ -89,7 +91,12 @@ public class ItemPool {
 			case 11:
 				newItem = (SpawnableItem) new IncreaseScore();
 				break;				
-				
+			case 12:
+				newItem = (SpawnableItem) new ShieldFactory().createShield(ShieldId.ATOM_SHIELD);
+				break;
+			case 13:
+				newItem = (SpawnableItem) new ShieldFactory().createShield(ShieldId.NORMAL_SHIELD);
+				break;
 			default:
 				break;
 			}

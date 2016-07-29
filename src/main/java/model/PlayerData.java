@@ -1,9 +1,12 @@
 package model;
 
+import builder.ShieldFactory;
 import builder.WeaponFactory;
 import config.GameConfig;
 import config.Physics;
+import config.ShieldId;
 import config.WeaponId;
+import interfaces.Shield;
 import interfaces.Spawnable;
 import interfaces.Weapon;
 import service.Spawner;
@@ -13,6 +16,8 @@ public class PlayerData implements Spawnable{
 	private long id;
 	private double x;
 	private double y;
+	
+	private Shield shield;
 	
 	private double previousAngle = 0.0d;
 	
@@ -53,14 +58,29 @@ public class PlayerData implements Spawnable{
 		this.speed = GameConfig.SHIP_INIT_SPEED;
 		this.maxSpeed = GameConfig.SHIP_INIT_SPEED;
 		this.score = 0l;
-		
+		this.shield = new ShieldFactory().createShield(ShieldId.NORMAL_SHIELD);		
+	}
+	
+	public void increaseShieldPower(){
+		getShield().increaseShieldPower();
 	}
 	
 	public long decreaseHp(long value){
-		hp -= value;
-		long hpAfterReduction = hp;
-		if(hp < 1L ) {
-			kill();
+		
+		long shieldProtection = getShield().getProtection();
+		long hpAfterReduction; 
+				
+		if(shieldProtection > 0L){
+			getShield().decreaseProtection(value);
+			hpAfterReduction = hp;
+		}
+		else
+		{
+			hp -= value;
+			hpAfterReduction = hp;
+			if(hp < 1L ) {
+				kill();
+			}
 		}
 		return hpAfterReduction; 
 	}
@@ -228,8 +248,17 @@ public class PlayerData implements Spawnable{
 		this.speed = GameConfig.SHIP_INIT_SPEED;
 		this.maxSpeed = GameConfig.SHIP_INIT_SPEED;
 		this.score = 0l;
+		this.shield = new ShieldFactory().createShield(ShieldId.NORMAL_SHIELD);
 	}
 	
+	public Shield getShield() {
+		return shield;
+	}
+
+	public void setShield(Shield shield) {
+		this.shield = shield;
+	}
+
 	public long getScore() {
 		return score;
 	}

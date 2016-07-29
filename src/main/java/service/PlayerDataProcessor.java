@@ -16,6 +16,7 @@ import interfaces.SpawnableItem;
 import model.BulletData;
 import model.HighScore;
 import model.PlayerData;
+import scheduler.TaskScheduler;
 
 /** Basic class to calculate player related values e.g. ship angles,... */
 @Component
@@ -31,6 +32,9 @@ public class PlayerDataProcessor {
 	
 	@Autowired
 	HighScoreTable highScores;
+	
+	@Autowired
+	TaskScheduler taskScheduler;
 
 	/** Calculates an angle using two points. */
 	private double calculateAngleAndFilterIt(PlayerData player, double baseX, double baseY) {
@@ -154,6 +158,8 @@ public class PlayerDataProcessor {
 			checkIfPlayerGetsAnItem(player);
 			player.decreaseInvulnerabilityCounter(1L);
 			player.getWeapon().decreaseRateOfFireCooldownValue(1L);
+			if(taskScheduler.getTimer() == 0) // increases shield value in every 5th loop
+				player.increaseShieldPower();
 		}
 
 	}

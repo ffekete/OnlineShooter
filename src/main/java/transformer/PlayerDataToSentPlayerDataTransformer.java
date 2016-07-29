@@ -45,6 +45,8 @@ public class PlayerDataToSentPlayerDataTransformer {
 			sentPlayerData.setItems(itemPool.getAllItemsOnScreen(playerData));
 			sentPlayerData.setScore(playerData.getScore());
 			sentPlayerData.setScores(highScoreTable.getThreeBestScores());
+			sentPlayerData.setShieldAmount(playerData.getShield().getProtection());
+			sentPlayerData.setMaxShieldAmount(playerData.getShield().getMaxProtectionValue());
 			return sentPlayerData;
 		}
 		else

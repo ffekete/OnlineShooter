@@ -24,6 +24,10 @@ public class SentPlayerData {
 	
 	private boolean invulnerable;
 	
+	private long shieldAmount;
+	
+	private long maxShieldAmount;
+	
 	Weapon weapon;
 	
 	List<PlayerData> visiblePlayers;
@@ -72,6 +76,14 @@ public class SentPlayerData {
 
 	public void setShipHp(Long shipHp) {
 		this.shipHp = shipHp;
+	}
+
+	public long getMaxShieldAmount() {
+		return maxShieldAmount;
+	}
+
+	public void setMaxShieldAmount(long maxShieldAmount) {
+		this.maxShieldAmount = maxShieldAmount;
 	}
 
 	public void setId(Long id) {
@@ -124,6 +136,14 @@ public class SentPlayerData {
 	
 	public List<PlayerData> getVisiblePlayers() {
 		return visiblePlayers;
+	}
+
+	public long getShieldAmount() {
+		return shieldAmount;
+	}
+
+	public void setShieldAmount(long shieldAmount) {
+		this.shieldAmount = shieldAmount;
 	}
 
 	public void setVisiblePlayers(List<PlayerData> visiblePlayers) {

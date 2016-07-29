@@ -68,6 +68,8 @@ function playerDataArrived(playerDataFromServer){
 	playerData.itemsOnScreen = JSON.parse(playerDataFromServer.body).items;
 	playerData.score = JSON.parse(playerDataFromServer.body).score;
 	playerData.highScores = JSON.parse(playerDataFromServer.body).scores;
+	playerData.shieldAmount = JSON.parse(playerDataFromServer.body).shieldAmount;
+	playerData.maxShieldAmount = JSON.parse(playerDataFromServer.body).maxShieldAmount;
 }
 
 function drawBorder(){
@@ -99,7 +101,7 @@ function draw(){
 	var ctx = c.getContext("2d");
 	drawBackground();
 	drawBorder();
-	drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.name, playerData.hp, playerData.invulnerable);
+	drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.name, playerData.hp, playerData.invulnerable, playerData.shieldAmount, playerData.maxShieldAmount);
 	
 	if(playerData.otherPlayers){
 		for(var i in playerData.otherPlayers){
@@ -107,7 +109,7 @@ function draw(){
 			
 			var dx = playerData.x - actualShip.x;
 			var dy = playerData.y - actualShip.y;
-			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.invulnerable);
+			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue);
 		}
 	}
 	drawBullets();
@@ -137,7 +139,7 @@ function drawBackground(){
 		}
 	
 	ctx.fillText("Your score: " + playerData.score, 10,15);
-	
+	//ctx.fillText("Shield: " + playerData.shieldAmount + " / " + playerData.maxShieldAmount, 100,15);
 	ctx.save();
 	
 	//ctx.translate(playerData.x, playerData.y);	
@@ -194,7 +196,7 @@ function drawBullets(){
 	ctx.restore();
 }
 
-function drawShip(x, y, angle, name, hp, invulnerability){
+function drawShip(x, y, angle, name, hp, invulnerability, shield, maxShield){
 	
 	var c = document.getElementById("gameArea");
 	var ctx = c.getContext("2d");
@@ -206,11 +208,11 @@ function drawShip(x, y, angle, name, hp, invulnerability){
 	ctx.rotate(angle * Math.PI / 180);
 	
 	ctx.fillStyle = "red";
-	ctx.fillRect(-37,-11,8,22);
+	ctx.fillRect(-41,-11,8,22);
 	
 	
 	ctx.fillStyle = "green";
-	ctx.fillRect(-35,-10,5,hp);
+	ctx.fillRect(-39,-10,5,hp);
 
 	
 	invCtr = (invCtr + 1) % 20;
@@ -222,7 +224,15 @@ function drawShip(x, y, angle, name, hp, invulnerability){
 	{
 		ctx.strokeStyle = "aqua";
 	}
+	
+	console.log("***************" + shield / maxShield);
+	
+	
+	
 	ctx.beginPath();
+	
+	ctx.arc(-5, 0, 17, 0, (2 * shield / maxShield)*Math.PI);
+	
 	ctx.moveTo(-15, -10);
 	ctx.lineTo(10, 0);
 	
@@ -239,8 +249,7 @@ function drawShip(x, y, angle, name, hp, invulnerability){
 	
 	ctx.rotate(90 * Math.PI / 180);
 	ctx.textAlign ="center";
-	ctx.fillText(name, 0, 25);
-
+	ctx.fillText(name, 0, 29);
 	ctx.restore();
 }
 

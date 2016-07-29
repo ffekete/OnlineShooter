@@ -15,10 +15,14 @@ import service.PlayerDataProcessor;
 @Component
 public class TaskScheduler {
 	
-	int timer = 0;
-	long exitTime = 0;
-	long entryTime = 0;
+	private long timer = 0;
+	private long exitTime = 0;
+	private long entryTime = 0;
 	
+	public long getTimer() {
+		return timer;
+	}
+
 	@Autowired
 	ItemProcessor itemProcessor;
 	
@@ -37,7 +41,9 @@ public class TaskScheduler {
 	/** Main game loop. */
 	@Scheduled(fixedRate = TimerValues.GAME_MAIN_PERIOD_IN_MS)
 	public void run() throws InterruptedException{
-		timer = (timer + 1) % 30;
+		
+		timer = (timer + 1) % TimerValues.MAIN_SCHEDULER_LOOP;
+		
 		if(timer == 0){
 			entryTime = System.currentTimeMillis();
 			System.out.println("Free time during two tasks:" + (entryTime - exitTime));

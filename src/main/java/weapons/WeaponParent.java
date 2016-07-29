@@ -5,7 +5,7 @@ import interfaces.SpawnableItem;
 import interfaces.Weapon;
 import model.PlayerData;
 
-public abstract class WeaponParent extends ItemParent implements SpawnableItem, Weapon {
+public abstract class WeaponParent extends ItemParent implements Weapon {
 	private long rateOfFireCooldown;
 	private long rateOfFire;
 	private long ammo;
