@@ -19,11 +19,8 @@ import config.ShieldId;
 import config.WeaponId;
 import factory.ShieldFactory;
 import factory.WeaponFactory;
-import interfaces.Spawnable;
 import interfaces.SpawnableItem;
-import model.BulletData;
 import model.PlayerData;
-import weapons.LaserCannon;
 
 @Component
 public class ItemPool {
