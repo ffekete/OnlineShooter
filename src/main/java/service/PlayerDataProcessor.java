@@ -29,10 +29,10 @@ public class PlayerDataProcessor {
 
 	@Autowired
 	ItemPool itemPool;
-	
+
 	@Autowired
 	HighScoreTable highScores;
-	
+
 	@Autowired
 	TaskScheduler taskScheduler;
 
@@ -48,26 +48,22 @@ public class PlayerDataProcessor {
 			angle += 360;
 		}
 
-		if(previousAngle - angle > 180.0){
-			angle = 360.0 + angle; 
+		if (previousAngle - angle > 180.0) {
+			angle = 360.0 + angle;
 		}
-		
-		else if(angle - previousAngle > 180.0){
-			angle = angle - 360.0; 
-		}
-		
-     	smoothedValue += (angle - smoothedValue) / player.getManeuverability();
-     	
-     	if(smoothedValue > 360.0d)
-     	{
-     		smoothedValue -=360.0d;
-     	}
-     	else if(smoothedValue <0.0d)
-     	{
-     		smoothedValue +=360.0d;
-     	}
 
-				
+		else if (angle - previousAngle > 180.0) {
+			angle = angle - 360.0;
+		}
+
+		smoothedValue += (angle - smoothedValue) / player.getManeuverability();
+
+		if (smoothedValue > 360.0d) {
+			smoothedValue -= 360.0d;
+		} else if (smoothedValue < 0.0d) {
+			smoothedValue += 360.0d;
+		}
+
 		return smoothedValue;
 	}
 
@@ -93,49 +89,49 @@ public class PlayerDataProcessor {
 			if (invulnerabilityCheck && playerIdCheck && areaCheck) {
 				PlayerData playerToSave = player;
 				long hpRemaining = player.decreaseHp(actualBullet.getDamage());
-				if(hpRemaining < 1L){
+				if (hpRemaining < 1L) {
 					PlayerData playerWhoKilledMe = playerPool.getPlayerById(actualBullet.getPlayerId());
 					playerWhoKilledMe.increaseScore(GameConfig.PLAYER_SCORE_VALUE);
-					
-					/* Save the killed player only if he/she has more than 0 points */
-					if(playerToSave.getScore() > 0L){
-							highScores.addScore(new HighScore(playerToSave.getScore(), playerToSave.getName()));
+
+					/*
+					 * Save the killed player only if he/she has more than 0
+					 * points
+					 */
+					if (playerToSave.getScore() > 0L) {
+						highScores.addScore(new HighScore(playerToSave.getScore(), playerToSave.getName()));
 					}
-					
+
 					highScores.addScore(new HighScore(playerWhoKilledMe.getScore(), playerWhoKilledMe.getName()));
 				}
 				bulletPool.getBulletPool().remove(actualBullet);
-				
+
 			}
 		}
 	}
 
-	private void updatePlayerSpeed(PlayerData player){
+	private void updatePlayerSpeed(PlayerData player) {
 		double a = Math.abs(player.getMouseX() - CanvasConstants.CANVAS_HALF_WIDTH);
 		double b = Math.abs(player.getMouseY() - CanvasConstants.CANVAS_HALF_HEIGHT);
-		double c = Math.sqrt(a*a + b*b);
-		
+		double c = Math.sqrt(a * a + b * b);
+
 		double maxDistance = CanvasConstants.CANVAS_MAX_DISTANCE_FROM_MIDPOINT;
-		
+
 		double limitation = c / maxDistance;
-		
-		if(limitation < 0.2d)
-		{
+
+		if (limitation < 0.2d) {
 			limitation = 0.5d;
-		}
-		else if(limitation < 0.5d)
-		{
+		} else if (limitation < 0.5d) {
 			limitation += 0.2d;
-		}
-		else if(limitation < 0.8d){
+		} else if (limitation < 0.8d) {
 			limitation += 0.1d;
 		}
-		
+
 		player.setSpeed(player.getMaxSpeed() * limitation);
 	}
-	
+
 	private void updateShipAngles(PlayerData player) throws InterruptedException {
-		double angle = calculateAngleAndFilterIt(player, (double) CanvasConstants.CANVAS_HALF_WIDTH, (double) CanvasConstants.CANVAS_HALF_HEIGHT);
+		double angle = calculateAngleAndFilterIt(player, (double) CanvasConstants.CANVAS_HALF_WIDTH,
+				(double) CanvasConstants.CANVAS_HALF_HEIGHT);
 		player.setPreviousAngle(player.getAngle());
 		player.setAngle(angle);
 	}
@@ -154,11 +150,13 @@ public class PlayerDataProcessor {
 			updateShipAngles(player);
 			updatePlayerCoordinates(player);
 			updatePlayerSpeed(player);
+			updatePlayerCollisions(player);
 			checkBulletHits(player);
 			checkIfPlayerGetsAnItem(player);
 			player.decreaseInvulnerabilityCounter(1L);
 			player.getWeapon().decreaseRateOfFireCooldownValue(1L);
-			if(taskScheduler.getTimer() == 0) // increases shield value in every 5th loop
+			if (taskScheduler.getTimer() == 0) // increases shield value in
+												// every 5th loop
 				player.increaseShieldPower();
 		}
 
@@ -178,6 +176,17 @@ public class PlayerDataProcessor {
 			if (areaCheck) {
 				actualItem.applyEffect(player);
 				itemPool.removeItem(actualItem);
+			}
+		}
+	}
+
+	private void updatePlayerCollisions(PlayerData player1) {
+		for (Long j : playerPool.getPool().keySet()) {
+			PlayerData player2 = playerPool.getPlayerById(j);
+			if (player1.getId() != player2.getId() && Math.abs(player1.getX() - player2.getX()) <= 15
+					&& Math.abs(player1.getY() - player2.getY()) <= 15) {
+				player1.getShield().setProtection(0L);
+				player2.getShield().setProtection(0L);
 			}
 		}
 	}

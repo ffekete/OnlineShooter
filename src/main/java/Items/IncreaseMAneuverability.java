@@ -10,7 +10,7 @@ public class IncreaseMAneuverability extends ItemParent{
 	}
 	@Override
 	public void applyEffect(PlayerData player) {
-		player.increaseManeuverablility(0.5d);
+		player.increaseManeuverablility(3.0d);
 	}
 
 }
