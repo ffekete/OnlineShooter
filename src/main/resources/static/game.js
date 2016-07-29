@@ -280,9 +280,9 @@ function updatePlayerData(){
 function start(){
 	drawBorder();
 	connect();
-	setInterval(draw, 20);
-	setInterval(updatePlayerData, 25);
-	setInterval(pollPlayerData, 25);
+	setInterval(draw, 5);
+	setInterval(updatePlayerData, 15);
+	setInterval(pollPlayerData, 15);
 	var c = document.getElementById("gameArea");
 	var ctx = c.getContext("2d");
 	ctx.rotate(0*Math.PI*180);
