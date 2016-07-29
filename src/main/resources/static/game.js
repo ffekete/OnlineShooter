@@ -58,7 +58,7 @@ function draw(){
 		ctx.save();
 		ctx.textAlign ="center";
 		ctx.font="40px Arial";
-		ctx.fillText("Respawning in seconds: " + playerData.respawnTime / 100 + 1, screen_x / 2 + 10, screen_y /2 +10);
+		ctx.fillText("Respawning in seconds: " + parseInt(playerData.respawnTime / 100 + 1), screen_x / 2 + 10, screen_y /2 +10);
 		ctx.restore();
 	}
 	
@@ -152,10 +152,7 @@ function drawBackground(){
 		}
 	
 	ctx.fillText("Your score: " + playerData.score, 10,15);
-	//ctx.fillText("Shield: " + playerData.shieldAmount + " / " + playerData.maxShieldAmount, 100,15);
 	ctx.save();
-	
-	//ctx.translate(playerData.x, playerData.y);	
 	
 	var dx = Math.abs(playerData.x - X_MIN_LIMIT);
 	var dy = Math.abs(playerData.y - Y_MIN_LIMIT);
@@ -281,8 +278,8 @@ function start(){
 	drawBorder();
 	connect();
 	setInterval(draw, 5);
-	setInterval(updatePlayerData, 15);
-	setInterval(pollPlayerData, 15);
+	setInterval(updatePlayerData, 10);
+	setInterval(pollPlayerData, 10);
 	var c = document.getElementById("gameArea");
 	var ctx = c.getContext("2d");
 	ctx.rotate(0*Math.PI*180);
