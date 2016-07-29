@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import config.CanvasConstants;
 import config.GameConfig;
+import config.Physics;
 import datahandler.BulletPool;
 import datahandler.HighScoreTable;
 import datahandler.ItemPool;
@@ -186,7 +187,9 @@ public class PlayerDataProcessor {
 			if (player1.getId() != player2.getId() && Math.abs(player1.getX() - player2.getX()) <= 15
 					&& Math.abs(player1.getY() - player2.getY()) <= 15) {
 				player1.getShield().setProtection(0L);
+				player1.decreaseHp(Physics.COLLISION_STRENGTH);
 				player2.getShield().setProtection(0L);
+				player2.decreaseHp(Physics.COLLISION_STRENGTH);
 			}
 		}
 	}

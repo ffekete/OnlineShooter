@@ -1,5 +1,8 @@
 package connection;
 
+/** Connection nodes for registered players.<br>
+ * Contains a path and an id.
+ * */
 public class ConnectionNode {
 	private final String path;
 	
