@@ -37,6 +37,8 @@ public class PlayerData implements Spawnable{
 	
 	private double speed;
 	
+	private double maxSpeed;
+	
 	public void increaseInactivityCounter(){
 		inactivityCounter++;
 	}
@@ -49,6 +51,7 @@ public class PlayerData implements Spawnable{
 		this.weapon = new WeaponFactory().createWeapon(WeaponId.MACHINEGUN);
 		this.maneuverability = Physics.SMOOTHING;
 		this.speed = GameConfig.SHIP_INIT_SPEED;
+		this.maxSpeed = GameConfig.SHIP_INIT_SPEED;
 		this.score = 0l;
 		
 	}
@@ -91,6 +94,10 @@ public class PlayerData implements Spawnable{
 
 	public double getPreviousAngle() {
 		return previousAngle;
+	}
+
+	public double getMaxSpeed() {
+		return maxSpeed;
 	}
 
 	public void setPreviousAngle(double previousAngle) {
@@ -219,6 +226,7 @@ public class PlayerData implements Spawnable{
 		this.weapon = new WeaponFactory().createWeapon(WeaponId.MACHINEGUN);
 		this.maneuverability = Physics.SMOOTHING;
 		this.speed = GameConfig.SHIP_INIT_SPEED;
+		this.maxSpeed = GameConfig.SHIP_INIT_SPEED;
 		this.score = 0l;
 	}
 	
