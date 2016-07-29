@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import config.CanvasConstants;
 import config.GameConfig;
 import config.Physics;
+import controller.EventSender;
 import datahandler.BulletPool;
 import datahandler.HighScoreTable;
 import datahandler.ItemPool;
@@ -36,6 +37,9 @@ public class PlayerDataProcessor {
 
 	@Autowired
 	TaskScheduler taskScheduler;
+	
+	@Autowired
+	EventSender eventSender;
 
 	/** Calculates an angle using two points. */
 	private double calculateAngleAndFilterIt(PlayerData player, double baseX, double baseY) {
@@ -77,20 +81,20 @@ public class PlayerDataProcessor {
 		while (bulletIterator.hasNext()) {
 			BulletData actualBullet = bulletIterator.next();
 
-			boolean invulnerabilityCheck = player.getInvulnerabilityCounter() < 1L; // true,
-																					// if
-																					// player
-																					// is
-																					// no
-																					// invulnerable
+			boolean invulnerabilityCheck = player.getInvulnerabilityCounter() < 1L; // true, if player is not invulnerable
 			boolean playerIdCheck = actualBullet.getPlayerId() != player.getId();
 			boolean areaCheck = Math.abs(actualBullet.getX() - player.getX()) < 10.0d
 					&& Math.abs(actualBullet.getY() - player.getY()) < 10.0d;
 
 			if (invulnerabilityCheck && playerIdCheck && areaCheck) {
-				PlayerData playerToSave = player;
+				PlayerData playerToSave = new PlayerData(player);
+				
 				long hpRemaining = player.decreaseHp(actualBullet.getDamage());
 				if (hpRemaining < 1L) {
+					
+					/* populate death event to client side */
+					eventSender.sendPlayerDeathNotification(playerToSave);
+					
 					PlayerData playerWhoKilledMe = playerPool.getPlayerById(actualBullet.getPlayerId());
 					playerWhoKilledMe.increaseScore(GameConfig.PLAYER_SCORE_VALUE);
 

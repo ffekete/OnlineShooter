@@ -32,7 +32,8 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 				BrokerPaths.PROVIDE_PLAYER_DATA + 8,
 				BrokerPaths.PROVIDE_PLAYER_DATA + 9,
 				BrokerPaths.PROVIDE_PLAYER_DATA + 10,
-				"/messages"				
+				BrokerPaths.MESSAGE_BROKER,
+				BrokerPaths.EVENT_BROKER
 				);
 		
 		config.setApplicationDestinationPrefixes("/app");

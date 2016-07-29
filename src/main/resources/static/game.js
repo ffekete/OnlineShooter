@@ -13,6 +13,8 @@ var shootBulletSwitch=false;
 
 var invCtr = 0;
 
+var explosions = [];
+
 var playerDataFromServer = {
 	
 };
@@ -73,6 +75,7 @@ function draw(){
 	}
 	drawBullets();
 	drawItems();
+	drawExplosions();
 	drawHighScores();
 }
 
@@ -83,9 +86,27 @@ function connect() {
 		console.log('Connected: ' + frame);
 		
 		stompClient.subscribe('/providePlayerData_node' + playerData.connectionId, playerDataArrived);
-		//stompClient.subscribe('/events', playerDataArrived);
 		stompClient.subscribe('/messages', messageArrived);
+		stompClient.subscribe('/events', eventArrived);
 	});
+}
+
+function eventArrived(event){
+	var eventInfo = {};
+	
+	eventInfo.eventCommand = JSON.parse(event.body).eventCommand;
+	eventInfo.eventX = JSON.parse(event.body).event_x;
+	eventInfo.eventY = JSON.parse(event.body).event_y;
+	
+	if(eventInfo.eventCommand === "PLAY_EXPLOSION_ANIM"){
+		var explosion = {};
+		explosion.x = eventInfo.eventX;
+		explosion.y = eventInfo.eventY;
+		explosion.duration = 1000;
+		explosions.push(explosion);
+	}
+	
+	$("#messagebox").append(eventInfo.eventCommand + " " + ((screen_x / 2 + 10)-dx) + " " + ((screen_y / 2 + 10)-dy) +"\n");
 }
 
 function messageArrived(message){
@@ -172,6 +193,25 @@ function drawBackground(){
 	ctx.restore();
 }
 
+function drawExplosions(){
+	var c = document.getElementById("gameArea");
+	var ctx = c.getContext("2d");
+	
+	ctx.save();
+	
+	for(var i in explosions){
+		ctx.beginPath();
+		
+		var dx = playerData.x - explosions[i].x;
+		var dy = playerData.y - explosions[i].y;
+		
+		ctx.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 25, 0, 2*Math.PI);
+		ctx.stroke();
+	}
+	
+	ctx.restore();
+}
+
 function drawItems(){
 	var c = document.getElementById("gameArea");
 	var ctx = c.getContext("2d");
@@ -209,6 +249,25 @@ function drawBullets(){
 		ctx.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 2, 0, 2*Math.PI);
 		ctx.stroke();
 	}
+	
+	ctx.restore();
+}
+
+function drawExplosion(x, y){
+	
+	var c = document.getElementById("gameArea");
+	var ctx = c.getContext("2d");
+
+	ctx.save();
+	
+
+	ctx.translate(x,y);
+	
+	ctx.beginPath();
+	
+	ctx.arc(-5, 0, 17, 0, 2*Math.PI);
+	
+	ctx.stroke();
 	
 	ctx.restore();
 }

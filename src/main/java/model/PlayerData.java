@@ -46,6 +46,26 @@ public class PlayerData implements Spawnable{
 	
 	private double maxSpeed;
 	
+	public PlayerData(PlayerData player2){
+		this.setAngle(player2.getAngle());
+		this.setConnectionId(player2.getConnectionId());
+		this.setHp(player2.getHp());
+		this.setId(player2.getId());
+		this.setInactivityCounter(player2.getInactivityCounter());
+		this.setInvulnerabilityCounter(player2.getInvulnerabilityCounter());
+		this.setManeuverability(player2.getManeuverability());
+		this.setMouseX(player2.getMouseX());
+		this.setMouseY(player2.getMouseY());
+		this.setName(player2.getName());
+		this.setScore(player2.getScore());
+		this.setShield(player2.getShield());
+		this.setShipAngle(player2.getShipAngle());
+		this.setSpeed(player2.getSpeed());
+		this.setWeapon(player2.getWeapon());
+		this.setX(player2.getX());
+		this.setY(player2.getY());
+	}
+	
 	public PlayerData(Long id, String name) {
 		this.name = name;
 		this.id = id;
@@ -64,6 +84,8 @@ public class PlayerData implements Spawnable{
 		this.score = 0l;
 		this.shield = new ShieldFactory().createShield(ShieldId.NORMAL_SHIELD);
 		this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
+		
+		
 	}
 	
 	public void kill(){

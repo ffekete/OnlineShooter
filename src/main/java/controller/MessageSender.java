@@ -5,14 +5,16 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
+import config.BrokerPaths;
+
 @Controller
 public class MessageSender {
 
 	@Autowired
     private SimpMessagingTemplate template;	
 	
-	@SendTo("/messages")
+	@SendTo(BrokerPaths.MESSAGE_BROKER)
 	public void broadCastMessage(String message){
-		template.convertAndSend("/messages", message);
+		template.convertAndSend(BrokerPaths.MESSAGE_BROKER, message);
 	}
 }
