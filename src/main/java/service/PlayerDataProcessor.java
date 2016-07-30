@@ -198,10 +198,18 @@ public class PlayerDataProcessor {
 				player1.getId() != player2.getId() && 
 				Math.abs(player1.getX() - player2.getX()) <= 15
 				&& Math.abs(player1.getY() - player2.getY()) <= 15) {
+					
+					PlayerData player1ToSave = new PlayerData(player1);
+					PlayerData player2ToSave = new PlayerData(player2);
+					
 					player1.getShield().setProtection(0L);
-					player1.decreaseHp(Physics.COLLISION_STRENGTH);
+					if(player1.decreaseHp(Physics.COLLISION_STRENGTH) < 0L){
+						eventSender.sendPlayerDeathNotification(player1ToSave);
+					}
 					player2.getShield().setProtection(0L);
-					player2.decreaseHp(Physics.COLLISION_STRENGTH);
+					if(player2.decreaseHp(Physics.COLLISION_STRENGTH) < 1L){
+						eventSender.sendPlayerDeathNotification(player2ToSave);
+					}
 			}
 		}
 	}
