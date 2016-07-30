@@ -19,22 +19,7 @@ var playerDataFromServer = {
 	
 };
 
-var lastCalledTime;
-var fps;
-
-function requestAnimFrame() {
-
-  if(!lastCalledTime) {
-     lastCalledTime = Date.now();
-     fps = 0;
-     return;
-  }
-  delta = (Date.now() - lastCalledTime)/1000;
-  lastCalledTime = Date.now();
-  fps = 1/delta;
-  
-  return fps;
-} 
+var explosionDuration = 100;
 
 var playerData = {
 	name: window.sessionStorage.getItem("playerName"), 
@@ -111,7 +96,7 @@ function eventArrived(event){
 		var explosion = {};
 		explosion.x = eventInfo.eventX;
 		explosion.y = eventInfo.eventY;
-		explosion.duration = 1000;
+		explosion.duration = explosionDuration;
 		explosions.push(explosion);
 	}
 	
@@ -209,13 +194,20 @@ function drawExplosions(){
 	ctx.save();
 	
 	for(var i in explosions){
-		ctx.beginPath();
-		
-		var dx = playerData.x - explosions[i].x;
-		var dy = playerData.y - explosions[i].y;
-		
-		ctx.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 25, 0, 2*Math.PI);
-		ctx.stroke();
+		explosions[i].duration--;
+		if(explosions[i].duration < 1){
+			explosions.splice(i,1);
+		}
+		else
+		{
+			ctx.beginPath();
+			
+			var dx = playerData.x - explosions[i].x;
+			var dy = playerData.y - explosions[i].y;
+			
+			ctx.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 20 - explosions[i].duration / (explosionDuration/20), 0, 2*Math.PI);
+			ctx.stroke();
+		}
 	}
 	
 	ctx.restore();
