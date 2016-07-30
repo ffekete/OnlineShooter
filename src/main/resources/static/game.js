@@ -154,7 +154,7 @@ function createBasicExplosion(x, y)
 	}
 }
 
-function update (frameDelay, context2D)
+function updateParticles (frameDelay, context2D)
 {
 	// update and draw particles
 	for (var i=0; i<particles.length; i++)
@@ -173,7 +173,7 @@ function drawExplosions(){
 	var c = document.getElementById("gameArea");
 	var ctx = c.getContext("2d");
 	
-	update(8, ctx);
+	updateParticles(8, ctx);
 }
 
 function draw(){
