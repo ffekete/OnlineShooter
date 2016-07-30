@@ -8,7 +8,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import config.CanvasConstants;
 import config.ConnectionPreferences;
 import connection.ConnectionPool;
 import model.HighScore;
@@ -133,8 +132,8 @@ public class PlayerPool {
 		for (Long id : playerPool.keySet()) {
 			PlayerData currentPlayer = playerPool.get(id);
 			if (currentPlayer.getId() != playerId) {
-				if ((Math.abs(currentPlayer.getX() - player.getX()) <= CanvasConstants.CANVAS_HALF_WIDTH)
-						&& (Math.abs(currentPlayer.getY() - player.getY()) <= CanvasConstants.CANVAS_HALF_HEIGHT)) {
+				if ((Math.abs(currentPlayer.getX() - player.getX()) <= player.getCanvas().getHalfWidth())
+						&& (Math.abs(currentPlayer.getY() - player.getY()) <= player.getCanvas().getHalfHeight())) {
 					visiblePlayers.add(currentPlayer);
 				}
 			}

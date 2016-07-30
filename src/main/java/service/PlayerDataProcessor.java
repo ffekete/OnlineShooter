@@ -115,8 +115,8 @@ public class PlayerDataProcessor {
 	}
 
 	private void updatePlayerSpeed(PlayerData player) {
-		double a = Math.abs(player.getMouseX() - CanvasConstants.CANVAS_HALF_WIDTH);
-		double b = Math.abs(player.getMouseY() - CanvasConstants.CANVAS_HALF_HEIGHT);
+		double a = Math.abs(player.getMouseX() - player.getCanvas().getHalfWidth());
+		double b = Math.abs(player.getMouseY() - player.getCanvas().getHalfHeight());
 		double c = Math.sqrt(a * a + b * b);
 
 		double maxDistance = CanvasConstants.CANVAS_MAX_DISTANCE_FROM_MIDPOINT;
@@ -135,8 +135,8 @@ public class PlayerDataProcessor {
 	}
 
 	private void updateShipAngles(PlayerData player) throws InterruptedException {
-		double angle = calculateAngleAndFilterIt(player, (double) CanvasConstants.CANVAS_HALF_WIDTH,
-				(double) CanvasConstants.CANVAS_HALF_HEIGHT);
+		double angle = calculateAngleAndFilterIt(player, (double) player.getCanvas().getHalfWidth(),
+				(double) player.getCanvas().getHalfHeight());
 		player.setPreviousAngle(player.getAngle());
 		player.setAngle(angle);
 	}

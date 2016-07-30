@@ -38,8 +38,8 @@ public class BulletPool {
 				
 				if(player != null){
 					BulletData actualBullet = bit.next();
-					if((Math.abs(actualBullet.getX() - player.getX()) <= CanvasConstants.CANVAS_HALF_WIDTH) &&
-							(Math.abs(actualBullet.getY() - player.getY()) <= CanvasConstants.CANVAS_HALF_HEIGHT)){
+					if((Math.abs(actualBullet.getX() - player.getX()) <= player.getCanvas().getHalfWidth()) &&
+							(Math.abs(actualBullet.getY() - player.getY()) <= player.getCanvas().getHalfHeight())){
 						allBulletsOnScreen.add(actualBullet);
 					}
 				}

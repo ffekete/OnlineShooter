@@ -1,5 +1,6 @@
 package model;
 
+import config.CanvasConstants;
 import config.GameConfig;
 import config.Physics;
 import config.ShieldId;
@@ -16,6 +17,8 @@ public class PlayerData implements Spawnable{
 	private long id;
 	private double x;
 	private double y;
+	
+	private Canvas canvas;
 	
 	private long respawnTime;
 	
@@ -64,6 +67,8 @@ public class PlayerData implements Spawnable{
 		this.setWeapon(player2.getWeapon());
 		this.setX(player2.getX());
 		this.setY(player2.getY());
+		this.setPreviousAngle(this.getPreviousAngle());
+		this.setCanvas(player2.getCanvas());
 	}
 	
 	public PlayerData(Long id, String name) {
@@ -84,8 +89,15 @@ public class PlayerData implements Spawnable{
 		this.score = 0l;
 		this.shield = new ShieldFactory().createShield(ShieldId.NORMAL_SHIELD);
 		this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
+		this.setCanvas(new Canvas(0, 0, CanvasConstants.CANVAS_HEIGHT, CanvasConstants.CANVAS_WIDTH));
 		
-		
+	}
+	
+	public void updateCanvasProperties(long x, long y, long height, long width){
+		this.canvas.setX(x);
+		this.canvas.setY(y);
+		this.canvas.setHeight(height);
+		this.canvas.setWidth(width);
 	}
 	
 	public void kill(){
@@ -102,6 +114,16 @@ public class PlayerData implements Spawnable{
 		this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
 	}
 	
+	
+	
+	public Canvas getCanvas() {
+		return canvas;
+	}
+
+	public void setCanvas(Canvas canvas) {
+		this.canvas = canvas;
+	}
+
 	public long getRespawnTime() {
 		return respawnTime;
 	}

@@ -18,6 +18,7 @@ public class ReceivedPlayerDataToPlayerDataTransformer {
 		if(playerData != null){
 			playerData.setMouseX(receivedPlayerData.getMouseX());
 			playerData.setMouseY(receivedPlayerData.getMouseY());
+			playerData.updateCanvasProperties(receivedPlayerData.getCanvasX(), receivedPlayerData.getCanvasY(), receivedPlayerData.getCanvasHeight(), receivedPlayerData.getCanvasWidth());
 			return playerData;
 		}
 		else

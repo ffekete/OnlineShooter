@@ -41,8 +41,8 @@ public class ItemPool {
 
 		while (bit.hasNext()) {
 			SpawnableItem item = bit.next();
-			if ((Math.abs(item.getX() - playerData.getX()) <= CanvasConstants.CANVAS_HALF_WIDTH)
-					&& (Math.abs(item.getY() - playerData.getY()) <= CanvasConstants.CANVAS_HALF_HEIGHT)) {
+			if ((Math.abs(item.getX() - playerData.getX()) <= playerData.getCanvas().getHalfWidth())
+					&& (Math.abs(item.getY() - playerData.getY()) <= playerData.getCanvas().getHalfHeight())) {
 				allItemsOnScreen.add(item);
 			}
 		}

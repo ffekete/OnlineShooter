@@ -48,6 +48,15 @@ var playerData = {
 function draw(){
 	var c = document.getElementById("gameArea");
 	var ctx = c.getContext("2d");
+	
+	ctx.canvas.width  = window.innerWidth-20;
+	ctx.canvas.height = window.innerHeight-20;
+	  
+	screen_x = $("#gameArea").width();
+	screen_y = $("#gameArea").height();
+	
+	updateCanwasSize();
+	
 	drawBackground();
 	drawBorder();
 	
@@ -110,7 +119,7 @@ function eventArrived(event){
 }
 
 function messageArrived(message){
-	$("#messagebox").append(message.body + "\n");
+	console.log(message.body);
 }
 
 function shootBullet(){
@@ -172,8 +181,8 @@ function drawBackground(){
 	var c = document.getElementById("gameArea");
 	var ctx = c.getContext("2d");
 	var img = document.getElementById("bg");
-	for(var i = -2; i < 6; i++)
-	for(var j = -2; j < 6; j++)
+	for(var i = -5; i < 10; i++)
+	for(var j = -5; j < 10; j++)
 		{
 		ctx.drawImage(img, 0 + j* 250-(playerData.x % 250), 0 + i* 246-(playerData.y % 246));
 		}
@@ -333,7 +342,9 @@ function updatePlayerData(){
 	var playerDataToSend = {
 			id: playerData.id,
 			mouseX : playerData.mouseX,
-			mouseY : playerData.mouseY
+			mouseY : playerData.mouseY,
+			canvasWidth: playerData.canvasWidth,
+			canvasHeight: playerData.canvasHeight
 	};
 	
 	stompClient.send("/app/updatePlayerData", {}, JSON.stringify(playerDataToSend));
@@ -367,6 +378,11 @@ function start(){
 	screen_y = $("#gameArea").height();
 	
 	$('#bg').css("display", "none"); // hide the background image
+}
+
+function updateCanwasSize(){
+	playerData.canvasHeight = $("#gameArea").height();
+	playerData.canvasWidth = $("#gameArea").width();
 }
 
 function updateMouseCoordinates(event){
