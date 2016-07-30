@@ -19,6 +19,16 @@ public class EventSender {
 	private void broadcastEvent(Event event){
 		template.convertAndSend(BrokerPaths.EVENT_BROKER, event);
 	}
+
+	public void sendPlayerHitNotification(PlayerData player){
+		Event event = new Event();
+		event.setEvent_x(player.getX());
+		event.setEvent_y(player.getY());
+		event.setEventCommand("PLAY_HIT_ANIM");
+		event.setAdditionalText(player.getName());
+		
+		broadcastEvent(event);
+	}
 	
 	public void sendPlayerDeathNotification(PlayerData player){
 		Event event = new Event();

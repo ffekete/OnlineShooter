@@ -140,13 +140,14 @@ function createBasicExplosion(x, y)
 		particle.x = x;
 		particle.y = y;
 
-		particle.color = "#FF0000";
+		particle.color = "#99CCFF";
 
 		var speed = 50.0;
 
 		// velocity is rotated by "angle"
 		particle.velocityX = speed * Math.cos(angle * Math.PI / 180.0);
 		particle.velocityY = speed * Math.sin(angle * Math.PI / 180.0);
+		particle.radius = 3;
 
 		// adding the newly created particle to the "particles" array
 		particles.push(particle);
@@ -240,6 +241,9 @@ function eventArrived(event){
 	if(eventInfo.eventCommand === "PLAY_EXPLOSION_ANIM"){
 		createExplosion(eventInfo.eventX, eventInfo.eventY, "red");
 		createExplosion(eventInfo.eventX, eventInfo.eventY, "yellow");
+	}
+	if(eventInfo.eventCommand === "PLAY_HIT_ANIM"){
+		createBasicExplosion(eventInfo.eventX, eventInfo.eventY);
 	}
 	
 	$("#messagebox").append(eventInfo.eventCommand + " " + ((screen_x / 2 + 10)-dx) + " " + ((screen_y / 2 + 10)-dy) +"\n");

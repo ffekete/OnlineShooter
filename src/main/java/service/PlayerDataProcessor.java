@@ -108,6 +108,10 @@ public class PlayerDataProcessor {
 
 					highScores.addScore(new HighScore(playerWhoKilledMe.getScore(), playerWhoKilledMe.getName()));
 				}
+				else
+				{
+					eventSender.sendPlayerHitNotification(player);
+				}
 				bulletPool.getBulletPool().remove(actualBullet);
 
 			}
