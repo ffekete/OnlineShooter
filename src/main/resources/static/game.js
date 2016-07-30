@@ -19,7 +19,9 @@ var playerDataFromServer = {
 	
 };
 
-var explosionDuration = 100;
+/* Array of particles (global variable)
+*/
+var particles = [];
 
 var playerData = {
 	name: window.sessionStorage.getItem("playerName"), 
@@ -29,6 +31,104 @@ var playerData = {
 	mouseY : 0,
 	shipAngle: 0.0,
 };
+
+/*
+ * A single explosion particle
+ */
+function Particle ()
+{
+	this.scale = 1.0;
+	this.x = 0;
+	this.y = 0;
+	this.radius = 20;
+	this.color = "#000";
+	this.velocityX = 0;
+	this.velocityY = 0;
+	this.scaleSpeed = 0.5;
+
+	this.update = function(ms)
+	{
+		// shrinking
+		this.scale -= this.scaleSpeed * ms / 1000.0;
+
+		if (this.scale <= 0)
+		{
+			this.scale = 0;
+		}
+		// moving away from explosion center
+		this.x += this.velocityX * ms/1000.0;
+		this.y += this.velocityY * ms/1000.0;
+	};
+
+	this.draw = function(context2D, offsettedX, offsettedY)
+	{
+		// translating the 2D context to the particle coordinates
+		context2D.save();
+		context2D.translate(offsettedX, offsettedY);
+		context2D.scale(this.scale, this.scale);
+
+		// drawing a filled circle in the particle's local space
+		context2D.beginPath();
+		context2D.arc(0, 0, this.radius, 0, Math.PI*2, true);
+		context2D.closePath();
+
+		context2D.fillStyle = this.color;
+		context2D.fill();
+
+		context2D.restore();
+	};
+}
+
+/*
+ * Basic Explosion, all particles move and shrink at the same speed.
+ * 
+ * Parameter : explosion center
+ */
+function createBasicExplosion(x, y)
+{
+	// creating 4 particles that scatter at 0, 90, 180 and 270 degrees
+	for (var angle=0; angle<360; angle+=90)
+	{
+		var particle = new Particle();
+
+		// particle will start at explosion center
+		particle.x = x;
+		particle.y = y;
+
+		particle.color = "#FF0000";
+
+		var speed = 50.0;
+
+		// velocity is rotated by "angle"
+		particle.velocityX = speed * Math.cos(angle * Math.PI / 180.0);
+		particle.velocityY = speed * Math.sin(angle * Math.PI / 180.0);
+
+		// adding the newly created particle to the "particles" array
+		particles.push(particle);
+	}
+}
+
+function update (frameDelay, context2D)
+{
+	// update and draw particles
+	for (var i=0; i<particles.length; i++)
+	{
+		var particle = particles[i];
+
+		particle.update(frameDelay);
+
+		var offsetX = playerData.x - particle.x; 
+		var offsetY =playerData.y - particle.y;
+		particle.draw(context2D, (screen_x / 2 + 10) - offsetX, (screen_y / 2 + 10) - offsetY);
+	}
+}
+
+function drawExplosions(){
+	var c = document.getElementById("gameArea");
+	var ctx = c.getContext("2d");
+	
+	update(10, ctx);
+}
 
 function draw(){
 	var c = document.getElementById("gameArea");
@@ -93,11 +193,7 @@ function eventArrived(event){
 	eventInfo.eventY = JSON.parse(event.body).event_y;
 	
 	if(eventInfo.eventCommand === "PLAY_EXPLOSION_ANIM"){
-		var explosion = {};
-		explosion.x = eventInfo.eventX;
-		explosion.y = eventInfo.eventY;
-		explosion.duration = explosionDuration;
-		explosions.push(explosion);
+		createBasicExplosion(eventInfo.eventX, eventInfo.eventY);
 	}
 	
 	$("#messagebox").append(eventInfo.eventCommand + " " + ((screen_x / 2 + 10)-dx) + " " + ((screen_y / 2 + 10)-dy) +"\n");
@@ -183,32 +279,6 @@ function drawBackground(){
 	
 	
 	ctx.rect((screen_x / 2) - dx, (screen_y / 2) - dy, dxm, dym);
-	
-	ctx.restore();
-}
-
-function drawExplosions(){
-	var c = document.getElementById("gameArea");
-	var ctx = c.getContext("2d");
-	
-	ctx.save();
-	
-	for(var i in explosions){
-		explosions[i].duration--;
-		if(explosions[i].duration < 1){
-			explosions.splice(i,1);
-		}
-		else
-		{
-			ctx.beginPath();
-			
-			var dx = playerData.x - explosions[i].x;
-			var dy = playerData.y - explosions[i].y;
-			
-			ctx.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 20 - explosions[i].duration / (explosionDuration/20), 0, 2*Math.PI);
-			ctx.stroke();
-		}
-	}
 	
 	ctx.restore();
 }
