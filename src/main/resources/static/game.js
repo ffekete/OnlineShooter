@@ -239,6 +239,7 @@ function eventArrived(event){
 	
 	if(eventInfo.eventCommand === "PLAY_EXPLOSION_ANIM"){
 		createExplosion(eventInfo.eventX, eventInfo.eventY, "red");
+		createExplosion(eventInfo.eventX, eventInfo.eventY, "yellow");
 	}
 	
 	$("#messagebox").append(eventInfo.eventCommand + " " + ((screen_x / 2 + 10)-dx) + " " + ((screen_y / 2 + 10)-dy) +"\n");
