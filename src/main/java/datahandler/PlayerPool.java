@@ -12,6 +12,7 @@ import config.ConnectionPreferences;
 import connection.ConnectionPool;
 import model.HighScore;
 import model.PlayerData;
+import model.RegistrationData;
 
 /**
  * All registered players are stored here. Players are identified by their id.
@@ -36,24 +37,25 @@ public class PlayerPool {
 	 * A convenient alis to store a new player. Returns true if registration was
 	 * successful.
 	 */
-	public synchronized boolean registerPlayer(Long id, String name) {
-		return storePlayer(id, name);
+	public synchronized boolean registerPlayer(Long id, RegistrationData data) {
+		return storePlayer(id, data);
 	}
 
 	/**
 	 * Stores a new player to a bean called playerPool. Returns true if the
 	 * player id was unique and the store was successful.
 	 */
-	public synchronized boolean storePlayer(Long id, String name) {
+	public synchronized boolean storePlayer(Long id, RegistrationData data) {
 
 		if (playerPool.containsKey(id)) {
 			return false;
 		} else {
-			PlayerData newPlayer = new PlayerData(id, name);
+			PlayerData newPlayer = new PlayerData(id, data.getName());
 			Long connectionId = connectionPool.registerNewConnection(id);
 
 			if (connectionId != null) {
 				newPlayer.setConnectionId(connectionId);
+				newPlayer.setColor(data.getColor());
 				playerPool.put(id, newPlayer);
 				return true;
 			}

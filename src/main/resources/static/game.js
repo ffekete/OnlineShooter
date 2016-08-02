@@ -29,7 +29,7 @@ var particles = [];
 var playerData = {
 	name: window.sessionStorage.getItem("playerName"), 
 	id: window.sessionStorage.getItem("playerId"),
-	color: window.sessionStorage.getItem("color"),
+	//color: window.sessionStorage.getItem("color"),
 	connectionId: window.sessionStorage.getItem("connectionId"),
 	mouseX : 0,
 	mouseY : 0,
@@ -208,7 +208,7 @@ function draw(){
 			
 			var dx = playerData.x - actualShip.x;
 			var dy = playerData.y - actualShip.y;
-			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue,"white");
+			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue, actualShip.color);
 		}
 	}
 	drawBullets();
@@ -269,6 +269,7 @@ function playerDataArrived(playerDataFromServer){
 	playerData.shieldAmount = JSON.parse(playerDataFromServer.body).shieldAmount;
 	playerData.maxShieldAmount = JSON.parse(playerDataFromServer.body).maxShieldAmount;
 	playerData.respawnTime = JSON.parse(playerDataFromServer.body).respawnTime;
+	playerData.color = JSON.parse(playerDataFromServer.body).color;
 }
 
 function drawBorder(){

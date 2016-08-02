@@ -18,7 +18,7 @@ function responseArrivedForRegisterPlayer(playerStatus) {
 		
 		window.sessionStorage.setItem("playerId", id);
 		window.sessionStorage.setItem("connectionId", connectionId);
-		window.sessionStorage.setItem("color", $("#colorPicker option:selected").text());		
+		//window.sessionStorage.setItem("color", $("#colorPicker").value);		
 		
 		var name = document.getElementById('name').value;
 		window.sessionStorage.setItem("playerName", name);
@@ -33,7 +33,12 @@ function responseArrivedForRegisterPlayer(playerStatus) {
 
 function registerPlayerWithName() {
 	var name = document.getElementById('name').value;
-	stompClient.send("/app/registerPlayer", {}, name);
+	var color = document.getElementById("colorPicker").value;
+	var data = {};
+	data.name = name;
+	data.color = color;
+	
+	stompClient.send("/app/registerPlayer", {}, JSON.stringify(data));
 }
 
 function showStatus(message) {

@@ -18,6 +18,8 @@ public class PlayerData implements Spawnable{
 	private double x;
 	private double y;
 	
+	private String color;
+	
 	private Canvas canvas;
 	
 	private long respawnTime;
@@ -184,11 +186,19 @@ public class PlayerData implements Spawnable{
 	}
 	
 	/* Getters/setters and constructors */
-		
+	
 	public String getName() {
 		return name;
 	}
 	
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
 	public double getSpeed() {
 		return speed;
 	}

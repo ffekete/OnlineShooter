@@ -46,7 +46,7 @@ public class TaskScheduler {
 		
 		if(timer == 0){
 			entryTime = System.currentTimeMillis();
-			System.out.println("Free time during two tasks:" + (entryTime - exitTime));
+			//System.out.println("Free time during two tasks:" + (entryTime - exitTime));
 		}
 		
 		itemProcessor.updateItemData();

@@ -14,6 +14,8 @@ public class SentPlayerData {
 	
 	private long respawnTime;
 	
+	private String color;
+	
 	private long score;
 	
 	private List<SpawnableItem> items;
@@ -70,6 +72,14 @@ public class SentPlayerData {
 
 	public void setInvulnerable(boolean invulnerable) {
 		this.invulnerable = invulnerable;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	public Long getShipHp() {
