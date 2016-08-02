@@ -18,6 +18,7 @@ function responseArrivedForRegisterPlayer(playerStatus) {
 		
 		window.sessionStorage.setItem("playerId", id);
 		window.sessionStorage.setItem("connectionId", connectionId);
+		window.sessionStorage.setItem("color", $("#colorPicker option:selected").text());		
 		
 		var name = document.getElementById('name').value;
 		window.sessionStorage.setItem("playerName", name);

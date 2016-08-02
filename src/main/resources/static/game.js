@@ -19,6 +19,9 @@ var playerDataFromServer = {
 	
 };
 
+var c;
+var ctx;
+
 /* Array of particles (global variable)
 */
 var particles = [];
@@ -26,6 +29,7 @@ var particles = [];
 var playerData = {
 	name: window.sessionStorage.getItem("playerName"), 
 	id: window.sessionStorage.getItem("playerId"),
+	color: window.sessionStorage.getItem("color"),
 	connectionId: window.sessionStorage.getItem("connectionId"),
 	mouseX : 0,
 	mouseY : 0,
@@ -170,16 +174,10 @@ function updateParticles (frameDelay, context2D)
 }
 
 function drawExplosions(){
-	var c = document.getElementById("gameArea");
-	var ctx = c.getContext("2d");
-	
 	updateParticles(8, ctx);
 }
 
 function draw(){
-	var c = document.getElementById("gameArea");
-	var ctx = c.getContext("2d");
-	
 	ctx.canvas.width  = window.innerWidth-20;
 	ctx.canvas.height = window.innerHeight-20;
 	  
@@ -193,7 +191,7 @@ function draw(){
 	
 	
 	if(playerData.respawnTime == 0){
-		drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.name, playerData.hp, playerData.invulnerable, playerData.shieldAmount, playerData.maxShieldAmount);
+		drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.name, playerData.hp, playerData.invulnerable, playerData.shieldAmount, playerData.maxShieldAmount, playerData.color);
 	}
 	else
 	{
@@ -210,7 +208,7 @@ function draw(){
 			
 			var dx = playerData.x - actualShip.x;
 			var dy = playerData.y - actualShip.y;
-			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue);
+			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue,"white");
 		}
 	}
 	drawBullets();
@@ -274,9 +272,6 @@ function playerDataArrived(playerDataFromServer){
 }
 
 function drawBorder(){
-	var c = document.getElementById("gameArea");
-	var ctx = c.getContext("2d");
-	
 	ctx.save();
 	
 	ctx.fillStyle = "black";
@@ -298,8 +293,6 @@ function drawBorder(){
 }
 
 function drawHighScores(){
-	var c = document.getElementById("gameArea");
-	var ctx = c.getContext("2d");
 	ctx.fillText("High score table: ", 10 ,25);
 	var y = 35;
 	for(var i in playerData.highScores){
@@ -309,8 +302,6 @@ function drawHighScores(){
 }
 
 function drawBackground(){
-	var c = document.getElementById("gameArea");
-	var ctx = c.getContext("2d");
 	var img = document.getElementById("bg");
 	for(var i = -5; i < 10; i++)
 	for(var j = -5; j < 10; j++)
@@ -334,9 +325,6 @@ function drawBackground(){
 }
 
 function drawItems(){
-	var c = document.getElementById("gameArea");
-	var ctx = c.getContext("2d");
-	
 	ctx.save();
 	
 	for(var items in playerData.itemsOnScreen){
@@ -356,9 +344,6 @@ function drawItems(){
 }
 
 function drawBullets(){
-	var c = document.getElementById("gameArea");
-	var ctx = c.getContext("2d");
-	
 	ctx.save();
 	
 	for(var bullets in playerData.bullets){
@@ -366,40 +351,28 @@ function drawBullets(){
 		
 		var dx = playerData.x - playerData.bullets[bullets].x;
 		var dy = playerData.y - playerData.bullets[bullets].y;
-		
+		ctx.save();
+		ctx.fillStyle = "black";
 		ctx.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 2, 0, 2*Math.PI);
-		ctx.stroke();
+		ctx.fill();
+		ctx.restore();
 	}
 	
 	ctx.restore();
 }
 
 function drawExplosion(x, y){
-	
-	var c = document.getElementById("gameArea");
-	var ctx = c.getContext("2d");
-
 	ctx.save();
-	
-
 	ctx.translate(x,y);
-	
 	ctx.beginPath();
-	
 	ctx.arc(-5, 0, 17, 0, 2*Math.PI);
-	
 	ctx.stroke();
-	
 	ctx.restore();
 }
 
-function drawShip(x, y, angle, name, hp, invulnerability, shield, maxShield){
-	
-	var c = document.getElementById("gameArea");
-	var ctx = c.getContext("2d");
-
+function drawShip(x, y, angle, name, hp, invulnerability, shield, maxShield, color){
 	ctx.save();
-	
+
 	ctx.fillStyle = "red";	
 	ctx.translate(x,y);
 	ctx.rotate(angle * Math.PI / 180);
@@ -411,7 +384,6 @@ function drawShip(x, y, angle, name, hp, invulnerability, shield, maxShield){
 	ctx.fillStyle = "green";
 	ctx.fillRect(-39,-10,5,hp);
 
-	
 	invCtr = (invCtr + 1) % 20;
 	
 	if(invulnerability == false){
@@ -423,22 +395,22 @@ function drawShip(x, y, angle, name, hp, invulnerability, shield, maxShield){
 	}
 	
 	ctx.beginPath();
-	
 	ctx.arc(-5, 0, 17, 0, (2 * shield / maxShield)*Math.PI);
-	
-	ctx.moveTo(-15, -10);
-	ctx.lineTo(10, 0);
-	
-	ctx.moveTo(-15,-10)
-	ctx.lineTo(-5, 0);
-	
-	ctx.moveTo(-15,10)
-	ctx.lineTo(-5, 0);
-	
-	ctx.moveTo(-15, 10);
-	ctx.lineTo(10, 0);
-
 	ctx.stroke();
+	
+	ctx.save();
+	
+	ctx.beginPath();
+	ctx.moveTo(-15, -10);
+	ctx.lineTo(-5, 0);
+	ctx.lineTo(-15, 10);
+	ctx.lineTo(10, 0);
+	ctx.lineTo(-15, -10);	
+	ctx.closePath();
+	ctx.fillStyle = color;
+	ctx.fill();
+
+	ctx.restore();
 	
 	ctx.rotate(90 * Math.PI / 180);
 	ctx.textAlign ="center";
@@ -463,13 +435,15 @@ function updatePlayerData(){
 }
 
 function start(){
+	c = document.getElementById("gameArea");
+	ctx = c.getContext("2d");
+	
 	drawBorder();
 	connect();
 	setInterval(draw, 5);
 	setInterval(updatePlayerData, 10);
 	setInterval(pollPlayerData, 10);
-	var c = document.getElementById("gameArea");
-	var ctx = c.getContext("2d");
+	
 	ctx.rotate(0*Math.PI*180);
 	
 	setInterval(function(){
