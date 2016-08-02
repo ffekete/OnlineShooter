@@ -52,7 +52,7 @@ public class BulletPool {
 	public synchronized void addBullet(Long playerId){
 		if(playerId != null){
 			PlayerData player = playerPool.getPlayerById(playerId);
-			if(player.getWeapon().canShoot()){
+			if(player != null && player.getWeapon().canShoot()){
 				List<BulletData> bulletsToCreate = player.getWeapon().createBullet(player);
 				
 				Iterator<BulletData> it = bulletsToCreate.iterator();
