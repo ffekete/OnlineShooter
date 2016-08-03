@@ -56,6 +56,7 @@ public class PlayerPool {
 			if (connectionId != null) {
 				newPlayer.setConnectionId(connectionId);
 				newPlayer.setColor(data.getColor());
+				newPlayer.setShipType(data.getShipType());
 				playerPool.put(id, newPlayer);
 				return true;
 			}

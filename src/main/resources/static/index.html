@@ -6,9 +6,13 @@
 <script type="text/javascript" src="sockjs-0.3.4.js"></script>
 <script type="text/javascript" src="stomp.js"></script>
 <script type="text/javascript" src="registerForm.js">
+	
 </script>
+
+<style type="text/css">
+</style>
 </head>
-<body>
+<body onload="loadShipType()">
 	<noscript>
 		<h2 style="color: #ff0000">Seems your browser doesn't support
 			Javascript! Websocket relies on Javascript being enabled. Please
@@ -16,12 +20,21 @@
 	</noscript>
 	<div>
 		<div id="conversationDiv">
-			<label>What is your name?</label><input type="text" id="name" />
+			<label>What is your name?</label> <input type="text" id="name" />
 			<button id="connect" onclick="connect();">Connect</button>
 			<p id="response"></p>
 		</div>
-		Select your color: 
-		<input type="color" name="favcolor" id="colorPicker">
+		Select your color: <input type="color" name="favcolor" id="colorPicker"><br> 
+		
+		Select ship: <br>
+		<select onchange="updateShipImage()" id="shipSelector">
+			<option value="Quicksilver" >Quicksilver</option>
+			<option value="Mercury">Mercury</option>
+			<option value="Interceptor">Interceptor</option>
+		</select>
+		<br>
+		<img src="ship01.png" id="ship">
+		
 	</div>
 </body>
 </html>

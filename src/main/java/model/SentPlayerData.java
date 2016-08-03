@@ -16,6 +16,8 @@ public class SentPlayerData {
 	
 	private String color;
 	
+	private String shipType;
+	
 	private long score;
 	
 	private List<SpawnableItem> items;
@@ -56,6 +58,14 @@ public class SentPlayerData {
 
 	public long getScore() {
 		return score;
+	}
+
+	public String getShipType() {
+		return shipType;
+	}
+
+	public void setShipType(String shipType) {
+		this.shipType = shipType;
 	}
 
 	public void setScore(long score) {

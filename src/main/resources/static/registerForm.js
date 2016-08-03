@@ -1,4 +1,9 @@
 var stompClient = null;
+var selectedShip;
+
+function loadShipType(){
+	selectedShip = document.getElementById("shipSelector").value;
+}
 
 function connect() {
 	var socket = new SockJS('/registerPlayer');
@@ -8,6 +13,23 @@ function connect() {
 		stompClient.subscribe('/playerRegistered', responseArrivedForRegisterPlayer);
 		registerPlayerWithName();
 	});
+}
+
+function updateShipImage(){
+	selectedShip = document.getElementById("shipSelector").value;
+	
+	switch(selectedShip){
+	case "Quicksilver":
+		document.getElementById("ship").src = "ship01.png";
+		break;
+	case "Mercury":
+		document.getElementById("ship").src = "ship02.png";
+		break;
+	case "Interceptor":
+		document.getElementById("ship").src = "ship03.png";
+		break;
+	}
+	
 }
 
 function responseArrivedForRegisterPlayer(playerStatus) {
@@ -37,16 +59,7 @@ function registerPlayerWithName() {
 	var data = {};
 	data.name = name;
 	data.color = color;
+	data.shipType = selectedShip;
 	
 	stompClient.send("/app/registerPlayer", {}, JSON.stringify(data));
-}
-
-function showStatus(message) {
-	var response = document.getElementById('response');
-	var p = document.createElement('p');
-	p.style.wordWrap = 'break-word';
-	p.appendChild(document
-			.createTextNode("Player successfully registered with name: "
-					+ message));
-	response.appendChild(p);
 }

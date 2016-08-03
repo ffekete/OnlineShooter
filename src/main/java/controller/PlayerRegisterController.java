@@ -36,7 +36,7 @@ public class PlayerRegisterController {
 		if(data.getName() != null){
 			Long newId = PlayerIdGenerator.generateNewId();
 					
-			System.out.println("New player registration request received with name " + data.getName() +" and color " + data.getColor() + ".");
+			System.out.println("New player registration request received with name " + data.getName() +" and ship " + data.getShipType() + ".");
 			
 			if(playerPool.registerPlayer(newId, data)){
 				PlayerData playerData = playerPool.getPlayerById(newId);

@@ -49,6 +49,7 @@ public class PlayerDataToSentPlayerDataTransformer {
 			sentPlayerData.setMaxShieldAmount(playerData.getShield().getMaxProtectionValue());
 			sentPlayerData.setRespawnTime(playerData.getRespawnTime());
 			sentPlayerData.setColor(playerData.getColor());
+			sentPlayerData.setShipType(playerData.getShipType());
 			return sentPlayerData;
 		}
 		else

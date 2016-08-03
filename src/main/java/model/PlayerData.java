@@ -20,6 +20,8 @@ public class PlayerData implements Spawnable{
 	
 	private String color;
 	
+	private String shipType;
+	
 	private Canvas canvas;
 	
 	private long respawnTime;
@@ -191,6 +193,14 @@ public class PlayerData implements Spawnable{
 		return name;
 	}
 	
+	public String getShipType() {
+		return shipType;
+	}
+
+	public void setShipType(String shipType) {
+		this.shipType = shipType;
+	}
+
 	public String getColor() {
 		return color;
 	}

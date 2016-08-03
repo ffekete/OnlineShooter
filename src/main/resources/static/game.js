@@ -191,7 +191,7 @@ function draw(){
 	
 	
 	if(playerData.respawnTime == 0){
-		drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.name, playerData.hp, playerData.invulnerable, playerData.shieldAmount, playerData.maxShieldAmount, playerData.color);
+		drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.name, playerData.hp, playerData.invulnerable, playerData.shieldAmount, playerData.maxShieldAmount, playerData.color, playerData.shipType);
 	}
 	else
 	{
@@ -208,7 +208,7 @@ function draw(){
 			
 			var dx = playerData.x - actualShip.x;
 			var dy = playerData.y - actualShip.y;
-			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue, actualShip.color);
+			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue, actualShip.color, actualShip.shipType);
 		}
 	}
 	drawBullets();
@@ -270,6 +270,7 @@ function playerDataArrived(playerDataFromServer){
 	playerData.maxShieldAmount = JSON.parse(playerDataFromServer.body).maxShieldAmount;
 	playerData.respawnTime = JSON.parse(playerDataFromServer.body).respawnTime;
 	playerData.color = JSON.parse(playerDataFromServer.body).color;
+	playerData.shipType = JSON.parse(playerDataFromServer.body).shipType;
 }
 
 function drawBorder(){
@@ -371,7 +372,7 @@ function drawExplosion(x, y){
 	ctx.restore();
 }
 
-function drawShip(x, y, angle, name, hp, invulnerability, shield, maxShield, color){
+function drawShip(x, y, angle, name, hp, invulnerability, shield, maxShield, color, type){
 	ctx.save();
 
 	ctx.fillStyle = "red";	
@@ -401,13 +402,42 @@ function drawShip(x, y, angle, name, hp, invulnerability, shield, maxShield, col
 	
 	ctx.save();
 	
-	ctx.beginPath();
-	ctx.moveTo(-15, -10);
-	ctx.lineTo(-5, 0);
-	ctx.lineTo(-15, 10);
-	ctx.lineTo(10, 0);
-	ctx.lineTo(-15, -10);	
-	ctx.closePath();
+	if(type === "Mercury")
+	{
+		ctx.beginPath();
+		ctx.moveTo(-15, -10);
+		ctx.lineTo(-5, 0);
+		ctx.lineTo(-15, 10);
+		ctx.lineTo(10, 0);
+		ctx.lineTo(-15, -10);	
+		ctx.closePath();
+	}
+	if(type === "Quicksilver")
+	{
+		ctx.beginPath();
+		ctx.moveTo(-13, -10);
+		ctx.lineTo(-18, 0);
+		ctx.lineTo(-13, 10);
+		ctx.lineTo(10, 0);
+		ctx.lineTo(-13, -10);	
+		ctx.closePath();
+	}
+	
+	if(type === "Interceptor")
+	{
+		ctx.beginPath();
+		ctx.moveTo(-15, -15);
+		ctx.lineTo(-5, -8);
+		ctx.lineTo(10, -5);
+		ctx.lineTo(5, -2);
+		ctx.lineTo(5, 2);
+		ctx.lineTo(10, 5);
+		ctx.lineTo(-5, 8);
+		ctx.lineTo(-15, 15);
+		ctx.lineTo(-20, 0);
+		ctx.closePath();
+	}
+	
 	ctx.fillStyle = color;
 	ctx.fill();
 

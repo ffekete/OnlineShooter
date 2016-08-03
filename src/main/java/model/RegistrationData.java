@@ -3,7 +3,14 @@ package model;
 public class RegistrationData {
 	private String name;
 	private String color;
-
+	private String shipType; 
+	
+	public String getShipType() {
+		return shipType;
+	}
+	public void setShipType(String shipType) {
+		this.shipType = shipType;
+	}
 	public String getName() {
 		return name;
 	}
