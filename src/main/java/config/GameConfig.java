@@ -1,7 +1,7 @@
 package config;
 
 public class GameConfig {
-	public final static double BULLET_INITIAL_SPEED = 15.0d;
+	public final static double BULLET_INITIAL_SPEED = 12.0d;
 	public final static long BULLET_MAX_AGE = 150L;
 	public final static long SHIP_INITIAL_HP = 20L;
 	public final static long SHIP_MAX_HP = 20L;
