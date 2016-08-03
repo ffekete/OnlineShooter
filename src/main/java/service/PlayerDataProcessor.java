@@ -121,20 +121,17 @@ public class PlayerDataProcessor {
 	private void updatePlayerSpeed(PlayerData player) {
 		double a = Math.abs(player.getMouseX() - player.getCanvas().getHalfWidth());
 		double b = Math.abs(player.getMouseY() - player.getCanvas().getHalfHeight());
-		double c = Math.sqrt(a * a + b * b);
+		double actualDistanceFromScreenMidpoint = Math.sqrt(a * a + b * b) / 2.0d;
+		
+		double canvasHalfWidth = player.getCanvas().getHalfWidth();
+		double canvasHalfHeight = player.getCanvas().getHalfHeight();
+		
+		double maxDistance = Math.sqrt(canvasHalfWidth * canvasHalfWidth + canvasHalfHeight * canvasHalfHeight) / 2.0d;
 
-		double maxDistance = CanvasConstants.CANVAS_MAX_DISTANCE_FROM_MIDPOINT;
+		double limitation = (actualDistanceFromScreenMidpoint / maxDistance);
 
-		double limitation = c / maxDistance;
-
-		if (limitation < 0.2d) {
-			limitation = 0.5d;
-		} else if (limitation < 0.5d) {
-			limitation += 0.2d;
-		} else if (limitation < 0.8d) {
-			limitation += 0.1d;
-		}
-
+		if(limitation < 0.2d) limitation = 0.2d;
+		
 		player.setSpeed(player.getMaxSpeed() * limitation);
 	}
 
