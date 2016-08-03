@@ -6,7 +6,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import config.CanvasConstants;
 import config.GameConfig;
 import config.Physics;
 import controller.EventSender;
@@ -139,7 +138,7 @@ public class PlayerDataProcessor {
 		double angle = calculateAngleAndFilterIt(player, (double) player.getCanvas().getHalfWidth(),
 				(double) player.getCanvas().getHalfHeight());
 		player.setPreviousAngle(player.getAngle());
-		player.setAngle(angle);
+		player.setShipAngle(angle);
 	}
 
 	/**

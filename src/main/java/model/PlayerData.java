@@ -8,11 +8,15 @@ import config.WeaponId;
 import factory.ShieldFactory;
 import factory.WeaponFactory;
 import interfaces.Shield;
+import interfaces.Ship;
 import interfaces.Spawnable;
 import interfaces.Weapon;
 import service.Spawner;
 
 public class PlayerData implements Spawnable{
+	
+	Ship spaceShip;
+	
 	private String name;
 	private long id;
 	private double x;
@@ -54,7 +58,6 @@ public class PlayerData implements Spawnable{
 	private double maxSpeed;
 	
 	public PlayerData(PlayerData player2){
-		this.setAngle(player2.getAngle());
 		this.setConnectionId(player2.getConnectionId());
 		this.setHp(player2.getHp());
 		this.setId(player2.getId());
@@ -289,9 +292,7 @@ public class PlayerData implements Spawnable{
 	public Double getAngle() {
 		return shipAngle;
 	}
-	public void setAngle(Double angle) {
-		this.shipAngle = angle;
-	}
+
 	public Long getMouseY() {
 		return mouseY;
 	}
