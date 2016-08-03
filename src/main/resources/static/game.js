@@ -1,26 +1,19 @@
 var screen_x = $("#gameArea").width();
 var screen_y = $("#gameArea").height();
 
-var X_MIN_LIMIT = 0;
-var Y_MIN_LIMIT = 0;
+/**/
+var STAGE_X_MIN_LIMIT = 0;
+var STAGE_Y_MIN_LIMIT = 0;
 
-var X_MAX_LIMIT = 0;
-var Y_MAX_LIMIT = 0;
+var STAGE_X_MAX_LIMIT = 0;
+var STAGE_Y_MAX_LIMIT = 0;
 
 var stompClient = null;
 
 var shootBulletSwitch=false;
 
-var invCtr = 0;
-
-var explosions = [];
-
-var playerDataFromServer = {
-	
-};
-
-var c;
-var ctx;
+var canvas;
+var canvasContext;
 
 /* Array of particles (global variable)
 */
@@ -174,12 +167,12 @@ function updateParticles (frameDelay, context2D)
 }
 
 function drawExplosions(){
-	updateParticles(8, ctx);
+	updateParticles(8, canvasContext);
 }
 
 function draw(){
-	ctx.canvas.width  = window.innerWidth-20;
-	ctx.canvas.height = window.innerHeight-20;
+	canvasContext.canvas.width  = window.innerWidth-20;
+	canvasContext.canvas.height = window.innerHeight-20;
 	  
 	screen_x = $("#gameArea").width();
 	screen_y = $("#gameArea").height();
@@ -195,11 +188,11 @@ function draw(){
 	}
 	else
 	{
-		ctx.save();
-		ctx.textAlign ="center";
-		ctx.font="40px Arial";
-		ctx.fillText("Respawning in seconds: " + parseInt(playerData.respawnTime / 100 + 1), screen_x / 2 + 10, screen_y /2 +10);
-		ctx.restore();
+		canvasContext.save();
+		canvasContext.textAlign ="center";
+		canvasContext.font="40px Arial";
+		canvasContext.fillText("Respawning in seconds: " + parseInt(playerData.respawnTime / 100 + 1), screen_x / 2 + 10, screen_y /2 +10);
+		canvasContext.restore();
 	}
 	
 	if(playerData.otherPlayers){
@@ -274,31 +267,31 @@ function playerDataArrived(playerDataFromServer){
 }
 
 function drawBorder(){
-	ctx.save();
+	canvasContext.save();
 	
-	ctx.fillStyle = "black";
-	ctx.moveTo(1,1);
-	ctx.lineTo(1, c.height);
+	canvasContext.fillStyle = "black";
+	canvasContext.moveTo(1,1);
+	canvasContext.lineTo(1, canvas.height);
 	
-	ctx.moveTo(1, c.height);
-	ctx.lineTo(c.width, c.height);
+	canvasContext.moveTo(1, canvas.height);
+	canvasContext.lineTo(canvas.width, canvas.height);
 	
-	ctx.moveTo(c.width, c.height);
-	ctx.lineTo(c.width, 1);
+	canvasContext.moveTo(canvas.width, canvas.height);
+	canvasContext.lineTo(canvas.width, 1);
 	
-	ctx.moveTo(c.width, 1);
-	ctx.lineTo(1, 1);
+	canvasContext.moveTo(canvas.width, 1);
+	canvasContext.lineTo(1, 1);
 	
-	ctx.stroke();
+	canvasContext.stroke();
 	
-	ctx.restore();
+	canvasContext.restore();
 }
 
 function drawHighScores(){
-	ctx.fillText("High score table: ", 10 ,25);
+	canvasContext.fillText("High score table: ", 10 ,25);
 	var y = 35;
 	for(var i in playerData.highScores){
-		ctx.fillText(playerData.highScores[i], 10 ,y);
+		canvasContext.fillText(playerData.highScores[i], 10 ,y);
 		y+=10;
 	}
 }
@@ -308,145 +301,143 @@ function drawBackground(){
 	for(var i = -5; i < 10; i++)
 	for(var j = -5; j < 10; j++)
 		{
-		ctx.drawImage(img, 0 + j* 250-(playerData.x % 250), 0 + i* 246-(playerData.y % 246));
+		canvasContext.drawImage(img, 0 + j* 250-(playerData.x % 250), 0 + i* 246-(playerData.y % 246));
 		}
 	
-	ctx.fillText("Your score: " + playerData.score, 10,15);
-	ctx.save();
+	canvasContext.fillText("Your score: " + playerData.score, 10,15);
+	canvasContext.save();
 	
-	var dx = Math.abs(playerData.x - X_MIN_LIMIT);
-	var dy = Math.abs(playerData.y - Y_MIN_LIMIT);
+	var dx = Math.abs(playerData.x - STAGE_X_MIN_LIMIT);
+	var dy = Math.abs(playerData.y - STAGE_Y_MIN_LIMIT);
 	
-	var dxm = Math.abs(X_MIN_LIMIT) + X_MAX_LIMIT;
-	var dym = Math.abs(Y_MIN_LIMIT) + Y_MAX_LIMIT;
+	var dxm = Math.abs(STAGE_X_MIN_LIMIT) + STAGE_X_MAX_LIMIT;
+	var dym = Math.abs(STAGE_Y_MIN_LIMIT) + STAGE_Y_MAX_LIMIT;
 	
 	
-	ctx.rect((screen_x / 2) - dx, (screen_y / 2) - dy, dxm, dym);
+	canvasContext.rect((screen_x / 2) - dx, (screen_y / 2) - dy, dxm, dym);
 	
-	ctx.restore();
+	canvasContext.restore();
 }
 
 function drawItems(){
-	ctx.save();
+	canvasContext.save();
 	
 	for(var items in playerData.itemsOnScreen){
-		ctx.beginPath();
+		canvasContext.beginPath();
 		
 		var dx = playerData.x - playerData.itemsOnScreen[items].x;
 		var dy = playerData.y - playerData.itemsOnScreen[items].y;
 		
-		ctx.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 5, 0, 2*Math.PI);
-		ctx.stroke();
-		ctx.textAlign ="center";
-		ctx.font="15px Arial";
-		ctx.fillText(playerData.itemsOnScreen[items].name, (screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy + 15);
+		canvasContext.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 5, 0, 2*Math.PI);
+		canvasContext.stroke();
+		canvasContext.textAlign ="center";
+		canvasContext.font="15px Arial";
+		canvasContext.fillText(playerData.itemsOnScreen[items].name, (screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy + 15);
 	}
 	
-	ctx.restore();
+	canvasContext.restore();
 }
 
 function drawBullets(){
-	ctx.save();
+	canvasContext.save();
 	
 	for(var bullets in playerData.bullets){
-		ctx.beginPath();
+		canvasContext.beginPath();
 		
 		var dx = playerData.x - playerData.bullets[bullets].x;
 		var dy = playerData.y - playerData.bullets[bullets].y;
-		ctx.save();
-		ctx.fillStyle = "black";
-		ctx.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 2, 0, 2*Math.PI);
-		ctx.fill();
-		ctx.restore();
+		canvasContext.save();
+		canvasContext.fillStyle = "black";
+		canvasContext.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 2, 0, 2*Math.PI);
+		canvasContext.fill();
+		canvasContext.restore();
 	}
 	
-	ctx.restore();
+	canvasContext.restore();
 }
 
 function drawExplosion(x, y){
-	ctx.save();
-	ctx.translate(x,y);
-	ctx.beginPath();
-	ctx.arc(-5, 0, 17, 0, 2*Math.PI);
-	ctx.stroke();
-	ctx.restore();
+	canvasContext.save();
+	canvasContext.translate(x,y);
+	canvasContext.beginPath();
+	canvasContext.arc(-5, 0, 17, 0, 2*Math.PI);
+	canvasContext.stroke();
+	canvasContext.restore();
 }
 
 function drawShip(x, y, angle, name, hp, invulnerability, shield, maxShield, color, type){
-	ctx.save();
+	canvasContext.save();
 
-	ctx.fillStyle = "red";	
-	ctx.translate(x,y);
-	ctx.rotate(angle * Math.PI / 180);
+	canvasContext.fillStyle = "red";	
+	canvasContext.translate(x,y);
+	canvasContext.rotate(angle * Math.PI / 180);
 	
-	ctx.fillStyle = "red";
-	ctx.fillRect(-41,-11,8,22);
+	canvasContext.fillStyle = "red";
+	canvasContext.fillRect(-41,-11,8,22);
 	
 	
-	ctx.fillStyle = "green";
-	ctx.fillRect(-39,-10,5,hp);
-
-	invCtr = (invCtr + 1) % 20;
+	canvasContext.fillStyle = "green";
+	canvasContext.fillRect(-39,-10,5,hp);
 	
 	if(invulnerability == false){
-		ctx.strokeStyle = "black";
+		canvasContext.strokeStyle = "black";
 	}
 	else
 	{
-		ctx.strokeStyle = "aqua";
+		canvasContext.strokeStyle = "aqua";
 	}
 	
-	ctx.beginPath();
-	ctx.arc(-5, 0, 17, 0, (2 * shield / maxShield)*Math.PI);
-	ctx.stroke();
+	canvasContext.beginPath();
+	canvasContext.arc(-5, 0, 17, 0, (2 * shield / maxShield)*Math.PI);
+	canvasContext.stroke();
 	
-	ctx.save();
+	canvasContext.save();
 	
 	if(type === "Mercury")
 	{
-		ctx.beginPath();
-		ctx.moveTo(-15, -10);
-		ctx.lineTo(-5, 0);
-		ctx.lineTo(-15, 10);
-		ctx.lineTo(10, 0);
-		ctx.lineTo(-15, -10);	
-		ctx.closePath();
+		canvasContext.beginPath();
+		canvasContext.moveTo(-15, -10);
+		canvasContext.lineTo(-5, 0);
+		canvasContext.lineTo(-15, 10);
+		canvasContext.lineTo(10, 0);
+		canvasContext.lineTo(-15, -10);	
+		canvasContext.closePath();
 	}
 	if(type === "Quicksilver")
 	{
-		ctx.beginPath();
-		ctx.moveTo(-13, -10);
-		ctx.lineTo(-18, 0);
-		ctx.lineTo(-13, 10);
-		ctx.lineTo(10, 0);
-		ctx.lineTo(-13, -10);	
-		ctx.closePath();
+		canvasContext.beginPath();
+		canvasContext.moveTo(-13, -10);
+		canvasContext.lineTo(-18, 0);
+		canvasContext.lineTo(-13, 10);
+		canvasContext.lineTo(10, 0);
+		canvasContext.lineTo(-13, -10);	
+		canvasContext.closePath();
 	}
 	
 	if(type === "Interceptor")
 	{
-		ctx.beginPath();
-		ctx.moveTo(-15, -15);
-		ctx.lineTo(-5, -8);
-		ctx.lineTo(10, -5);
-		ctx.lineTo(5, -2);
-		ctx.lineTo(5, 2);
-		ctx.lineTo(10, 5);
-		ctx.lineTo(-5, 8);
-		ctx.lineTo(-15, 15);
-		ctx.lineTo(-20, 0);
-		ctx.closePath();
+		canvasContext.beginPath();
+		canvasContext.moveTo(-15, -15);
+		canvasContext.lineTo(-5, -8);
+		canvasContext.lineTo(10, -5);
+		canvasContext.lineTo(5, -2);
+		canvasContext.lineTo(5, 2);
+		canvasContext.lineTo(10, 5);
+		canvasContext.lineTo(-5, 8);
+		canvasContext.lineTo(-15, 15);
+		canvasContext.lineTo(-20, 0);
+		canvasContext.closePath();
 	}
 	
-	ctx.fillStyle = color;
-	ctx.fill();
+	canvasContext.fillStyle = color;
+	canvasContext.fill();
 
-	ctx.restore();
+	canvasContext.restore();
 	
-	ctx.rotate(90 * Math.PI / 180);
-	ctx.textAlign ="center";
-	ctx.fillText(name, 0, 29);
-	ctx.restore();
+	canvasContext.rotate(90 * Math.PI / 180);
+	canvasContext.textAlign ="center";
+	canvasContext.fillText(name, 0, 29);
+	canvasContext.restore();
 }
 
 function pollPlayerData(){
@@ -466,8 +457,8 @@ function updatePlayerData(){
 }
 
 function start(){
-	c = document.getElementById("gameArea");
-	ctx = c.getContext("2d");
+	canvas = document.getElementById("gameArea");
+	canvasContext = canvas.getContext("2d");
 	
 	drawBorder();
 	connect();
@@ -475,7 +466,7 @@ function start(){
 	setInterval(updatePlayerData, 10);
 	setInterval(pollPlayerData, 10);
 	
-	ctx.rotate(0*Math.PI*180);
+	canvasContext.rotate(0*Math.PI*180);
 	
 	setInterval(function(){
 		if (shootBulletSwitch){
@@ -496,11 +487,11 @@ function start(){
 	
 	var stageData = JSON.parse(window.sessionStorage.getItem("stageData"));
 	
-	X_MIN_LIMIT = stageData.stageMinX;
-	Y_MIN_LIMIT = stageData.stageMinY;
+	STAGE_X_MIN_LIMIT = stageData.stageMinX;
+	STAGE_Y_MIN_LIMIT = stageData.stageMinY;
 	
-	X_MAX_LIMIT = stageData.stageMaxX;
-	Y_MAX_LIMIT = stageData.stageMaxY;
+	STAGE_X_MAX_LIMIT = stageData.stageMaxX;
+	STAGE_Y_MAX_LIMIT = stageData.stageMaxY;
 	
 	
 	$('#bg').css("display", "none"); // hide the background image
