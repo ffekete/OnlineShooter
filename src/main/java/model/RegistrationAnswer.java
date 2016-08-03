@@ -1,11 +1,11 @@
 package model;
 
 /** This data will be sent to the client side after a registration attempt. */
-public class QualifiedPlayerData {
+public class RegistrationAnswer {
 	private PlayerData playerData;
 	private boolean registered;
 	private Long connectionId;
-	
+		
 	/* Getters/setters and constructor */
 	public PlayerData getPlayerData() {
 		return playerData;
@@ -26,9 +26,13 @@ public class QualifiedPlayerData {
 		this.registered = registered;
 	}
 	
-	public QualifiedPlayerData(){
+	public RegistrationAnswer(){
 		this.playerData = null;
 		this.registered = false;
 		this.connectionId = 0L;
+	}
+	
+	public StageData getStageData(){
+		return StageData.getStageData();
 	}
 }

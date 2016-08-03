@@ -1,11 +1,11 @@
 var screen_x = $("#gameArea").width();
 var screen_y = $("#gameArea").height();
 
-var X_MIN_LIMIT = -1000;
-var Y_MIN_LIMIT = -1000;
+var X_MIN_LIMIT = 0;
+var Y_MIN_LIMIT = 0;
 
-var X_MAX_LIMIT = 1000;
-var Y_MAX_LIMIT = 1000;
+var X_MAX_LIMIT = 0;
+var Y_MAX_LIMIT = 0;
 
 var stompClient = null;
 
@@ -493,6 +493,15 @@ function start(){
 	
 	screen_x = $("#gameArea").width();
 	screen_y = $("#gameArea").height();
+	
+	var stageData = JSON.parse(window.sessionStorage.getItem("stageData"));
+	
+	X_MIN_LIMIT = stageData.stageMinX;
+	Y_MIN_LIMIT = stageData.stageMinY;
+	
+	X_MAX_LIMIT = stageData.stageMaxX;
+	Y_MAX_LIMIT = stageData.stageMaxY;
+	
 	
 	$('#bg').css("display", "none"); // hide the background image
 }

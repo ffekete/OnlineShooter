@@ -44,8 +44,9 @@ function responseArrivedForRegisterPlayer(playerStatus) {
 		
 		var name = document.getElementById('name').value;
 		window.sessionStorage.setItem("playerName", name);
+		window.sessionStorage.setItem("stageData", JSON.stringify(QualifiedPlayerData.stageData));
 		
-		document.getElementById("response").innerHTML = "Redirecting to game area, please wait..." + id;
+		document.getElementById("response").innerHTML = "Redirecting to game area, please wait...";
 		window.location.replace("/game_area.html");
 
 	} else {
