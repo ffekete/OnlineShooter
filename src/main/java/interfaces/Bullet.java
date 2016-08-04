@@ -31,4 +31,6 @@ public interface Bullet {
 	public void effect();
 	
 	public void hitDetected();
+	
+	public boolean hits(Spawnable item);
 }

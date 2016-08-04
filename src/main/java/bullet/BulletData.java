@@ -1,6 +1,7 @@
 package bullet;
 
 import interfaces.Bullet;
+import interfaces.Spawnable;
 
 public class BulletData implements Bullet{
 	private double x;
@@ -80,5 +81,10 @@ public class BulletData implements Bullet{
 	@Override
 	public void hitDetected() {
 		//empty		
+	}
+
+	@Override
+	public boolean hits(Spawnable item) {
+		return false;
 	}
 }
