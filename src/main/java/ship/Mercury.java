@@ -16,10 +16,10 @@ public class Mercury extends ShipParent{
 	
 	@Override
 	public void setHp(long hp) {
-		long hpToSet = super.getHp() + hp;
+		long hpToSet = hp;
 		if(hpToSet > ShipConfig.MERCURY_INIT_HP)
 			hpToSet = ShipConfig.MERCURY_INIT_HP;
-		super.setHp(hp);
+		super.setHp(hpToSet);
 	}
 	
 	@Override

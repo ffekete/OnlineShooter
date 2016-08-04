@@ -16,10 +16,10 @@ public class Quicksilver extends ShipParent{
 	
 	@Override
 	public void setHp(long hp) {
-		long hpToSet = super.getHp() + hp;
+		long hpToSet = hp;
 		if(hpToSet > ShipConfig.QUICKSILVER_INIT_HP)
 			hpToSet = ShipConfig.QUICKSILVER_INIT_HP;
-		super.setHp(hp);
+		super.setHp(hpToSet);
 	}
 
 	@Override
