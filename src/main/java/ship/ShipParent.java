@@ -1,7 +1,5 @@
 package ship;
 
-import config.WeaponId;
-import factory.WeaponFactory;
 import interfaces.Shield;
 import interfaces.Ship;
 import interfaces.Weapon;
@@ -55,9 +53,7 @@ public abstract class ShipParent implements Ship {
 	}
 	
 	@Override
-	public void initWeapon(){
-		this.weapon = WeaponFactory.createWeapon(WeaponId.MACHINEGUN);
-	}
+	public abstract void initWeapon();
 	
 	@Override
 	public double getX() {

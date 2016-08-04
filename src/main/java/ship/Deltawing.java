@@ -1,6 +1,7 @@
 package ship;
 
 import config.ShipConfig;
+import factory.WeaponFactory;
 import model.Coordinate;
 
 public class Deltawing extends ShipParent{
@@ -36,6 +37,12 @@ public class Deltawing extends ShipParent{
 	public void resetSpeed() {
 		super.setSpeed(ShipConfig.DELTAWING_INIT_SPEED);
 		super.setMaxSpeed(ShipConfig.DELTAWING_INIT_SPEED);
+	}
+
+	@Override
+	public void initWeapon() {
+		super.setWeapon(WeaponFactory.createWeapon(ShipConfig.DELTAWING_INIT_WEAPON));
+		
 	}
 	
 }

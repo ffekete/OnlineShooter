@@ -1,6 +1,7 @@
 package ship;
 
 import config.ShipConfig;
+import factory.WeaponFactory;
 import model.Coordinate;
 
 public class Quicksilver extends ShipParent{
@@ -37,5 +38,9 @@ public class Quicksilver extends ShipParent{
 		super.setSpeed(ShipConfig.QUICKSILVER_INIT_SPEED);
 		super.setMaxSpeed(ShipConfig.QUICKSILVER_INIT_SPEED);
 	}
-	
+
+	@Override
+	public void initWeapon() {
+		super.setWeapon(WeaponFactory.createWeapon(ShipConfig.QUICKSILVER_INIT_WEAPON));
+	}
 }

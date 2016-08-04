@@ -1,6 +1,7 @@
 package ship;
 
 import config.ShipConfig;
+import factory.WeaponFactory;
 import model.Coordinate;
 
 public class Mercury extends ShipParent{
@@ -36,6 +37,11 @@ public class Mercury extends ShipParent{
 	public void resetSpeed() {
 		super.setSpeed(ShipConfig.MERCURY_INIT_SPEED);
 		super.setMaxSpeed(ShipConfig.MERCURY_INIT_SPEED);
+	}
+
+	@Override
+	public void initWeapon() {
+		super.setWeapon(WeaponFactory.createWeapon(ShipConfig.MERCURY_INIT_WEAPON));		
 	}
 	
 }

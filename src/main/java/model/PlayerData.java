@@ -121,7 +121,7 @@ public class PlayerData implements Spawnable{
 	}
 	
 	public void initWeapon(){
-		this.getSpaceShip().setWeapon(WeaponFactory.createWeapon(WeaponId.MACHINEGUN));
+		this.getSpaceShip().initWeapon();
 	}
 	
 	public void decreasePlayerRespawnTime(){
