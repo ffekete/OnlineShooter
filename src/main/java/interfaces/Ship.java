@@ -2,7 +2,7 @@ package interfaces;
 
 import model.Coordinate;
 
-public interface Ship {
+public interface Ship extends Spawnable{
 	public void initWeapon();
 	public long decreaseHp(long value);
 	public String getColor();
@@ -33,4 +33,7 @@ public interface Ship {
 	public void setShipType(String shipType);
 	public void increaseShieldPower();
 	public void increaseSpeed(double value);
+	public void resetHp();
+	public void resetManeuverability();
+	public void resetSpeed();
 }

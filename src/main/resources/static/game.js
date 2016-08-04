@@ -91,6 +91,7 @@ function randomFloat (min, max)
  */
 function createExplosion(x, y, color)
 {
+	console.log("Creating explosion: " + x + " "  + y);
 	var minSize = 10;
 	var maxSize = 30;
 	var count = 10;
@@ -128,6 +129,8 @@ function createExplosion(x, y, color)
  */
 function createBasicExplosion(x, y)
 {
+	console.log("Creating basic explosion: " + x + " "  + y);
+	
 	// creating 4 particles that scatter at 0, 90, 180 and 270 degrees
 	for (var angle=0; angle<360; angle+=90)
 	{
@@ -236,8 +239,6 @@ function eventArrived(event){
 	if(eventInfo.eventCommand === "PLAY_HIT_ANIM"){
 		createBasicExplosion(eventInfo.eventX, eventInfo.eventY);
 	}
-	
-	$("#messagebox").append(eventInfo.eventCommand + " " + ((screen_x / 2 + 10)-dx) + " " + ((screen_y / 2 + 10)-dy) +"\n");
 }
 
 function messageArrived(message){

@@ -1,19 +1,18 @@
 package factory;
 
-import config.ShipId;
 import interfaces.Ship;
 import ship.Interceptor;
 import ship.Mercury;
 import ship.Quicksilver;
 
 public class ShipFactory {
-	public static Ship createShip(ShipId shipId){
-		switch (shipId){
-			case SHIP_QUICKSILVER:
+	public static Ship createShip(String shipType){
+		switch (shipType){
+			case "Quicksilver":
 				return new Quicksilver();
-			case SHIP_INTERCEPTOR:
+			case "Interceptor":
 				return new Interceptor();
-			case SHIP_MERCURY:
+			case "Mercury":
 				return new Mercury();
 			default:
 				return null;

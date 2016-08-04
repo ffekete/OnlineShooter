@@ -72,8 +72,7 @@ public class PlayerDataProcessor {
 	}
 
 	private void checkBulletHits(PlayerData player) {
-		CopyOnWriteArrayList<BulletData> bullets = (CopyOnWriteArrayList<BulletData>) bulletPool
-				.getAllBulletsOnScreen(player.getId());
+		CopyOnWriteArrayList<BulletData> bullets = (CopyOnWriteArrayList<BulletData>) bulletPool.getAllBulletsOnScreen(player.getId());
 
 		Iterator<BulletData> bulletIterator = bullets.iterator();
 
@@ -137,7 +136,7 @@ public class PlayerDataProcessor {
 	private void updateShipAngles(PlayerData player) throws InterruptedException {
 		double angle = calculateAngleAndFilterIt(player, (double) player.getCanvas().getHalfWidth(),
 				(double) player.getCanvas().getHalfHeight());
-		player.setPreviousAngle(player.getAngle());
+		player.setPreviousAngle(player.getShipAngle());
 		player.setShipAngle(angle);
 	}
 
@@ -218,7 +217,7 @@ public class PlayerDataProcessor {
 	private void updatePlayerCoordinates(PlayerData player) {
 		double resultx;
 		double resulty;
-		double angle = player.getAngle() * Math.PI / 180.0d;
+		double angle = player.getShipAngle() * Math.PI / 180.0d;
 
 		resultx = player.getX() + player.getSpeed() * Math.cos(angle);
 		resulty = player.getY() + player.getSpeed() * Math.sin(angle);

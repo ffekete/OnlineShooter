@@ -13,7 +13,6 @@ import Items.IncreaseMAneuverability;
 import Items.IncreaseRateOfFire;
 import Items.IncreaseScore;
 import Items.IncreaseSpeed;
-import config.CanvasConstants;
 import config.GameConfig;
 import config.ShieldId;
 import config.WeaponId;
@@ -62,7 +61,7 @@ public class ItemPool {
 
 			switch (i) {
 			case 1:
-				newItem = (SpawnableItem) new WeaponFactory().createWeapon(WeaponId.GATLING_GUN);
+				newItem = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.GATLING_GUN);
 				break;
 			case 2:
 				newItem = (SpawnableItem) new IncreaseDamage();
@@ -74,7 +73,7 @@ public class ItemPool {
 				newItem = (SpawnableItem) new IncreaseRateOfFire();
 				break;
 			case 5:
-				newItem = (SpawnableItem) new WeaponFactory().createWeapon(WeaponId.LASER_CANNON);
+				newItem = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.LASER_CANNON);
 				break;
 			case 6:
 				newItem = (SpawnableItem) new IncreaseMAneuverability();
@@ -89,16 +88,16 @@ public class ItemPool {
 				newItem = (SpawnableItem) new IncreaseScore();
 				break;				
 			case 12:
-				newItem = (SpawnableItem) new ShieldFactory().createShield(ShieldId.ATOM_SHIELD);
+				newItem = (SpawnableItem) ShieldFactory.createShield(ShieldId.ATOM_SHIELD);
 				break;
 			case 13:
-				newItem = (SpawnableItem) new ShieldFactory().createShield(ShieldId.PLASMA_SHIELD);
+				newItem = (SpawnableItem) ShieldFactory.createShield(ShieldId.PLASMA_SHIELD);
 				break;
 			case 14:
-				newItem = (SpawnableItem) new WeaponFactory().createWeapon(WeaponId.DOUBLE_GATLING);
+				newItem = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.DOUBLE_GATLING);
 				break;
 			case 15:
-				newItem = (SpawnableItem) new WeaponFactory().createWeapon(WeaponId.SHOTGUN);
+				newItem = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.SHOTGUN);
 				break;
 			default:
 				break;

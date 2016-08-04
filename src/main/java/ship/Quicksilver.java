@@ -1,11 +1,14 @@
 package ship;
 
 import config.ShipConfig;
+import model.Coordinate;
 
 public class Quicksilver extends ShipParent{
 
 	public Quicksilver(){
-		super.setHp(ShipConfig.QUICKSILVER_INIT_HP);
+		super.setCoordinates(new Coordinate());
+		this.setHp(ShipConfig.QUICKSILVER_INIT_HP);
+		super.setSpeed(ShipConfig.QUICKSILVER_INIT_SPEED);
 		super.setMaxSpeed(ShipConfig.QUICKSILVER_INIT_SPEED);
 		super.setManeuverability(ShipConfig.QUICKSILVER_INIT_MANEUVERABILITY);
 		super.setShipType("Quicksilver");
@@ -17,6 +20,22 @@ public class Quicksilver extends ShipParent{
 		if(hpToSet > ShipConfig.QUICKSILVER_INIT_HP)
 			hpToSet = ShipConfig.QUICKSILVER_INIT_HP;
 		super.setHp(hp);
+	}
+
+	@Override
+	public void resetHp() {
+		this.setHp(ShipConfig.QUICKSILVER_INIT_HP);	
+	}
+
+	@Override
+	public void resetManeuverability() {
+		super.setManeuverability(ShipConfig.QUICKSILVER_INIT_MANEUVERABILITY);		
+	}
+
+	@Override
+	public void resetSpeed() {
+		super.setSpeed(ShipConfig.QUICKSILVER_INIT_SPEED);
+		super.setMaxSpeed(ShipConfig.QUICKSILVER_INIT_SPEED);
 	}
 	
 }

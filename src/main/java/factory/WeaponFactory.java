@@ -10,7 +10,7 @@ import weapons.Shotgun;
 
 public class WeaponFactory {
 
-	public Weapon createWeapon(WeaponId weaponId) {
+	public static Weapon createWeapon(WeaponId weaponId) {
 		Weapon weapon = null;
 		switch (weaponId) {
 		case MACHINEGUN:

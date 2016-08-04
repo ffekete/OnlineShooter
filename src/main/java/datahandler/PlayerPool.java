@@ -50,7 +50,7 @@ public class PlayerPool {
 		if (playerPool.containsKey(id)) {
 			return false;
 		} else {
-			PlayerData newPlayer = new PlayerData(id, data.getName());
+			PlayerData newPlayer = new PlayerData(id, data.getName(), data.getShipType());
 			Long connectionId = connectionPool.registerNewConnection(id);
 
 			if (connectionId != null) {

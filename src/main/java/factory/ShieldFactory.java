@@ -11,7 +11,7 @@ import shield.PlasmaShield;
 @Component
 public class ShieldFactory {
 
-	public Shield createShield(ShieldId shieldId) {
+	public static Shield createShield(ShieldId shieldId) {
 		Shield shield = null;
 		switch (shieldId) {
 		case NORMAL_SHIELD:

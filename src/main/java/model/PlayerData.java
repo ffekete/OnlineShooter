@@ -2,10 +2,10 @@ package model;
 
 import config.CanvasConstants;
 import config.GameConfig;
-import config.Physics;
 import config.ShieldId;
 import config.WeaponId;
 import factory.ShieldFactory;
+import factory.ShipFactory;
 import factory.WeaponFactory;
 import interfaces.Shield;
 import interfaces.Ship;
@@ -15,23 +15,15 @@ import service.Spawner;
 
 public class PlayerData implements Spawnable{
 	
-	Ship spaceShip;
+	private Ship spaceShip;
 	
 	private String name;
 	private long id;
-	private double x;
-	private double y;
-	
-	private String color;
-	
-	private String shipType;
 	
 	private Canvas canvas;
 	
 	private long respawnTime;
-	
-	private Shield shield;
-	
+
 	private double previousAngle = 0.0d;
 	
 	private int inactivityCounter = 0;
@@ -43,21 +35,10 @@ public class PlayerData implements Spawnable{
 	
 	private long score;
 	
-	private long hp;
-	
-	private Double shipAngle;
-	
 	private long connectionId;
 	
-	private Weapon weapon;
-	
-	private double maneuverability;
-	
-	private double speed;
-	
-	private double maxSpeed;
-	
 	public PlayerData(PlayerData player2){
+		this.cloneSpaceShipAndStoreIt(player2.getSpaceShip());
 		this.setConnectionId(player2.getConnectionId());
 		this.setHp(player2.getHp());
 		this.setId(player2.getId());
@@ -78,26 +59,26 @@ public class PlayerData implements Spawnable{
 		this.setCanvas(player2.getCanvas());
 	}
 	
-	public PlayerData(Long id, String name) {
+	public PlayerData(Long id, String name, String shipType) {
 		this.name = name;
 		this.id = id;
 		
-		Spawner.spawn(this);
+		this.spaceShip = ShipFactory.createShip(shipType);
+		
+		Spawner.spawn(this.getSpaceShip());
 		
 		this.mouseX = 0L;
 		this.mouseY = 0L;
-		this.shipAngle = 0.0d;
+		this.getSpaceShip().setShipAngle(0.0d);
 		this.connectionId = 0L;
-		this.hp = GameConfig.SHIP_INITIAL_HP;
-		this.weapon = new WeaponFactory().createWeapon(WeaponId.MACHINEGUN);
-		this.maneuverability = Physics.SMOOTHING;
-		this.speed = GameConfig.SHIP_INIT_SPEED;
-		this.maxSpeed = GameConfig.SHIP_INIT_SPEED;
+		this.getSpaceShip().resetHp();
+		this.initWeapon();
+		this.getSpaceShip().resetManeuverability();
+		this.getSpaceShip().resetSpeed();
 		this.score = 0l;
-		this.shield = new ShieldFactory().createShield(ShieldId.NORMAL_SHIELD);
+		this.getSpaceShip().setShield(ShieldFactory.createShield(ShieldId.NORMAL_SHIELD));
 		this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
 		this.setCanvas(new Canvas(0, 0, CanvasConstants.CANVAS_HEIGHT, CanvasConstants.CANVAS_WIDTH));
-		
 	}
 	
 	public void updateCanvasProperties(long x, long y, long height, long width){
@@ -108,16 +89,15 @@ public class PlayerData implements Spawnable{
 	}
 	
 	public void kill(){
-		Spawner.spawn(this); 
-		inactivityCounter = 0;
-		hp = GameConfig.SHIP_INITIAL_HP;
-		invulnerabilityCounter = GameConfig.INVULN_CTR_MAX_VALUE;
-		this.weapon = new WeaponFactory().createWeapon(WeaponId.MACHINEGUN);
-		this.maneuverability = Physics.SMOOTHING;
-		this.speed = GameConfig.SHIP_INIT_SPEED;
-		this.maxSpeed = GameConfig.SHIP_INIT_SPEED;
+		Spawner.spawn(this.getSpaceShip()); 
+		this.inactivityCounter = 0;
+		this.getSpaceShip().resetHp();
+		this.invulnerabilityCounter = GameConfig.INVULN_CTR_MAX_VALUE;
+		this.initWeapon();
+		this.getSpaceShip().resetManeuverability();
+		this.getSpaceShip().resetSpeed();
 		this.score = 0l;
-		this.shield = new ShieldFactory().createShield(ShieldId.NORMAL_SHIELD);	
+		this.getSpaceShip().setShield(ShieldFactory.createShield(ShieldId.NORMAL_SHIELD));
 		this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
 	}
 	
@@ -141,7 +121,7 @@ public class PlayerData implements Spawnable{
 	}
 	
 	public void initWeapon(){
-		this.weapon = new WeaponFactory().createWeapon(WeaponId.MACHINEGUN);
+		this.getSpaceShip().setWeapon(WeaponFactory.createWeapon(WeaponId.MACHINEGUN));
 	}
 	
 	public void decreasePlayerRespawnTime(){
@@ -158,23 +138,13 @@ public class PlayerData implements Spawnable{
 	}
 	
 	public long decreaseHp(long value){
+		long hpRemaining = this.getSpaceShip().decreaseHp(value);
 		
-		long shieldProtection = getShield().getProtection();
-		long hpAfterReduction; 
-				
-		if(shieldProtection > 0L){
-			getShield().decreaseProtection(value);
-			hpAfterReduction = hp;
+		if(hpRemaining < 1L){
+			this.kill();
 		}
-		else
-		{
-			hp -= value;
-			hpAfterReduction = hp;
-			if(hp < 1L ) {
-				kill();
-			}
-		}
-		return hpAfterReduction; 
+		
+		return hpRemaining;
 	}
 	
 	public void decreaseInvulnerabilityCounter(long value){
@@ -187,7 +157,8 @@ public class PlayerData implements Spawnable{
 	}
 	
 	public void increaseSpeed(double value){
-		this.speed += value;
+		double speed = this.getSpaceShip().getSpeed() + value;
+		this.setSpeed(speed);
 	}
 	
 	/* Getters/setters and constructors */
@@ -197,27 +168,27 @@ public class PlayerData implements Spawnable{
 	}
 	
 	public String getShipType() {
-		return shipType;
+		return this.getSpaceShip().getShipType();
 	}
 
 	public void setShipType(String shipType) {
-		this.shipType = shipType;
+		this.getSpaceShip().setShipType(shipType);
 	}
 
 	public String getColor() {
-		return color;
+		return this.getSpaceShip().getColor();
 	}
 
 	public void setColor(String color) {
-		this.color = color;
+		this.getSpaceShip().setColor(color);
 	}
 
 	public double getSpeed() {
-		return speed;
+		return this.getSpaceShip().getSpeed();
 	}
 
 	public void setSpeed(double speed) {
-		this.speed = speed;
+		this.getSpaceShip().setSpeed(speed);
 	}
 
 	public double getPreviousAngle() {
@@ -225,7 +196,7 @@ public class PlayerData implements Spawnable{
 	}
 
 	public double getMaxSpeed() {
-		return maxSpeed;
+		return getSpaceShip().getMaxSpeed();
 	}
 
 	public void setPreviousAngle(double previousAngle) {
@@ -236,16 +207,38 @@ public class PlayerData implements Spawnable{
 		return invulnerabilityCounter;
 	}
 
+	public Ship getSpaceShip() {
+		return spaceShip;
+	}
+
+	public void setSpaceShip(Ship spaceShip) {
+		this.spaceShip = spaceShip;
+	}
+	
+	public void cloneSpaceShipAndStoreIt(Ship spaceShip) {
+		this.spaceShip.setColor(spaceShip.getColor());
+		this.spaceShip.setCoordinates(spaceShip.getCoordinates().getX(), spaceShip.getCoordinates().getY());
+		this.spaceShip.setHp(spaceShip.getHp());
+		this.spaceShip.setManeuverability(spaceShip.getManeuverability());
+		this.spaceShip.setMaxSpeed(spaceShip.getMaxSpeed());
+		this.spaceShip.setShield(spaceShip.getShield());
+		this.spaceShip.setShipAngle(spaceShip.getShipAngle());
+		this.spaceShip.setShipType(spaceShip.getShipType());
+		this.spaceShip.setSpeed(spaceShip.getSpeed());
+		this.spaceShip.setWeapon(spaceShip.getWeapon());
+	}
+	
+
 	public void setInvulnerabilityCounter(long invulnerabilityCounter) {
 		this.invulnerabilityCounter = invulnerabilityCounter;
 	}
 
 	public Double getShipAngle() {
-		return shipAngle;
+		return this.getSpaceShip().getShipAngle();
 	}
 
 	public void setShipAngle(Double shipAngle) {
-		this.shipAngle = shipAngle;
+		this.getSpaceShip().setShipAngle(shipAngle);
 	}
 
 	public Long getConnectionId() {
@@ -272,25 +265,24 @@ public class PlayerData implements Spawnable{
 		this.id = id;
 	}
 	public double getX() {
-		return x;
+		return getSpaceShip().getX();
 	}
+	
 	public void setX(double x) {
-		this.x = x;
+		this.getSpaceShip().setX(x);
 	}
+	
 	public double getY() {
-		return y;
+		return getSpaceShip().getY();
 	}
 	public void setY(double y) {
-		this.y = y;
+		this.getSpaceShip().setY(y);
 	}
 	public Long getMouseX() {
 		return mouseX;
 	}
 	public void setMouseX(Long mouseX) {
 		this.mouseX = mouseX;
-	}
-	public Double getAngle() {
-		return shipAngle;
 	}
 
 	public Long getMouseY() {
@@ -305,12 +297,11 @@ public class PlayerData implements Spawnable{
 	}
 	
 	public Long getHp() {
-		return hp;
+		return this.getSpaceShip().getHp();
 	}
 
-	public void setHp(Long hp) {
-		this.hp = hp;
-		if(this.hp > GameConfig.SHIP_MAX_HP) this.hp = GameConfig.SHIP_MAX_HP; 
+	public void setHp(long hp) {
+		this.getSpaceShip().setHp(hp);
 	}
 
 	public boolean isInvulnerable(){
@@ -318,32 +309,33 @@ public class PlayerData implements Spawnable{
 	}
 	
 	public Weapon getWeapon() {
-		return weapon;
+		return this.getSpaceShip().getWeapon();
 	}
 
 	public void setWeapon(Weapon weapon) {
-		this.weapon = weapon;
+		this.getSpaceShip().setWeapon(weapon);
 	}
 
 	public double getManeuverability() {
-		return maneuverability;
+		return this.getSpaceShip().getManeuverability();
 	}
 
 	public void setManeuverability(double maneuverability) {
-		this.maneuverability = maneuverability;
+		this.getSpaceShip().setManeuverability(maneuverability);
 	}
 
 	public void increaseManeuverablility(double value){
-		this.maneuverability -= value;
-		if(this.maneuverability < 1.0d) this.maneuverability = 1.0d;
+		double maneuverability = this.getSpaceShip().getManeuverability() - value;
+		if(maneuverability < 1.0d) maneuverability = 1.0d;
+		this.setManeuverability(maneuverability);
 	}
 	
 	public Shield getShield() {
-		return shield;
+		return this.getSpaceShip().getShield();
 	}
 
 	public void setShield(Shield shield) {
-		this.shield = shield;
+		this.getSpaceShip().setShield(shield);
 	}
 
 	public long getScore() {

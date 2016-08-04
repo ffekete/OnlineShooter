@@ -1,11 +1,14 @@
 package ship;
 
 import config.ShipConfig;
+import model.Coordinate;
 
 public class Interceptor extends ShipParent{
 
 	public Interceptor(){
-		super.setHp(ShipConfig.INTERCEPTOR_INIT_HP);
+		super.setCoordinates(new Coordinate());
+		this.setHp(ShipConfig.INTERCEPTOR_INIT_HP);
+		super.setSpeed(ShipConfig.INTERCEPTOR_INIT_SPEED);
 		super.setMaxSpeed(ShipConfig.INTERCEPTOR_INIT_SPEED);
 		super.setManeuverability(ShipConfig.INTERCEPTOR_INIT_MANEUVERABILITY);
 		super.setShipType("Interceptor");
@@ -18,5 +21,21 @@ public class Interceptor extends ShipParent{
 			hpToSet = ShipConfig.INTERCEPTOR_INIT_HP;
 		super.setHp(hp);
 	}
-	
+
+	@Override
+	public void resetHp() {
+		this.setHp(ShipConfig.INTERCEPTOR_INIT_HP);
+		
+	}
+
+	@Override
+	public void resetManeuverability() {
+		super.setManeuverability(ShipConfig.INTERCEPTOR_INIT_MANEUVERABILITY);
+	}
+
+	@Override
+	public void resetSpeed() {
+		super.setSpeed(ShipConfig.INTERCEPTOR_INIT_SPEED);
+		super.setMaxSpeed(ShipConfig.INTERCEPTOR_INIT_SPEED);		
+	}
 }

@@ -1,6 +1,5 @@
 package ship;
 
-import config.GameConfig;
 import config.WeaponId;
 import factory.WeaponFactory;
 import interfaces.Shield;
@@ -8,7 +7,7 @@ import interfaces.Ship;
 import interfaces.Weapon;
 import model.Coordinate;
 
-public class ShipParent implements Ship {
+public abstract class ShipParent implements Ship {
 	private Coordinate coordinates;
 	private String color;
 	private String shipType;
@@ -27,9 +26,8 @@ public class ShipParent implements Ship {
 	}
 	
 	@Override
-	public void setHp(long hp) {
+	public void setHp(long hp){
 		this.hp = hp;
-		if(this.hp > GameConfig.SHIP_MAX_HP) this.hp = GameConfig.SHIP_MAX_HP; 
 	}
 	
 	@Override
@@ -48,7 +46,7 @@ public class ShipParent implements Ship {
 		{
 			hp -= value;
 		}
-		return hp; // Kill kell utana, ha elesben lesz hivva!!! 
+		return hp;
 	}
 	
 	@Override
@@ -58,7 +56,7 @@ public class ShipParent implements Ship {
 	
 	@Override
 	public void initWeapon(){
-		this.weapon = new WeaponFactory().createWeapon(WeaponId.MACHINEGUN);
+		this.weapon = WeaponFactory.createWeapon(WeaponId.MACHINEGUN);
 	}
 	
 	@Override
@@ -75,6 +73,8 @@ public class ShipParent implements Ship {
 	public double getY() {
 		return coordinates.getY();
 	}
+	
+	public abstract void resetHp();
 	
 	@Override
 	public void setY(double y) {
