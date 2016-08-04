@@ -18,6 +18,9 @@ public class BulletDataProcessor {
 	private void updateBulletCoordinates(Bullet bullet){
 		double resultx;
 		double resulty;
+		
+		bullet.effect();
+		
 		double angle = bullet.getAngle() * Math.PI / 180.0d;
 		
 		resultx = (double)bullet.getX() + GameConfig.BULLET_INITIAL_SPEED * Math.cos(angle);

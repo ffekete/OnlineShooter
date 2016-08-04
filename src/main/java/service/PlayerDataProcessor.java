@@ -94,6 +94,8 @@ public class PlayerDataProcessor {
 					/* populate death event to client side */
 					eventSender.sendPlayerDeathNotification(playerToSave);
 					
+					actualBullet.hitDetected();
+					
 					PlayerData playerWhoKilledMe = playerPool.getPlayerById(actualBullet.getPlayerId());
 					playerWhoKilledMe.increaseScore(GameConfig.PLAYER_SCORE_VALUE);
 

@@ -76,4 +76,9 @@ public class BulletData implements Bullet{
 	public void effect() {
 		// empty		
 	}
+
+	@Override
+	public void hitDetected() {
+		//empty		
+	}
 }

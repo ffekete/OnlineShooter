@@ -27,5 +27,8 @@ public interface Bullet {
 	
 	public void setY(double y);
 	
+	/** Periodically updated bullet effect. Use this to create heat-seeking missiles, etc.. */
 	public void effect();
+	
+	public void hitDetected();
 }
