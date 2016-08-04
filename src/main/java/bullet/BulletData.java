@@ -85,6 +85,6 @@ public class BulletData implements Bullet{
 
 	@Override
 	public boolean hits(Spawnable item) {
-		return false;
+		return (Math.abs(x - item.getX()) < 10.0d && (Math.abs(y - item.getY())) < 10.0d);
 	}
 }

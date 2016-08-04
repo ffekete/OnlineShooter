@@ -82,8 +82,7 @@ public class PlayerDataProcessor {
 
 			boolean invulnerabilityCheck = player.getInvulnerabilityCounter() < 1L; // true, if player is not invulnerable
 			boolean playerIdCheck = actualBullet.getPlayerId() != player.getId();
-			boolean areaCheck = Math.abs(actualBullet.getX() - player.getX()) < 10.0d
-					&& Math.abs(actualBullet.getY() - player.getY()) < 10.0d;
+			boolean areaCheck = actualBullet.hits(player);
 
 			if (invulnerabilityCheck && playerIdCheck && areaCheck) {
 				PlayerData playerToSave = new PlayerData(player);
