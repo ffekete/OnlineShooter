@@ -1,5 +1,7 @@
 package interfaces;
 
+import controller.EventSender;
+
 public interface Bullet {
 	public double getAngle();
 
@@ -33,4 +35,8 @@ public interface Bullet {
 	public void hitDetected();
 	
 	public boolean hits(Spawnable item);
+
+	void hitDetected(Spawnable item);
+
+	void hitDetected(Spawnable item, EventSender eventSender);
 }

@@ -87,13 +87,13 @@ public class PlayerDataProcessor {
 			if (invulnerabilityCheck && playerIdCheck && areaCheck) {
 				PlayerData playerToSave = new PlayerData(player);
 				
+				actualBullet.hitDetected(playerToSave, eventSender);
+				
 				long hpRemaining = player.decreaseHp(actualBullet.getDamage());
 				if (hpRemaining < 1L) {
 					
 					/* populate death event to client side */
-					eventSender.sendPlayerDeathNotification(playerToSave);
-					
-					actualBullet.hitDetected();
+					eventSender.sendItemDestroyedNotification(playerToSave);
 					
 					PlayerData playerWhoKilledMe = playerPool.getPlayerById(actualBullet.getPlayerId());
 					playerWhoKilledMe.increaseScore(GameConfig.PLAYER_SCORE_VALUE);
@@ -110,7 +110,7 @@ public class PlayerDataProcessor {
 				}
 				else
 				{
-					eventSender.sendPlayerHitNotification(player);
+					eventSender.sendItemHitNotification(player);
 				}
 				bulletPool.getBulletPool().remove(actualBullet);
 
@@ -205,11 +205,11 @@ public class PlayerDataProcessor {
 					
 					player1.getShield().setProtection(0L);
 					if(player1.decreaseHp(Physics.COLLISION_STRENGTH) < 0L){
-						eventSender.sendPlayerDeathNotification(player1ToSave);
+						eventSender.sendItemDestroyedNotification(player1ToSave);
 					}
 					player2.getShield().setProtection(0L);
 					if(player2.decreaseHp(Physics.COLLISION_STRENGTH) < 1L){
-						eventSender.sendPlayerDeathNotification(player2ToSave);
+						eventSender.sendItemDestroyedNotification(player2ToSave);
 					}
 			}
 		}

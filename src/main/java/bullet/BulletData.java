@@ -1,5 +1,6 @@
 package bullet;
 
+import controller.EventSender;
 import interfaces.Bullet;
 import interfaces.Spawnable;
 
@@ -79,12 +80,23 @@ public class BulletData implements Bullet{
 	}
 
 	@Override
-	public void hitDetected() {
-		//empty		
+	public boolean hits(Spawnable item) {
+		return (Math.abs(x - item.getX()) < 10.0d && (Math.abs(y - item.getY())) < 10.0d);
 	}
 
 	@Override
-	public boolean hits(Spawnable item) {
-		return (Math.abs(x - item.getX()) < 10.0d && (Math.abs(y - item.getY())) < 10.0d);
+	public void hitDetected() {
+		// empty		
+	}
+
+	@Override
+	public void hitDetected(Spawnable item) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void hitDetected(Spawnable item, EventSender eventSender) {
+		eventSender.sendItemHitNotification(item);
 	}
 }

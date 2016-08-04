@@ -6,6 +6,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 import config.BrokerPaths;
+import interfaces.Spawnable;
 import model.Event;
 import model.PlayerData;
 
@@ -20,22 +21,20 @@ public class EventSender {
 		template.convertAndSend(BrokerPaths.EVENT_BROKER, event);
 	}
 
-	public void sendPlayerHitNotification(PlayerData player){
+	public void sendItemHitNotification(Spawnable item){
 		Event event = new Event();
-		event.setEvent_x(player.getX());
-		event.setEvent_y(player.getY());
+		event.setEvent_x(item.getX());
+		event.setEvent_y(item.getY());
 		event.setEventCommand("PLAY_HIT_ANIM");
-		event.setAdditionalText(player.getName());
-		
+	
 		broadcastEvent(event);
 	}
 	
-	public void sendPlayerDeathNotification(PlayerData player){
+	public void sendItemDestroyedNotification(Spawnable item){
 		Event event = new Event();
-		event.setEvent_x(player.getX());
-		event.setEvent_y(player.getY());
+		event.setEvent_x(item.getX());
+		event.setEvent_y(item.getY());
 		event.setEventCommand("PLAY_EXPLOSION_ANIM");
-		event.setAdditionalText(player.getName());
 		
 		broadcastEvent(event);
 	}
