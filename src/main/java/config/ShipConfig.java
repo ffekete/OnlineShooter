@@ -12,4 +12,8 @@ public class ShipConfig {
 	public final static long   INTERCEPTOR_INIT_HP = 20L;
 	public final static double INTERCEPTOR_INIT_SPEED = 8.0D;
 	public final static double INTERCEPTOR_INIT_MANEUVERABILITY = 14.0D;
+	
+	public final static long   DELTAWING_INIT_HP = 11L;
+	public final static double DELTAWING_INIT_SPEED = 10.0D;
+	public final static double DELTAWING_INIT_MANEUVERABILITY = 16.0D;
 }

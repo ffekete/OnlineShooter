@@ -28,6 +28,9 @@ function updateShipImage(){
 	case "Interceptor":
 		document.getElementById("ship").src = "ship03.png";
 		break;
+	case "Deltawing":
+		document.getElementById("ship").src = "ship04.png";
+		break;
 	}
 	
 }

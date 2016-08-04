@@ -1,6 +1,7 @@
 package factory;
 
 import interfaces.Ship;
+import ship.Deltawing;
 import ship.Interceptor;
 import ship.Mercury;
 import ship.Quicksilver;
@@ -14,6 +15,8 @@ public class ShipFactory {
 				return new Interceptor();
 			case "Mercury":
 				return new Mercury();
+			case "Deltawing":
+				return new Deltawing();
 			default:
 				throw new RuntimeException("Unknownw ship type!");
 		}

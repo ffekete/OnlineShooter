@@ -430,6 +430,18 @@ function drawShip(x, y, angle, name, hp, invulnerability, shield, maxShield, col
 		canvasContext.closePath();
 	}
 	
+	if(type === "Deltawing")
+	{
+		canvasContext.beginPath();
+		canvasContext.moveTo(-15, 0);
+		canvasContext.lineTo(-7, -15);
+		canvasContext.lineTo(-7, -3);
+		canvasContext.bezierCurveTo(-15,-3,15,-3,15,0);
+		canvasContext.bezierCurveTo(15,3,-15,3,-7,3);
+		canvasContext.lineTo(-7, 15);
+		canvasContext.closePath();
+	}
+	
 	canvasContext.fillStyle = color;
 	canvasContext.fill();
 
