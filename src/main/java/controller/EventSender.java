@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import config.BrokerPaths;
 import interfaces.Spawnable;
 import model.Event;
-import model.PlayerData;
 
 @Controller
 public class EventSender {
