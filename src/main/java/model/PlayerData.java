@@ -38,7 +38,7 @@ public class PlayerData implements Spawnable{
 	private long connectionId;
 	
 	public PlayerData(PlayerData player2){
-		this.cloneSpaceShipAndStoreIt(player2.getSpaceShip());
+		this.spaceShip = this.cloneSpaceShip(player2.getSpaceShip());
 		this.setConnectionId(player2.getConnectionId());
 		this.setHp(player2.getHp());
 		this.setId(player2.getId());
@@ -215,17 +215,21 @@ public class PlayerData implements Spawnable{
 		this.spaceShip = spaceShip;
 	}
 	
-	public void cloneSpaceShipAndStoreIt(Ship spaceShip) {
-		this.spaceShip.setColor(spaceShip.getColor());
-		this.spaceShip.setCoordinates(spaceShip.getCoordinates().getX(), spaceShip.getCoordinates().getY());
-		this.spaceShip.setHp(spaceShip.getHp());
-		this.spaceShip.setManeuverability(spaceShip.getManeuverability());
-		this.spaceShip.setMaxSpeed(spaceShip.getMaxSpeed());
-		this.spaceShip.setShield(spaceShip.getShield());
-		this.spaceShip.setShipAngle(spaceShip.getShipAngle());
-		this.spaceShip.setShipType(spaceShip.getShipType());
-		this.spaceShip.setSpeed(spaceShip.getSpeed());
-		this.spaceShip.setWeapon(spaceShip.getWeapon());
+	public Ship cloneSpaceShip(Ship spaceShip) {
+		Ship spaceShipToStore = ShipFactory.createShip(spaceShip.getShipType());
+		
+		spaceShipToStore.setColor(spaceShip.getColor());
+		spaceShipToStore.setCoordinates(spaceShip.getCoordinates().getX(), spaceShip.getCoordinates().getY());
+		spaceShipToStore.setHp(spaceShip.getHp());
+		spaceShipToStore.setManeuverability(spaceShip.getManeuverability());
+		spaceShipToStore.setMaxSpeed(spaceShip.getMaxSpeed());
+		spaceShipToStore.setShield(spaceShip.getShield());
+		spaceShipToStore.setShipAngle(spaceShip.getShipAngle());
+		spaceShipToStore.setShipType(spaceShip.getShipType());
+		spaceShipToStore.setSpeed(spaceShip.getSpeed());
+		spaceShipToStore.setWeapon(spaceShip.getWeapon());
+		
+		return spaceShipToStore;
 	}
 	
 

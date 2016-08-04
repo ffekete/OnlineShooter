@@ -15,7 +15,7 @@ public class ShipFactory {
 			case "Mercury":
 				return new Mercury();
 			default:
-				return null;
+				throw new RuntimeException("Unknownw ship type!");
 		}
 	}
 }
