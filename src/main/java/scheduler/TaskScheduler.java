@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import config.GameConfig;
 import config.TimerValues;
 import datahandler.HighScoreTable;
 import datahandler.PlayerPool;
@@ -44,9 +45,9 @@ public class TaskScheduler {
 		
 		timer = (timer + 1) % TimerValues.MAIN_SCHEDULER_LOOP;
 		
-		if(timer == 0){
+		if(GameConfig.FREE_SYSTEM_TIME_MEASUREMENT_ENABLED && timer == 0){
 			entryTime = System.currentTimeMillis();
-			//System.out.println("Free time during two tasks:" + (entryTime - exitTime));
+			System.out.println("Free time during two tasks:" + (entryTime - exitTime));
 		}
 		
 		itemProcessor.updateItemData();

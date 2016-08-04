@@ -16,4 +16,6 @@ public class GameConfig {
 	public final static long ITEM_SCORE_VALUE = 10l;
 	
 	public final static long PLAYER_RESPAWN_TIME = 300l;
+	
+	public static final boolean FREE_SYSTEM_TIME_MEASUREMENT_ENABLED = false;
 }
