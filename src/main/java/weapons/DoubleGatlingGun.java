@@ -3,15 +3,16 @@ package weapons;
 import java.util.ArrayList;
 import java.util.List;
 
+import bullet.BulletData;
 import config.WeaponConfig;
-import model.BulletData;
+import interfaces.Bullet;
 import model.PlayerData;
 import service.Spawner;
 
 public class DoubleGatlingGun extends WeaponParent{
 
-	public List<BulletData> createBullet(PlayerData player){
-		ArrayList<BulletData> bulletsToCreate = new ArrayList<>();
+	public List<Bullet> createBullet(PlayerData player){
+		ArrayList<Bullet> bulletsToCreate = new ArrayList<>();
 		
 		bulletsToCreate.add(new BulletData(player.getX(), player.getY(), player.getShipAngle()+0.5d, player.getId(), player.getWeapon().getDamage()));
 		bulletsToCreate.add(new BulletData(player.getX(), player.getY(), player.getShipAngle()-0.50d, player.getId(), player.getWeapon().getDamage()));

@@ -7,7 +7,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import model.BulletData;
+import interfaces.Bullet;
 import model.PlayerData;
 
 @Component
@@ -16,27 +16,27 @@ public class BulletPool {
 	@Autowired
 	PlayerPool playerPool;
 	
-	private List<BulletData> bulletPool;
+	private List<Bullet> bulletPool;
 	
 	public BulletPool(){
-		bulletPool = new CopyOnWriteArrayList<BulletData>();
+		bulletPool = new CopyOnWriteArrayList<Bullet>();
 	}
 
-	public synchronized List<BulletData> getBulletPool() {
+	public synchronized List<Bullet> getBulletPool() {
 		return bulletPool;
 	}
 
-	public synchronized List<BulletData> getAllBulletsOnScreen(Long playerId){
-		CopyOnWriteArrayList<BulletData> allBulletsOnScreen = new CopyOnWriteArrayList<BulletData>();
+	public synchronized List<Bullet> getAllBulletsOnScreen(Long playerId){
+		CopyOnWriteArrayList<Bullet> allBulletsOnScreen = new CopyOnWriteArrayList<Bullet>();
 		
 		if(playerId != null){
-			Iterator<BulletData> bit = bulletPool.iterator();
+			Iterator<Bullet> bit = bulletPool.iterator();
 			
 			while(bit.hasNext()){
 				PlayerData player = playerPool.getPlayerById(playerId);
 				
 				if(player != null){
-					BulletData actualBullet = bit.next();
+					Bullet actualBullet = bit.next();
 					if((Math.abs(actualBullet.getX() - player.getX()) <= player.getCanvas().getHalfWidth()) &&
 							(Math.abs(actualBullet.getY() - player.getY()) <= player.getCanvas().getHalfHeight())){
 						allBulletsOnScreen.add(actualBullet);
@@ -52,9 +52,9 @@ public class BulletPool {
 		if(playerId != null){
 			PlayerData player = playerPool.getPlayerById(playerId);
 			if(player != null && player.getWeapon().canShoot()){
-				List<BulletData> bulletsToCreate = player.getWeapon().createBullet(player);
+				List<Bullet> bulletsToCreate = player.getWeapon().createBullet(player);
 				
-				Iterator<BulletData> it = bulletsToCreate.iterator();
+				Iterator<Bullet> it = bulletsToCreate.iterator();
 				while(it.hasNext()){
 					bulletPool.add(it.next());
 				}

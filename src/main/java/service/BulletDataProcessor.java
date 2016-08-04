@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import config.GameConfig;
 import datahandler.BulletPool;
-import model.BulletData;
+import interfaces.Bullet;
 
 @Component
 public class BulletDataProcessor {
@@ -15,7 +15,7 @@ public class BulletDataProcessor {
 	@Autowired
 	private BulletPool bulletPool;
 	
-	private void updateBulletCoordinates(BulletData bullet){
+	private void updateBulletCoordinates(Bullet bullet){
 		double resultx;
 		double resulty;
 		double angle = bullet.getAngle() * Math.PI / 180.0d;
@@ -33,7 +33,7 @@ public class BulletDataProcessor {
 		bullet.setY(resulty);
 	}
 	
-	private void processAgeCounter(BulletData bullet){
+	private void processAgeCounter(Bullet bullet){
 		bullet.increaseAge();
 		if(bullet.getAge() >= GameConfig.BULLET_MAX_AGE){
 			boolean result = bulletPool.getBulletPool().remove(bullet);
@@ -45,10 +45,10 @@ public class BulletDataProcessor {
 	}
 	
 	public void updateBulletData(){
-		Iterator<BulletData> bit = bulletPool.getBulletPool().iterator();
+		Iterator<Bullet> bit = bulletPool.getBulletPool().iterator();
 		
 		while(bit.hasNext()){
-			BulletData bullet = bit.next();
+			Bullet bullet = bit.next();
 			updateBulletCoordinates(bullet);
 			processAgeCounter(bullet);
 		}

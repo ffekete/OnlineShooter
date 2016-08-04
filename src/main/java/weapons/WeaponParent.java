@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Items.ItemParent;
+import bullet.BulletData;
+import interfaces.Bullet;
 import interfaces.Weapon;
-import model.BulletData;
 import model.PlayerData;
 
 public abstract class WeaponParent extends ItemParent implements Weapon {
@@ -107,8 +108,8 @@ public abstract class WeaponParent extends ItemParent implements Weapon {
 		}
 	}
 	
-	public List<BulletData> createBullet(PlayerData player){
-		ArrayList<BulletData> bulletsToCreate = new ArrayList<>();
+	public List<Bullet> createBullet(PlayerData player){
+		ArrayList<Bullet> bulletsToCreate = new ArrayList<>();
 		
 		bulletsToCreate.add(new BulletData(player.getX(), player.getY(), player.getShipAngle(), player.getId(), player.getWeapon().getDamage()));
 		

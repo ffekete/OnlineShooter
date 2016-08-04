@@ -2,6 +2,7 @@ package model;
 
 import java.util.List;
 
+import interfaces.Bullet;
 import interfaces.SpawnableItem;
 import interfaces.Weapon;
 
@@ -38,7 +39,7 @@ public class SentPlayerData {
 	
 	List<PlayerData> visiblePlayers;
 	
-	List<BulletData> visibleBullets;
+	List<Bullet> visibleBullets;
 
 	public Long getId() {
 		return id;
@@ -160,7 +161,7 @@ public class SentPlayerData {
 		this.connectionId = connectionId;
 	}
 
-	public List<BulletData> getVisibleBullets() {
+	public List<Bullet> getVisibleBullets() {
 		return visibleBullets;
 	}
 	
@@ -180,7 +181,7 @@ public class SentPlayerData {
 		this.visiblePlayers = visiblePlayers;
 	}
 
-	public void setVisibleBullets(List<BulletData> visibleBullets) {
+	public void setVisibleBullets(List<Bullet> visibleBullets) {
 		this.visibleBullets = visibleBullets;
 	}
 }

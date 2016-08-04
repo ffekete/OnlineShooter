@@ -6,6 +6,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import bullet.BulletData;
 import config.GameConfig;
 import config.Physics;
 import controller.EventSender;
@@ -13,8 +14,8 @@ import datahandler.BulletPool;
 import datahandler.HighScoreTable;
 import datahandler.ItemPool;
 import datahandler.PlayerPool;
+import interfaces.Bullet;
 import interfaces.SpawnableItem;
-import model.BulletData;
 import model.HighScore;
 import model.PlayerData;
 import scheduler.TaskScheduler;
@@ -72,12 +73,12 @@ public class PlayerDataProcessor {
 	}
 
 	private void checkBulletHits(PlayerData player) {
-		CopyOnWriteArrayList<BulletData> bullets = (CopyOnWriteArrayList<BulletData>) bulletPool.getAllBulletsOnScreen(player.getId());
+		CopyOnWriteArrayList<Bullet> bullets = (CopyOnWriteArrayList<Bullet>) bulletPool.getAllBulletsOnScreen(player.getId());
 
-		Iterator<BulletData> bulletIterator = bullets.iterator();
+		Iterator<Bullet> bulletIterator = bullets.iterator();
 
 		while (bulletIterator.hasNext()) {
-			BulletData actualBullet = bulletIterator.next();
+			Bullet actualBullet = bulletIterator.next();
 
 			boolean invulnerabilityCheck = player.getInvulnerabilityCounter() < 1L; // true, if player is not invulnerable
 			boolean playerIdCheck = actualBullet.getPlayerId() != player.getId();

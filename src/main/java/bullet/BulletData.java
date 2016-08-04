@@ -1,6 +1,8 @@
-package model;
+package bullet;
 
-public class BulletData {
+import interfaces.Bullet;
+
+public class BulletData implements Bullet{
 	private double x;
 	private double y;
 	private double angle;
@@ -68,5 +70,10 @@ public class BulletData {
 	
 	public void setY(double y) {
 		this.y = y;
+	}
+
+	@Override
+	public void effect() {
+		// empty		
 	}
 }
