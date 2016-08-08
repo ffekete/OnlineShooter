@@ -12,13 +12,13 @@ import game.model.PlayerData;
 
 @Component
 public class BulletPool {
-	
+
 	@Autowired
 	PlayerPool playerPool;
-	
+
 	private List<Bullet> bulletPool;
-	
-	public BulletPool(){
+
+	public BulletPool() {
 		bulletPool = new CopyOnWriteArrayList<Bullet>();
 	}
 
@@ -26,44 +26,44 @@ public class BulletPool {
 		return bulletPool;
 	}
 
-	public synchronized List<Bullet> getAllBulletsOnScreen(Long playerId){
+	public synchronized List<Bullet> getAllBulletsOnScreen(Long playerId) {
 		CopyOnWriteArrayList<Bullet> allBulletsOnScreen = new CopyOnWriteArrayList<Bullet>();
-		
-		if(playerId != null){
-			Iterator<Bullet> bit = bulletPool.iterator();
+
+		if (playerId != null) {
+			PlayerData player = playerPool.getPlayerById(playerId);
 			
-			while(bit.hasNext()){
-				PlayerData player = playerPool.getPlayerById(playerId);
-				
-				if(player != null){
+			if (player != null) {
+				Iterator<Bullet> bit = bulletPool.iterator();
+
+				while (bit.hasNext()) {
 					Bullet actualBullet = bit.next();
-					if((Math.abs(actualBullet.getX() - player.getX()) <= player.getCanvas().getHalfWidth()) &&
-							(Math.abs(actualBullet.getY() - player.getY()) <= player.getCanvas().getHalfHeight())){
+					if ((Math.abs(actualBullet.getX() - player.getX()) <= player.getScreenHalfWidth())
+							&& (Math.abs(actualBullet.getY() - player.getY()) <= player.getScreenHalfHeight())) {
 						allBulletsOnScreen.add(actualBullet);
 					}
 				}
 			}
 		}
-		
+
 		return allBulletsOnScreen;
 	}
-	
-	public synchronized void addBullet(Long playerId){
-		if(playerId != null){
+
+	public synchronized void addBullet(Long playerId) {
+		if (playerId != null) {
 			PlayerData player = playerPool.getPlayerById(playerId);
-			if(player != null && player.getWeapon().canShoot()){
-				List<Bullet> bulletsToCreate = player.getWeapon().createBullet(player);
-				
+			if (player != null && player.canShootWeapon()) {
+				List<Bullet> bulletsToCreate = player.createBulletWithPlayerWeapon();
+
 				Iterator<Bullet> it = bulletsToCreate.iterator();
-				while(it.hasNext()){
+				while (it.hasNext()) {
 					bulletPool.add(it.next());
 				}
-				player.getWeapon().startShootingRateCooldownEffect();
-				player.getWeapon().decreaseAmmo(1L);
-				if(player.getWeapon().getAmmo() == 0L)
+				player.startShootingRateCooldownEffect();
+				player.decreasAmmoForPlayerWeapon(1L);
+				if (player.getActualWeaponAmmo() == 0L)
 					player.initWeapon();
 			}
 		}
 	}
-	
+
 }

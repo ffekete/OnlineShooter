@@ -1,10 +1,13 @@
 package game.model;
 
+import java.util.List;
+
 import factory.ShieldFactory;
 import factory.ShipFactory;
 import game.config.CanvasConstants;
 import game.config.GameConfig;
 import game.config.ShieldId;
+import game.interfaces.Bullet;
 import game.interfaces.Shield;
 import game.interfaces.Ship;
 import game.interfaces.Spawnable;
@@ -99,7 +102,33 @@ public class PlayerData implements Spawnable{
 		this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
 	}
 	
+	public long getActualWeaponAmmo(){
+		return getWeapon().getAmmo();
+	}
 	
+	public void decreasAmmoForPlayerWeapon(long amount){
+		getWeapon().decreaseAmmo(amount);
+	}
+	
+	public void startShootingRateCooldownEffect(){
+		getWeapon().startShootingRateCooldownEffect();
+	}
+	
+	public List<Bullet> createBulletWithPlayerWeapon(){
+		return getWeapon().createBullet(this);
+	}
+	
+	public boolean canShootWeapon(){
+		return getWeapon().canShoot();
+	}
+	
+	public double getScreenHalfWidth() {
+		return canvas.getHalfWidth();
+	}
+	
+	public double getScreenHalfHeight() {
+		return canvas.getHalfHeight();
+	}
 	
 	public Canvas getCanvas() {
 		return canvas;
