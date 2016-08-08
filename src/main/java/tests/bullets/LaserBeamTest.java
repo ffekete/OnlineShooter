@@ -1,4 +1,4 @@
-package tests.weapons;
+package tests.bullets;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
