@@ -22,8 +22,8 @@ public class EventSender {
 
     public void sendItemHitNotification(Spawnable item){
         Event event = new Event();
-        event.setEvent_x(item.getX());
-        event.setEvent_y(item.getY());
+        event.setEventX(item.getX());
+        event.setEventY(item.getY());
         event.setEventCommand("PLAY_HIT_ANIM");
     
         broadcastEvent(event);
@@ -31,8 +31,8 @@ public class EventSender {
     
     public void sendItemDestroyedNotification(Spawnable item){
         Event event = new Event();
-        event.setEvent_x(item.getX());
-        event.setEvent_y(item.getY());
+        event.setEventX(item.getX());
+        event.setEventY(item.getY());
         event.setEventCommand("PLAY_EXPLOSION_ANIM");
         
         broadcastEvent(event);

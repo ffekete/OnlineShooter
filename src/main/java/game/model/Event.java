@@ -2,16 +2,16 @@ package game.model;
 
 public class Event {
     private String eventCommand;
-    private double event_x;
-    private double event_y;
+    private double eventX;
+    private double eventY;
     private String additionalText;
     
-    public double getEvent_x() {
-        return event_x;
+    public double getEventX() {
+        return eventX;
     }
     
-    public void setEvent_x(double event_x) {
-        this.event_x = event_x;
+    public void setEventX(double eventX) {
+        this.eventX = eventX;
     }
     
     public String getAdditionalText() {
@@ -20,12 +20,12 @@ public class Event {
     public void setAdditionalText(String additionalText) {
         this.additionalText = additionalText;
     }
-    public double getEvent_y() {
-        return event_y;
+    public double getEventY() {
+        return eventY;
     }
     
-    public void setEvent_y(double event_y) {
-        this.event_y = event_y;
+    public void setEventY(double eventY) {
+        this.eventY = eventY;
     }
     
     public String getEventCommand() {
