@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="4" passed="4">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="31" started-at="2016-08-08T07:35:11Z" finished-at="2016-08-08T07:35:11Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="31" started-at="2016-08-08T07:35:11Z" finished-at="2016-08-08T07:35:11Z">
+      <class name="tests.weapons.LaserBeamTest">
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_0Angle_XEqualsTo_150()[pri:0, instance:tests.weapons.LaserBeamTest@5622fdf]" name="testLaserBeam_shouldCreateLaserBeam_0Angle_XEqualsTo_150" duration-ms="15" started-at="2016-08-08T09:35:11Z" finished-at="2016-08-08T09:35:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_0Angle_XEqualsTo_150 -->
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_0Angle_YEqualsTo_0()[pri:0, instance:tests.weapons.LaserBeamTest@5622fdf]" name="testLaserBeam_shouldCreateLaserBeam_0Angle_YEqualsTo_0" duration-ms="0" started-at="2016-08-08T09:35:11Z" finished-at="2016-08-08T09:35:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_0Angle_YEqualsTo_0 -->
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_90Angle_XEqualsTo_0()[pri:0, instance:tests.weapons.LaserBeamTest@5622fdf]" name="testLaserBeam_shouldCreateLaserBeam_90Angle_XEqualsTo_0" duration-ms="0" started-at="2016-08-08T09:35:11Z" finished-at="2016-08-08T09:35:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_90Angle_XEqualsTo_0 -->
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_90angle_YEqualsTo_minus150()[pri:0, instance:tests.weapons.LaserBeamTest@5622fdf]" name="testLaserBeam_shouldCreateLaserBeam_90angle_YEqualsTo_minus150" duration-ms="0" started-at="2016-08-08T09:35:11Z" finished-at="2016-08-08T09:35:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_90angle_YEqualsTo_minus150 -->
+      </class> <!-- tests.weapons.LaserBeamTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

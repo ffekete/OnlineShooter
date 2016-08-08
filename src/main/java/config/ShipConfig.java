@@ -14,7 +14,7 @@ public class ShipConfig {
 	public final static long   INTERCEPTOR_INIT_HP = 20L;
 	public final static double INTERCEPTOR_INIT_SPEED = 7.0D;
 	public final static double INTERCEPTOR_INIT_MANEUVERABILITY = 14.0D;
-	public final static WeaponId INTERCEPTOR_INIT_WEAPON = WeaponId.GATLING_GUN;
+	public final static WeaponId INTERCEPTOR_INIT_WEAPON = WeaponId.LASER_CANNON;
 	
 	public final static long   DELTAWING_INIT_HP = 11L;
 	public final static double DELTAWING_INIT_SPEED = 9.0D;

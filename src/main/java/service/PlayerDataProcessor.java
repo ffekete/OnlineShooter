@@ -81,38 +81,41 @@ public class PlayerDataProcessor {
 
 			boolean invulnerabilityCheck = player.getInvulnerabilityCounter() < 1L; // true, if player is not invulnerable
 			boolean playerIdCheck = actualBullet.getPlayerId() != player.getId();
-			boolean areaCheck = actualBullet.hits(player);
-
-			if (invulnerabilityCheck && playerIdCheck && areaCheck) {
-				PlayerData playerToSave = new PlayerData(player);
-				
-				actualBullet.hitDetected(playerToSave, eventSender);
-				
-				long hpRemaining = player.decreaseHp(actualBullet.getDamage());
-				if (hpRemaining < 1L) {
+			
+			if(playerIdCheck){
+				boolean areaCheck = actualBullet.hits(player);
+	
+				if (invulnerabilityCheck && areaCheck) {
+					PlayerData playerToSave = new PlayerData(player);
 					
-					/* populate death event to client side */
-					eventSender.sendItemDestroyedNotification(playerToSave);
+					actualBullet.hitDetected(playerToSave, eventSender);
 					
-					PlayerData playerWhoKilledMe = playerPool.getPlayerById(actualBullet.getPlayerId());
-					playerWhoKilledMe.increaseScore(GameConfig.PLAYER_SCORE_VALUE);
-
-					/*
-					 * Save the killed player only if he/she has more than 0
-					 * points
-					 */
-					if (playerToSave.getScore() > 0L) {
-						highScores.addScore(new HighScore(playerToSave.getScore(), playerToSave.getName()));
+					long hpRemaining = player.decreaseHp(actualBullet.getDamage());
+					if (hpRemaining < 1L) {
+						
+						/* populate death event to client side */
+						eventSender.sendItemDestroyedNotification(playerToSave);
+						
+						PlayerData playerWhoKilledMe = playerPool.getPlayerById(actualBullet.getPlayerId());
+						playerWhoKilledMe.increaseScore(GameConfig.PLAYER_SCORE_VALUE);
+	
+						/*
+						 * Save the killed player only if he/she has more than 0
+						 * points
+						 */
+						if (playerToSave.getScore() > 0L) {
+							highScores.addScore(new HighScore(playerToSave.getScore(), playerToSave.getName()));
+						}
+	
+						highScores.addScore(new HighScore(playerWhoKilledMe.getScore(), playerWhoKilledMe.getName()));
 					}
-
-					highScores.addScore(new HighScore(playerWhoKilledMe.getScore(), playerWhoKilledMe.getName()));
+					else
+					{
+						eventSender.sendItemHitNotification(player);
+					}
+					bulletPool.getBulletPool().remove(actualBullet);
+	
 				}
-				else
-				{
-					eventSender.sendItemHitNotification(player);
-				}
-				bulletPool.getBulletPool().remove(actualBullet);
-
 			}
 		}
 	}

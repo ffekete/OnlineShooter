@@ -1,10 +1,23 @@
 package weapons;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import bullet.LaserBeam;
 import config.WeaponConfig;
+import interfaces.Bullet;
+import model.PlayerData;
 import service.Spawner;
 
 public class LaserCannon extends WeaponParent {
 
+	public List<Bullet> createBullet(PlayerData player){
+		ArrayList<Bullet> bulletsToCreate = new ArrayList<>();
+		
+		bulletsToCreate.add(new LaserBeam(player.getX(), player.getY(), player.getShipAngle(), player.getId(), player.getWeapon().getDamage()));
+		return bulletsToCreate;
+	}
+	
 	public LaserCannon() {
 		Spawner.spawn(this);
 		super.setDamage(WeaponConfig.LASER_CANNON_INIT_DAMAGE);

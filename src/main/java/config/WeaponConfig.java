@@ -16,4 +16,5 @@ public class WeaponConfig {
 	public static final long LASER_CANNON_INIT_DAMAGE = 10L; 
 	public static final long LASER_CANNON_INIT_AMMO = 100L;
 	public static final long LASER_CANNON_INIT_RATE_OF_FIRE = 20L;
+	public static final double LASER_BEAM_LENGTH = 150.0d;
 }
