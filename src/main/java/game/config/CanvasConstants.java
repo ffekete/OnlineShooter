@@ -1,6 +1,5 @@
 package game.config;
 
-/** HTML Canvas related constants that is used on the client side. */
 public class CanvasConstants {
 	
 	public static final int CANVAS_WIDTH = 1024;

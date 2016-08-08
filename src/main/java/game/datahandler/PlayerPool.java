@@ -14,50 +14,40 @@ import game.model.HighScore;
 import game.model.PlayerData;
 import game.model.RegistrationData;
 
-/**
- * All registered players are stored here. Players are identified by their id.
- */
 @Component
 public class PlayerPool {
 
 	@Autowired
-	ConnectionPool connectionPool;
+	private ConnectionPool connectionPool;
 
 	@Autowired
-	HighScoreTable highScores;
+	private HighScoreTable highScores;
 	
 	private Map<Long, PlayerData> playerPool;
 
+	/** This function should be called periodically from the game loop. */
 	public void updatePlayerPoolData(){
 		increasePlayerInactivityCounters();
-		removeInactivePlayers();
+		removeInactivePlayersAndStoreHighScore();
 	}
 	
-	/**
-	 * A convenient alis to store a new player. Returns true if registration was
-	 * successful.
-	 */
 	public synchronized boolean registerPlayer(Long id, RegistrationData data) {
 		return storePlayer(id, data);
 	}
 
-	/**
-	 * Stores a new player to a bean called playerPool. Returns true if the
-	 * player id was unique and the store was successful.
-	 */
-	public synchronized boolean storePlayer(Long id, RegistrationData data) {
+	public synchronized boolean storePlayer(Long newPlayerId, RegistrationData data) {
 
-		if (playerPool.containsKey(id)) {
+		if (playerPool.containsKey(newPlayerId)) {
 			return false;
 		} else {
-			PlayerData newPlayer = new PlayerData(id, data.getName(), data.getShipType());
-			Long connectionId = connectionPool.registerNewConnection(id);
+			PlayerData newPlayerData = new PlayerData(newPlayerId, data.getName(), data.getShipType());
+			Long connectionId = connectionPool.registerNewConnection(newPlayerId);
 
 			if (connectionId != null) {
-				newPlayer.setConnectionId(connectionId);
-				newPlayer.setColor(data.getColor());
-				newPlayer.setShipType(data.getShipType());
-				playerPool.put(id, newPlayer);
+				newPlayerData.setConnectionId(connectionId);
+				newPlayerData.setColor(data.getColor());
+				newPlayerData.setShipType(data.getShipType());
+				playerPool.put(newPlayerId, newPlayerData);
 				return true;
 			}
 			return false;
@@ -65,7 +55,7 @@ public class PlayerPool {
 	}
 
 	private synchronized void increasePlayerInactivityCounters() {
-		for (Long i : playerPool.keySet()) {
+		for (long i : playerPool.keySet()) {
 			PlayerData currentPlayer = playerPool.get(i);
 
 			currentPlayer.increaseInactivityCounter();
@@ -74,19 +64,20 @@ public class PlayerPool {
 
 	public synchronized void removePlayer(PlayerData player) {
 
-		Long playerId = player.getId();
+		long playerId = player.getId();
 		
 		connectionPool.removeConnectionNode(playerId);
 		System.out.println("Removing dead player with id " + playerId + ".");
 		playerPool.remove(playerId);
 	}
 
-	private synchronized void removeInactivePlayers() {
-		for (Long i : playerPool.keySet()) {
+	private synchronized void removeInactivePlayersAndStoreHighScore() {
+		for (long i : playerPool.keySet()) {
 			PlayerData currentPlayer = playerPool.get(i);
 
 			if (currentPlayer.getInactivityCounter() >= ConnectionPreferences.PLAYER_INACTIVITY_LIMIT) {
 				highScores.addScore(new HighScore(currentPlayer.getScore(), currentPlayer.getName()));
+				highScores.KeepTopThreePlayersInHighScoreTable();
 				connectionPool.removeConnectionNode(i);
 				System.out.println("Removing inactive player with id " + i + ".");
 				playerPool.remove(i);
@@ -103,10 +94,6 @@ public class PlayerPool {
 		}
 	}
 
-	/**
-	 * Searches playerPool and tries to find the user with a given id. Returns
-	 * null, if the player was not found.
-	 */
 	public synchronized PlayerData getPlayerById(Long id) {
 		PlayerData player = null;
 
@@ -117,7 +104,6 @@ public class PlayerPool {
 		return player;
 	}
 
-	/** Creates a new HashMap to store player data. */
 	public PlayerPool() {
 		this.playerPool = new ConcurrentHashMap<Long, PlayerData>();
 	}
@@ -135,8 +121,8 @@ public class PlayerPool {
 		for (Long id : playerPool.keySet()) {
 			PlayerData currentPlayer = playerPool.get(id);
 			if (currentPlayer.getId() != playerId) {
-				if ((Math.abs(currentPlayer.getX() - player.getX()) <= player.getCanvas().getHalfWidth())
-						&& (Math.abs(currentPlayer.getY() - player.getY()) <= player.getCanvas().getHalfHeight())) {
+				if ((Math.abs(currentPlayer.getX() - player.getX()) <= player.getScreenHalfWidth())
+						&& (Math.abs(currentPlayer.getY() - player.getY()) <= player.getScreenHalfHeight())) {
 					visiblePlayers.add(currentPlayer);
 				}
 			}

@@ -105,6 +105,7 @@ public class PlayerDataProcessor {
 						 */
 						if (playerToSave.getScore() > 0L) {
 							highScores.addScore(new HighScore(playerToSave.getScore(), playerToSave.getName()));
+							highScores.KeepTopThreePlayersInHighScoreTable();
 						}
 	
 						highScores.addScore(new HighScore(playerWhoKilledMe.getScore(), playerWhoKilledMe.getName()));

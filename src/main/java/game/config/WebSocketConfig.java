@@ -7,17 +7,10 @@ import org.springframework.web.socket.config.annotation.AbstractWebSocketMessage
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
-/** Websocket related configuration class.
- *  Contains:
- *  - Message broker configuration to send messages
- *  - Message endpoint configuration to receive messages
- */
 @Configuration
 @EnableWebSocketMessageBroker
 @EnableScheduling
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
-
-	/** configuring all message brokers to send messages to clients. */
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry config) {
 		config.enableSimpleBroker(BrokerPaths.PLAYER_REGISTERED_STATUS, 
@@ -39,7 +32,6 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 		config.setApplicationDestinationPrefixes("/app");
 	}
 
-	/** configuring all message endpoints to receive messages from client. */
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		registry.addEndpoint(EndpointPaths.REGISTER_PLAYER).withSockJS();

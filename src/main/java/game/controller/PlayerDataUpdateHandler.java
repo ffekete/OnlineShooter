@@ -10,7 +10,6 @@ import game.model.PlayerData;
 import game.model.ReceivedPlayerData;
 import game.transformer.ReceivedPlayerDataToPlayerDataTransformer;
 
-/** this class serves all data update request coming from client side. */
 @Controller
 public class PlayerDataUpdateHandler {
 
@@ -20,7 +19,6 @@ public class PlayerDataUpdateHandler {
 	@Autowired
 	ReceivedPlayerDataToPlayerDataTransformer receivedPlayerDataToPlayerDataTransformer;
 	
-	/** Function that handles update player data requests when a new message arrives to destination endpoint UPDATE_PLAYER_DATA. */
 	@MessageMapping(EndpointPaths.UPDATE_PLAYER_DATA)
 	public void updateplayerData(ReceivedPlayerData receivedPlayerData){
 		if(receivedPlayerData != null){

@@ -23,7 +23,7 @@ import game.model.PlayerData;
 
 @Component
 public class ItemPool {
-	List<SpawnableItem> itemPool;
+	private List<SpawnableItem> itemPool;
 
 	public ItemPool() {
 		itemPool = new CopyOnWriteArrayList<SpawnableItem>();
@@ -34,14 +34,13 @@ public class ItemPool {
 	}
 
 	public List<SpawnableItem> getAllItemsOnScreen(PlayerData playerData) {
-
 		CopyOnWriteArrayList<SpawnableItem> allItemsOnScreen = new CopyOnWriteArrayList<SpawnableItem>();
 		Iterator<SpawnableItem> bit = itemPool.iterator();
 
 		while (bit.hasNext()) {
 			SpawnableItem item = bit.next();
-			if ((Math.abs(item.getX() - playerData.getX()) <= playerData.getCanvas().getHalfWidth())
-					&& (Math.abs(item.getY() - playerData.getY()) <= playerData.getCanvas().getHalfHeight())) {
+			if ((Math.abs(item.getX() - playerData.getX()) <= playerData.getScreenHalfWidth())
+					&& (Math.abs(item.getY() - playerData.getY()) <= playerData.getScreenHalfHeight())) {
 				allItemsOnScreen.add(item);
 			}
 		}
@@ -57,9 +56,9 @@ public class ItemPool {
 		SpawnableItem newItem = null;
 
 		if (itemPool.size() < GameConfig.MAX_ITEMS_ON_STAGE) {
-			int i = random.nextInt(800);
+			int itemSpawned = random.nextInt(GameConfig.ITEM_SPAWNING_RATE);
 
-			switch (i) {
+			switch (itemSpawned) {
 			case 1:
 				newItem = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.GATLING_GUN);
 				break;

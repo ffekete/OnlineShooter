@@ -14,7 +14,6 @@ import game.model.RegistrationAnswer;
 import game.model.RegistrationData;
 import game.transformer.PlayerDataToRegistrationAnswerTransformer;
 
-/** Serves all incoming register new player requests. */
 @Controller
 public class PlayerRegisterController {
 
@@ -27,7 +26,6 @@ public class PlayerRegisterController {
 	@Autowired
 	PlayerDataToRegistrationAnswerTransformer playerDataToQualifiedPlayerDataTransformer;
 	
-	/** Receives new player registration request on endpoint REGISTER_PLAYER and sends answers by broker REGISTER_PLAYERED_STATUS. */
 	@MessageMapping(EndpointPaths.REGISTER_PLAYER)
 	@SendTo(BrokerPaths.PLAYER_REGISTERED_STATUS)
 	public RegistrationAnswer registerNewPlayer(RegistrationData data){

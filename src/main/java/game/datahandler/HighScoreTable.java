@@ -9,7 +9,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import game.model.HighScore;
@@ -18,17 +17,13 @@ import game.service.HighScoreComparator;
 @Path("/highScore")
 @Component
 public class HighScoreTable {
-
-	@Autowired
-	PlayerPool playerPool;
-	
 	private List<HighScore> highScore;
 	
 	public HighScoreTable(){
 		highScore = new ArrayList<>();
 	}
 	
-	public void trimHighScoreTable(){
+	public void KeepTopThreePlayersInHighScoreTable(){
 		Collections.sort(highScore, new HighScoreComparator());
 		if(highScore.size() > 3 ){
 			for(int i = 3; i < highScore.size(); i++){
@@ -39,9 +34,7 @@ public class HighScoreTable {
 	
 	public void addScore(HighScore hs){
 		highScore.add(hs);
-		trimHighScoreTable();
-	}
-	
+	}	
 	
 	@GET
 	@Path("/scores")

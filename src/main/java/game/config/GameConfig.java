@@ -1,6 +1,7 @@
 package game.config;
 
 public class GameConfig {
+	public final static int ITEM_SPAWNING_RATE = 800;
 	public final static double BULLET_INITIAL_SPEED = 12.0d;
 	public final static long BULLET_MAX_AGE = 150L;
 	public final static long LASER_MAX_AGE = 5L;

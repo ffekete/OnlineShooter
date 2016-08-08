@@ -12,7 +12,6 @@ import game.model.PlayerData;
 import game.model.SentPlayerData;
 import game.transformer.PlayerDataToSentPlayerDataTransformer;
 
-/** Clients can poll REQUEST_PLAYER_DATA channel to receive server-side information about the given player. */
 @Controller
 public class DataRequestController {
 	
