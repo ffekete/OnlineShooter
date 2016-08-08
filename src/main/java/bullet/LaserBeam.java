@@ -43,6 +43,6 @@ public class LaserBeam extends BulletData{
 	
 	public boolean hits(Spawnable item){
 		double distance = Line2D.ptSegDist(startPoint.getX(), startPoint.getY(), endPoint.getX(), endPoint.getY(), item.getX(), item.getY());
-		return Math.abs(distance) < 50.0d;
+		return Math.abs(distance) <= WeaponConfig.LASER_BEAM_HIT_RADIUS;
 	}
 }
