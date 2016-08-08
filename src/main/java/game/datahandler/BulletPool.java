@@ -13,57 +13,57 @@ import game.model.PlayerData;
 @Component
 public class BulletPool {
 
-	@Autowired
-	PlayerPool playerPool;
+    @Autowired
+    PlayerPool playerPool;
 
-	private List<Bullet> bulletPool;
+    private List<Bullet> bulletPool;
 
-	public BulletPool() {
-		bulletPool = new CopyOnWriteArrayList<Bullet>();
-	}
+    public BulletPool() {
+        bulletPool = new CopyOnWriteArrayList<Bullet>();
+    }
 
-	public synchronized List<Bullet> getBulletPool() {
-		return bulletPool;
-	}
+    public synchronized List<Bullet> getBulletPool() {
+        return bulletPool;
+    }
 
-	public synchronized List<Bullet> getAllBulletsOnScreen(Long playerId) {
-		CopyOnWriteArrayList<Bullet> allBulletsOnScreen = new CopyOnWriteArrayList<Bullet>();
+    public synchronized List<Bullet> getAllBulletsOnScreen(Long playerId) {
+        CopyOnWriteArrayList<Bullet> allBulletsOnScreen = new CopyOnWriteArrayList<Bullet>();
 
-		if (playerId != null) {
-			PlayerData player = playerPool.getPlayerById(playerId);
-			
-			if (player != null) {
-				Iterator<Bullet> bit = bulletPool.iterator();
+        if (playerId != null) {
+            PlayerData player = playerPool.getPlayerById(playerId);
+            
+            if (player != null) {
+                Iterator<Bullet> bit = bulletPool.iterator();
 
-				while (bit.hasNext()) {
-					Bullet actualBullet = bit.next();
-					if ((Math.abs(actualBullet.getX() - player.getX()) <= player.getScreenHalfWidth())
-							&& (Math.abs(actualBullet.getY() - player.getY()) <= player.getScreenHalfHeight())) {
-						allBulletsOnScreen.add(actualBullet);
-					}
-				}
-			}
-		}
+                while (bit.hasNext()) {
+                    Bullet actualBullet = bit.next();
+                    if ((Math.abs(actualBullet.getX() - player.getX()) <= player.getScreenHalfWidth())
+                            && (Math.abs(actualBullet.getY() - player.getY()) <= player.getScreenHalfHeight())) {
+                        allBulletsOnScreen.add(actualBullet);
+                    }
+                }
+            }
+        }
 
-		return allBulletsOnScreen;
-	}
+        return allBulletsOnScreen;
+    }
 
-	public synchronized void addBullet(Long playerId) {
-		if (playerId != null) {
-			PlayerData player = playerPool.getPlayerById(playerId);
-			if (player != null && player.canShootWeapon()) {
-				List<Bullet> bulletsToCreate = player.createBulletWithPlayerWeapon();
+    public synchronized void addBullet(Long playerId) {
+        if (playerId != null) {
+            PlayerData player = playerPool.getPlayerById(playerId);
+            if (player != null && player.canShootWeapon()) {
+                List<Bullet> bulletsToCreate = player.createBulletWithPlayerWeapon();
 
-				Iterator<Bullet> it = bulletsToCreate.iterator();
-				while (it.hasNext()) {
-					bulletPool.add(it.next());
-				}
-				player.startShootingRateCooldownEffect();
-				player.decreasAmmoForPlayerWeapon(1L);
-				if (player.getActualWeaponAmmo() == 0L)
-					player.initWeapon();
-			}
-		}
-	}
+                Iterator<Bullet> it = bulletsToCreate.iterator();
+                while (it.hasNext()) {
+                    bulletPool.add(it.next());
+                }
+                player.startShootingRateCooldownEffect();
+                player.decreasAmmoForPlayerWeapon(1L);
+                if (player.getActualWeaponAmmo() == 0L)
+                    player.initWeapon();
+            }
+        }
+    }
 
 }

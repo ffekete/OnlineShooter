@@ -10,30 +10,30 @@ import game.interfaces.Weapon;
 
 public class WeaponFactory {
 
-	public static Weapon createWeapon(WeaponId weaponId) {
-		Weapon weapon = null;
-		switch (weaponId) {
-		case MACHINEGUN:
-			weapon = new Machinegun();
-			break;
+    public static Weapon createWeapon(WeaponId weaponId) {
+        Weapon weapon = null;
+        switch (weaponId) {
+        case MACHINEGUN:
+            weapon = new Machinegun();
+            break;
 
-		case GATLING_GUN:
-			weapon = new GatlingGun();
-			break;
+        case GATLING_GUN:
+            weapon = new GatlingGun();
+            break;
 
-		case LASER_CANNON:
-			weapon = new LaserCannon();
-			break;
-		case DOUBLE_GATLING:
-			weapon = new DoubleGatlingGun();
-			break;
-		case SHOTGUN:
-			weapon = new Shotgun();
-			break;
-		default:
-			break;
-		}
+        case LASER_CANNON:
+            weapon = new LaserCannon();
+            break;
+        case DOUBLE_GATLING:
+            weapon = new DoubleGatlingGun();
+            break;
+        case SHOTGUN:
+            weapon = new Shotgun();
+            break;
+        default:
+            break;
+        }
 
-		return weapon;
-	}
+        return weapon;
+    }
 }

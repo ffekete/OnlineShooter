@@ -11,8 +11,8 @@ import game.datahandler.HighScoreTable;
 @ApplicationPath("/jersey")
 public class JerseyConfig extends ResourceConfig {
 
-	public JerseyConfig() {
-		register(HighScoreTable.class);
-	}
+    public JerseyConfig() {
+        register(HighScoreTable.class);
+    }
 
 }

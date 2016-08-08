@@ -7,12 +7,12 @@ import game.datahandler.ItemPool;
 
 @Component
 public class ItemProcessor {
-	
-	@Autowired
-	ItemPool itemPool;
-	
-	public void updateItemData(){
-		itemPool.createNewRandomItem();
-	}
-	
+    
+    @Autowired
+    ItemPool itemPool;
+    
+    public void updateItemData(){
+        itemPool.createNewRandomItem();
+    }
+    
 }

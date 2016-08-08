@@ -10,11 +10,11 @@ import game.config.BrokerPaths;
 @Controller
 public class MessageSender {
 
-	@Autowired
-    private SimpMessagingTemplate template;	
-	
-	@SendTo(BrokerPaths.MESSAGE_BROKER)
-	public void broadCastMessage(String message){
-		template.convertAndSend(BrokerPaths.MESSAGE_BROKER, message);
-	}
+    @Autowired
+    private SimpMessagingTemplate template;    
+    
+    @SendTo(BrokerPaths.MESSAGE_BROKER)
+    public void broadCastMessage(String message){
+        template.convertAndSend(BrokerPaths.MESSAGE_BROKER, message);
+    }
 }

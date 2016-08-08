@@ -12,29 +12,29 @@ import game.model.Event;
 @Controller
 public class EventSender {
 
-	@Autowired
-    private SimpMessagingTemplate template;	
-	
-	@SendTo(BrokerPaths.EVENT_BROKER)
-	private void broadcastEvent(Event event){
-		template.convertAndSend(BrokerPaths.EVENT_BROKER, event);
-	}
+    @Autowired
+    private SimpMessagingTemplate template;    
+    
+    @SendTo(BrokerPaths.EVENT_BROKER)
+    private void broadcastEvent(Event event){
+        template.convertAndSend(BrokerPaths.EVENT_BROKER, event);
+    }
 
-	public void sendItemHitNotification(Spawnable item){
-		Event event = new Event();
-		event.setEvent_x(item.getX());
-		event.setEvent_y(item.getY());
-		event.setEventCommand("PLAY_HIT_ANIM");
-	
-		broadcastEvent(event);
-	}
-	
-	public void sendItemDestroyedNotification(Spawnable item){
-		Event event = new Event();
-		event.setEvent_x(item.getX());
-		event.setEvent_y(item.getY());
-		event.setEventCommand("PLAY_EXPLOSION_ANIM");
-		
-		broadcastEvent(event);
-	}
+    public void sendItemHitNotification(Spawnable item){
+        Event event = new Event();
+        event.setEvent_x(item.getX());
+        event.setEvent_y(item.getY());
+        event.setEventCommand("PLAY_HIT_ANIM");
+    
+        broadcastEvent(event);
+    }
+    
+    public void sendItemDestroyedNotification(Spawnable item){
+        Event event = new Event();
+        event.setEvent_x(item.getX());
+        event.setEvent_y(item.getY());
+        event.setEventCommand("PLAY_EXPLOSION_ANIM");
+        
+        broadcastEvent(event);
+    }
 }

@@ -11,25 +11,25 @@ import game.interfaces.Shield;
 @Component
 public class ShieldFactory {
 
-	public static Shield createShield(ShieldId shieldId) {
-		Shield shield = null;
-		switch (shieldId) {
-		case NORMAL_SHIELD:
-			shield = new NormalShield();
-			break;
+    public static Shield createShield(ShieldId shieldId) {
+        Shield shield = null;
+        switch (shieldId) {
+        case NORMAL_SHIELD:
+            shield = new NormalShield();
+            break;
 
-		case PLASMA_SHIELD:
-			shield = new PlasmaShield();
-			break;
+        case PLASMA_SHIELD:
+            shield = new PlasmaShield();
+            break;
 
-		case ATOM_SHIELD:
-			shield = new AtomShield();
-			break;
+        case ATOM_SHIELD:
+            shield = new AtomShield();
+            break;
 
-		default:
-			break;
-		}
+        default:
+            break;
+        }
 
-		return shield;
-	}
+        return shield;
+    }
 }
