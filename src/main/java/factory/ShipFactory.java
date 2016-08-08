@@ -1,10 +1,10 @@
 package factory;
 
-import interfaces.Ship;
-import ship.Deltawing;
-import ship.Interceptor;
-import ship.Mercury;
-import ship.Quicksilver;
+import game.datatypes.ship.Deltawing;
+import game.datatypes.ship.Interceptor;
+import game.datatypes.ship.Mercury;
+import game.datatypes.ship.Quicksilver;
+import game.interfaces.Ship;
 
 public class ShipFactory {
 	public static Ship createShip(String shipType){

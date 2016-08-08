@@ -1,12 +1,12 @@
 package factory;
 
-import config.WeaponId;
-import interfaces.Weapon;
-import weapons.DoubleGatlingGun;
-import weapons.GatlingGun;
-import weapons.LaserCannon;
-import weapons.Machinegun;
-import weapons.Shotgun;
+import game.config.WeaponId;
+import game.datatypes.weapons.DoubleGatlingGun;
+import game.datatypes.weapons.GatlingGun;
+import game.datatypes.weapons.LaserCannon;
+import game.datatypes.weapons.Machinegun;
+import game.datatypes.weapons.Shotgun;
+import game.interfaces.Weapon;
 
 public class WeaponFactory {
 

@@ -4,11 +4,11 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import bullet.LaserBeam;
-import config.WeaponConfig;
 import factory.ShipFactory;
-import interfaces.Ship;
-import model.Coordinate;
+import game.config.WeaponConfig;
+import game.datatypes.bullet.LaserBeam;
+import game.interfaces.Ship;
+import game.model.Coordinate;
 
 public class LaserBeamTest{
 

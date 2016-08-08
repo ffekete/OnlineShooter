@@ -2,11 +2,11 @@ package factory;
 
 import org.springframework.stereotype.Component;
 
-import config.ShieldId;
-import interfaces.Shield;
-import shield.AtomShield;
-import shield.NormalShield;
-import shield.PlasmaShield;
+import game.config.ShieldId;
+import game.datatypes.shield.AtomShield;
+import game.datatypes.shield.NormalShield;
+import game.datatypes.shield.PlasmaShield;
+import game.interfaces.Shield;
 
 @Component
 public class ShieldFactory {
