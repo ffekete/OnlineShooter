@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="12" passed="12">
+<testng-results skipped="0" failed="0" total="14" passed="14">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="58" started-at="2016-08-08T09:12:23Z" finished-at="2016-08-08T09:12:23Z">
+  <suite name="Default suite" duration-ms="64" started-at="2016-08-08T09:18:27Z" finished-at="2016-08-08T09:18:27Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="58" started-at="2016-08-08T09:12:23Z" finished-at="2016-08-08T09:12:23Z">
+    <test name="Default test" duration-ms="64" started-at="2016-08-08T09:18:27Z" finished-at="2016-08-08T09:18:27Z">
       <class name="tests.weapons.LaserBeamTest">
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="11" started-at="2016-08-08T11:12:23Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T11:12:23Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="15" started-at="2016-08-08T11:18:27Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T11:18:27Z">
           <params>
             <param index="0">
               <value>
@@ -43,7 +43,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="4" started-at="2016-08-08T11:12:23Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T11:12:23Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="3" started-at="2016-08-08T11:18:27Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T11:18:27Z">
           <params>
             <param index="0">
               <value>
@@ -79,7 +79,43 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T11:12:23Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T11:12:23Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="1" started-at="2016-08-08T11:18:27Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T11:18:27Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[80.0]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[10.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="1" started-at="2016-08-08T11:18:27Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T11:18:27Z">
           <params>
             <param index="0">
               <value>
@@ -115,7 +151,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="2" started-at="2016-08-08T11:12:23Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T11:12:23Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="1" started-at="2016-08-08T11:18:27Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T11:18:27Z">
           <params>
             <param index="0">
               <value>
@@ -151,7 +187,43 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_XCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_XCoordinate" duration-ms="1" started-at="2016-08-08T11:12:23Z" data-provider="angleSourceForX" finished-at="2016-08-08T11:12:23Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="1" started-at="2016-08-08T11:18:27Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T11:18:27Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[80.0]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[11.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_XCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_XCoordinate" duration-ms="1" started-at="2016-08-08T11:18:27Z" data-provider="angleSourceForX" finished-at="2016-08-08T11:18:27Z">
           <params>
             <param index="0">
               <value>
@@ -177,7 +249,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_XCoordinate -->
-        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_XCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_XCoordinate" duration-ms="1" started-at="2016-08-08T11:12:23Z" data-provider="angleSourceForX" finished-at="2016-08-08T11:12:23Z">
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_XCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_XCoordinate" duration-ms="0" started-at="2016-08-08T11:18:27Z" data-provider="angleSourceForX" finished-at="2016-08-08T11:18:27Z">
           <params>
             <param index="0">
               <value>
@@ -203,7 +275,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_XCoordinate -->
-        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_XCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_XCoordinate" duration-ms="1" started-at="2016-08-08T11:12:23Z" data-provider="angleSourceForX" finished-at="2016-08-08T11:12:23Z">
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_XCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_XCoordinate" duration-ms="0" started-at="2016-08-08T11:18:27Z" data-provider="angleSourceForX" finished-at="2016-08-08T11:18:27Z">
           <params>
             <param index="0">
               <value>
@@ -229,7 +301,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_XCoordinate -->
-        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_XCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_XCoordinate" duration-ms="2" started-at="2016-08-08T11:12:23Z" data-provider="angleSourceForX" finished-at="2016-08-08T11:12:23Z">
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_XCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_XCoordinate" duration-ms="1" started-at="2016-08-08T11:18:27Z" data-provider="angleSourceForX" finished-at="2016-08-08T11:18:27Z">
           <params>
             <param index="0">
               <value>
@@ -255,7 +327,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_XCoordinate -->
-        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_YCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_YCoordinate" duration-ms="2" started-at="2016-08-08T11:12:23Z" data-provider="angleSourceForY" finished-at="2016-08-08T11:12:23Z">
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_YCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_YCoordinate" duration-ms="1" started-at="2016-08-08T11:18:27Z" data-provider="angleSourceForY" finished-at="2016-08-08T11:18:27Z">
           <params>
             <param index="0">
               <value>
@@ -281,7 +353,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_YCoordinate -->
-        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_YCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_YCoordinate" duration-ms="1" started-at="2016-08-08T11:12:23Z" data-provider="angleSourceForY" finished-at="2016-08-08T11:12:23Z">
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_YCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_YCoordinate" duration-ms="1" started-at="2016-08-08T11:18:27Z" data-provider="angleSourceForY" finished-at="2016-08-08T11:18:27Z">
           <params>
             <param index="0">
               <value>
@@ -307,7 +379,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_YCoordinate -->
-        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_YCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_YCoordinate" duration-ms="2" started-at="2016-08-08T11:12:23Z" data-provider="angleSourceForY" finished-at="2016-08-08T11:12:23Z">
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_YCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_YCoordinate" duration-ms="1" started-at="2016-08-08T11:18:27Z" data-provider="angleSourceForY" finished-at="2016-08-08T11:18:27Z">
           <params>
             <param index="0">
               <value>
@@ -333,7 +405,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_YCoordinate -->
-        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_YCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_YCoordinate" duration-ms="1" started-at="2016-08-08T11:12:23Z" data-provider="angleSourceForY" finished-at="2016-08-08T11:12:23Z">
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_YCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_YCoordinate" duration-ms="1" started-at="2016-08-08T11:18:27Z" data-provider="angleSourceForY" finished-at="2016-08-08T11:18:27Z">
           <params>
             <param index="0">
               <value>

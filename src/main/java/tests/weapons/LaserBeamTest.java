@@ -59,8 +59,10 @@ public class LaserBeamTest{
 		return new Object[][]{
 			{0.0D, 0.0D, 0.0d, -WeaponConfig.LASER_BEAM_HIT_RADIUS, 0.0d, true},
 			{0.0D, 0.0D, 0.0d, WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS, 0.0d, true},
+			{0.0D, 0.0D, 0.0d, (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d, WeaponConfig.LASER_BEAM_HIT_RADIUS, true},
 			{0.0D, 0.0D, 0.0d, -1.0 - WeaponConfig.LASER_BEAM_HIT_RADIUS, 0.0d, false},
 			{0.0D, 0.0D, 0.0d, WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS + 1.0d, 0.0d, false},
+			{0.0D, 0.0D, 0.0d, (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d, WeaponConfig.LASER_BEAM_HIT_RADIUS + 1.0d, false},
 		};
 	}
 	
