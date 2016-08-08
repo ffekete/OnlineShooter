@@ -57,12 +57,53 @@ public class LaserBeamTest{
 	@DataProvider(name="hitCheckerInputList")
 	public Object[][] hitCheckerInputList(){
 		return new Object[][]{
+			/* hit, 0 degree */
 			{0.0D, 0.0D, 0.0d, -WeaponConfig.LASER_BEAM_HIT_RADIUS, 0.0d, true},
 			{0.0D, 0.0D, 0.0d, WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS, 0.0d, true},
 			{0.0D, 0.0D, 0.0d, (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d, WeaponConfig.LASER_BEAM_HIT_RADIUS, true},
+			{0.0D, 0.0D, 0.0d, (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d, -WeaponConfig.LASER_BEAM_HIT_RADIUS, true},
+			
+			/* hit, 90 degree */
+			{0.0D, 0.0D, 90.0d, 0.0d, -WeaponConfig.LASER_BEAM_HIT_RADIUS, true},
+			{0.0D, 0.0D, 90.0d, 0.0d, WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS, true},
+			{0.0D, 0.0D, 90.0d, WeaponConfig.LASER_BEAM_HIT_RADIUS, (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d, true},
+			{0.0D, 0.0D, 90.0d, -WeaponConfig.LASER_BEAM_HIT_RADIUS, (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d, true},
+			
+			/* hit, 180 degree */
+			{0.0D, 0.0D, 180.0d, WeaponConfig.LASER_BEAM_HIT_RADIUS, 0.0d, true},
+			{0.0D, 0.0D, 180.0d, -WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS, 0.0d, true},
+			{0.0D, 0.0D, 180.0d, -(WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d, -WeaponConfig.LASER_BEAM_HIT_RADIUS, true},
+			{0.0D, 0.0D, 180.0d, -(WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d, WeaponConfig.LASER_BEAM_HIT_RADIUS, true},
+			
+			/* hit, 270 degree */
+			{0.0D, 0.0D, 270.0d, 0.0d, WeaponConfig.LASER_BEAM_HIT_RADIUS, true},
+			{0.0D, 0.0D, 270.0d, 0.0d, -(WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS), true},
+			{0.0D, 0.0D, 270.0d, WeaponConfig.LASER_BEAM_HIT_RADIUS - 0.001d, -((WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d), true},
+			{0.0D, 0.0D, 270.0d, -WeaponConfig.LASER_BEAM_HIT_RADIUS, -((WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d), true},
+			
+			/* no hit, 0 degree */
 			{0.0D, 0.0D, 0.0d, -1.0 - WeaponConfig.LASER_BEAM_HIT_RADIUS, 0.0d, false},
 			{0.0D, 0.0D, 0.0d, WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS + 1.0d, 0.0d, false},
 			{0.0D, 0.0D, 0.0d, (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d, WeaponConfig.LASER_BEAM_HIT_RADIUS + 1.0d, false},
+			{0.0D, 0.0D, 0.0d, (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d, -WeaponConfig.LASER_BEAM_HIT_RADIUS - 1.0d, false},
+			
+			/* no hit, 90 degree */
+			{0.0D, 0.0D, 90.0d, 0.0d, -1.0 - WeaponConfig.LASER_BEAM_HIT_RADIUS, false},
+			{0.0D, 0.0D, 90.0d, 0.0d, WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS + 1.0d, false},
+			{0.0D, 0.0D, 90.0d, WeaponConfig.LASER_BEAM_HIT_RADIUS + 1.0d, (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d, false},
+			{0.0D, 0.0D, 90.0d, -WeaponConfig.LASER_BEAM_HIT_RADIUS - 1.0d, (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d, false},
+			
+			/* no hit, 180 degree */
+			{0.0D, 0.0D, 180.0d, 1.0 + WeaponConfig.LASER_BEAM_HIT_RADIUS, 0.0d, false},
+			{0.0D, 0.0D, 180.0d, -1.0 * (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS + 1.0d), 0.0d, false},
+			{0.0D, 0.0D, 180.0d, -((WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d), WeaponConfig.LASER_BEAM_HIT_RADIUS + 1.0d, false},
+			{0.0D, 0.0D, 180.0d, -((WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d), -WeaponConfig.LASER_BEAM_HIT_RADIUS - 1.0d, false},
+			
+			/* no hit, 270 degree */
+			{0.0D, 0.0D, 270.0d, 0.0d, -(-1.0 - WeaponConfig.LASER_BEAM_HIT_RADIUS), false},
+			{0.0D, 0.0D, 270.0d, 0.0d, -(WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS + 1.0d), false},
+			{0.0D, 0.0D, 270.0d, WeaponConfig.LASER_BEAM_HIT_RADIUS + 1.0d, -((WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d), false},
+			{0.0D, 0.0D, 270.0d, -WeaponConfig.LASER_BEAM_HIT_RADIUS - 1.0d, -((WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d), false},
 		};
 	}
 	
