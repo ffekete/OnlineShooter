@@ -2,6 +2,7 @@ package game.datatypes.bullet;
 
 import java.awt.geom.Line2D;
 
+import game.config.GameConfig;
 import game.config.WeaponConfig;
 import game.interfaces.Spawnable;
 import game.model.Coordinate;
@@ -22,6 +23,14 @@ public class LaserBeam extends BulletData{
 		return endPoint;
 	}
 
+	public boolean isAgeCounterExpired(){
+		if(super.getAge() >= GameConfig.LASER_MAX_AGE){
+			super.setAge(0);
+			return true;
+		}
+		return false;
+	}
+	
 	public void setEndPoint(Coordinate endPoint) {
 		this.endPoint = endPoint;
 	}
@@ -44,5 +53,10 @@ public class LaserBeam extends BulletData{
 	public boolean hits(Spawnable item){
 		double distance = Line2D.ptSegDist(startPoint.getX(), startPoint.getY(), endPoint.getX(), endPoint.getY(), item.getX(), item.getY());
 		return Math.abs(distance) <= WeaponConfig.LASER_BEAM_HIT_RADIUS;
+	}
+	
+	@Override
+	public String getPhysicalRepresentation() {
+		return "{\"shape\" : \"line\", \"startx\": \"" + startPoint.getX() + "\", \"starty\" :\"" + startPoint.getY() + "\", \"endx\": \"" + endPoint.getX() + "\", \"endy\": \"" + endPoint.getY() + "\"}";
 	}
 }

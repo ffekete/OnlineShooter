@@ -5,6 +5,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import factory.ShipFactory;
+import game.config.GameConfig;
 import game.config.WeaponConfig;
 import game.datatypes.bullet.LaserBeam;
 import game.interfaces.Ship;
@@ -17,9 +18,9 @@ public class LaserBeamTest{
 	public Object[][] angleSourceForY(){
 		return new Object[][]{
 		//   X     Y     angle  expectedXCoordinate
-			{0.0D, 0.0D, 90.0D, 150.0D},
+			{0.0D, 0.0D, 90.0D, WeaponConfig.LASER_BEAM_LENGTH},
 			{0.0D, 0.0D, 180.0D, 0.0D},
-			{0.0D, 0.0D, 270.0D, -150.0D},
+			{0.0D, 0.0D, 270.0D, -1.0 * WeaponConfig.LASER_BEAM_LENGTH},
 			{0.0D, 0.0D, 0.0D, 0.0D}
 		};
 	}
@@ -29,9 +30,9 @@ public class LaserBeamTest{
 		return new Object[][]{
 		//   X     Y     angle  expectedYCoordinate
 			{0.0D, 0.0D, 90.0D, 0.0D},
-			{0.0D, 0.0D, 180.0D, -150.0D},
+			{0.0D, 0.0D, 180.0D, -1.0 * WeaponConfig.LASER_BEAM_LENGTH},
 			{0.0D, 0.0D, 270.0D, 0.0D},
-			{0.0D, 0.0D, 0.0D, 150.0D}
+			{0.0D, 0.0D, 0.0D, WeaponConfig.LASER_BEAM_LENGTH}
 		};
 	}
 	
@@ -116,4 +117,13 @@ public class LaserBeamTest{
 		boolean hitDetected = laserBeam.hits(ship);
 		Assert.assertEquals(hitDetected, expHitDetected);
 	}
+		
+	@Test
+	public void testPhysicalRepresentation(){
+		
+		LaserBeam laserBeam = new LaserBeam(0.0, 0.0, 0.0, 0, 0);
+		
+		Assert.assertEquals(laserBeam.getPhysicalRepresentation(), "{\"shape\" : \"line\", \"startx\": \"0.0\", \"starty\" :\"0.0\", \"endx\": \"1000.0\", \"endy\": \"0.0\"}");
+	}
+	
 }

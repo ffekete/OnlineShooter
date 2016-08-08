@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="40" passed="40">
+<testng-results skipped="0" failed="0" total="42" passed="42">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="132" started-at="2016-08-08T11:00:28Z" finished-at="2016-08-08T11:00:28Z">
+  <suite name="Default suite" duration-ms="83" started-at="2016-08-08T13:27:08Z" finished-at="2016-08-08T13:27:08Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="132" started-at="2016-08-08T11:00:28Z" finished-at="2016-08-08T11:00:28Z">
+    <test name="Default test" duration-ms="83" started-at="2016-08-08T13:27:08Z" finished-at="2016-08-08T13:27:08Z">
       <class name="tests.weapons.LaserBeamTest">
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="12" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="16" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -43,7 +43,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="3" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -62,43 +62,7 @@
             </param>
             <param index="3">
               <value>
-                <![CDATA[160.0]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[true]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="2" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[80.0]]>
+                <![CDATA[505.0]]>
               </value>
             </param>
             <param index="4">
@@ -115,43 +79,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="3" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[80.0]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[-10.0]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[true]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -187,7 +115,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -211,7 +139,7 @@
             </param>
             <param index="4">
               <value>
-                <![CDATA[160.0]]>
+                <![CDATA[1010.0]]>
               </value>
             </param>
             <param index="5">
@@ -223,7 +151,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -237,17 +165,17 @@
             </param>
             <param index="2">
               <value>
-                <![CDATA[90.0]]>
+                <![CDATA[0.0]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[10.0]]>
+                <![CDATA[1010.0]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[80.0]]>
+                <![CDATA[0.0]]>
               </value>
             </param>
             <param index="5">
@@ -259,7 +187,43 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[505.0]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[-10.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -283,7 +247,7 @@
             </param>
             <param index="4">
               <value>
-                <![CDATA[80.0]]>
+                <![CDATA[505.0]]>
               </value>
             </param>
             <param index="5">
@@ -295,7 +259,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -309,7 +273,7 @@
             </param>
             <param index="2">
               <value>
-                <![CDATA[180.0]]>
+                <![CDATA[90.0]]>
               </value>
             </param>
             <param index="3">
@@ -319,7 +283,7 @@
             </param>
             <param index="4">
               <value>
-                <![CDATA[0.0]]>
+                <![CDATA[505.0]]>
               </value>
             </param>
             <param index="5">
@@ -331,7 +295,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -350,7 +314,7 @@
             </param>
             <param index="3">
               <value>
-                <![CDATA[-140.0]]>
+                <![CDATA[-990.0]]>
               </value>
             </param>
             <param index="4">
@@ -367,79 +331,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[180.0]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[-80.0]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[-10.0]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[true]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[180.0]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[-80.0]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[10.0]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[true]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="2" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -475,7 +367,79 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[180.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[-505.0]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[-10.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[180.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[10.0]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -499,7 +463,7 @@
             </param>
             <param index="4">
               <value>
-                <![CDATA[-160.0]]>
+                <![CDATA[-1010.0]]>
               </value>
             </param>
             <param index="5">
@@ -511,7 +475,43 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[180.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[-505.0]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[10.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="16" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -535,7 +535,7 @@
             </param>
             <param index="4">
               <value>
-                <![CDATA[-80.0]]>
+                <![CDATA[-505.0]]>
               </value>
             </param>
             <param index="5">
@@ -547,7 +547,115 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="2" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[90.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[-11.0]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[505.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[90.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[1011.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[505.0]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[11.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -571,7 +679,7 @@
             </param>
             <param index="4">
               <value>
-                <![CDATA[-80.0]]>
+                <![CDATA[-505.0]]>
               </value>
             </param>
             <param index="5">
@@ -583,295 +691,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[-11.0]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[false]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[161.0]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[false]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[80.0]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[11.0]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[false]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[80.0]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[-11.0]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[false]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="2" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[90.0]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[-11.0]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[false]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[90.0]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[161.0]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[false]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="2" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[90.0]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[11.0]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[80.0]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[false]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[90.0]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[-11.0]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[80.0]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[false]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -907,7 +727,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -921,187 +741,7 @@
             </param>
             <param index="2">
               <value>
-                <![CDATA[180.0]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[-161.0]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[false]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="3" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[180.0]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[-80.0]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[11.0]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[false]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="2" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[180.0]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[-80.0]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[-11.0]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[false]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="5" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[270.0]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[11.0]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[false]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[270.0]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[-161.0]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[false]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[270.0]]>
+                <![CDATA[90.0]]>
               </value>
             </param>
             <param index="3">
@@ -1111,7 +751,7 @@
             </param>
             <param index="4">
               <value>
-                <![CDATA[-80.0]]>
+                <![CDATA[505.0]]>
               </value>
             </param>
             <param index="5">
@@ -1123,43 +763,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testHitCheckerForLaserBeam" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T13:00:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[270.0]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[-11.0]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[-80.0]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[false]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testHitCheckerForLaserBeam -->
-        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_XCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_XCoordinate" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="angleSourceForX" finished-at="2016-08-08T13:00:28Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -1179,39 +783,157 @@
             <param index="3">
               <value>
                 <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[-11.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[-11.0]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[505.0]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[-11.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1011.0]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_XCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testLaserBeam_shouldCreateLaserBeam_XCoordinate" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="angleSourceForX" finished-at="2016-08-08T15:27:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1000.0]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_XCoordinate -->
-        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_XCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_XCoordinate" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="angleSourceForX" finished-at="2016-08-08T13:00:28Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[0.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[180.0]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[-150.0]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_XCoordinate -->
-        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_XCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_XCoordinate" duration-ms="0" started-at="2016-08-08T13:00:28Z" data-provider="angleSourceForX" finished-at="2016-08-08T13:00:28Z">
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -1233,11 +955,21 @@
                 <![CDATA[0.0]]>
               </value>
             </param>
+            <param index="4">
+              <value>
+                <![CDATA[11.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_XCoordinate -->
-        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_XCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_XCoordinate" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="angleSourceForX" finished-at="2016-08-08T13:00:28Z">
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -1251,19 +983,29 @@
             </param>
             <param index="2">
               <value>
-                <![CDATA[0.0]]>
+                <![CDATA[180.0]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[150.0]]>
+                <![CDATA[-1011.0]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[false]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_XCoordinate -->
-        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_YCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_YCoordinate" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="angleSourceForY" finished-at="2016-08-08T13:00:28Z">
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -1277,19 +1019,29 @@
             </param>
             <param index="2">
               <value>
-                <![CDATA[90.0]]>
+                <![CDATA[180.0]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[150.0]]>
+                <![CDATA[-505.0]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[11.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[false]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_YCoordinate -->
-        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_YCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_YCoordinate" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="angleSourceForY" finished-at="2016-08-08T13:00:28Z">
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_YCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testLaserBeam_shouldCreateLaserBeam_YCoordinate" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="angleSourceForY" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -1315,7 +1067,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_YCoordinate -->
-        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_YCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_YCoordinate" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="angleSourceForY" finished-at="2016-08-08T13:00:28Z">
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_YCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testLaserBeam_shouldCreateLaserBeam_YCoordinate" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="angleSourceForY" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -1334,14 +1086,14 @@
             </param>
             <param index="3">
               <value>
-                <![CDATA[-150.0]]>
+                <![CDATA[-1000.0]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_YCoordinate -->
-        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_YCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@7d9d1a19]" name="testLaserBeam_shouldCreateLaserBeam_YCoordinate" duration-ms="1" started-at="2016-08-08T13:00:28Z" data-provider="angleSourceForY" finished-at="2016-08-08T13:00:28Z">
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_YCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testLaserBeam_shouldCreateLaserBeam_YCoordinate" duration-ms="15" started-at="2016-08-08T15:27:08Z" data-provider="angleSourceForY" finished-at="2016-08-08T15:27:08Z">
           <params>
             <param index="0">
               <value>
@@ -1367,7 +1119,265 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_YCoordinate -->
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[270.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[11.0]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[-505.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_XCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testLaserBeam_shouldCreateLaserBeam_XCoordinate" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="angleSourceForX" finished-at="2016-08-08T15:27:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[90.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_XCoordinate -->
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_XCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testLaserBeam_shouldCreateLaserBeam_XCoordinate" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="angleSourceForX" finished-at="2016-08-08T15:27:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[270.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_XCoordinate -->
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[270.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[-1011.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_YCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testLaserBeam_shouldCreateLaserBeam_YCoordinate" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="angleSourceForY" finished-at="2016-08-08T15:27:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[90.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1000.0]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_YCoordinate -->
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[270.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[-11.0]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[-505.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testLaserBeam_shouldCreateLaserBeam_XCoordinate(double, double, double, double)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testLaserBeam_shouldCreateLaserBeam_XCoordinate" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="angleSourceForX" finished-at="2016-08-08T15:27:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[180.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[-1000.0]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLaserBeam_shouldCreateLaserBeam_XCoordinate -->
+        <test-method status="PASS" signature="testHitCheckerForLaserBeam(double, double, double, double, double, boolean)[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testHitCheckerForLaserBeam" duration-ms="0" started-at="2016-08-08T15:27:08Z" data-provider="hitCheckerInputList" finished-at="2016-08-08T15:27:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[180.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[-505.0]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[-11.0]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testHitCheckerForLaserBeam -->
+        <test-method status="PASS" signature="testPhysicalRepresentation()[pri:0, instance:tests.weapons.LaserBeamTest@39c0f4a]" name="testPhysicalRepresentation" duration-ms="0" started-at="2016-08-08T15:27:08Z" finished-at="2016-08-08T15:27:08Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testPhysicalRepresentation -->
       </class> <!-- tests.weapons.LaserBeamTest -->
+      <class name="tests.weapons.BulletDataTest">
+        <test-method status="PASS" signature="testPhysicalRepresentation()[pri:0, instance:tests.weapons.BulletDataTest@57baeedf]" name="testPhysicalRepresentation" duration-ms="0" started-at="2016-08-08T15:27:08Z" finished-at="2016-08-08T15:27:08Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testPhysicalRepresentation -->
+      </class> <!-- tests.weapons.BulletDataTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

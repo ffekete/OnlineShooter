@@ -1,5 +1,6 @@
 package game.datatypes.bullet;
 
+import game.config.GameConfig;
 import game.controller.EventSender;
 import game.interfaces.Bullet;
 import game.interfaces.Spawnable;
@@ -11,7 +12,15 @@ public class BulletData implements Bullet{
 	private long age;
 	private long playerId;
 	private long damage;
-		
+	
+	public boolean isAgeCounterExpired(){
+		if(age >= GameConfig.BULLET_MAX_AGE){
+			age = 0;
+			return true;
+		}
+		return false;
+	}
+	
 	public double getAngle() {
 		return angle;
 	}
@@ -98,5 +107,10 @@ public class BulletData implements Bullet{
 	@Override
 	public void hitDetected(Spawnable item, EventSender eventSender) {
 		eventSender.sendItemHitNotification(item);
+	}
+
+	@Override
+	public String getPhysicalRepresentation() {
+		return new String("{\"shape\": \"circle\", \"startx\": \"" + x + "\", \"starty\": \"" + y + "\", \"radius\" : \"15\"}");
 	}
 }

@@ -38,7 +38,7 @@ public class BulletDataProcessor {
 	
 	private void processAgeCounter(Bullet bullet){
 		bullet.increaseAge();
-		if(bullet.getAge() >= GameConfig.BULLET_MAX_AGE){
+		if(bullet.isAgeCounterExpired()){
 			boolean result = bulletPool.getBulletPool().remove(bullet);
 			if(result == false)
 			{

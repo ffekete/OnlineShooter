@@ -34,9 +34,13 @@ public interface Bullet {
 	
 	public void hitDetected();
 	
+	public String getPhysicalRepresentation();
+	
 	public boolean hits(Spawnable item);
 
 	void hitDetected(Spawnable item);
 
 	void hitDetected(Spawnable item, EventSender eventSender);
+	
+	boolean isAgeCounterExpired();
 }

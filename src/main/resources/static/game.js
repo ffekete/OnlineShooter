@@ -347,10 +347,31 @@ function drawBullets(){
 		
 		var dx = playerData.x - playerData.bullets[bullets].x;
 		var dy = playerData.y - playerData.bullets[bullets].y;
+		
+		var physicalRepresentation = JSON.parse(playerData.bullets[bullets].physicalRepresentation);
+		
 		canvasContext.save();
-		canvasContext.fillStyle = "black";
-		canvasContext.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 2, 0, 2*Math.PI);
-		canvasContext.fill();
+		
+		if(physicalRepresentation.shape === "circle"){
+			canvasContext.fillStyle = "black";
+			canvasContext.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 2, 0, 2*Math.PI);
+			canvasContext.fill();
+		}
+		
+		if(physicalRepresentation.shape === "line"){
+			canvasContext.strokeStyle = "red";
+
+			var dx1 = playerData.x - physicalRepresentation.startx;
+			var dy1 = playerData.y - physicalRepresentation.starty;
+			
+			var dx2 = playerData.x - physicalRepresentation.endx;
+			var dy2 = playerData.y - physicalRepresentation.endy;
+			
+			canvasContext.moveTo((screen_x / 2 + 10) - dx1, (screen_y / 2 + 10) - dy1);
+			canvasContext.lineTo((screen_x / 2 + 10) - dx2, (screen_y / 2 + 10) - dy2);
+			canvasContext.stroke();
+		}
+		
 		canvasContext.restore();
 	}
 	
