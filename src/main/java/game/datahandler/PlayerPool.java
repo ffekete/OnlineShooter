@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 
 import game.config.ConnectionPreferences;
 import game.connection.ConnectionPool;
-import game.model.HighScore;
-import game.model.PlayerData;
-import game.model.RegistrationData;
+import game.datatypes.HighScore;
+import game.datatypes.PlayerData;
+import game.datatypes.RegistrationData;
 
 @Component
 public class PlayerPool {

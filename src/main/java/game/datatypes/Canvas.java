@@ -1,4 +1,4 @@
-package game.model;
+package game.datatypes;
 
 public class Canvas {
     private double x;

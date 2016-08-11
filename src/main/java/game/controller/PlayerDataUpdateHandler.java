@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 
 import game.config.EndpointPaths;
 import game.datahandler.PlayerPool;
-import game.model.PlayerData;
-import game.model.ReceivedPlayerData;
+import game.datatypes.PlayerData;
+import game.datatypes.ReceivedPlayerData;
 import game.transformer.ReceivedPlayerDataToPlayerDataTransformer;
 
 @Controller

@@ -6,9 +6,9 @@ import org.testng.annotations.Test;
 
 import factory.ShipFactory;
 import game.config.WeaponConfig;
+import game.datatypes.Coordinate;
 import game.datatypes.bullet.LaserBeam;
 import game.interfaces.Ship;
-import game.model.Coordinate;
 
 public class LaserBeamTest{
 

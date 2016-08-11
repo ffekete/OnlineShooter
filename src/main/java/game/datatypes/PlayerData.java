@@ -1,4 +1,4 @@
-package game.model;
+package game.datatypes;
 
 import java.util.List;
 

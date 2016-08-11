@@ -2,7 +2,7 @@ package game.datatypes.ship;
 
 import factory.WeaponFactory;
 import game.config.ShipConfig;
-import game.model.Coordinate;
+import game.datatypes.Coordinate;
 
 public class Mercury extends ShipParent{
 

@@ -1,6 +1,6 @@
 package game.interfaces;
 
-import game.model.PlayerData;
+import game.datatypes.PlayerData;
 
 public interface SpawnableItem extends Spawnable{
     public void applyEffect(PlayerData player);

@@ -1,5 +1,8 @@
 package game.model;
 
+import game.datatypes.PlayerData;
+import game.datatypes.StageData;
+
 /** This data will be sent to the client side after a registration attempt. */
 public class RegistrationAnswer {
     private PlayerData playerData;

@@ -8,9 +8,10 @@ import org.springframework.stereotype.Component;
 import game.config.GameConfig;
 import game.datahandler.BulletPool;
 import game.interfaces.Bullet;
+import game.interfaces.BulletDataProcessorInterface;
 
 @Component
-public class BulletDataProcessor {
+public class BulletDataProcessor implements BulletDataProcessorInterface {
     
     @Autowired
     private BulletPool bulletPool;
@@ -26,11 +27,11 @@ public class BulletDataProcessor {
         resultx = (double)bullet.getX() + GameConfig.BULLET_INITIAL_SPEED * Math.cos(angle);
         resulty = (double)bullet.getY() + GameConfig.BULLET_INITIAL_SPEED * Math.sin(angle);
         
-        if(resultx > GameConfig.STAGE_POS_LIMIT_X) resultx = GameConfig.STAGE_NEG_LIMIT_X;
-        if(resultx < GameConfig.STAGE_NEG_LIMIT_X) resultx = GameConfig.STAGE_POS_LIMIT_X;
+        if(resultx > GameConfig.STAGE_POS_LIMIT_X) resultx = GameConfig.STAGE_NEG_LIMIT_X + (resultx - GameConfig.STAGE_POS_LIMIT_X);
+        if(resultx < GameConfig.STAGE_NEG_LIMIT_X) resultx = GameConfig.STAGE_POS_LIMIT_X + (resultx + GameConfig.STAGE_POS_LIMIT_X);
         
-        if(resulty > GameConfig.STAGE_POS_LIMIT_Y) resulty = GameConfig.STAGE_NEG_LIMIT_Y;
-        if(resulty < GameConfig.STAGE_NEG_LIMIT_Y) resulty = GameConfig.STAGE_POS_LIMIT_Y;
+        if(resulty > GameConfig.STAGE_POS_LIMIT_Y) resulty = GameConfig.STAGE_NEG_LIMIT_Y + (resulty - GameConfig.STAGE_POS_LIMIT_Y);
+        if(resulty < GameConfig.STAGE_NEG_LIMIT_Y) resulty = GameConfig.STAGE_POS_LIMIT_Y + (resulty + GameConfig.STAGE_NEG_LIMIT_Y);
         
         bullet.setX(resultx);
         bullet.setY(resulty);
@@ -47,7 +48,11 @@ public class BulletDataProcessor {
         }
     }
     
-    public void updateBulletData(){
+    /* (non-Javadoc)
+	 * @see game.service.BulletDataProcessorInterface#updateBulletData()
+	 */
+    @Override
+	public void updateBulletData(){
         Iterator<Bullet> bit = bulletPool.getBulletPool().iterator();
         
         while(bit.hasNext()){

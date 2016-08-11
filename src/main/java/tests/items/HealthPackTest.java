@@ -5,8 +5,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import game.config.ShipConfig;
+import game.datatypes.PlayerData;
 import game.datatypes.Items.HealthPack;
-import game.model.PlayerData;
 
 public class HealthPackTest {
 

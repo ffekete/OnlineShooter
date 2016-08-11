@@ -8,7 +8,7 @@ import game.datahandler.BulletPool;
 import game.datahandler.HighScoreTable;
 import game.datahandler.ItemPool;
 import game.datahandler.PlayerPool;
-import game.model.PlayerData;
+import game.datatypes.PlayerData;
 import game.model.SentPlayerData;
 
 @Component

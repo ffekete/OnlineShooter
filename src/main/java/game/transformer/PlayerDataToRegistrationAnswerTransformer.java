@@ -2,7 +2,7 @@ package game.transformer;
 
 import org.springframework.stereotype.Component;
 
-import game.model.PlayerData;
+import game.datatypes.PlayerData;
 import game.model.RegistrationAnswer;
 
 @Component

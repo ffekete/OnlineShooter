@@ -4,8 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import game.datatypes.PlayerData;
 import game.datatypes.Items.IncreaseDamage;
-import game.model.PlayerData;
 
 public class IncreaseDamageTest {
 

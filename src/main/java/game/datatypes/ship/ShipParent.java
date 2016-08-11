@@ -1,9 +1,9 @@
 package game.datatypes.ship;
 
+import game.datatypes.Coordinate;
 import game.interfaces.Shield;
 import game.interfaces.Ship;
 import game.interfaces.Weapon;
-import game.model.Coordinate;
 
 public abstract class ShipParent implements Ship {
     private Coordinate coordinates;

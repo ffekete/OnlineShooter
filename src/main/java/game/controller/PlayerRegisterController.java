@@ -9,9 +9,9 @@ import game.config.BrokerPaths;
 import game.config.EndpointPaths;
 import game.datahandler.PlayerIdGenerator;
 import game.datahandler.PlayerPool;
-import game.model.PlayerData;
+import game.datatypes.PlayerData;
+import game.datatypes.RegistrationData;
 import game.model.RegistrationAnswer;
-import game.model.RegistrationData;
 import game.transformer.PlayerDataToRegistrationAnswerTransformer;
 
 @Controller

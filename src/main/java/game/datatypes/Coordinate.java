@@ -1,4 +1,4 @@
-package game.model;
+package game.datatypes;
 
 public class Coordinate {
     private double x;

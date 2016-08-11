@@ -3,11 +3,11 @@ package game.datatypes.weapons;
 import java.util.ArrayList;
 import java.util.List;
 
+import game.datatypes.PlayerData;
 import game.datatypes.Items.ItemParent;
 import game.datatypes.bullet.BulletData;
 import game.interfaces.Bullet;
 import game.interfaces.Weapon;
-import game.model.PlayerData;
 
 public abstract class WeaponParent extends ItemParent implements Weapon {
     private long rateOfFireCooldown;
@@ -34,17 +34,6 @@ public abstract class WeaponParent extends ItemParent implements Weapon {
     
     public boolean canShoot(){
         return this.hasAmmo() && this.rateOfFireCooldown < 1L;
-    }
-    
-    public long removeAmmo(long amount){
-        if(amount > this.ammo){
-            this.ammo -= amount;
-            return amount;
-        }
-        else
-        {
-            return amount - this.ammo;
-        }
     }
     
     @Override

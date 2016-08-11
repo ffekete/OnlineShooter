@@ -1,8 +1,8 @@
 package game.datatypes.shield;
 
+import game.datatypes.PlayerData;
 import game.datatypes.Items.ItemParent;
 import game.interfaces.Shield;
-import game.model.PlayerData;
 
 public class ShieldParent extends ItemParent implements Shield{
 

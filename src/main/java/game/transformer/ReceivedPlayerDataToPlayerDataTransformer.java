@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import game.datahandler.PlayerPool;
-import game.model.PlayerData;
-import game.model.ReceivedPlayerData;
+import game.datatypes.PlayerData;
+import game.datatypes.ReceivedPlayerData;
 
 @Component
 public class ReceivedPlayerDataToPlayerDataTransformer {

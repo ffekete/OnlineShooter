@@ -1,6 +1,6 @@
 package game.interfaces;
 
-import game.model.Coordinate;
+import game.datatypes.Coordinate;
 
 public interface Ship extends Spawnable{
     public void initWeapon();

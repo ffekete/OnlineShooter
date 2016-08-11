@@ -8,9 +8,9 @@ import game.config.GameConfig;
 import game.config.TimerValues;
 import game.datahandler.HighScoreTable;
 import game.datahandler.PlayerPool;
-import game.service.BulletDataProcessor;
-import game.service.ItemProcessor;
-import game.service.PlayerDataProcessor;
+import game.interfaces.BulletDataProcessorInterface;
+import game.interfaces.ItemProcessorInterface;
+import game.interfaces.PlayerDataProcessorInterface;
 
 /** A basic scheduler for the main loop of the game. */
 @Component
@@ -25,16 +25,16 @@ public class TaskScheduler {
     }
 
     @Autowired
-    ItemProcessor itemProcessor;
+    ItemProcessorInterface itemProcessor;
     
     @Autowired
-    BulletDataProcessor bulletDataProcessor;
+    BulletDataProcessorInterface bulletDataProcessor;
     
     @Autowired
     PlayerPool playerPool;
     
     @Autowired
-    PlayerDataProcessor playerDataPrcessor;
+    PlayerDataProcessorInterface playerDataPrcessor;
     
     @Autowired
     HighScoreTable highScoreTable;

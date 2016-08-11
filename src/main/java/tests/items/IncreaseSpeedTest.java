@@ -4,8 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import game.config.ItemConfig;
+import game.datatypes.PlayerData;
 import game.datatypes.Items.IncreaseSpeed;
-import game.model.PlayerData;
 
 public class IncreaseSpeedTest {
     

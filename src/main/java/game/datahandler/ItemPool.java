@@ -12,6 +12,7 @@ import factory.WeaponFactory;
 import game.config.GameConfig;
 import game.config.ShieldId;
 import game.config.WeaponId;
+import game.datatypes.PlayerData;
 import game.datatypes.Items.HealthPack;
 import game.datatypes.Items.IncreaseDamage;
 import game.datatypes.Items.IncreaseMAneuverability;
@@ -19,7 +20,6 @@ import game.datatypes.Items.IncreaseRateOfFire;
 import game.datatypes.Items.IncreaseScore;
 import game.datatypes.Items.IncreaseSpeed;
 import game.interfaces.SpawnableItem;
-import game.model.PlayerData;
 
 @Component
 public class ItemPool {

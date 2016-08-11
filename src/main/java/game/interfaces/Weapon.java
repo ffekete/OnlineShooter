@@ -2,7 +2,7 @@ package game.interfaces;
 
 import java.util.List;
 
-import game.model.PlayerData;
+import game.datatypes.PlayerData;
 
 public interface Weapon {
     public long getDamage();

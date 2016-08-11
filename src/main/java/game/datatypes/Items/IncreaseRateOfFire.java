@@ -1,6 +1,6 @@
 package game.datatypes.Items;
 
-import game.model.PlayerData;
+import game.datatypes.PlayerData;
 import game.service.Spawner;
 
 public class IncreaseRateOfFire extends ItemParent{

@@ -4,8 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import game.config.GameConfig;
+import game.datatypes.PlayerData;
 import game.datatypes.Items.IncreaseScore;
-import game.model.PlayerData;
 
 public class IncreaseScoreTest {
 

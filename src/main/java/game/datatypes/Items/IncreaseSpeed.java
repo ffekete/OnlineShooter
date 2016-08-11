@@ -1,7 +1,7 @@
 package game.datatypes.Items;
 
 import game.config.ItemConfig;
-import game.model.PlayerData;
+import game.datatypes.PlayerData;
 import game.service.Spawner;
 
 public class IncreaseSpeed extends ItemParent{

@@ -4,8 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import game.config.ShieldConfig;
+import game.datatypes.PlayerData;
 import game.datatypes.shield.AtomShield;
-import game.model.PlayerData;
 
 public class AtomShieldTest {
 

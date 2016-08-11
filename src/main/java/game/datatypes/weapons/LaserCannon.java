@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import game.config.WeaponConfig;
+import game.datatypes.PlayerData;
 import game.datatypes.bullet.LaserBeam;
 import game.interfaces.Bullet;
-import game.model.PlayerData;
 import game.service.Spawner;
 
 public class LaserCannon extends WeaponParent {

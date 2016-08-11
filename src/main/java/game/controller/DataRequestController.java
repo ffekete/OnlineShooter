@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import game.config.BrokerPaths;
 import game.config.EndpointPaths;
 import game.datahandler.PlayerPool;
-import game.model.PlayerData;
+import game.datatypes.PlayerData;
 import game.model.SentPlayerData;
 import game.transformer.PlayerDataToSentPlayerDataTransformer;
 

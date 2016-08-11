@@ -2,7 +2,7 @@ package game.service;
 
 import java.util.Comparator;
 
-import game.model.HighScore;
+import game.datatypes.HighScore;
 
 public class HighScoreComparator implements Comparator<HighScore>{
 

@@ -4,8 +4,8 @@ import java.awt.geom.Line2D;
 
 import game.config.GameConfig;
 import game.config.WeaponConfig;
+import game.datatypes.Coordinate;
 import game.interfaces.Spawnable;
-import game.model.Coordinate;
 
 public class LaserBeam extends BulletData{
     private Coordinate startPoint;

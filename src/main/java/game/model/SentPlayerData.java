@@ -2,6 +2,7 @@ package game.model;
 
 import java.util.List;
 
+import game.datatypes.PlayerData;
 import game.interfaces.Bullet;
 import game.interfaces.SpawnableItem;
 import game.interfaces.Weapon;

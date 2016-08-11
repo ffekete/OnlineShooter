@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.stereotype.Component;
 
-import game.model.HighScore;
+import game.datatypes.HighScore;
 import game.service.HighScoreComparator;
 
 @Path("/highScore")

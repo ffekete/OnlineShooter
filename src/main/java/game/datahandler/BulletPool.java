@@ -7,8 +7,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import game.datatypes.PlayerData;
 import game.interfaces.Bullet;
-import game.model.PlayerData;
 
 @Component
 public class BulletPool {
@@ -18,6 +18,10 @@ public class BulletPool {
 
     private List<Bullet> bulletPool;
 
+    public void clearPool(){
+    	bulletPool.clear();
+    }
+    
     public BulletPool() {
         bulletPool = new CopyOnWriteArrayList<Bullet>();
     }

@@ -13,15 +13,16 @@ import game.datahandler.BulletPool;
 import game.datahandler.HighScoreTable;
 import game.datahandler.ItemPool;
 import game.datahandler.PlayerPool;
+import game.datatypes.HighScore;
+import game.datatypes.PlayerData;
 import game.interfaces.Bullet;
+import game.interfaces.PlayerDataProcessorInterface;
 import game.interfaces.SpawnableItem;
-import game.model.HighScore;
-import game.model.PlayerData;
 import game.scheduler.TaskScheduler;
 
 /** Basic class to calculate player related values e.g. ship angles,... */
 @Component
-public class PlayerDataProcessor {
+public class PlayerDataProcessor implements PlayerDataProcessorInterface {
     @Autowired
     PlayerPool playerPool;
 
@@ -145,12 +146,11 @@ public class PlayerDataProcessor {
         player.setShipAngle(angle);
     }
 
-    /**
-     * Main loop function
-     * 
-     * @throws InterruptedException
-     */
-    public void updatePlayerData() throws InterruptedException {
+    /* (non-Javadoc)
+	 * @see game.service.PlayerDataProcessorInterface#updatePlayerData()
+	 */
+    @Override
+	public void updatePlayerData() throws InterruptedException {
         Iterator<Long> shipIds = playerPool.getPool().keySet().iterator();
 
         while (shipIds.hasNext()) {
@@ -177,7 +177,11 @@ public class PlayerDataProcessor {
 
     }
 
-    public void checkIfPlayerGetsAnItem(PlayerData player) {
+    /* (non-Javadoc)
+	 * @see game.service.PlayerDataProcessorInterface#checkIfPlayerGetsAnItem(game.datatypes.PlayerData)
+	 */
+    @Override
+	public void checkIfPlayerGetsAnItem(PlayerData player) {
         CopyOnWriteArrayList<SpawnableItem> items = (CopyOnWriteArrayList<SpawnableItem>) itemPool
                 .getAllItemsOnScreen(player);
 
