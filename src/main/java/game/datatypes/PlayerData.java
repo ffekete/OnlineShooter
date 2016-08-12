@@ -10,11 +10,10 @@ import game.config.ShieldId;
 import game.interfaces.Bullet;
 import game.interfaces.Shield;
 import game.interfaces.Ship;
-import game.interfaces.Spawnable;
 import game.interfaces.Weapon;
 import game.service.Spawner;
 
-public class PlayerData implements Spawnable{
+public class PlayerData{
     
     private Ship spaceShip;
     
@@ -70,7 +69,7 @@ public class PlayerData implements Spawnable{
         
         this.mouseX = 0L;
         this.mouseY = 0L;
-        this.getSpaceShip().setShipAngle(0.0d);
+        this.getSpaceShip().setAngle(0.0d);
         this.connectionId = 0L;
         this.getSpaceShip().resetHp();
         this.initWeapon();
@@ -251,7 +250,7 @@ public class PlayerData implements Spawnable{
         spaceShipToStore.setManeuverability(spaceShip.getManeuverability());
         spaceShipToStore.setMaxSpeed(spaceShip.getMaxSpeed());
         spaceShipToStore.setShield(spaceShip.getShield());
-        spaceShipToStore.setShipAngle(spaceShip.getShipAngle());
+        spaceShipToStore.setAngle(spaceShip.getAngle());
         spaceShipToStore.setShipType(spaceShip.getShipType());
         spaceShipToStore.setSpeed(spaceShip.getSpeed());
         spaceShipToStore.setWeapon(spaceShip.getWeapon());
@@ -265,11 +264,11 @@ public class PlayerData implements Spawnable{
     }
 
     public Double getShipAngle() {
-        return this.getSpaceShip().getShipAngle();
+        return this.getSpaceShip().getAngle();
     }
 
     public void setShipAngle(Double shipAngle) {
-        this.getSpaceShip().setShipAngle(shipAngle);
+        this.getSpaceShip().setAngle(shipAngle);
     }
 
     public Long getConnectionId() {

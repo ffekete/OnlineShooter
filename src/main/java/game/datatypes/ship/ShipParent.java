@@ -11,7 +11,7 @@ public abstract class ShipParent implements Ship {
     private String shipType;
     private Shield shield;
     private long hp;
-    private Double shipAngle;
+    private Double angle;
     private Weapon weapon;
     private double speed;
     private double maxSpeed;
@@ -113,13 +113,13 @@ public abstract class ShipParent implements Ship {
     }
     
     @Override
-    public double getShipAngle() {
-        return shipAngle;
+    public double getAngle() {
+        return angle;
     }
     
     @Override
-    public void setShipAngle(Double shipAngle) {
-        this.shipAngle = shipAngle;
+    public void setAngle(double angle) {
+        this.angle = angle;
     }
     
     @Override

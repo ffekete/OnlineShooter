@@ -1,4 +1,4 @@
-package tests.services;
+package services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -7,11 +7,11 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import cofiguration.TestContextConfiguration;
 import game.datahandler.BulletPool;
 import game.datahandler.PlayerPool;
 import game.datatypes.PlayerData;
 import game.datatypes.weapons.GatlingGun;
-import tests.cofiguration.TestContextConfiguration;
 
 @ContextConfiguration(classes={TestContextConfiguration.class})
 public class BulletPoolTest extends AbstractTestNGSpringContextTests{

@@ -23,6 +23,9 @@ public class PlayerPool {
     @Autowired
     private HighScoreTable highScores;
     
+    @Autowired
+    private ItemHandler itemHandler;
+    
     private Map<Long, PlayerData> playerPool;
 
     /** This function should be called periodically from the game loop. */
@@ -31,11 +34,11 @@ public class PlayerPool {
         removeInactivePlayersAndStoreHighScore();
     }
     
-    public synchronized boolean registerPlayer(Long id, RegistrationData data) {
+    public boolean registerPlayer(Long id, RegistrationData data) {
         return storePlayer(id, data);
     }
 
-    public synchronized boolean storePlayer(Long newPlayerId, RegistrationData data) {
+    public boolean storePlayer(Long newPlayerId, RegistrationData data) {
 
         if (playerPool.containsKey(newPlayerId)) {
             return false;
@@ -54,7 +57,7 @@ public class PlayerPool {
         }
     }
 
-    private synchronized void increasePlayerInactivityCounters() {
+    private void increasePlayerInactivityCounters() {
         for (long i : playerPool.keySet()) {
             PlayerData currentPlayer = playerPool.get(i);
 
@@ -62,7 +65,7 @@ public class PlayerPool {
         }
     }
 
-    public synchronized void removePlayer(PlayerData player) {
+    public void removePlayer(PlayerData player) {
 
         long playerId = player.getId();
         
@@ -71,7 +74,7 @@ public class PlayerPool {
         playerPool.remove(playerId);
     }
 
-    private synchronized void removeInactivePlayersAndStoreHighScore() {
+    private void removeInactivePlayersAndStoreHighScore() {
         for (long i : playerPool.keySet()) {
             PlayerData currentPlayer = playerPool.get(i);
 
@@ -85,7 +88,7 @@ public class PlayerPool {
         }
     }
 
-    public synchronized void resetInactivityOfPlayer(Long id) {
+    public void resetInactivityOfPlayer(Long id) {
         PlayerData player = null;
 
         if (playerPool.containsKey(id)) {
@@ -94,7 +97,7 @@ public class PlayerPool {
         }
     }
 
-    public synchronized PlayerData getPlayerById(Long id) {
+    public PlayerData getPlayerById(Long id) {
         PlayerData player = null;
 
         if (playerPool.containsKey(id)) {
@@ -113,7 +116,7 @@ public class PlayerPool {
         return playerPool;
     }
 
-    public synchronized List<PlayerData> getAllPlayersOnScreen(Long playerId) {
+    public List<PlayerData> getAllPlayersOnScreen(Long playerId) {
         ArrayList<PlayerData> visiblePlayers = new ArrayList<>();
 
         PlayerData player = playerPool.get(playerId);
@@ -121,8 +124,7 @@ public class PlayerPool {
         for (Long id : playerPool.keySet()) {
             PlayerData currentPlayer = playerPool.get(id);
             if (currentPlayer.getId() != playerId) {
-                if ((Math.abs(currentPlayer.getX() - player.getX()) <= player.getScreenHalfWidth())
-                        && (Math.abs(currentPlayer.getY() - player.getY()) <= player.getScreenHalfHeight())) {
+                if (itemHandler.isItOnScreen(player, currentPlayer.getSpaceShip())) {
                     visiblePlayers.add(currentPlayer);
                 }
             }

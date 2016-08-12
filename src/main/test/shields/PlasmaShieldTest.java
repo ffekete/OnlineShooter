@@ -1,4 +1,4 @@
-package tests.shields;
+package shields;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

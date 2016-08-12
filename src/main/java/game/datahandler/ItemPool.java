@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import factory.ShieldFactory;
@@ -25,6 +26,9 @@ import game.interfaces.SpawnableItem;
 public class ItemPool {
     private List<SpawnableItem> itemPool;
 
+    @Autowired
+    private ItemHandler itemHandler;
+    
     public ItemPool() {
         itemPool = new CopyOnWriteArrayList<SpawnableItem>();
     }
@@ -39,8 +43,8 @@ public class ItemPool {
 
         while (bit.hasNext()) {
             SpawnableItem item = bit.next();
-            if ((Math.abs(item.getX() - playerData.getX()) <= playerData.getScreenHalfWidth())
-                    && (Math.abs(item.getY() - playerData.getY()) <= playerData.getScreenHalfHeight())) {
+            
+            if (itemHandler.isItOnScreen(playerData, item)) {
                 allItemsOnScreen.add(item);
             }
         }

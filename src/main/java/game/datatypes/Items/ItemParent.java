@@ -6,6 +6,7 @@ public abstract class ItemParent implements SpawnableItem {
     private String name;
     private double x;
     private double y;
+    private double angle;
     
     @Override
     public void setX(double x) {
@@ -33,5 +34,13 @@ public abstract class ItemParent implements SpawnableItem {
 
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public void setAngle(double angle){
+    	this.angle = angle;
+    }
+    
+    public double getAngle(){
+    	return this.angle;
     }
 }

@@ -1,4 +1,4 @@
-package tests.bullets;
+package bullets;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

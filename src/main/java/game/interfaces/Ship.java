@@ -11,8 +11,8 @@ public interface Ship extends Spawnable{
     public void setSpeed(double speed);
     public double getMaxSpeed();
     public void setMaxSpeed(double maxSpeed);
-    public double getShipAngle();
-    public void setShipAngle(Double shipAngle);
+    public double getAngle();
+    public void setAngle(double angle);
     public Coordinate getCoordinates();
     public void setCoordinates(Coordinate coordinate);
     public void setCoordinates(double x, double y);
