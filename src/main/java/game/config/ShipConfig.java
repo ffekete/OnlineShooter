@@ -20,4 +20,9 @@ public class ShipConfig {
     public final static double DELTAWING_INIT_SPEED = 9.0D;
     public final static double DELTAWING_INIT_MANEUVERABILITY = 16.0D;
     public final static WeaponId DELTAWING_INIT_WEAPON = WeaponId.DOUBLE_GATLING;
+    
+    public final static long   CARGO_SHIP_INIT_HP = 11L;
+    public final static double CARGO_SHIP_INIT_SPEED = 9.0D;
+    public final static double CARGO_SHIP_INIT_MANEUVERABILITY = 16.0D;
+    public final static WeaponId CARGO_SHIP_INIT_WEAPON = null;
 }
