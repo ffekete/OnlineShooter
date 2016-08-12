@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import game.connection.ConnectionPool;
 import game.datahandler.BulletPool;
 import game.datahandler.HighScoreTable;
+import game.datahandler.ItemHandler;
 import game.datahandler.PlayerPool;
 import game.datatypes.PlayerData;
 import game.interfaces.BulletDataProcessorInterface;
@@ -13,6 +14,11 @@ import game.service.BulletDataProcessor;
 
 @Configuration
 public class TestContextConfiguration{ 
+	
+	@Bean
+	public ItemHandler itemHandler(){
+		return new ItemHandler();
+	}
 	
 	@Bean
 	public BulletDataProcessorInterface bulletDataProcessor(){
