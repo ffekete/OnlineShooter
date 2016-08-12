@@ -229,8 +229,8 @@ function eventArrived(event){
 	var eventInfo = {};
 	
 	eventInfo.eventCommand = JSON.parse(event.body).eventCommand;
-	eventInfo.eventX = JSON.parse(event.body).event_x;
-	eventInfo.eventY = JSON.parse(event.body).event_y;
+	eventInfo.eventX = JSON.parse(event.body).eventX;
+	eventInfo.eventY = JSON.parse(event.body).eventY;
 	
 	if(eventInfo.eventCommand === "PLAY_EXPLOSION_ANIM"){
 		createExplosion(eventInfo.eventX, eventInfo.eventY, "red");
