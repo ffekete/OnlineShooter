@@ -2,10 +2,8 @@ package game.interfaces;
 
 import game.controller.EventSender;
 
-public interface Bullet {
-    public double getAngle();
+public interface Bullet extends Spawnable{
 
-    public void setAngle(double angle);
 
     public long getPlayerId();
 
@@ -21,14 +19,6 @@ public interface Bullet {
 
     public void setAge(long age);
 
-    public double getX();
-    
-    public void setX(double x);
-    
-    public double getY();
-    
-    public void setY(double y);
-    
     /** Periodically updated bullet effect. Use this to create heat-seeking missiles, etc.. */
     public void effect();
     

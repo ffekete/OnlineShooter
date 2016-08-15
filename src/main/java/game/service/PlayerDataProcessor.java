@@ -13,6 +13,7 @@ import game.datahandler.BulletPool;
 import game.datahandler.HighScoreTable;
 import game.datahandler.ItemPool;
 import game.datahandler.PlayerPool;
+import game.datatypes.Coordinate;
 import game.datatypes.HighScore;
 import game.datatypes.PlayerData;
 import game.interfaces.Bullet;
@@ -40,6 +41,9 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
     
     @Autowired
     EventSender eventSender;
+    
+    @Autowired 
+    CoordinateHandler coordinateHandler;
 
     /** Calculates an angle using two points. */
     private double calculateAngleAndFilterIt(PlayerData player, double baseX, double baseY) {
@@ -224,24 +228,9 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
 
     /** Updates a given players coordinate. */
     private void updatePlayerCoordinates(PlayerData player) {
-        double resultx;
-        double resulty;
-        double angle = player.getShipAngle() * Math.PI / 180.0d;
-
-        resultx = player.getX() + player.getSpeed() * Math.cos(angle);
-        resulty = player.getY() + player.getSpeed() * Math.sin(angle);
-
-        if (resultx > GameConfig.STAGE_POS_LIMIT_X)
-            resultx = GameConfig.STAGE_NEG_LIMIT_X;
-        if (resultx < GameConfig.STAGE_NEG_LIMIT_X)
-            resultx = GameConfig.STAGE_POS_LIMIT_X;
-
-        if (resulty > GameConfig.STAGE_POS_LIMIT_Y)
-            resulty = GameConfig.STAGE_NEG_LIMIT_Y;
-        if (resulty < GameConfig.STAGE_NEG_LIMIT_Y)
-            resulty = GameConfig.STAGE_POS_LIMIT_Y;
-
-        player.setX(resultx);
-        player.setY(resulty);
+        Coordinate coordinates = coordinateHandler.calculateItemCoordinates(player.getSpaceShip(), player.getSpeed());
+        
+        player.setX(coordinates.getX());
+        player.setY(coordinates.getY());
     }
 }

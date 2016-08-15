@@ -22,6 +22,11 @@ public class BulletPool {
     	bulletPool.clear();
     }
     
+    public boolean removeBullet(Bullet bullet){
+    	boolean status = getBulletPool().remove(bullet);
+    	return status;
+    }
+    
     public BulletPool() {
         bulletPool = new CopyOnWriteArrayList<Bullet>();
     }
