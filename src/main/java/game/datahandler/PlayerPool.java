@@ -1,8 +1,10 @@
 package game.datahandler;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,14 @@ public class PlayerPool {
     
     private Map<Long, PlayerData> playerPool;
 
+    public Set<Long> getAllPlayerIds(){
+    	return playerPool.keySet();
+    }
+    
+    public Iterator<Long> getKeySetIterator(){
+    	return getAllPlayerIds().iterator();
+    }
+    
     /** This function should be called periodically from the game loop. */
     public void updatePlayerPoolData(){
         increasePlayerInactivityCounters();

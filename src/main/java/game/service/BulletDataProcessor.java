@@ -40,7 +40,7 @@ public class BulletDataProcessor implements BulletDataProcessorInterface {
     
     @Override
 	public void updateBulletData(){
-        Iterator<Bullet> bit = bulletPool.getBulletPool().iterator();
+        Iterator<Bullet> bit = bulletPool.getIteratorForBullets();
         
         while(bit.hasNext()){
             Bullet bullet = bit.next();

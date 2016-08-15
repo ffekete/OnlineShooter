@@ -22,17 +22,17 @@ public class BulletPool {
     	bulletPool.clear();
     }
     
+    public Iterator<Bullet> getIteratorForBullets(){
+    	return bulletPool.iterator();
+    }
+    
     public boolean removeBullet(Bullet bullet){
-    	boolean status = getBulletPool().remove(bullet);
+    	boolean status = bulletPool.remove(bullet);
     	return status;
     }
     
     public BulletPool() {
         bulletPool = new CopyOnWriteArrayList<Bullet>();
-    }
-
-    public synchronized List<Bullet> getBulletPool() {
-        return bulletPool;
     }
 
     public synchronized List<Bullet> getAllBulletsOnScreen(Long playerId) {

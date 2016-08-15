@@ -95,15 +95,14 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                 boolean bulletHitsTargetPlayer = actualBullet.hits(player.getSpaceShip());
     
                 if (bulletHitsTargetPlayer) {
-                    PlayerData playerToSave = new PlayerData(player);
-                    
-                    actualBullet.hitDetected(playerToSave.getSpaceShip(), eventSender);
+                   
+                    actualBullet.hitDetected(player.getSpaceShip(), eventSender);
                     
                     long hpRemaining = player.decreaseHp(actualBullet.getDamage());
                     if (hpRemaining < 1L) {
-                        
-                        /* populate death event to client side */
-                        eventSender.sendItemDestroyedNotification(playerToSave.getSpaceShip());
+
+                    	/* populate death event to client side */
+                        eventSender.sendItemDestroyedNotification(player.getSpaceShip());
                         
                         PlayerData playerWhoKilledMe = playerPool.getPlayerById(actualBullet.getPlayerId());
                         playerWhoKilledMe.increaseScore(GameConfig.PLAYER_SCORE_VALUE);
@@ -112,18 +111,20 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                          * Save the killed player only if he/she has more than 0
                          * points
                          */
-                        if (playerToSave.getScore() > 0L) {
-                            highScores.addScore(new HighScore(playerToSave.getScore(), playerToSave.getName()));
+                        if (player.getScore() > 0L) {
+                            highScores.addScore(new HighScore(player.getScore(), player.getName()));
                             highScores.KeepTopThreePlayersInHighScoreTable();
                         }
     
                         highScores.addScore(new HighScore(playerWhoKilledMe.getScore(), playerWhoKilledMe.getName()));
+                        
+                        player.kill();
                     }
                     else
                     {
                         eventSender.sendItemHitNotification(player.getSpaceShip());
                     }
-                    bulletPool.getBulletPool().remove(actualBullet);
+                    bulletPool.removeBullet(actualBullet);
     
                 }
             }
@@ -154,12 +155,9 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
         player.setShipAngle(angle);
     }
 
-    /* (non-Javadoc)
-	 * @see game.service.PlayerDataProcessorInterface#updatePlayerData()
-	 */
     @Override
 	public void updatePlayerData() throws InterruptedException {
-        Iterator<Long> shipIds = playerPool.getPool().keySet().iterator();
+        Iterator<Long> shipIds = playerPool.getKeySetIterator();
 
         while (shipIds.hasNext()) {
             Long playerId = shipIds.next();
@@ -208,23 +206,22 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
     }
 
     private void updatePlayerCollisions(PlayerData player1) {
-        for (Long j : playerPool.getPool().keySet()) {
+        for (Long j : playerPool.getAllPlayerIds()) {
             PlayerData player2 = playerPool.getPlayerById(j);
             if (player2.isSpawned() &&
                 player1.getId() != player2.getId() && 
                 Math.abs(player1.getX() - player2.getX()) <= 15
                 && Math.abs(player1.getY() - player2.getY()) <= 15) {
-                    
-                    PlayerData player1ToSave = new PlayerData(player1);
-                    PlayerData player2ToSave = new PlayerData(player2);
-                    
-                    player1.getShield().setProtection(0L);
+                    player1.setShieldProtection(0L);
                     if(player1.decreaseHp(Physics.COLLISION_STRENGTH) < 0L){
-                        eventSender.sendItemDestroyedNotification(player1ToSave.getSpaceShip());
+                        eventSender.sendItemDestroyedNotification(player1.getSpaceShip());
+                        player1.kill();
+                        
                     }
-                    player2.getShield().setProtection(0L);
+                    player2.setShieldProtection(0L);
                     if(player2.decreaseHp(Physics.COLLISION_STRENGTH) < 1L){
-                        eventSender.sendItemDestroyedNotification(player2ToSave.getSpaceShip());
+                        eventSender.sendItemDestroyedNotification(player2.getSpaceShip());
+                        player2.kill();
                     }
             }
         }

@@ -164,13 +164,13 @@ public class PlayerData{
     }
     
     public long decreaseHp(long value){
-        long hpRemaining = this.getSpaceShip().decreaseHp(value);
-        
-        if(hpRemaining < 1L){
-            this.kill();
-        }
-        
+        long hpRemaining = getSpaceShip().decreaseHp(value);
+       
         return hpRemaining;
+    }
+    
+    public void setShieldProtection(long value){
+    	getShield().setProtection(value);
     }
     
     public void decreaseInvulnerabilityCounter(long value){
