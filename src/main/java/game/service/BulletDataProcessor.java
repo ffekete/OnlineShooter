@@ -18,7 +18,7 @@ public class BulletDataProcessor implements BulletDataProcessorInterface {
     private BulletPool bulletPool;
     
     @Autowired 
-    CoordinateHandler coordinateHandler;
+    private CoordinateHandler coordinateHandler;
     
     private void updateBulletCoordinates(Bullet bullet){
     	Coordinate coordinates = coordinateHandler.calculateItemCoordinates(bullet, GameConfig.BULLET_INITIAL_SPEED);

@@ -25,25 +25,25 @@ import game.scheduler.TaskScheduler;
 @Component
 public class PlayerDataProcessor implements PlayerDataProcessorInterface {
     @Autowired
-    PlayerPool playerPool;
+    private PlayerPool playerPool;
 
     @Autowired
-    BulletPool bulletPool;
+    private BulletPool bulletPool;
 
     @Autowired
-    ItemPool itemPool;
+    private ItemPool itemPool;
 
     @Autowired
-    HighScoreTable highScores;
+    private HighScoreTable highScores;
 
     @Autowired
-    TaskScheduler taskScheduler;
+    private TaskScheduler taskScheduler;
     
     @Autowired
-    EventSender eventSender;
+    private EventSender eventSender;
     
     @Autowired 
-    CoordinateHandler coordinateHandler;
+    private CoordinateHandler coordinateHandler;
 
     /** Calculates an angle using two points. */
     private double calculateAngleAndFilterIt(PlayerData player, double baseX, double baseY) {
@@ -81,16 +81,20 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
 
         Iterator<Bullet> bulletIterator = bullets.iterator();
 
+        boolean playerIsVulnerable = player.getInvulnerabilityCounter() < 1L; // true, if player is not invulnerable
+        if(playerIsVulnerable == false){
+        	return; // player is invulnerable, no need to check against the bullets
+        }
+        
         while (bulletIterator.hasNext()) {
             Bullet actualBullet = bulletIterator.next();
 
-            boolean invulnerabilityCheck = player.getInvulnerabilityCounter() < 1L; // true, if player is not invulnerable
-            boolean playerIdCheck = actualBullet.getPlayerId() != player.getId();
+            boolean targetPlayerIsNotWhoShotThisBullet = actualBullet.getPlayerId() != player.getId(); // the player who shot the bullet cannot hit itself
             
-            if(playerIdCheck){
-                boolean areaCheck = actualBullet.hits(player.getSpaceShip());
+            if(targetPlayerIsNotWhoShotThisBullet){
+                boolean bulletHitsTargetPlayer = actualBullet.hits(player.getSpaceShip());
     
-                if (invulnerabilityCheck && areaCheck) {
+                if (bulletHitsTargetPlayer) {
                     PlayerData playerToSave = new PlayerData(player);
                     
                     actualBullet.hitDetected(playerToSave.getSpaceShip(), eventSender);
