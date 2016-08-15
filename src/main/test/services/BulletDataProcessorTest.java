@@ -8,16 +8,16 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import cofiguration.TestContextConfiguration;
 import game.config.GameConfig;
 import game.datahandler.BulletPool;
 import game.datahandler.PlayerPool;
 import game.datatypes.PlayerData;
 import game.datatypes.bullet.BulletData;
 import game.datatypes.weapons.GatlingGun;
+import game.entrypoint.Application;
 import game.interfaces.BulletDataProcessorInterface;
 
-@ContextConfiguration(classes={TestContextConfiguration.class})
+@ContextConfiguration(classes=Application.class)
 public class BulletDataProcessorTest extends AbstractTestNGSpringContextTests{
 
 	@Autowired
@@ -28,12 +28,12 @@ public class BulletDataProcessorTest extends AbstractTestNGSpringContextTests{
 	
 	@Autowired BulletPool bp;
 	
-	@Autowired
 	PlayerData player;
 	
 	@BeforeMethod
-	public void initBulletPool(){
+	public void initTests(){
 		bp.clearPool();
+		player = new PlayerData(200L, "P01", "Deltawing");
 	}
 	
 	@DataProvider(name = "bulletDataInput")
@@ -50,6 +50,7 @@ public class BulletDataProcessorTest extends AbstractTestNGSpringContextTests{
 	@Test(dataProvider = "bulletDataInput")
 	public void testShouldUpdateBulletCoordinates(double x, double y, double angle, int cycles, double expectedX, double expectedY){
 		// given
+		System.out.println("Fakka " + player);
 		player.setWeapon(new GatlingGun()); // setting this weapon for player ship because it will create one bullet
 		player.setX(x);
 		player.setY(y);

@@ -7,13 +7,13 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import cofiguration.TestContextConfiguration;
 import game.datahandler.BulletPool;
 import game.datahandler.PlayerPool;
 import game.datatypes.PlayerData;
 import game.datatypes.weapons.GatlingGun;
+import game.entrypoint.Application;
 
-@ContextConfiguration(classes={TestContextConfiguration.class})
+@ContextConfiguration(classes={Application.class})
 public class BulletPoolTest extends AbstractTestNGSpringContextTests{
 
 	@Autowired
@@ -21,12 +21,12 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests{
 	
 	@Autowired BulletPool bp;
 	
-	@Autowired
 	PlayerData player;
 	
 	@BeforeMethod
 	public void initBulletPool(){
 		bp.clearPool();
+		player = new PlayerData(200L, "P01", "Deltawing");
 	}
 	
 	@Test
