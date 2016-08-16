@@ -1,5 +1,6 @@
 package game.connection;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,14 +59,18 @@ public class ConnectionPool {
         else
         {
             /* Get all available connections by removing all used from the list */
+            ArrayList<Long> availableConnections = new ArrayList<Long>();
             for(long i = 0; i < ConnectionPreferences.SERVER_MAX_CAPACITY; i++){
-                if(connectionPool.get(i) == null)
-                {
-                    return i;
-                }
+                availableConnections.add(i);
             }
+            /* Remove used connection ids */
+            for(Long id: connectionPool.keySet()){
+                ConnectionNode node = connectionPool.get(id);
+                availableConnections.remove(node.getId());
+            }
+            
+            return availableConnections.get(0); // retrieve first element
         }
-        return null;        
     }
     
     public boolean isConnectionPoolFull(){
