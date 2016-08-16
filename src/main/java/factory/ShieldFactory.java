@@ -12,24 +12,15 @@ import game.interfaces.Shield;
 public class ShieldFactory {
 
     public static Shield createShield(ShieldId shieldId) {
-        Shield shield = null;
         switch (shieldId) {
         case NORMAL_SHIELD:
-            shield = new NormalShield();
-            break;
-
+            return new NormalShield();
         case PLASMA_SHIELD:
-            shield = new PlasmaShield();
-            break;
-
+            return new PlasmaShield();
         case ATOM_SHIELD:
-            shield = new AtomShield();
-            break;
-
+            return new AtomShield();
         default:
             throw new RuntimeException("Unknownw shield type!");
         }
-
-        return shield;
     }
 }
