@@ -4,15 +4,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import factory.ConnectionNodeBuilder;
 import game.config.BrokerPaths;
 import game.config.ConnectionPreferences;
 
 @Component
 public class ConnectionPool {
-    private Map<Long, ConnectionNode> connectionPool;
     
+	@Autowired
+	private ConnectionNodeBuilder connectionNodeBuilder;
+	
+	private Map<Long, ConnectionNode> connectionPool;
+    		
     public void removeConnectionNode(Long playerId){
         System.out.println("Connection node removed with id " + connectionPool.get(playerId).getId());
         connectionPool.remove(playerId);
@@ -23,7 +29,11 @@ public class ConnectionPool {
         
         /* If there is a free connection slot, register a new connection and store it in the pool */
         if(connectionId != null){
-            ConnectionNode connectionNode = new ConnectionNode(BrokerPaths.PROVIDE_PLAYER_DATA, connectionId);
+            ConnectionNode connectionNode = connectionNodeBuilder.
+            									setConnectionId(connectionId).
+            									setProvidePlayerDataPath(BrokerPaths.PROVIDE_PLAYER_DATA).
+            									build();
+            
             connectionPool.put(playerId, connectionNode);
             System.out.println("Connection registered for player id " + playerId + " to path " + connectionNode.getPath());
             return connectionId;
