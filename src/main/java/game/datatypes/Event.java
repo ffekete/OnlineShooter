@@ -6,34 +6,28 @@ public class Event {
     private double eventY;
     private String additionalText;
     
-    public double getEventX() {
-        return eventX;
-    }
-    
-    public void setEventX(double eventX) {
+    public Event(String eventCommand, double eventX, double eventY, String additionalText) {
+        super();
+        this.eventCommand = eventCommand;
         this.eventX = eventX;
-    }
-    
-    public String getAdditionalText() {
-        return additionalText;
-    }
-    public void setAdditionalText(String additionalText) {
+        this.eventY = eventY;
         this.additionalText = additionalText;
     }
-    public double getEventY() {
-        return eventY;
-    }
-    
-    public void setEventY(double eventY) {
-        this.eventY = eventY;
-    }
-    
+
     public String getEventCommand() {
         return eventCommand;
     }
-    
-    public void setEventCommand(String eventCommand) {
-        this.eventCommand = eventCommand;
+
+    public double getEventX() {
+        return eventX;
+    }
+
+    public double getEventY() {
+        return eventY;
+    }
+
+    public String getAdditionalText() {
+        return additionalText;
     }
     
     
