@@ -1,15 +1,15 @@
 package datahandler;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import game.connection.ConnectionNode;
+import game.config.ConnectionPreferences;
 import game.connection.ConnectionPool;
 import game.entrypoint.Application;
 
@@ -19,11 +19,48 @@ public class ConnectionPoolTest extends AbstractTestNGSpringContextTests{
     @Autowired
     ConnectionPool connectionPool;
     
+    @BeforeMethod
+    public void initPool(){
+        connectionPool.clear();
+    }
+    
     @Test
     public void testShouldFindOneAvailableConnectionNode(){
         long id = connectionPool.findAvailableConnectionNodeId();
         
         Assert.assertEquals(id, 0L);
+    }
+
+    @Test(expectedExceptions = {NoSuchElementException.class})
+    public void testShouldThrowNoSuchElementException(){
+        connectionPool.registerNewConnection(200L);
+        
+        Assert.assertEquals(connectionPool.getPoolSize(), 1);
+        
+        connectionPool.removeConnectionNode(null);
+     }
+    
+    @Test
+    public void testShouldReturnOneConnection(){
+        connectionPool.registerNewConnection(200L);
+        
+        Assert.assertEquals(connectionPool.getPoolSize(), 1);
+        
+        connectionPool.removeConnectionNode(200L);
+        
+        Assert.assertEquals(connectionPool.getPoolSize(), 0);
+    }
+    
+    @Test
+    public void testShouldReturnNull_poolIsFull(){
+        
+        for(int i = 0; i < ConnectionPreferences.SERVER_MAX_CAPACITY; i++){
+            connectionPool.registerNewConnection(200L + i);
+        }
+        
+        Long id = connectionPool.findAvailableConnectionNodeId();
+        
+        Assert.assertEquals(id, null);
     }
     
     @Test
@@ -31,10 +68,7 @@ public class ConnectionPoolTest extends AbstractTestNGSpringContextTests{
         
         connectionPool.registerNewConnection(200L);
         long id = connectionPool.findAvailableConnectionNodeId();
-        
-        Map<Long, ConnectionNode> connectionPool = new HashMap<>();
-        System.out.println(connectionPool.get(200l));
-        
+      
         Assert.assertEquals(id, 1L);
     }
 }

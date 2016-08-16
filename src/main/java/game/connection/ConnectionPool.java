@@ -21,15 +21,18 @@ public class ConnectionPool {
     private Map<Long, ConnectionNode> connectionPool;
 
     public void removeConnectionNode(Long playerId) {
-        /*
-         * if(playerId == null){ throw new
-         * NullPointerException("(E): Player id cannot be null!"); }
-         */
-        Optional<Long> id = Optional.of(playerId);
         System.out.println("Connection node removed with id " + playerId);
-        connectionPool.remove(id.get());
+        connectionPool.remove(playerId);
     }
 
+    public void clear(){
+        connectionPool.clear();
+    }
+    
+    public int getPoolSize(){
+        return connectionPool.size();
+    }
+    
     public Long registerNewConnection(Long playerId) {
         if (playerId == null) {
             throw new NullPointerException("(E): Player id cannot be null!");
