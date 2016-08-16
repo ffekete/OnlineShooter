@@ -28,7 +28,12 @@ public class ConnectionNodeBuilder {
             throw new NullPointerException("(E) connectionId cannot be null!");
         }
         
-        return new ConnectionNode(providePlayerDataPath, connectionId);
+        ConnectionNode result = new ConnectionNode(providePlayerDataPath, connectionId); 
+        
+        providePlayerDataPath = null;
+        connectionId = null;
+        
+        return result;
     }
     
 }
