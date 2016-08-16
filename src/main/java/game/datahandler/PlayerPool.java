@@ -15,6 +15,7 @@ import game.connection.ConnectionPool;
 import game.datatypes.HighScore;
 import game.datatypes.PlayerData;
 import game.datatypes.RegistrationData;
+import game.transformer.RegistrationDataToPlayerDataTransformer;
 
 @Component
 public class PlayerPool {
@@ -27,6 +28,9 @@ public class PlayerPool {
     
     @Autowired
     private ItemHandler itemHandler;
+    
+    @Autowired
+    RegistrationDataToPlayerDataTransformer registrationDataToPlayerDataTransformer;
     
     private Map<Long, PlayerData> playerPool;
 
@@ -53,7 +57,7 @@ public class PlayerPool {
         if (playerPool.containsKey(newPlayerId)) {
             return false;
         } else {
-            PlayerData newPlayerData = new PlayerData(newPlayerId, data.getName(), data.getShipType());
+            PlayerData newPlayerData = registrationDataToPlayerDataTransformer.transform(data, newPlayerId);
             Long connectionId = connectionPool.registerNewConnection(newPlayerId);
 
             if (connectionId != null) {
