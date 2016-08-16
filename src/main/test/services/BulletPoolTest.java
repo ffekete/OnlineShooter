@@ -39,6 +39,6 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests{
         bp.addBullet(player.getId());
         
         // then
-        Assert.assertEquals(bp.getBulletPool().size(), 1);
+        Assert.assertEquals(bp.getNuberOfExistingBullets(), 1);
     }
 }

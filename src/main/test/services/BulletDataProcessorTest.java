@@ -64,7 +64,7 @@ public class BulletDataProcessorTest extends AbstractTestNGSpringContextTests{
         }
         
         BulletData bullet = null;
-        bullet = (BulletData) bp.getBulletPool().get(0);
+        bullet = (BulletData) bp.getNthBullet(0);
         
         double bulletX = bullet.getX();
         double bulletY = bullet.getY();

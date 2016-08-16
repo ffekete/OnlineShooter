@@ -57,6 +57,17 @@ public class BulletPool {
         return allBulletsOnScreen;
     }
 
+    public Bullet getNthBullet(int index){
+        if(index > bulletPool.size()){
+            throw new IllegalArgumentException("(E): Index cannot exceed bullet pool size!");
+        }
+        return bulletPool.get(index);
+    }
+    
+    public int getNuberOfExistingBullets(){
+        return bulletPool.size();
+    }
+    
     public void addBullet(Long playerId) {
         if (playerId != null) {
             PlayerData player = playerPool.getPlayerById(playerId);
