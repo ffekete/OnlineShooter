@@ -35,7 +35,7 @@ public class BulletPool {
         bulletPool = new CopyOnWriteArrayList<Bullet>();
     }
 
-    public synchronized List<Bullet> getAllBulletsOnScreen(Long playerId) {
+    public List<Bullet> getAllBulletsOnScreen(Long playerId) {
         CopyOnWriteArrayList<Bullet> allBulletsOnScreen = new CopyOnWriteArrayList<Bullet>();
 
         if (playerId != null) {
@@ -57,7 +57,7 @@ public class BulletPool {
         return allBulletsOnScreen;
     }
 
-    public synchronized void addBullet(Long playerId) {
+    public void addBullet(Long playerId) {
         if (playerId != null) {
             PlayerData player = playerPool.getPlayerById(playerId);
             if (player != null && player.canShootWeapon()) {
