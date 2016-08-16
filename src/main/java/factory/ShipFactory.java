@@ -22,8 +22,8 @@ public class ShipFactory {
             case "Deltawing":
                 return new Deltawing();
             case "Cargoship":
-            	List<SpawnableItem> carriage = CarriageBuilder.buildRandomCargo();
-            	return new CargoShip(carriage);
+                List<SpawnableItem> carriage = CarriageBuilder.buildRandomCargo();
+                return new CargoShip(carriage);
             default:
                 throw new RuntimeException("Unknownw ship type!");
         }

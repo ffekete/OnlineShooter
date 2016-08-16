@@ -83,7 +83,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
 
         boolean playerIsVulnerable = player.getInvulnerabilityCounter() < 1L; // true, if player is not invulnerable
         if(playerIsVulnerable == false){
-        	return; // player is invulnerable, no need to check against the bullets
+            return; // player is invulnerable, no need to check against the bullets
         }
         
         while (bulletIterator.hasNext()) {
@@ -101,7 +101,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                     long hpRemaining = player.decreaseHp(actualBullet.getDamage());
                     if (hpRemaining < 1L) {
 
-                    	/* populate death event to client side */
+                        /* populate death event to client side */
                         eventSender.sendItemDestroyedNotification(player.getSpaceShip());
                         
                         PlayerData playerWhoKilledMe = playerPool.getPlayerById(actualBullet.getPlayerId());
@@ -156,7 +156,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
     }
 
     @Override
-	public void updatePlayerData() throws InterruptedException {
+    public void updatePlayerData() throws InterruptedException {
         Iterator<Long> shipIds = playerPool.getKeySetIterator();
 
         while (shipIds.hasNext()) {
@@ -184,10 +184,10 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
     }
 
     /* (non-Javadoc)
-	 * @see game.service.PlayerDataProcessorInterface#checkIfPlayerGetsAnItem(game.datatypes.PlayerData)
-	 */
+     * @see game.service.PlayerDataProcessorInterface#checkIfPlayerGetsAnItem(game.datatypes.PlayerData)
+     */
     @Override
-	public void checkIfPlayerGetsAnItem(PlayerData player) {
+    public void checkIfPlayerGetsAnItem(PlayerData player) {
         CopyOnWriteArrayList<SpawnableItem> items = (CopyOnWriteArrayList<SpawnableItem>) itemPool
                 .getAllItemsOnScreen(player);
 

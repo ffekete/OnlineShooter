@@ -21,7 +21,7 @@ public class BulletDataProcessor implements BulletDataProcessorInterface {
     private CoordinateHandler coordinateHandler;
     
     private void updateBulletCoordinates(Bullet bullet){
-    	Coordinate coordinates = coordinateHandler.calculateItemCoordinates(bullet, GameConfig.BULLET_INITIAL_SPEED);
+        Coordinate coordinates = coordinateHandler.calculateItemCoordinates(bullet, GameConfig.BULLET_INITIAL_SPEED);
         
         bullet.setX(coordinates.getX());
         bullet.setY(coordinates.getY());
@@ -39,7 +39,7 @@ public class BulletDataProcessor implements BulletDataProcessorInterface {
     }
     
     @Override
-	public void updateBulletData(){
+    public void updateBulletData(){
         Iterator<Bullet> bit = bulletPool.getIteratorForBullets();
         
         while(bit.hasNext()){

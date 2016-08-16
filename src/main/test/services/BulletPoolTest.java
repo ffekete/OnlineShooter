@@ -16,29 +16,29 @@ import game.entrypoint.Application;
 @ContextConfiguration(classes={Application.class})
 public class BulletPoolTest extends AbstractTestNGSpringContextTests{
 
-	@Autowired
-	PlayerPool pp;
-	
-	@Autowired BulletPool bp;
-	
-	PlayerData player;
-	
-	@BeforeMethod
-	public void initBulletPool(){
-		bp.clearPool();
-		player = new PlayerData(200L, "P01", "Deltawing");
-	}
-	
-	@Test
-	public void testShouldCreateOneBullet(){
-		// given
-		player.setWeapon(new GatlingGun()); // setting this weapon for player ship because it will create one bullet
-		pp.getPool().put(200L, player);
-		
-		// when
-		bp.addBullet(player.getId());
-		
-		// then
-		Assert.assertEquals(bp.getBulletPool().size(), 1);
-	}
+    @Autowired
+    PlayerPool pp;
+    
+    @Autowired BulletPool bp;
+    
+    PlayerData player;
+    
+    @BeforeMethod
+    public void initBulletPool(){
+        bp.clearPool();
+        player = new PlayerData(200L, "P01", "Deltawing");
+    }
+    
+    @Test
+    public void testShouldCreateOneBullet(){
+        // given
+        player.setWeapon(new GatlingGun()); // setting this weapon for player ship because it will create one bullet
+        pp.getPool().put(200L, player);
+        
+        // when
+        bp.addBullet(player.getId());
+        
+        // then
+        Assert.assertEquals(bp.getBulletPool().size(), 1);
+    }
 }

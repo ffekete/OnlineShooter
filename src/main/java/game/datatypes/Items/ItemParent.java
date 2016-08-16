@@ -37,10 +37,10 @@ public abstract class ItemParent implements SpawnableItem {
     }
     
     public void setAngle(double angle){
-    	this.angle = angle;
+        this.angle = angle;
     }
     
     public double getAngle(){
-    	return this.angle;
+        return this.angle;
     }
 }

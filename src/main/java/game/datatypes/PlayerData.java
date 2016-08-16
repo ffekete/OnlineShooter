@@ -170,7 +170,7 @@ public class PlayerData{
     }
     
     public void setShieldProtection(long value){
-    	getShield().setProtection(value);
+        getShield().setProtection(value);
     }
     
     public void decreaseInvulnerabilityCounter(long value){

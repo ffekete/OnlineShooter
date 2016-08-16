@@ -9,8 +9,8 @@ import game.interfaces.SpawnableItem;
 
 public class CargoShip extends ShipParent{
 
-	private List<SpawnableItem> carriage;
-	
+    private List<SpawnableItem> carriage;
+    
     public CargoShip(List<SpawnableItem> carriage){
         super.setCoordinates(new Coordinate());
         this.setHp(ShipConfig.CARGO_SHIP_INIT_HP);
@@ -51,6 +51,6 @@ public class CargoShip extends ShipParent{
     }
     
     public List<SpawnableItem> dropItem(){
-    	return this.carriage;
+        return this.carriage;
     }
 }

@@ -20,59 +20,59 @@ import game.interfaces.BulletDataProcessorInterface;
 @ContextConfiguration(classes=Application.class)
 public class BulletDataProcessorTest extends AbstractTestNGSpringContextTests{
 
-	@Autowired
-	PlayerPool pp;
-	
-	@Autowired
-	BulletDataProcessorInterface bdp;
-	
-	@Autowired BulletPool bp;
-	
-	PlayerData player;
-	
-	@BeforeMethod
-	public void initTests(){
-		bp.clearPool();
-		player = new PlayerData(200L, "P01", "Deltawing");
-	}
-	
-	@DataProvider(name = "bulletDataInput")
-	Object[][] bulletDataInput(){
-		return new Object[][]{
-		//   x,y,angle,number of cycles to count, expectedX, expectedY
- 			{0.0d, 0.0d, 0.0d, 1, GameConfig.BULLET_INITIAL_SPEED, 0.0D},
- 			{0.0d, 0.0d, 0.0d, 3, 3 * GameConfig.BULLET_INITIAL_SPEED, 0.0D},
- 			{GameConfig.STAGE_POS_LIMIT_X, 0.0d, 0.0d, 1, GameConfig.STAGE_NEG_LIMIT_X + GameConfig.BULLET_INITIAL_SPEED, 0.0D},
- 			{GameConfig.STAGE_NEG_LIMIT_X, 0.0d, 180.0d, 1, GameConfig.STAGE_POS_LIMIT_X - GameConfig.BULLET_INITIAL_SPEED, 0.0D},
-		};
-	}
-	
-	@Test(dataProvider = "bulletDataInput")
-	public void testShouldUpdateBulletCoordinates(double x, double y, double angle, int cycles, double expectedX, double expectedY){
-		// given
-		System.out.println("Fakka " + player);
-		player.setWeapon(new GatlingGun()); // setting this weapon for player ship because it will create one bullet
-		player.setX(x);
-		player.setY(y);
-		player.setShipAngle(angle);
-		pp.getPool().put(200L, player);
-		bp.addBullet(player.getId());
+    @Autowired
+    PlayerPool pp;
+    
+    @Autowired
+    BulletDataProcessorInterface bdp;
+    
+    @Autowired BulletPool bp;
+    
+    PlayerData player;
+    
+    @BeforeMethod
+    public void initTests(){
+        bp.clearPool();
+        player = new PlayerData(200L, "P01", "Deltawing");
+    }
+    
+    @DataProvider(name = "bulletDataInput")
+    Object[][] bulletDataInput(){
+        return new Object[][]{
+        //   x,y,angle,number of cycles to count, expectedX, expectedY
+             {0.0d, 0.0d, 0.0d, 1, GameConfig.BULLET_INITIAL_SPEED, 0.0D},
+             {0.0d, 0.0d, 0.0d, 3, 3 * GameConfig.BULLET_INITIAL_SPEED, 0.0D},
+             {GameConfig.STAGE_POS_LIMIT_X, 0.0d, 0.0d, 1, GameConfig.STAGE_NEG_LIMIT_X + GameConfig.BULLET_INITIAL_SPEED, 0.0D},
+             {GameConfig.STAGE_NEG_LIMIT_X, 0.0d, 180.0d, 1, GameConfig.STAGE_POS_LIMIT_X - GameConfig.BULLET_INITIAL_SPEED, 0.0D},
+        };
+    }
+    
+    @Test(dataProvider = "bulletDataInput")
+    public void testShouldUpdateBulletCoordinates(double x, double y, double angle, int cycles, double expectedX, double expectedY){
+        // given
+        System.out.println("Fakka " + player);
+        player.setWeapon(new GatlingGun()); // setting this weapon for player ship because it will create one bullet
+        player.setX(x);
+        player.setY(y);
+        player.setShipAngle(angle);
+        pp.getPool().put(200L, player);
+        bp.addBullet(player.getId());
 
-		// when
-		for(int i = 1; i <= cycles; i++){
-			bdp.updateBulletData();
-		}
-		
-		BulletData bullet = null;
-		bullet = (BulletData) bp.getBulletPool().get(0);
-		
-		double bulletX = bullet.getX();
-		double bulletY = bullet.getY();
-		
-		// then
-		
-		Assert.assertNotNull(bullet);
-		Assert.assertEquals(bulletX, expectedX,0.0001, "Expected and calculated X coordinates does not match! (expected: " + expectedX + ", calculated: " + bulletX + ")");
-		Assert.assertEquals(bulletY, expectedY,0.0001, "Expected and calculated Y coordinates does not match! (expected: " + expectedY + ", calculated: " + bulletY + ")");
-	}
+        // when
+        for(int i = 1; i <= cycles; i++){
+            bdp.updateBulletData();
+        }
+        
+        BulletData bullet = null;
+        bullet = (BulletData) bp.getBulletPool().get(0);
+        
+        double bulletX = bullet.getX();
+        double bulletY = bullet.getY();
+        
+        // then
+        
+        Assert.assertNotNull(bullet);
+        Assert.assertEquals(bulletX, expectedX,0.0001, "Expected and calculated X coordinates does not match! (expected: " + expectedX + ", calculated: " + bulletX + ")");
+        Assert.assertEquals(bulletY, expectedY,0.0001, "Expected and calculated Y coordinates does not match! (expected: " + expectedY + ", calculated: " + bulletY + ")");
+    }
 }

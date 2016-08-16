@@ -13,10 +13,10 @@ public class ItemProcessor implements ItemProcessorInterface {
     ItemPool itemPool;
     
     /* (non-Javadoc)
-	 * @see game.service.ItemProcessorInterface#updateItemData()
-	 */
+     * @see game.service.ItemProcessorInterface#updateItemData()
+     */
     @Override
-	public void updateItemData(){
+    public void updateItemData(){
         itemPool.createNewRandomItem();
     }
     

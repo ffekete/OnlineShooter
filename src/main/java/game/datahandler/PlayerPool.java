@@ -35,11 +35,11 @@ public class PlayerPool {
     private Map<Long, PlayerData> playerPool;
 
     public Set<Long> getAllPlayerIds(){
-    	return playerPool.keySet();
+        return playerPool.keySet();
     }
     
     public Iterator<Long> getKeySetIterator(){
-    	return getAllPlayerIds().iterator();
+        return getAllPlayerIds().iterator();
     }
     
     /** This function should be called periodically from the game loop. */

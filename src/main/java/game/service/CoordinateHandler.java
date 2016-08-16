@@ -9,7 +9,7 @@ import game.interfaces.Spawnable;
 @Component
 public class CoordinateHandler {
 
-	public Coordinate calculateItemCoordinates(Spawnable item, double speed){
+    public Coordinate calculateItemCoordinates(Spawnable item, double speed){
         double resultx;
         double resulty;
         
@@ -27,5 +27,5 @@ public class CoordinateHandler {
         Coordinate coordinate = new Coordinate(resultx,  resulty);
         
         return coordinate;
-	}
+    }
 }

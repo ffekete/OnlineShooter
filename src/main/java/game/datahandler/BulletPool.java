@@ -19,16 +19,16 @@ public class BulletPool {
     private List<Bullet> bulletPool;
 
     public void clearPool(){
-    	bulletPool.clear();
+        bulletPool.clear();
     }
     
     public Iterator<Bullet> getIteratorForBullets(){
-    	return bulletPool.iterator();
+        return bulletPool.iterator();
     }
     
     public boolean removeBullet(Bullet bullet){
-    	boolean status = bulletPool.remove(bullet);
-    	return status;
+        boolean status = bulletPool.remove(bullet);
+        return status;
     }
     
     public BulletPool() {
