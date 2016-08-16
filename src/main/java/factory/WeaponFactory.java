@@ -31,7 +31,7 @@ public class WeaponFactory {
             weapon = new Shotgun();
             break;
         default:
-            break;
+            throw new RuntimeException("Unknownw weapon type!");
         }
 
         return weapon;

@@ -27,7 +27,7 @@ public class ShieldFactory {
             break;
 
         default:
-            break;
+            throw new RuntimeException("Unknownw shield type!");
         }
 
         return shield;
