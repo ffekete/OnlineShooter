@@ -37,7 +37,10 @@ public class ConnectionNodeTest{
             expectedExceptions = {NullPointerException.class})
     void testShouldThrowNullPointerException(String path, Long id){
         new ConnectionNodeBuilder().setConnectionId(id).setProvidePlayerDataPath(path).build();
-        
-        
+    }
+    
+    @Test(expectedExceptions = {NullPointerException.class})
+    void testShouldThrowNullPointerException_NoSetterWasInvoked(){
+        new ConnectionNodeBuilder().build();
     }
 }
