@@ -5,22 +5,22 @@ import game.controller.EventSender;
 import game.interfaces.Bullet;
 import game.interfaces.Spawnable;
 
-public class BulletData implements Bullet{
+public class BulletData implements Bullet {
     private double x;
     private double y;
     private double angle;
     private long age;
     private long playerId;
     private long damage;
-    
-    public boolean isAgeCounterExpired(){
-        if(age >= GameConfig.BULLET_MAX_AGE){
+
+    public boolean isAgeCounterExpired() {
+        if (age >= GameConfig.BULLET_MAX_AGE) {
             age = 0;
             return true;
         }
         return false;
     }
-    
+
     public double getAngle() {
         return angle;
     }
@@ -54,11 +54,11 @@ public class BulletData implements Bullet{
         this.playerId = playerId;
         this.damage = damage;
     }
-    
-    public void increaseAge(){
+
+    public void increaseAge() {
         this.age++;
     }
-    
+
     public long getAge() {
         return age;
     }
@@ -70,22 +70,22 @@ public class BulletData implements Bullet{
     public double getX() {
         return x;
     }
-    
+
     public void setX(double x) {
         this.x = x;
     }
-    
+
     public double getY() {
         return y;
     }
-    
+
     public void setY(double y) {
         this.y = y;
     }
 
     @Override
     public void effect() {
-        // empty        
+        // empty
     }
 
     @Override
@@ -95,15 +95,15 @@ public class BulletData implements Bullet{
 
     @Override
     public void hitDetected() {
-        // empty        
+        // empty
     }
 
     @Override
     public void hitDetected(Spawnable item) {
         // TODO Auto-generated method stub
-        
+
     }
-    
+
     @Override
     public void hitDetected(Spawnable item, EventSender eventSender) {
         eventSender.sendItemHitNotification(item);
@@ -111,6 +111,7 @@ public class BulletData implements Bullet{
 
     @Override
     public String getPhysicalRepresentation() {
-        return new String("{\"shape\": \"circle\", \"startx\": \"" + x + "\", \"starty\": \"" + y + "\", \"radius\" : \"15\"}");
+        return new String(
+                "{\"shape\": \"circle\", \"startx\": \"" + x + "\", \"starty\": \"" + y + "\", \"radius\" : \"15\"}");
     }
 }

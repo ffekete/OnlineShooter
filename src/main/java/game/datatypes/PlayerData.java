@@ -13,31 +13,31 @@ import game.interfaces.Ship;
 import game.interfaces.Weapon;
 import game.service.Spawner;
 
-public class PlayerData{
-    
+public class PlayerData {
+
     private Ship spaceShip;
-    
+
     private String name;
     private long id;
-    
+
     private Canvas canvas;
-    
+
     private long respawnTime;
 
     private double previousAngle = 0.0d;
-    
+
     private int inactivityCounter = 0;
-    
+
     private long invulnerabilityCounter = GameConfig.INVULN_CTR_MAX_VALUE;
-    
+
     private long mouseX;
     private long mouseY;
-    
+
     private long score;
-    
+
     private long connectionId;
-    
-    public PlayerData(PlayerData player2){
+
+    public PlayerData(PlayerData player2) {
         this.spaceShip = this.cloneSpaceShip(player2.getSpaceShip());
         this.setConnectionId(player2.getConnectionId());
         this.setHp(player2.getHp());
@@ -58,15 +58,15 @@ public class PlayerData{
         this.setPreviousAngle(this.getPreviousAngle());
         this.setCanvas(player2.getCanvas());
     }
-    
+
     public PlayerData(Long id, String name, String shipType) {
         this.name = name;
         this.id = id;
-        
+
         this.spaceShip = ShipFactory.createShip(shipType);
-        
+
         Spawner.spawn(this.getSpaceShip());
-        
+
         this.mouseX = 0L;
         this.mouseY = 0L;
         this.getSpaceShip().setAngle(0.0d);
@@ -80,16 +80,16 @@ public class PlayerData{
         this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
         this.setCanvas(new Canvas(0, 0, CanvasConstants.CANVAS_HEIGHT, CanvasConstants.CANVAS_WIDTH));
     }
-    
-    public void updateCanvasProperties(long x, long y, long height, long width){
+
+    public void updateCanvasProperties(long x, long y, long height, long width) {
         this.canvas.setX(x);
         this.canvas.setY(y);
         this.canvas.setHeight(height);
         this.canvas.setWidth(width);
     }
-    
-    public void kill(){
-        Spawner.spawn(this.getSpaceShip()); 
+
+    public void kill() {
+        Spawner.spawn(this.getSpaceShip());
         this.inactivityCounter = 0;
         this.getSpaceShip().resetHp();
         this.invulnerabilityCounter = GameConfig.INVULN_CTR_MAX_VALUE;
@@ -100,35 +100,35 @@ public class PlayerData{
         this.getSpaceShip().setShield(ShieldFactory.createShield(ShieldId.NORMAL_SHIELD));
         this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
     }
-    
-    public long getActualWeaponAmmo(){
+
+    public long getActualWeaponAmmo() {
         return getWeapon().getAmmo();
     }
-    
-    public void decreasAmmoForPlayerWeapon(long amount){
+
+    public void decreasAmmoForPlayerWeapon(long amount) {
         getWeapon().decreaseAmmo(amount);
     }
-    
-    public void startShootingRateCooldownEffect(){
+
+    public void startShootingRateCooldownEffect() {
         getWeapon().startShootingRateCooldownEffect();
     }
-    
-    public List<Bullet> createBulletWithPlayerWeapon(){
+
+    public List<Bullet> createBulletWithPlayerWeapon() {
         return getWeapon().createBullet(this);
     }
-    
-    public boolean canShootWeapon(){
+
+    public boolean canShootWeapon() {
         return getWeapon().canShoot();
     }
-    
+
     public double getScreenHalfWidth() {
         return canvas.getHalfWidth();
     }
-    
+
     public double getScreenHalfHeight() {
         return canvas.getHalfHeight();
     }
-    
+
     public Canvas getCanvas() {
         return canvas;
     }
@@ -141,58 +141,59 @@ public class PlayerData{
         return respawnTime;
     }
 
-    public boolean isSpawned(){
-        if(this.respawnTime == 0L) return true;
+    public boolean isSpawned() {
+        if (this.respawnTime == 0L)
+            return true;
         return false;
     }
-    
-    public void initWeapon(){
+
+    public void initWeapon() {
         this.getSpaceShip().initWeapon();
     }
-    
-    public void decreasePlayerRespawnTime(){
-        if(this.respawnTime > 0L)
+
+    public void decreasePlayerRespawnTime() {
+        if (this.respawnTime > 0L)
             this.respawnTime--;
     }
-    
-    public void increaseInactivityCounter(){
+
+    public void increaseInactivityCounter() {
         inactivityCounter++;
     }
-    
-    public void increaseShieldPower(){
+
+    public void increaseShieldPower() {
         getShield().increaseShieldPower();
     }
-    
-    public long decreaseHp(long value){
+
+    public long decreaseHp(long value) {
         long hpRemaining = getSpaceShip().decreaseHp(value);
-       
+
         return hpRemaining;
     }
-    
-    public void setShieldProtection(long value){
+
+    public void setShieldProtection(long value) {
         getShield().setProtection(value);
     }
-    
-    public void decreaseInvulnerabilityCounter(long value){
-        if(invulnerabilityCounter > 0L){
+
+    public void decreaseInvulnerabilityCounter(long value) {
+        if (invulnerabilityCounter > 0L) {
             invulnerabilityCounter -= value;
-            if(invulnerabilityCounter < 0L){
+            if (invulnerabilityCounter < 0L) {
                 invulnerabilityCounter = 0L;
             }
         }
     }
-    
-    public void increaseSpeed(double value){
+
+    public void increaseSpeed(double value) {
         double speed = this.getSpaceShip().getSpeed() + value;
         this.setSpeed(speed);
     }
-    
+
     /* Getters/setters and constructors */
-    
+
     public String getName() {
         return name;
     }
-    
+
     public String getShipType() {
         return this.getSpaceShip().getShipType();
     }
@@ -240,10 +241,10 @@ public class PlayerData{
     public void setSpaceShip(Ship spaceShip) {
         this.spaceShip = spaceShip;
     }
-    
+
     public Ship cloneSpaceShip(Ship spaceShip) {
         Ship spaceShipToStore = ShipFactory.createShip(spaceShip.getShipType());
-        
+
         spaceShipToStore.setColor(spaceShip.getColor());
         spaceShipToStore.setCoordinates(spaceShip.getCoordinates().getX(), spaceShip.getCoordinates().getY());
         spaceShipToStore.setHp(spaceShip.getHp());
@@ -254,10 +255,9 @@ public class PlayerData{
         spaceShipToStore.setShipType(spaceShip.getShipType());
         spaceShipToStore.setSpeed(spaceShip.getSpeed());
         spaceShipToStore.setWeapon(spaceShip.getWeapon());
-        
+
         return spaceShipToStore;
     }
-    
 
     public void setInvulnerabilityCounter(long invulnerabilityCounter) {
         this.invulnerabilityCounter = invulnerabilityCounter;
@@ -282,35 +282,43 @@ public class PlayerData{
     public int getInactivityCounter() {
         return inactivityCounter;
     }
+
     public void setInactivityCounter(int inactivityCounter) {
         this.inactivityCounter = inactivityCounter;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public double getX() {
         return getSpaceShip().getX();
     }
-    
+
     public void setX(double x) {
         this.getSpaceShip().setX(x);
     }
-    
+
     public double getY() {
         return getSpaceShip().getY();
     }
+
     public void setY(double y) {
         this.getSpaceShip().setY(y);
     }
+
     public Long getMouseX() {
         return mouseX;
     }
+
     public void setMouseX(Long mouseX) {
         this.mouseX = mouseX;
     }
@@ -318,14 +326,15 @@ public class PlayerData{
     public Long getMouseY() {
         return mouseY;
     }
+
     public void setMouseY(Long mouseY) {
         this.mouseY = mouseY;
     }
-    
+
     public PlayerData() {
         super();
     }
-    
+
     public Long getHp() {
         return this.getSpaceShip().getHp();
     }
@@ -334,10 +343,10 @@ public class PlayerData{
         this.getSpaceShip().setHp(hp);
     }
 
-    public boolean isInvulnerable(){
+    public boolean isInvulnerable() {
         return this.getInvulnerabilityCounter() > 0L;
     }
-    
+
     public Weapon getWeapon() {
         return this.getSpaceShip().getWeapon();
     }
@@ -354,12 +363,13 @@ public class PlayerData{
         this.getSpaceShip().setManeuverability(maneuverability);
     }
 
-    public void increaseManeuverablility(double value){
+    public void increaseManeuverablility(double value) {
         double maneuverability = this.getSpaceShip().getManeuverability() - value;
-        if(maneuverability < 1.0d) maneuverability = 1.0d;
+        if (maneuverability < 1.0d)
+            maneuverability = 1.0d;
         this.setManeuverability(maneuverability);
     }
-    
+
     public Shield getShield() {
         return this.getSpaceShip().getShield();
     }
@@ -376,11 +386,11 @@ public class PlayerData{
         this.score = score;
     }
 
-    public void increaseScore(long value){
+    public void increaseScore(long value) {
         score += value;
     }
-    
-    public String toString(){
+
+    public String toString() {
         return this.name + " " + this.mouseX + " " + this.mouseY;
     }
 }

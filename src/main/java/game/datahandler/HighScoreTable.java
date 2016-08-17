@@ -18,34 +18,34 @@ import game.service.HighScoreComparator;
 @Component
 public class HighScoreTable {
     private List<HighScore> highScore;
-    
-    public HighScoreTable(){
+
+    public HighScoreTable() {
         highScore = new ArrayList<>();
     }
-    
-    public void KeepTopThreePlayersInHighScoreTable(){
+
+    public void KeepTopThreePlayersInHighScoreTable() {
         Collections.sort(highScore, new HighScoreComparator());
-        if(highScore.size() > 3 ){
-            for(int i = 3; i < highScore.size(); i++){
+        if (highScore.size() > 3) {
+            for (int i = 3; i < highScore.size(); i++) {
                 highScore.remove(i);
             }
         }
     }
-    
-    public void addScore(HighScore hs){
+
+    public void addScore(HighScore hs) {
         highScore.add(hs);
-    }    
-    
+    }
+
     @GET
     @Path("/scores")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<String> getThreeBestScores(){
+    public List<String> getThreeBestScores() {
         ArrayList<String> scores = new ArrayList<>();
-        
-        for(int i = 0; i < highScore.size() && i < 3; i++){
+
+        for (int i = 0; i < highScore.size() && i < 3; i++) {
             scores.add(highScore.get(i).toString());
         }
-        
+
         return scores;
     }
 }

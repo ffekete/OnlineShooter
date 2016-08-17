@@ -12,6 +12,7 @@ import factory.ShieldFactory;
 import factory.WeaponFactory;
 import game.config.GameConfig;
 import game.config.ShieldId;
+import game.config.SpawnableItemTypeConstants;
 import game.config.WeaponId;
 import game.datatypes.PlayerData;
 import game.datatypes.Items.HealthPack;
@@ -28,7 +29,7 @@ public class ItemPool {
 
     @Autowired
     private ItemHandler itemHandler;
-    
+
     public ItemPool() {
         itemPool = new CopyOnWriteArrayList<SpawnableItem>();
     }
@@ -43,7 +44,7 @@ public class ItemPool {
 
         while (bit.hasNext()) {
             SpawnableItem item = bit.next();
-            
+
             if (itemHandler.isItOnScreen(playerData, item)) {
                 allItemsOnScreen.add(item);
             }
@@ -56,58 +57,53 @@ public class ItemPool {
     }
 
     public void createNewRandomItem() {
-        Random random = new Random();
-        SpawnableItem newItem = null;
-
-        if (itemPool.size() < GameConfig.MAX_ITEMS_ON_STAGE) {
-            int itemSpawned = random.nextInt(GameConfig.ITEM_SPAWNING_RATE);
-
-            switch (itemSpawned) {
-            case 1:
-                newItem = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.GATLING_GUN);
+        if (isPlaceItem()) {
+            switch (new Random().nextInt(15)) {
+            case SpawnableItemTypeConstants.GATLING_GUN:
+                addItem((SpawnableItem) WeaponFactory.createWeapon(WeaponId.GATLING_GUN));
                 break;
-            case 2:
-                newItem = (SpawnableItem) new IncreaseDamage();
+            case SpawnableItemTypeConstants.INCREASE_DAMAGE:
+                addItem((SpawnableItem) new IncreaseDamage());
                 break;
-            case 3:
-                newItem = (SpawnableItem) new HealthPack();
+            case SpawnableItemTypeConstants.HEALTH_PACK:
+                addItem((SpawnableItem) new HealthPack());
                 break;
-            case 4:
-                newItem = (SpawnableItem) new IncreaseRateOfFire();
+            case SpawnableItemTypeConstants.INCRASE_RATE_OF_FIRE:
+                addItem((SpawnableItem) new IncreaseRateOfFire());
                 break;
-            case 5:
-                newItem = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.LASER_CANNON);
+            case SpawnableItemTypeConstants.LASER_CANNON:
+                addItem((SpawnableItem) WeaponFactory.createWeapon(WeaponId.LASER_CANNON));
                 break;
-            case 6:
-                newItem = (SpawnableItem) new IncreaseMAneuverability();
+            case SpawnableItemTypeConstants.INCREASE_MANEUVERABILITY:
+                addItem((SpawnableItem) new IncreaseMAneuverability());
                 break;
-            case 7:
-                newItem = (SpawnableItem) new IncreaseSpeed();
+            case SpawnableItemTypeConstants.INCREASE_SPEED:
+                addItem((SpawnableItem) new IncreaseSpeed());
                 break;
-            case 8:
-            case 9:
-            case 10:
-            case 11:
-                newItem = (SpawnableItem) new IncreaseScore();
-                break;                
-            case 12:
-                newItem = (SpawnableItem) ShieldFactory.createShield(ShieldId.ATOM_SHIELD);
+            case SpawnableItemTypeConstants.INCREASE_SCORE_1:
+            case SpawnableItemTypeConstants.INCREASE_SCORE_2:
+            case SpawnableItemTypeConstants.INCREASE_SCORE_3:
+            case SpawnableItemTypeConstants.INCREASE_SCORE_4:
+                addItem((SpawnableItem) new IncreaseScore());
                 break;
-            case 13:
-                newItem = (SpawnableItem) ShieldFactory.createShield(ShieldId.PLASMA_SHIELD);
+            case SpawnableItemTypeConstants.ATOM_SHIELD:
+                addItem((SpawnableItem) ShieldFactory.createShield(ShieldId.ATOM_SHIELD));
                 break;
-            case 14:
-                newItem = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.DOUBLE_GATLING);
+            case SpawnableItemTypeConstants.PLASMA_SHIELD:
+                addItem((SpawnableItem) ShieldFactory.createShield(ShieldId.PLASMA_SHIELD));
                 break;
-            case 15:
-                newItem = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.SHOTGUN);
+            case SpawnableItemTypeConstants.DOUBLE_GATLING_GUN:
+                addItem((SpawnableItem) WeaponFactory.createWeapon(WeaponId.DOUBLE_GATLING));
                 break;
-            default:
+            case SpawnableItemTypeConstants.SHOTGUN:
+                addItem((SpawnableItem) WeaponFactory.createWeapon(WeaponId.SHOTGUN));
                 break;
-            }
-            if (newItem != null) {
-                addItem(newItem);
             }
         }
+    }
+
+    private boolean isPlaceItem() {
+        return (itemPool.size() < GameConfig.MAX_ITEMS_ON_STAGE
+                && (new Random().nextInt(GameConfig.ITEM_SPAWNING_RATE) < 16));
     }
 }
