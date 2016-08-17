@@ -22,6 +22,7 @@ import game.datatypes.Items.IncreaseRateOfFire;
 import game.datatypes.Items.IncreaseScore;
 import game.datatypes.Items.IncreaseSpeed;
 import game.interfaces.ItemPoolList;
+import game.interfaces.PlayerPoolMap;
 import game.interfaces.SpawnableItem;
 
 @Component
@@ -32,7 +33,7 @@ public class ItemPool implements ItemPoolList<SpawnableItem> {
     private ItemHandler itemHandler;
 
     @Autowired
-    private PlayerPool playerPool;
+    private PlayerPoolMap<Long, PlayerData> playerPool;
 
     public ItemPool() {
         itemPool = new CopyOnWriteArrayList<SpawnableItem>();

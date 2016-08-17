@@ -4,14 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import game.datahandler.BulletPool;
 import game.datahandler.HighScoreTable;
-import game.datahandler.ItemPool;
-import game.datahandler.PlayerPool;
 import game.datatypes.PlayerData;
 import game.interfaces.Bullet;
 import game.interfaces.BulletPoolList;
 import game.interfaces.ItemPoolList;
+import game.interfaces.PlayerPoolMap;
 import game.interfaces.SpawnableItem;
 import game.model.SentPlayerData;
 
@@ -20,7 +18,7 @@ import game.model.SentPlayerData;
 public class PlayerDataToSentPlayerDataTransformer {
 
     @Autowired
-    PlayerPool playerPool;
+    PlayerPoolMap<Long, PlayerData> playerPool;
 
     @Autowired
     BulletPoolList<Bullet> bulletPool;
@@ -42,7 +40,7 @@ public class PlayerDataToSentPlayerDataTransformer {
         sentPlayerData.setVisibleBullets(bulletPool.getAllOnScreen(playerId));
         sentPlayerData.setX(playerData.getX());
         sentPlayerData.setY(playerData.getY());
-        sentPlayerData.setVisiblePlayers(playerPool.getAllPlayersOnScreen(playerId));
+        sentPlayerData.setVisiblePlayers(playerPool.getAllOnScreen(playerId));
         sentPlayerData.setShipHp(playerData.getHp());
         sentPlayerData.setInvulnerable(playerData.isInvulnerable());
         sentPlayerData.setWeapon(playerData.getWeapon());

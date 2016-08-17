@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 
 import game.config.BrokerPaths;
 import game.config.EndpointPaths;
-import game.datahandler.PlayerPool;
 import game.datatypes.PlayerData;
+import game.interfaces.PlayerPoolMap;
 import game.model.SentPlayerData;
 import game.transformer.PlayerDataToSentPlayerDataTransformer;
 
@@ -19,11 +19,11 @@ public class DataRequestController {
     PlayerDataToSentPlayerDataTransformer playerDataToSentPlayerDataTransformer;
     
     @Autowired
-    private PlayerPool playerPool;
+    private PlayerPoolMap<Long, PlayerData> playerPool;
     
     private SentPlayerData handleRequest(Long id){
         if(id != null){
-            PlayerData currentPlayer = playerPool.getPlayerById(id);
+            PlayerData currentPlayer = playerPool.get(id);
             if(currentPlayer != null){
                 playerPool.resetInactivityOfPlayer(id);
                 return playerDataToSentPlayerDataTransformer.transform(currentPlayer);

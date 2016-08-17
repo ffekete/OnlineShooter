@@ -7,19 +7,18 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import game.datahandler.BulletPool;
-import game.datahandler.PlayerPool;
 import game.datatypes.PlayerData;
 import game.datatypes.weapons.GatlingGun;
 import game.entrypoint.Application;
 import game.interfaces.Bullet;
 import game.interfaces.BulletPoolList;
+import game.interfaces.PlayerPoolMap;
 
 @ContextConfiguration(classes={Application.class})
 public class BulletPoolTest extends AbstractTestNGSpringContextTests{
 
     @Autowired
-    PlayerPool pp;
+    PlayerPoolMap<Long, PlayerData> pp;
     
     @Autowired BulletPoolList<Bullet> bp;
     
