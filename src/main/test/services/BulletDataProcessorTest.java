@@ -50,7 +50,6 @@ public class BulletDataProcessorTest extends AbstractTestNGSpringContextTests{
     @Test(dataProvider = "bulletDataInput")
     public void testShouldUpdateBulletCoordinates(double x, double y, double angle, int cycles, double expectedX, double expectedY){
         // given
-        System.out.println("Fakka " + player);
         player.setWeapon(new GatlingGun()); // setting this weapon for player ship because it will create one bullet
         player.setX(x);
         player.setY(y);

@@ -3,7 +3,6 @@ package game.connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,12 +33,7 @@ public class ConnectionPool {
     }
     
     public Long registerNewConnection(Long playerId) {
-        if (playerId == null) {
-            throw new NullPointerException("(E): Player id cannot be null!");
-        }
-
         Long connectionId = findAvailableConnectionNodeId();
-
         /*
          * If there is a free connection slot, register a new connection and
          * store it in the pool

@@ -27,7 +27,7 @@ public class DataRequestController {
             if(currentPlayer != null){
                 playerPool.resetInactivityOfPlayer(id);
                 return playerDataToSentPlayerDataTransformer.transform(currentPlayer);
-            }            
+            }
         }
         return null;
     }
