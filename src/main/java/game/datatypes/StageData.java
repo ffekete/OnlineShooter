@@ -8,21 +8,21 @@ public class StageData {
     private static long stageMinY;
     private static long stageMaxX;
     private static long stageMaxY;
-    
-    public static StageData getStageData(){
-        if(data == null){
+
+    public static StageData getStageData() {
+        if (data == null) {
             data = new StageData();
         }
         return data;
     }
-    
-    private StageData(){
+
+    private StageData() {
         stageMaxX = GameConfig.STAGE_POS_LIMIT_X;
         stageMaxY = GameConfig.STAGE_POS_LIMIT_Y;
         stageMinX = GameConfig.STAGE_NEG_LIMIT_X;
         stageMinY = GameConfig.STAGE_NEG_LIMIT_Y;
     }
-    
+
     public long getStageMinX() {
         return stageMinX;
     }

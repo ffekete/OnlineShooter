@@ -25,29 +25,29 @@ public class PlayerPool {
 
     @Autowired
     private HighScoreTable highScores;
-    
+
     @Autowired
     private ItemHandler itemHandler;
-    
+
     @Autowired
     RegistrationDataToPlayerDataTransformer registrationDataToPlayerDataTransformer;
-    
+
     private Map<Long, PlayerData> playerPool;
 
-    public Set<Long> getAllPlayerIds(){
+    public Set<Long> getAllPlayerIds() {
         return playerPool.keySet();
     }
-    
-    public Iterator<Long> getKeySetIterator(){
+
+    public Iterator<Long> getKeySetIterator() {
         return getAllPlayerIds().iterator();
     }
-    
+
     /** This function should be called periodically from the game loop. */
-    public void updatePlayerPoolData(){
+    public void updatePlayerPoolData() {
         increasePlayerInactivityCounters();
         removeInactivePlayersAndStoreHighScore();
     }
-    
+
     public boolean registerPlayer(Long id, RegistrationData data) {
         return storePlayer(id, data);
     }
@@ -80,9 +80,8 @@ public class PlayerPool {
     }
 
     public void removePlayer(PlayerData player) {
-
         long playerId = player.getId();
-        
+
         connectionPool.removeConnectionNode(playerId);
         System.out.println("Removing dead player with id " + playerId + ".");
         playerPool.remove(playerId);
