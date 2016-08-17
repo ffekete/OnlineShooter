@@ -5,7 +5,6 @@ import java.awt.geom.Point2D;
 
 import game.config.GameConfig;
 import game.config.WeaponConfig;
-import game.datatypes.Coordinate;
 import game.interfaces.Spawnable;
 
 public class LaserBeam extends BulletData {

@@ -1,5 +1,7 @@
 package game.service;
 
+import java.awt.geom.Point2D;
+
 import org.springframework.stereotype.Component;
 
 import game.config.GameConfig;
@@ -9,23 +11,25 @@ import game.interfaces.Spawnable;
 @Component
 public class CoordinateHandler {
 
-    public Coordinate calculateItemCoordinates(Spawnable item, double speed){
-        double resultx;
-        double resulty;
-        
+    public Point2D calculateItemCoordinates(Spawnable item, double speed) {
+        double resultX;
+        double resultY;
+
         double angle = item.getAngle() * Math.PI / 180.0d;
-        
-        resultx = (double)item.getX() + speed * Math.cos(angle);
-        resulty = (double)item.getY() + speed * Math.sin(angle);
-        
-        if(resultx > GameConfig.STAGE_POS_LIMIT_X) resultx = GameConfig.STAGE_NEG_LIMIT_X + (resultx - GameConfig.STAGE_POS_LIMIT_X);
-        if(resultx < GameConfig.STAGE_NEG_LIMIT_X) resultx = GameConfig.STAGE_POS_LIMIT_X + (resultx + GameConfig.STAGE_POS_LIMIT_X);
-        
-        if(resulty > GameConfig.STAGE_POS_LIMIT_Y) resulty = GameConfig.STAGE_NEG_LIMIT_Y + (resulty - GameConfig.STAGE_POS_LIMIT_Y);
-        if(resulty < GameConfig.STAGE_NEG_LIMIT_Y) resulty = GameConfig.STAGE_POS_LIMIT_Y + (resulty + GameConfig.STAGE_NEG_LIMIT_Y);
-        
-        Coordinate coordinate = new Coordinate(resultx,  resulty);
-        
-        return coordinate;
+
+        resultX = (double) item.getX() + speed * Math.cos(angle);
+        resultY = (double) item.getY() + speed * Math.sin(angle);
+
+        if (resultX > GameConfig.STAGE_POS_LIMIT_X)
+            resultX = GameConfig.STAGE_NEG_LIMIT_X + (resultX - GameConfig.STAGE_POS_LIMIT_X);
+        if (resultX < GameConfig.STAGE_NEG_LIMIT_X)
+            resultX = GameConfig.STAGE_POS_LIMIT_X + (resultX + GameConfig.STAGE_POS_LIMIT_X);
+
+        if (resultY > GameConfig.STAGE_POS_LIMIT_Y)
+            resultY = GameConfig.STAGE_NEG_LIMIT_Y + (resultY - GameConfig.STAGE_POS_LIMIT_Y);
+        if (resultY < GameConfig.STAGE_NEG_LIMIT_Y)
+            resultY = GameConfig.STAGE_POS_LIMIT_Y + (resultY + GameConfig.STAGE_NEG_LIMIT_Y);
+
+        return new Point2D.Double(resultX, resultY);
     }
 }
