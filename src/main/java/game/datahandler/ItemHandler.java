@@ -8,14 +8,14 @@ import game.interfaces.Spawnable;
 @Component
 public class ItemHandler {
 
-    public boolean isItOnScreen(PlayerData player, Spawnable item){
+    public boolean isItOnScreen(PlayerData player, Spawnable item) {
         boolean result = false;
-        
+
         if ((Math.abs(item.getX() - player.getX()) <= player.getScreenHalfWidth())
                 && (Math.abs(item.getY() - player.getY()) <= player.getScreenHalfHeight())) {
             result = true;
         }
-        
+
         return result;
     }
 }

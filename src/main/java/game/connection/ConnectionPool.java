@@ -25,37 +25,25 @@ public class ConnectionPool {
         connectionPool.remove(playerId);
     }
 
-    public void clear(){
+    public void clear() {
         connectionPool.clear();
     }
-    
-    public int getPoolSize(){
+
+    public int getPoolSize() {
         return connectionPool.size();
     }
-    
+
     public Long registerNewConnection(Long playerId) {
-        if (playerId == null) {
-            throw new NullPointerException("(E): Player id cannot be null!");
-        }
-
         Long connectionId = findAvailableConnectionNodeId();
-
-        /*
-         * If there is a free connection slot, register a new connection and
-         * store it in the pool
-         */
-        if (connectionId != null) {
-            ConnectionNode connectionNode = connectionNodeBuilder.setConnectionId(connectionId)
-                    .setProvidePlayerDataPath(BrokerPaths.PROVIDE_PLAYER_DATA).build();
-
-            connectionPool.put(playerId, connectionNode);
-            System.out.println(
-                    "Connection registered for player id " + playerId + " to path " + connectionNode.getPath());
-            return connectionId;
-        } else {
-            /* There is no free connection slot... */
+        if(connectionId == null){
             return null;
         }
+        ConnectionNode connectionNode = connectionNodeBuilder.setConnectionId(connectionId)
+                .setProvidePlayerDataPath(BrokerPaths.PROVIDE_PLAYER_DATA).build();
+
+        connectionPool.put(playerId, connectionNode);
+        System.out.println("Connection registered for player id " + playerId + " to path " + connectionNode.getPath());
+        return connectionId;
     }
 
     public Long findAvailableConnectionNodeId() {
