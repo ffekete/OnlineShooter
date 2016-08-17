@@ -9,6 +9,8 @@ import game.datahandler.HighScoreTable;
 import game.datahandler.ItemPool;
 import game.datahandler.PlayerPool;
 import game.datatypes.PlayerData;
+import game.interfaces.Bullet;
+import game.interfaces.BulletPoolList;
 import game.model.SentPlayerData;
 
 @Component
@@ -19,7 +21,7 @@ public class PlayerDataToSentPlayerDataTransformer {
     PlayerPool playerPool;
 
     @Autowired
-    BulletPool bulletPool;
+    BulletPoolList<Bullet> bulletPool;
 
     @Autowired
     ItemPool itemPool;

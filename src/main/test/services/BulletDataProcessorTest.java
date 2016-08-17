@@ -15,7 +15,9 @@ import game.datatypes.PlayerData;
 import game.datatypes.bullet.BulletData;
 import game.datatypes.weapons.GatlingGun;
 import game.entrypoint.Application;
+import game.interfaces.Bullet;
 import game.interfaces.BulletDataProcessorInterface;
+import game.interfaces.BulletPoolList;
 
 @ContextConfiguration(classes=Application.class)
 public class BulletDataProcessorTest extends AbstractTestNGSpringContextTests{
@@ -26,7 +28,7 @@ public class BulletDataProcessorTest extends AbstractTestNGSpringContextTests{
     @Autowired
     BulletDataProcessorInterface bdp;
     
-    @Autowired BulletPool bp;
+    @Autowired BulletPoolList<Bullet> bp;
     
     PlayerData player;
     

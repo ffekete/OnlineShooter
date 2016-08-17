@@ -12,6 +12,8 @@ import game.datahandler.PlayerPool;
 import game.datatypes.PlayerData;
 import game.datatypes.weapons.GatlingGun;
 import game.entrypoint.Application;
+import game.interfaces.Bullet;
+import game.interfaces.BulletPoolList;
 
 @ContextConfiguration(classes={Application.class})
 public class BulletPoolTest extends AbstractTestNGSpringContextTests{
@@ -19,7 +21,7 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests{
     @Autowired
     PlayerPool pp;
     
-    @Autowired BulletPool bp;
+    @Autowired BulletPoolList<Bullet> bp;
     
     PlayerData player;
     
@@ -39,7 +41,7 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests{
         bp.addBullet(player.getId());
         
         // then
-        Assert.assertEquals(bp.getNuberOfExistingBullets(), 1);
+        Assert.assertEquals(bp.poolSize(), 1);
     }
     
     @Test
@@ -49,15 +51,15 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests{
         pp.put(10L, player);
              
         bp.addBullet(10L);
-        Assert.assertEquals(bp.getNuberOfExistingBullets(), 1);
+        Assert.assertEquals(bp.poolSize(), 1);
         
         // get rid of waiting for player to be able to shoot again
         player.getWeapon().decreaseRateOfFireCooldownValue(player.getWeapon().getRateOfFireCooldown());
         
         bp.addBullet(10L);
-        Assert.assertEquals(bp.getNuberOfExistingBullets(), 2);
+        Assert.assertEquals(bp.poolSize(), 2);
         
         bp.clear();
-        Assert.assertEquals(bp.getNuberOfExistingBullets(), 0);
+        Assert.assertEquals(bp.poolSize(), 0);
     }
 }

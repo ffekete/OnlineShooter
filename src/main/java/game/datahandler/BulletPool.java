@@ -56,16 +56,12 @@ public class BulletPool implements BulletPoolList<Bullet> {
         }
         return bulletPool.get(index);
     }
-
-    public int getNuberOfExistingBullets() {
-        return bulletPool.size();
-    }
-
     @Override
     public int poolSize() {
-        return getNuberOfExistingBullets();
+        return bulletPool.size();
     }
-
+    
+    @Override
     public void addBullet(Long playerId) {
         PlayerData player = playerPool.getPlayerById(playerId);
         if (player != null && player.canShootWeapon()) {

@@ -9,12 +9,13 @@ import game.config.GameConfig;
 import game.datahandler.BulletPool;
 import game.interfaces.Bullet;
 import game.interfaces.BulletDataProcessorInterface;
+import game.interfaces.BulletPoolList;
 
 @Component
 public class BulletDataProcessor implements BulletDataProcessorInterface {
 
     @Autowired
-    private BulletPool bulletPool;
+    private BulletPoolList<Bullet> bulletPool;
 
     @Autowired
     private CoordinateHandler coordinateHandler;
