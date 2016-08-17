@@ -57,10 +57,8 @@ public class ItemPool {
     }
 
     public void createNewRandomItem() {
-        if (itemPool.size() < GameConfig.MAX_ITEMS_ON_STAGE) {
-            int itemSpawned = new Random().nextInt(GameConfig.ITEM_SPAWNING_RATE);
-
-            switch (itemSpawned) {
+        if (isPlaceItem()) {
+            switch (new Random().nextInt(15)) {
             case SpawnableItemTypeConstants.GATLING_GUN:
                 addItem((SpawnableItem) WeaponFactory.createWeapon(WeaponId.GATLING_GUN));
                 break;
@@ -102,5 +100,10 @@ public class ItemPool {
                 break;
             }
         }
+    }
+
+    private boolean isPlaceItem() {
+        return (itemPool.size() < GameConfig.MAX_ITEMS_ON_STAGE
+                && (new Random().nextInt(GameConfig.ITEM_SPAWNING_RATE) < 16));
     }
 }
