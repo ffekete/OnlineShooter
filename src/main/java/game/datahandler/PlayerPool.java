@@ -15,10 +15,11 @@ import game.connection.ConnectionPool;
 import game.datatypes.HighScore;
 import game.datatypes.PlayerData;
 import game.datatypes.RegistrationData;
+import game.interfaces.PoolMap;
 import game.transformer.RegistrationDataToPlayerDataTransformer;
 
 @Component
-public class PlayerPool {
+public class PlayerPool implements PoolMap<Long, PlayerData> {
 
     @Autowired
     private ConnectionPool connectionPool;
@@ -34,16 +35,17 @@ public class PlayerPool {
 
     private Map<Long, PlayerData> playerPool;
 
-    public Set<Long> getAllPlayerIds() {
+    public PlayerPool() {
+        this.playerPool = new ConcurrentHashMap<Long, PlayerData>();
+    }
+
+    @Override
+    public Set<Long> getAll() {
         return playerPool.keySet();
     }
 
-    public void putPlayerToPool(long id, PlayerData player){
-        playerPool.put(id, player);
-    }
-    
     public Iterator<Long> getKeySetIterator() {
-        return getAllPlayerIds().iterator();
+        return getAll().iterator();
     }
 
     /** This function should be called periodically from the game loop. */
@@ -57,7 +59,6 @@ public class PlayerPool {
     }
 
     public boolean storePlayer(Long newPlayerId, RegistrationData data) {
-
         if (playerPool.containsKey(newPlayerId)) {
             return false;
         } else {
@@ -68,7 +69,7 @@ public class PlayerPool {
                 newPlayerData.setConnectionId(connectionId);
                 newPlayerData.setColor(data.getColor());
                 newPlayerData.setShipType(data.getShipType());
-                playerPool.put(newPlayerId, newPlayerData);
+                this.put(newPlayerId, newPlayerData);
                 return true;
             }
             return false;
@@ -76,8 +77,8 @@ public class PlayerPool {
     }
 
     private void increasePlayerInactivityCounters() {
-        for (long i : playerPool.keySet()) {
-            PlayerData currentPlayer = playerPool.get(i);
+        for (long i : this.getAll()) {
+            PlayerData currentPlayer = this.get(i);
 
             currentPlayer.increaseInactivityCounter();
         }
@@ -88,54 +89,42 @@ public class PlayerPool {
 
         connectionPool.removeConnectionNode(playerId);
         System.out.println("Removing dead player with id " + playerId + ".");
-        playerPool.remove(playerId);
+        this.remove(playerId);
     }
 
     private void removeInactivePlayersAndStoreHighScore() {
-        for (long i : playerPool.keySet()) {
-            PlayerData currentPlayer = playerPool.get(i);
+        for (long i : this.getAll()) {
+            PlayerData currentPlayer = this.get(i);
 
             if (currentPlayer.getInactivityCounter() >= ConnectionPreferences.PLAYER_INACTIVITY_LIMIT) {
                 highScores.addScore(new HighScore(currentPlayer.getScore(), currentPlayer.getName()));
                 highScores.KeepTopThreePlayersInHighScoreTable();
                 connectionPool.removeConnectionNode(i);
                 System.out.println("Removing inactive player with id " + i + ".");
-                playerPool.remove(i);
+                this.remove(i);
             }
         }
     }
 
     public void resetInactivityOfPlayer(Long id) {
-        PlayerData player = null;
-
         if (playerPool.containsKey(id)) {
-            player = playerPool.get(id);
+            PlayerData player = this.get(id);
             player.setInactivityCounter(0);
         }
     }
 
     public PlayerData getPlayerById(Long id) {
-        PlayerData player = null;
-
-        if (playerPool.containsKey(id)) {
-            player = playerPool.get(id);
-        }
-
-        return player;
-    }
-
-    public PlayerPool() {
-        this.playerPool = new ConcurrentHashMap<Long, PlayerData>();
+        return this.get(id);
     }
 
     /* Getters/setters */
     public List<PlayerData> getAllPlayersOnScreen(Long playerId) {
         ArrayList<PlayerData> visiblePlayers = new ArrayList<>();
 
-        PlayerData player = playerPool.get(playerId);
+        PlayerData player = this.get(playerId);
 
-        for (Long id : playerPool.keySet()) {
-            PlayerData currentPlayer = playerPool.get(id);
+        for (Long id : this.getAll()) {
+            PlayerData currentPlayer = this.get(id);
             if (currentPlayer.getId() != playerId) {
                 if (itemHandler.isItOnScreen(player, currentPlayer.getSpaceShip())) {
                     visiblePlayers.add(currentPlayer);
@@ -144,5 +133,20 @@ public class PlayerPool {
         }
 
         return visiblePlayers;
+    }
+
+    @Override
+    public void put(Long id, PlayerData player) {
+        playerPool.put(id, player);
+    }
+
+    @Override
+    public void remove(Long playerId) {
+        playerPool.remove(playerId);
+    }
+
+    @Override
+    public PlayerData get(Long playerId) {
+        return playerPool.get(playerId);
     }
 }

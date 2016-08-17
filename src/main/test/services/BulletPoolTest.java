@@ -25,7 +25,7 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests{
     
     @BeforeMethod
     public void initBulletPool(){
-        bp.clearPool();
+        bp.clear();
         player = new PlayerData(200L, "P01", "Deltawing");
     }
     
@@ -33,7 +33,7 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests{
     public void testShouldCreateOneBullet(){
         // given
         player.setWeapon(new GatlingGun()); // setting this weapon for player ship because it will create one bullet
-        pp.putPlayerToPool(200L, player);
+        pp.put(200L, player);
         
         // when
         bp.addBullet(player.getId());
@@ -46,7 +46,7 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests{
     public void testShouldClearThePool(){
         // given
         player.setWeapon(new GatlingGun()); // setting this weapon for player ship because it will create one bullet
-        pp.putPlayerToPool(10L, player);
+        pp.put(10L, player);
              
         bp.addBullet(10L);
         Assert.assertEquals(bp.getNuberOfExistingBullets(), 1);
@@ -57,7 +57,7 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests{
         bp.addBullet(10L);
         Assert.assertEquals(bp.getNuberOfExistingBullets(), 2);
         
-        bp.clearPool();
+        bp.clear();
         Assert.assertEquals(bp.getNuberOfExistingBullets(), 0);
     }
 }

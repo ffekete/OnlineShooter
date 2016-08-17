@@ -137,8 +137,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                     } else {
                         eventSender.sendItemHitNotification(player.getSpaceShip());
                     }
-                    bulletPool.removeBullet(actualBullet);
-
+                    bulletPool.remove(actualBullet);
                 }
             }
         }
@@ -217,13 +216,13 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
 
             if (areaCheck) {
                 actualItem.applyEffect(player);
-                itemPool.removeItem(actualItem);
+                itemPool.remove(actualItem);
             }
         }
     }
 
     private void updatePlayerCollisions(PlayerData player1) {
-        for (Long j : playerPool.getAllPlayerIds()) {
+        for (Long j : playerPool.getAll()) {
             PlayerData player2 = playerPool.getPlayerById(j);
             if (player2.isSpawned() && player1.getId() != player2.getId()
                     && Math.abs(player1.getX() - player2.getX()) <= 15

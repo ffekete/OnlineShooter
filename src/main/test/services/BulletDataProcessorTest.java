@@ -32,7 +32,7 @@ public class BulletDataProcessorTest extends AbstractTestNGSpringContextTests{
     
     @BeforeMethod
     public void initTests(){
-        bp.clearPool();
+        bp.clear();
         player = new PlayerData(200L, "P01", "Deltawing");
     }
     
@@ -54,7 +54,7 @@ public class BulletDataProcessorTest extends AbstractTestNGSpringContextTests{
         player.setX(x);
         player.setY(y);
         player.setShipAngle(angle);
-        pp.putPlayerToPool(200L, player);
+        pp.put(200L, player);
         bp.addBullet(player.getId());
 
         // when

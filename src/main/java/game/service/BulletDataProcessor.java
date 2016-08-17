@@ -27,7 +27,7 @@ public class BulletDataProcessor implements BulletDataProcessorInterface {
     private void processAgeCounter(Bullet bullet) {
         bullet.increaseAge();
         if (bullet.isAgeCounterExpired()) {
-            boolean result = bulletPool.removeBullet(bullet);
+            boolean result = bulletPool.remove(bullet);
             if (result == false) {
                 System.out.println("Bullet cannot be removed." + bullet);
             }
