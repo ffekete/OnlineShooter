@@ -1,7 +1,5 @@
 package datahandler;
 
-import java.util.NoSuchElementException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -31,7 +29,7 @@ public class ConnectionPoolTest extends AbstractTestNGSpringContextTests{
         Assert.assertEquals(id, 0L);
     }
 
-    @Test(expectedExceptions = {NoSuchElementException.class})
+    @Test
     public void testShouldThrowNoSuchElementException(){
         connectionPool.registerNewConnection(200L);
         
