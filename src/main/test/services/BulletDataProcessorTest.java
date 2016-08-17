@@ -9,8 +9,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import game.config.GameConfig;
-import game.datahandler.BulletPool;
-import game.datahandler.PlayerPool;
 import game.datatypes.PlayerData;
 import game.datatypes.bullet.BulletData;
 import game.datatypes.weapons.GatlingGun;
@@ -18,12 +16,13 @@ import game.entrypoint.Application;
 import game.interfaces.Bullet;
 import game.interfaces.BulletDataProcessorInterface;
 import game.interfaces.BulletPoolList;
+import game.interfaces.PlayerPoolMap;
 
 @ContextConfiguration(classes=Application.class)
 public class BulletDataProcessorTest extends AbstractTestNGSpringContextTests{
 
     @Autowired
-    PlayerPool pp;
+    PlayerPoolMap<Long, PlayerData> pp;
     
     @Autowired
     BulletDataProcessorInterface bdp;

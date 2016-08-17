@@ -15,11 +15,11 @@ import game.connection.ConnectionPool;
 import game.datatypes.HighScore;
 import game.datatypes.PlayerData;
 import game.datatypes.RegistrationData;
-import game.interfaces.PoolMap;
+import game.interfaces.PlayerPoolMap;
 import game.transformer.RegistrationDataToPlayerDataTransformer;
 
 @Component
-public class PlayerPool implements PoolMap<Long, PlayerData> {
+public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
 
     @Autowired
     private ConnectionPool connectionPool;
@@ -44,16 +44,19 @@ public class PlayerPool implements PoolMap<Long, PlayerData> {
         return playerPool.keySet();
     }
 
+    @Override
     public Iterator<Long> getKeySetIterator() {
         return getAll().iterator();
     }
 
     /** This function should be called periodically from the game loop. */
+    @Override
     public void updatePlayerPoolData() {
         increasePlayerInactivityCounters();
         removeInactivePlayersAndStoreHighScore();
     }
 
+    @Override
     public boolean registerPlayer(Long id, RegistrationData data) {
         return storePlayer(id, data);
     }
@@ -106,6 +109,7 @@ public class PlayerPool implements PoolMap<Long, PlayerData> {
         }
     }
 
+    @Override
     public void resetInactivityOfPlayer(Long id) {
         if (playerPool.containsKey(id)) {
             PlayerData player = this.get(id);
@@ -113,12 +117,9 @@ public class PlayerPool implements PoolMap<Long, PlayerData> {
         }
     }
 
-    public PlayerData getPlayerById(Long id) {
-        return this.get(id);
-    }
-
     /* Getters/setters */
-    public List<PlayerData> getAllPlayersOnScreen(Long playerId) {
+    @Override
+    public List<PlayerData> getAllOnScreen(Long playerId) {
         ArrayList<PlayerData> visiblePlayers = new ArrayList<>();
 
         PlayerData player = this.get(playerId);

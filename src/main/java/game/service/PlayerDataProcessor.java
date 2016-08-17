@@ -10,16 +10,14 @@ import org.springframework.stereotype.Component;
 import game.config.GameConfig;
 import game.config.Physics;
 import game.controller.EventSender;
-import game.datahandler.BulletPool;
 import game.datahandler.HighScoreTable;
-import game.datahandler.ItemPool;
-import game.datahandler.PlayerPool;
 import game.datatypes.HighScore;
 import game.datatypes.PlayerData;
 import game.interfaces.Bullet;
 import game.interfaces.BulletPoolList;
 import game.interfaces.ItemPoolList;
 import game.interfaces.PlayerDataProcessorInterface;
+import game.interfaces.PlayerPoolMap;
 import game.interfaces.SpawnableItem;
 import game.scheduler.TaskScheduler;
 
@@ -27,7 +25,7 @@ import game.scheduler.TaskScheduler;
 @Component
 public class PlayerDataProcessor implements PlayerDataProcessorInterface {
     @Autowired
-    private PlayerPool playerPool;
+    private PlayerPoolMap<Long, PlayerData> playerPool;
 
     @Autowired
     private BulletPoolList<Bullet> bulletPool;
@@ -79,8 +77,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
     }
 
     private void checkBulletHits(PlayerData player) {
-        CopyOnWriteArrayList<Bullet> bullets = (CopyOnWriteArrayList<Bullet>) bulletPool
-                .getAllOnScreen(player.getId());
+        CopyOnWriteArrayList<Bullet> bullets = (CopyOnWriteArrayList<Bullet>) bulletPool.getAllOnScreen(player.getId());
 
         Iterator<Bullet> bulletIterator = bullets.iterator();
 
@@ -121,7 +118,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                         /* populate death event to client side */
                         eventSender.sendItemDestroyedNotification(player.getSpaceShip());
 
-                        PlayerData playerWhoKilledMe = playerPool.getPlayerById(actualBullet.getPlayerId());
+                        PlayerData playerWhoKilledMe = playerPool.get(actualBullet.getPlayerId());
                         playerWhoKilledMe.increaseScore(GameConfig.PLAYER_SCORE_VALUE);
 
                         /*
@@ -176,7 +173,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
 
         while (shipIds.hasNext()) {
             Long playerId = shipIds.next();
-            PlayerData player = playerPool.getPlayerById(playerId);
+            PlayerData player = playerPool.get(playerId);
             if (player.isSpawned()) {
                 updateShipAngles(player);
                 updatePlayerCoordinates(player);
@@ -225,7 +222,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
 
     private void updatePlayerCollisions(PlayerData player1) {
         for (Long j : playerPool.getAll()) {
-            PlayerData player2 = playerPool.getPlayerById(j);
+            PlayerData player2 = playerPool.get(j);
             if (player2.isSpawned() && player1.getId() != player2.getId()
                     && Math.abs(player1.getX() - player2.getX()) <= 15
                     && Math.abs(player1.getY() - player2.getY()) <= 15) {

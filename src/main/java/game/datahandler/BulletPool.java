@@ -10,12 +10,13 @@ import org.springframework.stereotype.Component;
 import game.datatypes.PlayerData;
 import game.interfaces.Bullet;
 import game.interfaces.BulletPoolList;
+import game.interfaces.PlayerPoolMap;
 
 @Component
 public class BulletPool implements BulletPoolList<Bullet> {
 
     @Autowired
-    PlayerPool playerPool;
+    PlayerPoolMap<Long, PlayerData> playerPool;
 
     private List<Bullet> bulletPool;
 
@@ -32,7 +33,7 @@ public class BulletPool implements BulletPoolList<Bullet> {
     public List<Bullet> getAllOnScreen(Long playerId) {
         CopyOnWriteArrayList<Bullet> allBulletsOnScreen = new CopyOnWriteArrayList<Bullet>();
 
-        PlayerData player = playerPool.getPlayerById(playerId);
+        PlayerData player = playerPool.get(playerId);
 
         if (player != null) {
             Iterator<Bullet> bit = bulletPool.iterator();
@@ -63,7 +64,7 @@ public class BulletPool implements BulletPoolList<Bullet> {
     
     @Override
     public void addBullet(Long playerId) {
-        PlayerData player = playerPool.getPlayerById(playerId);
+        PlayerData player = playerPool.get(playerId);
         if (player != null && player.canShootWeapon()) {
             this.createBulletsForPlayer(player);
         }

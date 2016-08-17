@@ -3,17 +3,17 @@ package game.transformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import game.datahandler.PlayerPool;
 import game.datatypes.PlayerData;
 import game.datatypes.ReceivedPlayerData;
+import game.interfaces.PlayerPoolMap;
 
 @Component
 public class ReceivedPlayerDataToPlayerDataTransformer {
     @Autowired
-    PlayerPool playerPool;
+    PlayerPoolMap<Long, PlayerData> playerPool;
     
     public PlayerData transform(ReceivedPlayerData receivedPlayerData){
-        PlayerData playerData = playerPool.getPlayerById(receivedPlayerData.getId());
+        PlayerData playerData = playerPool.get(receivedPlayerData.getId());
         
         if(playerData != null){
             playerData.setMouseX(receivedPlayerData.getMouseX());
