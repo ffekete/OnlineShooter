@@ -54,7 +54,7 @@ public class BulletDataProcessorTest extends AbstractTestNGSpringContextTests{
         player.setX(x);
         player.setY(y);
         player.setShipAngle(angle);
-        pp.getPool().put(200L, player);
+        pp.putPlayerToPool(200L, player);
         bp.addBullet(player.getId());
 
         // when

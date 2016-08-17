@@ -38,6 +38,10 @@ public class PlayerPool {
         return playerPool.keySet();
     }
 
+    public void putPlayerToPool(long id, PlayerData player){
+        playerPool.put(id, player);
+    }
+    
     public Iterator<Long> getKeySetIterator() {
         return getAllPlayerIds().iterator();
     }
@@ -125,10 +129,6 @@ public class PlayerPool {
     }
 
     /* Getters/setters */
-    public Map<Long, PlayerData> getPool() {
-        return playerPool;
-    }
-
     public List<PlayerData> getAllPlayersOnScreen(Long playerId) {
         ArrayList<PlayerData> visiblePlayers = new ArrayList<>();
 
