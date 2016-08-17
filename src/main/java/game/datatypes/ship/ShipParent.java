@@ -7,7 +7,7 @@ import game.interfaces.Ship;
 import game.interfaces.Weapon;
 
 public abstract class ShipParent implements Ship {
-    private Point2D coordinate;
+    private Point2D coordinate = new Point2D.Double(0, 0);
     private String color;
     private String shipType;
     private Shield shield;
@@ -61,21 +61,31 @@ public abstract class ShipParent implements Ship {
     }
 
     @Override
-    public void setX(double x) {
-        this.coordinate.setLocation(x, this.coordinate.getY());
-    }
-
-    @Override
     public double getY() {
         return coordinate.getY();
     }
 
-    public abstract void resetHp();
+    @Override
+    public void setX(double x) {
+        this.setLocation(x, this.coordinate.getY());
+    }
 
     @Override
     public void setY(double y) {
-        this.coordinate.setLocation(this.coordinate.getX(), y);
+        this.setLocation(this.coordinate.getX(), y);
     }
+
+    @Override
+    public void setLocation(double x, double y) {
+        this.coordinate.setLocation(x, y);
+    }
+
+    @Override
+    public void setLocation(Point2D coordinate) {
+        this.coordinate = coordinate;
+    }
+
+    public abstract void resetHp();
 
     @Override
     public String getColor() {
@@ -152,18 +162,17 @@ public abstract class ShipParent implements Ship {
         this.maxSpeed = maxSpeed;
     }
 
+    @Override
     public Point2D getCoordinate() {
         return coordinate;
     }
 
+    @Override
     public void setCoordinate(double x, double y) {
-        if (this.coordinate == null) {
-            this.coordinate = new Point2D.Double();
-        }
-
         this.coordinate.setLocation(x, y);
     }
 
+    @Override
     public void setCoordinate(Point2D coordinate) {
         this.coordinate = coordinate;
     }

@@ -16,38 +16,6 @@ public class BulletData implements Bullet {
     private long playerId;
     private long damage;
 
-    public boolean isAgeCounterExpired() {
-        if (age >= GameConfig.BULLET_MAX_AGE) {
-            age = 0;
-            return true;
-        }
-        return false;
-    }
-
-    public double getAngle() {
-        return angle;
-    }
-
-    public void setAngle(double angle) {
-        this.angle = angle;
-    }
-
-    public long getPlayerId() {
-        return playerId;
-    }
-
-    public void setPlayerId(long playerId) {
-        this.playerId = playerId;
-    }
-
-    public long getDamage() {
-        return damage;
-    }
-
-    public void setDamage(long damage) {
-        this.damage = damage;
-    }
-
     public BulletData(Point2D coordinate, double angle, long playerId, long damage) {
         super();
         this.coordinate = coordinate;
@@ -57,32 +25,68 @@ public class BulletData implements Bullet {
         this.damage = damage;
     }
 
+    @Override
+    public boolean isAgeCounterExpired() {
+        if (age >= GameConfig.BULLET_MAX_AGE) {
+            age = 0;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public double getAngle() {
+        return angle;
+    }
+
+    @Override
+    public void setAngle(double angle) {
+        this.angle = angle;
+    }
+
+    @Override
+    public long getPlayerId() {
+        return playerId;
+    }
+
+    @Override
+    public void setPlayerId(long playerId) {
+        this.playerId = playerId;
+    }
+
+    @Override
+    public long getDamage() {
+        return damage;
+    }
+
+    @Override
+    public void setDamage(long damage) {
+        this.damage = damage;
+    }
+
+    @Override
     public void increaseAge() {
         this.age++;
     }
 
+    @Override
     public long getAge() {
         return age;
     }
 
+    @Override
     public void setAge(long age) {
         this.age = age;
     }
 
+    @Override
     public double getX() {
         return coordinate.getX();
     }
 
-    public void setX(double x) {
-        this.coordinate.setLocation(x, this.coordinate.getY());
-    }
-
+    @Override
     public double getY() {
         return coordinate.getY();
-    }
-
-    public void setY(double y) {
-        this.coordinate.setLocation(this.coordinate.getX(), y);
     }
 
     @Override
@@ -116,5 +120,15 @@ public class BulletData implements Bullet {
     public String getPhysicalRepresentation() {
         return new String(
                 "{\"shape\": \"circle\", \"startx\": \"" + x + "\", \"starty\": \"" + y + "\", \"radius\" : \"15\"}");
+    }
+
+    @Override
+    public void setLocation(double x, double y) {
+        this.coordinate.setLocation(x, y);
+    }
+    
+    @Override
+    public void setLocation(Point2D coordinate) {
+        this.coordinate = coordinate;
     }
 }

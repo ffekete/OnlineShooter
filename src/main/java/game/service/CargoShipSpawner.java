@@ -4,7 +4,6 @@ import java.awt.geom.Point2D;
 import java.util.Random;
 
 import game.config.GameConfig;
-import game.datatypes.Coordinate;
 import game.interfaces.Spawnable;
 
 public class CargoShipSpawner extends Spawner {
@@ -27,10 +26,7 @@ public class CargoShipSpawner extends Spawner {
     }
 
     public static void spawn(Spawnable item) {
-        Point2D coordinate = pickRandomCoordinateForItemOnGameSpace();
-
-        item.setX(coordinate.getX());
-        item.setY(coordinate.getY());
+        item.setLocation(pickRandomCoordinateForItemOnGameSpace());
         item.setAngle(pickRandomAngle());
     }
 }

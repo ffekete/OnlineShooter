@@ -1,31 +1,32 @@
 package game.datatypes.Items;
 
+import java.awt.geom.Point2D;
+
 import game.interfaces.SpawnableItem;
 
 public abstract class ItemParent implements SpawnableItem {
     private String name;
-    private double x;
-    private double y;
+    private Point2D coordinate = new Point2D.Double(0, 0);
     private double angle;
-    
+
     @Override
-    public void setX(double x) {
-        this.x = x;
+    public void setLocation(double x, double y) {
+        this.coordinate.setLocation(x, y);
     }
 
     @Override
-    public void setY(double y) {
-        this.y = y;
+    public void setLocation(Point2D coordinate) {
+        this.coordinate = coordinate;
     }
 
     @Override
     public double getX() {
-        return this.x;
+        return this.coordinate.getX();
     }
 
     @Override
     public double getY() {
-        return this.y;
+        return this.coordinate.getY();
     }
 
     public String getName() {
@@ -35,12 +36,12 @@ public abstract class ItemParent implements SpawnableItem {
     public void setName(String name) {
         this.name = name;
     }
-    
-    public void setAngle(double angle){
+
+    public void setAngle(double angle) {
         this.angle = angle;
     }
-    
-    public double getAngle(){
+
+    public double getAngle() {
         return this.angle;
     }
 }

@@ -21,10 +21,7 @@ public class BulletDataProcessor implements BulletDataProcessorInterface {
     private CoordinateHandler coordinateHandler;
 
     private void updateBulletCoordinates(Bullet bullet) {
-        Point2D coordinate = coordinateHandler.calculateItemCoordinates(bullet, GameConfig.BULLET_INITIAL_SPEED);
-
-        bullet.setX(coordinate.getX());
-        bullet.setY(coordinate.getY());
+        bullet.setLocation(coordinateHandler.calculateItemCoordinates(bullet, GameConfig.BULLET_INITIAL_SPEED));
     }
 
     private void processAgeCounter(Bullet bullet) {
