@@ -1,5 +1,6 @@
 package game.datatypes.weapons;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public abstract class WeaponParent extends ItemParent implements Weapon {
     private long rateOfFire;
     private long ammo;
     private long damage;
-    
+
     @Override
     public void applyEffect(PlayerData player) {
         player.setWeapon(this);
@@ -31,11 +32,11 @@ public abstract class WeaponParent extends ItemParent implements Weapon {
 
         this.setRateOfFire(rof - amount);
     }
-    
-    public boolean canShoot(){
+
+    public boolean canShoot() {
         return this.hasAmmo() && this.rateOfFireCooldown < 1L;
     }
-    
+
     @Override
     public long getDamage() {
         return this.damage;
@@ -43,10 +44,11 @@ public abstract class WeaponParent extends ItemParent implements Weapon {
 
     @Override
     public void decreaseAmmo(long value) {
-        if(this.ammo > 0L){
+        if (this.ammo > 0L) {
             this.ammo -= value;
-            if(this.ammo < 0L) this.ammo = 0L;
-        }        
+            if (this.ammo < 0L)
+                this.ammo = 0L;
+        }
     }
 
     @Override
@@ -65,18 +67,17 @@ public abstract class WeaponParent extends ItemParent implements Weapon {
     public void setDamage(long damage) {
         this.damage = damage;
     }
-    
+
     public long getRateOfFire() {
         return rateOfFire;
     }
 
-    
-    
     public void setRateOfFire(long rateOfFire) {
         this.rateOfFire = rateOfFire;
-        if(rateOfFire < 1L) rateOfFire = 1L;
+        if (rateOfFire < 1L)
+            rateOfFire = 1L;
     }
-    
+
     public long getRateOfFireCooldown() {
         return rateOfFireCooldown;
     }
@@ -84,25 +85,26 @@ public abstract class WeaponParent extends ItemParent implements Weapon {
     public void setRateOfFireCooldown(long rateOfFireCooldown) {
         this.rateOfFireCooldown = rateOfFireCooldown;
     }
-    
-    public void startShootingRateCooldownEffect(){
+
+    public void startShootingRateCooldownEffect() {
         rateOfFireCooldown = this.getRateOfFire();
     }
-    
-    public void decreaseRateOfFireCooldownValue(long value){
-        if(rateOfFireCooldown > 0L)
-        {
+
+    public void decreaseRateOfFireCooldownValue(long value) {
+        if (rateOfFireCooldown > 0L) {
             rateOfFireCooldown -= value;
-            if(rateOfFireCooldown < 0L) rateOfFireCooldown = 0L;
+            if (rateOfFireCooldown < 0L)
+                rateOfFireCooldown = 0L;
         }
     }
-    
-    public List<Bullet> createBullet(PlayerData player){
+
+    public List<Bullet> createBullet(PlayerData player) {
         ArrayList<Bullet> bulletsToCreate = new ArrayList<>();
-        
-        bulletsToCreate.add(new BulletData(player.getX(), player.getY(), player.getShipAngle(), player.getId(), player.getWeapon().getDamage()));
-        
+
+        bulletsToCreate.add(new BulletData(new Point2D.Double(player.getX(), player.getY()), player.getShipAngle(),
+                player.getId(), player.getWeapon().getDamage()));
+
         return bulletsToCreate;
     }
-    
+
 }

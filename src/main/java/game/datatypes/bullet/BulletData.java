@@ -1,5 +1,7 @@
 package game.datatypes.bullet;
 
+import java.awt.geom.Point2D;
+
 import game.config.GameConfig;
 import game.controller.EventSender;
 import game.interfaces.Bullet;
@@ -8,6 +10,7 @@ import game.interfaces.Spawnable;
 public class BulletData implements Bullet {
     private double x;
     private double y;
+    private Point2D coordinate;
     private double angle;
     private long age;
     private long playerId;
@@ -45,10 +48,9 @@ public class BulletData implements Bullet {
         this.damage = damage;
     }
 
-    public BulletData(double x, double y, double angle, long playerId, long damage) {
+    public BulletData(Point2D coordinate, double angle, long playerId, long damage) {
         super();
-        this.x = x;
-        this.y = y;
+        this.coordinate = coordinate;
         this.angle = angle;
         this.age = 0L;
         this.playerId = playerId;
@@ -68,19 +70,19 @@ public class BulletData implements Bullet {
     }
 
     public double getX() {
-        return x;
+        return coordinate.getX();
     }
 
     public void setX(double x) {
-        this.x = x;
+        this.coordinate.setLocation(x, this.coordinate.getY());
     }
 
     public double getY() {
-        return y;
+        return coordinate.getY();
     }
 
     public void setY(double y) {
-        this.y = y;
+        this.coordinate.setLocation(this.coordinate.getX(), y);
     }
 
     @Override
@@ -90,7 +92,8 @@ public class BulletData implements Bullet {
 
     @Override
     public boolean hits(Spawnable item) {
-        return (Math.abs(x - item.getX()) < 10.0d && (Math.abs(y - item.getY())) < 10.0d);
+        return (Math.abs(this.coordinate.getX() - item.getX()) < 10.0d
+                && (Math.abs(this.coordinate.getY() - item.getY())) < 10.0d);
     }
 
     @Override
