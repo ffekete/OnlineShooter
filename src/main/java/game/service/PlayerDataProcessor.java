@@ -78,7 +78,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
 
     private void checkBulletHits(PlayerData player) {
         CopyOnWriteArrayList<Bullet> bullets = (CopyOnWriteArrayList<Bullet>) bulletPool
-                .getAllBulletsOnScreen(player.getId());
+                .getAllOnScreen(player.getId());
 
         Iterator<Bullet> bulletIterator = bullets.iterator();
 
@@ -205,7 +205,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
     @Override
     public void checkIfPlayerGetsAnItem(PlayerData player) {
         CopyOnWriteArrayList<SpawnableItem> items = (CopyOnWriteArrayList<SpawnableItem>) itemPool
-                .getAllItemsOnScreen(player);
+                .getAllOnScreen(player.getId());
 
         Iterator<SpawnableItem> itemIterator = items.iterator();
 

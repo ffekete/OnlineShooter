@@ -1,6 +1,5 @@
 package game.service;
 
-import java.awt.geom.Point2D;
 import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class BulletDataProcessor implements BulletDataProcessorInterface {
 
     @Override
     public void updateBulletData() {
-        Iterator<Bullet> bit = bulletPool.getIteratorForBullets();
+        Iterator<Bullet> bit = bulletPool.getIterator();
 
         while (bit.hasNext()) {
             Bullet bullet = bit.next();

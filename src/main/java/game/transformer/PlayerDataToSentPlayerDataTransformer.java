@@ -35,14 +35,14 @@ public class PlayerDataToSentPlayerDataTransformer {
         sentPlayerData.setConnectionId(playerData.getConnectionId());
         sentPlayerData.setId(playerId);
         sentPlayerData.setShipAngle(playerData.getShipAngle());
-        sentPlayerData.setVisibleBullets(bulletPool.getAllBulletsOnScreen(playerId));
+        sentPlayerData.setVisibleBullets(bulletPool.getAllOnScreen(playerId));
         sentPlayerData.setX(playerData.getX());
         sentPlayerData.setY(playerData.getY());
         sentPlayerData.setVisiblePlayers(playerPool.getAllPlayersOnScreen(playerId));
         sentPlayerData.setShipHp(playerData.getHp());
         sentPlayerData.setInvulnerable(playerData.isInvulnerable());
         sentPlayerData.setWeapon(playerData.getWeapon());
-        sentPlayerData.setItems(itemPool.getAllItemsOnScreen(playerData));
+        sentPlayerData.setItems(itemPool.getAllOnScreen(playerId));
         sentPlayerData.setScore(playerData.getScore());
         sentPlayerData.setScores(highScoreTable.getThreeBestScores());
         sentPlayerData.setShieldAmount(playerData.getShield().getProtection());

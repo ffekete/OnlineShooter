@@ -24,11 +24,12 @@ public class BulletPool implements BulletPoolList<Bullet> {
     }
     
     @Override
-    public Iterator<Bullet> getIteratorForBullets() {
+    public Iterator<Bullet> getIterator() {
         return bulletPool.iterator();
     }
-
-    public List<Bullet> getAllBulletsOnScreen(Long playerId) {
+    
+    @Override
+    public List<Bullet> getAllOnScreen(Long playerId) {
         CopyOnWriteArrayList<Bullet> allBulletsOnScreen = new CopyOnWriteArrayList<Bullet>();
 
         PlayerData player = playerPool.getPlayerById(playerId);

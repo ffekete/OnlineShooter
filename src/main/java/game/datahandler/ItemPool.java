@@ -21,24 +21,29 @@ import game.datatypes.Items.IncreaseMAneuverability;
 import game.datatypes.Items.IncreaseRateOfFire;
 import game.datatypes.Items.IncreaseScore;
 import game.datatypes.Items.IncreaseSpeed;
-import game.interfaces.ItemPoolList;
+import game.interfaces.PoolList;
 import game.interfaces.SpawnableItem;
 
 @Component
-public class ItemPool implements ItemPoolList<SpawnableItem> {
+public class ItemPool implements PoolList<SpawnableItem> {
     private List<SpawnableItem> itemPool;
 
     @Autowired
     private ItemHandler itemHandler;
 
+    @Autowired
+    private PlayerPool playerPool;
+
     public ItemPool() {
         itemPool = new CopyOnWriteArrayList<SpawnableItem>();
     }
-    
+
     @Override
-    public List<SpawnableItem> getAllItemsOnScreen(PlayerData playerData) {
+    public List<SpawnableItem> getAllOnScreen(Long playerId) {
         CopyOnWriteArrayList<SpawnableItem> allItemsOnScreen = new CopyOnWriteArrayList<SpawnableItem>();
-        Iterator<SpawnableItem> bit = itemPool.iterator();
+        Iterator<SpawnableItem> bit = this.getIterator();
+
+        PlayerData playerData = playerPool.get(playerId);
 
         while (bit.hasNext()) {
             SpawnableItem item = bit.next();
@@ -123,5 +128,10 @@ public class ItemPool implements ItemPoolList<SpawnableItem> {
     @Override
     public int poolSize() {
         return itemPool.size();
+    }
+
+    @Override
+    public Iterator<SpawnableItem> getIterator() {
+        return itemPool.iterator();
     }
 }
