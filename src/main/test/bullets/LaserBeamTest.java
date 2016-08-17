@@ -139,7 +139,7 @@ public class LaserBeamTest {
         LaserBeam laserBeam = new LaserBeam(new Point2D.Double(beamStartX, beamStartY), angle, 0, 0);
 
         Ship ship = ShipFactory.createShip("Interceptor");
-        ship.setCoordinates(objectX, objectY);
+        ship.setCoordinate(objectX, objectY);
         boolean hitDetected = laserBeam.hits(ship);
         Assert.assertEquals(hitDetected, expHitDetected);
     }

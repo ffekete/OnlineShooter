@@ -1,6 +1,6 @@
 package game.interfaces;
 
-import game.datatypes.Coordinate;
+import java.awt.geom.Point2D;
 
 public interface Ship extends Spawnable{
     public void initWeapon();
@@ -13,9 +13,9 @@ public interface Ship extends Spawnable{
     public void setMaxSpeed(double maxSpeed);
     public double getAngle();
     public void setAngle(double angle);
-    public Coordinate getCoordinates();
-    public void setCoordinates(Coordinate coordinate);
-    public void setCoordinates(double x, double y);
+    public Point2D getCoordinate();
+    public void setCoordinate(Point2D coordinate);
+    public void setCoordinate(double x, double y);
     public long getHp();
     public void setHp(long hp);
     public Weapon getWeapon();

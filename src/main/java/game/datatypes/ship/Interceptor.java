@@ -1,24 +1,25 @@
 package game.datatypes.ship;
 
+import java.awt.geom.Point2D;
+
 import factory.WeaponFactory;
 import game.config.ShipConfig;
-import game.datatypes.Coordinate;
 
-public class Interceptor extends ShipParent{
+public class Interceptor extends ShipParent {
 
-    public Interceptor(){
-        super.setCoordinates(new Coordinate());
+    public Interceptor() {
+        super.setCoordinate(new Point2D.Double(0, 0));
         this.setHp(ShipConfig.INTERCEPTOR_INIT_HP);
         super.setSpeed(ShipConfig.INTERCEPTOR_INIT_SPEED);
         super.setMaxSpeed(ShipConfig.INTERCEPTOR_INIT_SPEED);
         super.setManeuverability(ShipConfig.INTERCEPTOR_INIT_MANEUVERABILITY);
         super.setShipType("Interceptor");
     }
-    
+
     @Override
     public void setHp(long hp) {
         long hpToSet = hp;
-        if(hpToSet > ShipConfig.INTERCEPTOR_INIT_HP)
+        if (hpToSet > ShipConfig.INTERCEPTOR_INIT_HP)
             hpToSet = ShipConfig.INTERCEPTOR_INIT_HP;
 
         super.setHp(hpToSet);
@@ -27,7 +28,7 @@ public class Interceptor extends ShipParent{
     @Override
     public void resetHp() {
         this.setHp(ShipConfig.INTERCEPTOR_INIT_HP);
-        
+
     }
 
     @Override
@@ -38,11 +39,11 @@ public class Interceptor extends ShipParent{
     @Override
     public void resetSpeed() {
         super.setSpeed(ShipConfig.INTERCEPTOR_INIT_SPEED);
-        super.setMaxSpeed(ShipConfig.INTERCEPTOR_INIT_SPEED);        
+        super.setMaxSpeed(ShipConfig.INTERCEPTOR_INIT_SPEED);
     }
 
     @Override
     public void initWeapon() {
-        super.setWeapon(WeaponFactory.createWeapon(ShipConfig.INTERCEPTOR_INIT_WEAPON));        
+        super.setWeapon(WeaponFactory.createWeapon(ShipConfig.INTERCEPTOR_INIT_WEAPON));
     }
 }

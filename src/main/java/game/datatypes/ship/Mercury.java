@@ -1,31 +1,32 @@
 package game.datatypes.ship;
 
+import java.awt.geom.Point2D;
+
 import factory.WeaponFactory;
 import game.config.ShipConfig;
-import game.datatypes.Coordinate;
 
-public class Mercury extends ShipParent{
+public class Mercury extends ShipParent {
 
-    public Mercury(){
-        super.setCoordinates(new Coordinate());
+    public Mercury() {
+        super.setCoordinate(new Point2D.Double(0, 0));
         this.setHp(ShipConfig.MERCURY_INIT_HP);
         super.setSpeed(ShipConfig.MERCURY_INIT_SPEED);
         super.setMaxSpeed(ShipConfig.MERCURY_INIT_SPEED);
         super.setManeuverability(ShipConfig.MERCURY_INIT_MANEUVERABILITY);
         super.setShipType("Mercury");
     }
-    
+
     @Override
     public void setHp(long hp) {
         long hpToSet = hp;
-        if(hpToSet > ShipConfig.MERCURY_INIT_HP)
+        if (hpToSet > ShipConfig.MERCURY_INIT_HP)
             hpToSet = ShipConfig.MERCURY_INIT_HP;
         super.setHp(hpToSet);
     }
-    
+
     @Override
     public void resetHp() {
-        this.setHp(ShipConfig.MERCURY_INIT_HP);    
+        this.setHp(ShipConfig.MERCURY_INIT_HP);
     }
 
     @Override
@@ -41,7 +42,7 @@ public class Mercury extends ShipParent{
 
     @Override
     public void initWeapon() {
-        super.setWeapon(WeaponFactory.createWeapon(ShipConfig.MERCURY_INIT_WEAPON));        
+        super.setWeapon(WeaponFactory.createWeapon(ShipConfig.MERCURY_INIT_WEAPON));
     }
-    
+
 }

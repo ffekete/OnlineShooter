@@ -246,7 +246,7 @@ public class PlayerData {
         Ship spaceShipToStore = ShipFactory.createShip(spaceShip.getShipType());
 
         spaceShipToStore.setColor(spaceShip.getColor());
-        spaceShipToStore.setCoordinates(spaceShip.getCoordinates().getX(), spaceShip.getCoordinates().getY());
+        spaceShipToStore.setCoordinate(spaceShip.getCoordinate());
         spaceShipToStore.setHp(spaceShip.getHp());
         spaceShipToStore.setManeuverability(spaceShip.getManeuverability());
         spaceShipToStore.setMaxSpeed(spaceShip.getMaxSpeed());
