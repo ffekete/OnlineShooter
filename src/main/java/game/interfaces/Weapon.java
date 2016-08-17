@@ -16,5 +16,6 @@ public interface Weapon {
     public void increaseDamage(long amount);
     public void increaseRateOfFire(long amount);
     public long getAmmo();
+    public long getRateOfFireCooldown();
     public List<Bullet> createBullet(PlayerData player);
 }

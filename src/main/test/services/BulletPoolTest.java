@@ -41,4 +41,23 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests{
         // then
         Assert.assertEquals(bp.getNuberOfExistingBullets(), 1);
     }
+    
+    @Test
+    public void testShouldClearThePool(){
+        // given
+        player.setWeapon(new GatlingGun()); // setting this weapon for player ship because it will create one bullet
+        pp.getPool().put(10L, player);
+             
+        bp.addBullet(10L);
+        Assert.assertEquals(bp.getNuberOfExistingBullets(), 1);
+        
+        // get rid of waiting for player to be able to shoot again
+        player.getWeapon().decreaseRateOfFireCooldownValue(player.getWeapon().getRateOfFireCooldown());
+        
+        bp.addBullet(10L);
+        Assert.assertEquals(bp.getNuberOfExistingBullets(), 2);
+        
+        bp.clearPool();
+        Assert.assertEquals(bp.getNuberOfExistingBullets(), 0);
+    }
 }
