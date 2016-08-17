@@ -18,6 +18,7 @@ import game.datatypes.HighScore;
 import game.datatypes.PlayerData;
 import game.interfaces.Bullet;
 import game.interfaces.BulletPoolList;
+import game.interfaces.ItemPoolList;
 import game.interfaces.PlayerDataProcessorInterface;
 import game.interfaces.SpawnableItem;
 import game.scheduler.TaskScheduler;
@@ -32,7 +33,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
     private BulletPoolList<Bullet> bulletPool;
 
     @Autowired
-    private ItemPool itemPool;
+    private ItemPoolList<SpawnableItem> itemPool;
 
     @Autowired
     private HighScoreTable highScores;

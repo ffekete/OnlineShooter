@@ -21,11 +21,11 @@ import game.datatypes.Items.IncreaseMAneuverability;
 import game.datatypes.Items.IncreaseRateOfFire;
 import game.datatypes.Items.IncreaseScore;
 import game.datatypes.Items.IncreaseSpeed;
-import game.interfaces.PoolList;
+import game.interfaces.ItemPoolList;
 import game.interfaces.SpawnableItem;
 
 @Component
-public class ItemPool implements PoolList<SpawnableItem> {
+public class ItemPool implements ItemPoolList<SpawnableItem> {
     private List<SpawnableItem> itemPool;
 
     @Autowired
@@ -55,6 +55,7 @@ public class ItemPool implements PoolList<SpawnableItem> {
         return allItemsOnScreen;
     }
 
+    @Override
     public void createNewRandomItem() {
         if (isPlaceItem()) {
             this.create(new Random().nextInt(15));

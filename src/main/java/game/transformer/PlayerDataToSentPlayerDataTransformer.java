@@ -11,6 +11,8 @@ import game.datahandler.PlayerPool;
 import game.datatypes.PlayerData;
 import game.interfaces.Bullet;
 import game.interfaces.BulletPoolList;
+import game.interfaces.ItemPoolList;
+import game.interfaces.SpawnableItem;
 import game.model.SentPlayerData;
 
 @Component
@@ -24,7 +26,7 @@ public class PlayerDataToSentPlayerDataTransformer {
     BulletPoolList<Bullet> bulletPool;
 
     @Autowired
-    ItemPool itemPool;
+    ItemPoolList<SpawnableItem> itemPool;
 
     @Autowired
     HighScoreTable highScoreTable;
