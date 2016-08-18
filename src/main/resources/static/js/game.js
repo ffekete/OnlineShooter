@@ -15,14 +15,15 @@ var shootBulletSwitch=false;
 var canvas;
 var canvasContext;
 
-/* Array of particles (global variable)
-*/
+/*
+ * Array of particles (global variable)
+ */
 var particles = [];
 
 var playerData = {
 	name: window.sessionStorage.getItem("playerName"), 
 	id: window.sessionStorage.getItem("playerId"),
-	//color: window.sessionStorage.getItem("color"),
+	// color: window.sessionStorage.getItem("color"),
 	connectionId: window.sessionStorage.getItem("connectionId"),
 	mouseX : 0,
 	mouseY : 0,
@@ -82,12 +83,10 @@ function randomFloat (min, max)
 }
 
 /*
- * Advanced Explosion effect
- * Each particle has a different size, move speed and scale speed.
+ * Advanced Explosion effect Each particle has a different size, move speed and
+ * scale speed.
  * 
- * Parameters:
- * 	x, y - explosion center
- * 	color - particles' color
+ * Parameters: x, y - explosion center color - particles' color
  */
 function createExplosion(x, y, color)
 {
@@ -521,12 +520,11 @@ function start(){
 	
 	var stageData = JSON.parse(window.sessionStorage.getItem("stageData"));
 	
-	STAGE_X_MIN_LIMIT = stageData.stageMinX;
-	STAGE_Y_MIN_LIMIT = stageData.stageMinY;
+	STAGE_X_MIN_LIMIT = stageData.minCoordinate.x;
+	STAGE_Y_MIN_LIMIT = stageData.minCoordinate.y;
 	
-	STAGE_X_MAX_LIMIT = stageData.stageMaxX;
-	STAGE_Y_MAX_LIMIT = stageData.stageMaxY;
-	
+	STAGE_X_MAX_LIMIT = stageData.maxCoordinate.x;
+	STAGE_Y_MAX_LIMIT = stageData.maxCoordinate.y;
 	
 	$('#bg').css("display", "none"); // hide the background image
 }
@@ -537,6 +535,7 @@ function updateCanwasSize(){
 }
 
 function updateMouseCoordinates(event){
-	playerData.mouseX = event.clientX - 10; // -10: the canvas starts with coordinates x = 10,y = 10
+	playerData.mouseX = event.clientX - 10; // -10: the canvas starts with
+											// coordinates x = 10,y = 10
 	playerData.mouseY = event.clientY - 10;
 }
