@@ -97,7 +97,6 @@ public class BulletData implements Bullet {
     @Override
     public void hitDetected(Spawnable item) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
