@@ -3,7 +3,7 @@ package game.datatypes.ship;
 import java.awt.geom.Point2D;
 
 import factory.WeaponFactory;
-import game.config.ShipConfig;
+import game.config.constants.ShipConfig;
 
 public class Quicksilver extends ShipParent {
 
@@ -13,7 +13,7 @@ public class Quicksilver extends ShipParent {
         super.setSpeed(ShipConfig.QUICKSILVER_INIT_SPEED);
         super.setMaxSpeed(ShipConfig.QUICKSILVER_INIT_SPEED);
         super.setManeuverability(ShipConfig.QUICKSILVER_INIT_MANEUVERABILITY);
-        super.setShipType("Quicksilver");
+        super.setShipType(ShipConfig.SHIP_TYPE_QUICKSILVER);
     }
 
     @Override

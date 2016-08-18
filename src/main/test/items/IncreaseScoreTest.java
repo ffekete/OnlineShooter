@@ -3,7 +3,7 @@ package items;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import game.config.GameConfig;
+import game.config.constants.GameConfig;
 import game.datatypes.PlayerData;
 import game.datatypes.Items.IncreaseScore;
 

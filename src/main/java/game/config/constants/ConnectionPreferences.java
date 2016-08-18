@@ -1,4 +1,4 @@
-package game.config;
+package game.config.constants;
 
 public class ConnectionPreferences {
     public static final Long PLAYER_INACTIVITY_LIMIT = 300L;

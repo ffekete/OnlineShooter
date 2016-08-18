@@ -4,7 +4,7 @@ import java.awt.geom.Point2D;
 
 import org.springframework.stereotype.Component;
 
-import game.config.GameConfig;
+import game.config.constants.GameConfig;
 import game.interfaces.Spawnable;
 
 @Component

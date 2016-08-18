@@ -3,7 +3,7 @@ package game.datatypes.ship;
 import java.awt.geom.Point2D;
 
 import factory.WeaponFactory;
-import game.config.ShipConfig;
+import game.config.constants.ShipConfig;
 
 public class Deltawing extends ShipParent {
 
@@ -13,7 +13,7 @@ public class Deltawing extends ShipParent {
         super.setSpeed(ShipConfig.DELTAWING_INIT_SPEED);
         super.setMaxSpeed(ShipConfig.DELTAWING_INIT_SPEED);
         super.setManeuverability(ShipConfig.DELTAWING_INIT_MANEUVERABILITY);
-        super.setShipType("Deltawing");
+        super.setShipType(ShipConfig.SHIP_TYPE_DELTAWING);
     }
 
     @Override

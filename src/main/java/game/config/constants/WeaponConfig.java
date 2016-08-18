@@ -1,4 +1,4 @@
-package game.config;
+package game.config.constants;
 
 public class WeaponConfig {
     public static final long MACHINEGUN_INIT_DAMAGE = 2L; 

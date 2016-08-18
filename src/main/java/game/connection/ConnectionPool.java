@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import factory.ConnectionNodeBuilder;
-import game.config.BrokerPaths;
-import game.config.ConnectionPreferences;
+import game.config.constants.BrokerPaths;
+import game.config.constants.ConnectionPreferences;
 
 @Component
 public class ConnectionPool {

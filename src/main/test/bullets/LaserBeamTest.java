@@ -7,7 +7,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import factory.ShipFactory;
-import game.config.WeaponConfig;
+import game.config.constants.WeaponConfig;
 import game.datatypes.bullet.LaserBeam;
 import game.interfaces.Ship;
 

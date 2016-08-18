@@ -1,6 +1,6 @@
 package game.datatypes.weapons;
 
-import game.config.WeaponConfig;
+import game.config.constants.WeaponConfig;
 import game.service.Spawner;
 
 public class GatlingGun extends WeaponParent{

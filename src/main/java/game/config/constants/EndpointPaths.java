@@ -1,4 +1,4 @@
-package game.config;
+package game.config.constants;
 
 public class EndpointPaths {
     public static final String REQUEST_PLAYER_DATA = "/requestPlayerData_node";

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import factory.BulletBuilder;
-import game.config.WeaponConfig;
+import game.config.constants.WeaponConfig;
 import game.datatypes.PlayerData;
 import game.datatypes.bullet.BulletData;
 import game.interfaces.Bullet;

@@ -3,7 +3,7 @@ package game.datatypes.ship;
 import java.awt.geom.Point2D;
 
 import factory.WeaponFactory;
-import game.config.ShipConfig;
+import game.config.constants.ShipConfig;
 
 public class Interceptor extends ShipParent {
 
@@ -13,7 +13,7 @@ public class Interceptor extends ShipParent {
         super.setSpeed(ShipConfig.INTERCEPTOR_INIT_SPEED);
         super.setMaxSpeed(ShipConfig.INTERCEPTOR_INIT_SPEED);
         super.setManeuverability(ShipConfig.INTERCEPTOR_INIT_MANEUVERABILITY);
-        super.setShipType("Interceptor");
+        super.setShipType(ShipConfig.SHIP_TYPE_INTERCEPTOR);
     }
 
     @Override

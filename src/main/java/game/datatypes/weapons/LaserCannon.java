@@ -4,7 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import game.config.WeaponConfig;
+import game.config.constants.WeaponConfig;
 import game.datatypes.PlayerData;
 import game.datatypes.bullet.LaserBeam;
 import game.interfaces.Bullet;

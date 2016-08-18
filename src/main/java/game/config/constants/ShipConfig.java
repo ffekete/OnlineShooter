@@ -1,6 +1,14 @@
-package game.config;
+package game.config.constants;
+
+import game.config.WeaponId;
 
 public class ShipConfig {
+    public final static String   SHIP_TYPE_CARGOSHIP = "Cargoship";
+    public final static String   SHIP_TYPE_DELTAWING = "Deltawing";
+    public final static String   SHIP_TYPE_INTERCEPTOR = "Interceptor";
+    public final static String   SHIP_TYPE_MERCURY = "Mercury";
+    public final static String   SHIP_TYPE_QUICKSILVER = "Quicksilver";
+    
     public final static long     QUICKSILVER_INIT_HP = 15L;
     public final static double   QUICKSILVER_INIT_SPEED = 6.0D;
     public final static double   QUICKSILVER_INIT_MANEUVERABILITY = 10.0D;

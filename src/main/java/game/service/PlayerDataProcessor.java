@@ -7,8 +7,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import game.config.GameConfig;
-import game.config.Physics;
+import game.config.constants.GameConfig;
+import game.config.constants.Physics;
 import game.controller.EventSender;
 import game.datahandler.HighScoreTable;
 import game.datatypes.HighScore;

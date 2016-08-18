@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 
 import factory.ShieldFactory;
 import factory.WeaponFactory;
-import game.config.GameConfig;
 import game.config.ShieldId;
-import game.config.SpawnableItemTypeConstants;
 import game.config.WeaponId;
+import game.config.constants.GameConfig;
+import game.config.constants.SpawnableItemTypeConstants;
 import game.datatypes.PlayerData;
 import game.datatypes.Items.HealthPack;
 import game.datatypes.Items.IncreaseDamage;

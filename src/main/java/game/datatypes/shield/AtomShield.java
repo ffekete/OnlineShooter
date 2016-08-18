@@ -1,6 +1,6 @@
 package game.datatypes.shield;
 
-import game.config.ShieldConfig;
+import game.config.constants.ShieldConfig;
 
 public class AtomShield extends ShieldParent{
     public AtomShield(){

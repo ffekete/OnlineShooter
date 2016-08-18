@@ -5,7 +5,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
-import game.config.BrokerPaths;
+import game.config.constants.BrokerPaths;
 
 @Controller
 public class MessageSender {

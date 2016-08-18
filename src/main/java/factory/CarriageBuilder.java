@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import game.config.ShipConfig;
+import game.config.constants.ShipConfig;
 import game.datatypes.Items.IncreaseScore;
 import game.interfaces.SpawnableItem;
 

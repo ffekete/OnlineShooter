@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import game.config.GameConfig;
+import game.config.constants.GameConfig;
 import game.datatypes.PlayerData;
 import game.datatypes.bullet.BulletData;
 import game.datatypes.weapons.GatlingGun;

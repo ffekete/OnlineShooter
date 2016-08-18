@@ -3,7 +3,7 @@ package game.datatypes.ship;
 import java.awt.geom.Point2D;
 
 import factory.WeaponFactory;
-import game.config.ShipConfig;
+import game.config.constants.ShipConfig;
 
 public class Mercury extends ShipParent {
 
@@ -13,7 +13,7 @@ public class Mercury extends ShipParent {
         super.setSpeed(ShipConfig.MERCURY_INIT_SPEED);
         super.setMaxSpeed(ShipConfig.MERCURY_INIT_SPEED);
         super.setManeuverability(ShipConfig.MERCURY_INIT_MANEUVERABILITY);
-        super.setShipType("Mercury");
+        super.setShipType(ShipConfig.SHIP_TYPE_MERCURY);
     }
 
     @Override

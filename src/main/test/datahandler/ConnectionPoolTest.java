@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import game.config.ConnectionPreferences;
+import game.config.constants.ConnectionPreferences;
 import game.connection.ConnectionPool;
 import game.entrypoint.Application;
 

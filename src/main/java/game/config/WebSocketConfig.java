@@ -7,6 +7,9 @@ import org.springframework.web.socket.config.annotation.AbstractWebSocketMessage
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
+import game.config.constants.BrokerPaths;
+import game.config.constants.EndpointPaths;
+
 @Configuration
 @EnableWebSocketMessageBroker
 @EnableScheduling

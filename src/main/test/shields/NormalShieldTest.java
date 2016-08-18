@@ -3,7 +3,7 @@ package shields;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import game.config.ShieldConfig;
+import game.config.constants.ShieldConfig;
 import game.datatypes.PlayerData;
 import game.datatypes.shield.AtomShield;
 import game.datatypes.shield.NormalShield;

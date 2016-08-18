@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import game.config.ShipConfig;
+import game.config.constants.ShipConfig;
 import game.datatypes.PlayerData;
 import game.datatypes.Items.HealthPack;
 

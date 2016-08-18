@@ -4,7 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.List;
 
 import factory.WeaponFactory;
-import game.config.ShipConfig;
+import game.config.constants.ShipConfig;
 import game.interfaces.SpawnableItem;
 
 public class CargoShip extends ShipParent {
@@ -17,7 +17,7 @@ public class CargoShip extends ShipParent {
         super.setSpeed(ShipConfig.CARGO_SHIP_INIT_SPEED);
         super.setMaxSpeed(ShipConfig.CARGO_SHIP_INIT_SPEED);
         super.setManeuverability(ShipConfig.CARGO_SHIP_INIT_MANEUVERABILITY);
-        super.setShipType("Cargoship");
+        super.setShipType(ShipConfig.SHIP_TYPE_CARGOSHIP);
         this.carriage = carriage;
     }
 

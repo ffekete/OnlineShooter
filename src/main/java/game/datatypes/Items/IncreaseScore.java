@@ -1,6 +1,6 @@
 package game.datatypes.Items;
 
-import game.config.GameConfig;
+import game.config.constants.GameConfig;
 import game.datatypes.PlayerData;
 import game.service.Spawner;
 

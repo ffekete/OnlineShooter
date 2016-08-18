@@ -1,4 +1,4 @@
-package game.config;
+package game.config.constants;
 
 /** Timer constant values used by scedulers. */
 public class TimerValues {

@@ -5,7 +5,7 @@ import java.util.Iterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import game.config.GameConfig;
+import game.config.constants.GameConfig;
 import game.interfaces.Bullet;
 import game.interfaces.BulletDataProcessorInterface;
 import game.interfaces.BulletPoolList;
