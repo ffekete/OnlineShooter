@@ -4,6 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import factory.BulletBuilder;
 import game.config.WeaponConfig;
 import game.datatypes.PlayerData;
 import game.datatypes.bullet.BulletData;
@@ -15,16 +16,36 @@ public class Shotgun extends WeaponParent {
     public List<Bullet> createBullet(PlayerData player) {
         ArrayList<Bullet> bulletsToCreate = new ArrayList<>();
 
-        bulletsToCreate.add(new BulletData(new Point2D.Double(player.getX(), player.getY()),
-                player.getShipAngle() + 15.0d, player.getId(), player.getWeapon().getDamage()));
-        bulletsToCreate.add(new BulletData(new Point2D.Double(player.getX(), player.getY()),
-                player.getShipAngle() + 5.0d, player.getId(), player.getWeapon().getDamage()));
-        bulletsToCreate.add(new BulletData(new Point2D.Double(player.getX(), player.getY()), player.getShipAngle(),
-                player.getId(), player.getWeapon().getDamage()));
-        bulletsToCreate.add(new BulletData(new Point2D.Double(player.getX(), player.getY()),
-                player.getShipAngle() - 5.0d, player.getId(), player.getWeapon().getDamage()));
-        bulletsToCreate.add(new BulletData(new Point2D.Double(player.getX(), player.getY()),
-                player.getShipAngle() - 15.0d, player.getId(), player.getWeapon().getDamage()));
+        bulletsToCreate.add(new BulletBuilder()
+                            .setCoordinate(new Point2D.Double(player.getX(), player.getY()))
+                            .setAngle(player.getShipAngle() + 15.0d).setPlayerId(player.getId())
+                            .setDamage(player.getWeapon().getDamage())
+                            .build());
+
+        bulletsToCreate.add(new BulletBuilder()
+                            .setCoordinate(new Point2D.Double(player.getX(), player.getY()))
+                            .setAngle(player.getShipAngle() + 5.0d).setPlayerId(player.getId())
+                            .setDamage(player.getWeapon().getDamage())
+                            .build());
+
+        bulletsToCreate.add(new BulletBuilder()
+                            .setCoordinate(new Point2D.Double(player.getX(), player.getY()))
+                            .setAngle(player.getShipAngle()).setPlayerId(player.getId())
+                            .setDamage(player.getWeapon().getDamage())
+                            .build());
+
+        bulletsToCreate.add(new BulletBuilder()
+                            .setCoordinate(new Point2D.Double(player.getX(), player.getY()))
+                            .setAngle(player.getShipAngle() - 5.0d).setPlayerId(player.getId())
+                            .setDamage(player.getWeapon().getDamage())
+                            .build());
+
+        bulletsToCreate.add(new BulletBuilder()
+                            .setCoordinate(new Point2D.Double(player.getX(), player.getY()))
+                            .setAngle(player.getShipAngle() - 15.0d).setPlayerId(player.getId())
+                            .setDamage(player.getWeapon().getDamage())
+                            .build());
+
         return bulletsToCreate;
     }
 

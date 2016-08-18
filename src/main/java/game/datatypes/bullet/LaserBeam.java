@@ -36,7 +36,10 @@ public class LaserBeam extends BulletData {
     }
 
     public LaserBeam(Point2D coordinate, double angle, long playerId, long damage) {
-        super(coordinate, angle, playerId, damage);
+        super.setLocation(coordinate);
+        super.setAngle(angle);
+        super.setPlayerId(playerId);
+        super.setDamage(damage);
 
         double resultX;
         double resultY;

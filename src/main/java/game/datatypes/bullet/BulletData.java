@@ -8,22 +8,11 @@ import game.interfaces.Bullet;
 import game.interfaces.Spawnable;
 
 public class BulletData implements Bullet {
-    private double x;
-    private double y;
     private Point2D coordinate;
     private double angle;
-    private long age;
+    private long age = 0L;
     private long playerId;
     private long damage;
-
-    public BulletData(Point2D coordinate, double angle, long playerId, long damage) {
-        super();
-        this.coordinate = coordinate;
-        this.angle = angle;
-        this.age = 0L;
-        this.playerId = playerId;
-        this.damage = damage;
-    }
 
     @Override
     public boolean isAgeCounterExpired() {
@@ -119,7 +108,7 @@ public class BulletData implements Bullet {
     @Override
     public String getPhysicalRepresentation() {
         return new String(
-                "{\"shape\": \"circle\", \"startx\": \"" + x + "\", \"starty\": \"" + y + "\", \"radius\" : \"15\"}");
+                "{\"shape\": \"circle\", \"startx\": \"" + this.coordinate.getX() + "\", \"starty\": \"" + this.coordinate.getY() + "\", \"radius\" : \"15\"}");
     }
 
     @Override
