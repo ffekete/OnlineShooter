@@ -4,7 +4,7 @@ import java.awt.geom.Point2D;
 
 import org.springframework.stereotype.Component;
 
-import game.datatypes.bullet.BulletData;
+import game.datatype.bullet.BulletData;
 import game.interfaces.Bullet;
 
 @Component

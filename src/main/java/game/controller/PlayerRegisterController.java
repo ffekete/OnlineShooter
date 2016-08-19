@@ -5,11 +5,11 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
-import game.config.constants.BrokerPaths;
-import game.config.constants.EndpointPaths;
+import game.config.constant.BrokerPaths;
+import game.config.constant.EndpointPaths;
 import game.datahandler.PlayerIdGenerator;
-import game.datatypes.PlayerData;
-import game.datatypes.RegistrationData;
+import game.datatype.PlayerData;
+import game.datatype.RegistrationData;
 import game.interfaces.PlayerPoolMap;
 import game.model.RegistrationAnswer;
 import game.transformer.PlayerDataToRegistrationAnswerTransformer;
