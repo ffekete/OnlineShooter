@@ -1,4 +1,4 @@
-package datahandler;
+package game.connection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import game.config.constants.ConnectionPreferences;
+import game.config.constant.ConnectionPreferences;
 import game.connection.ConnectionPool;
 import game.entrypoint.Application;
 

@@ -1,23 +1,34 @@
-package game.config.constants;
+package game.config.constant;
 
-public class SpawnableItemTypeConstants {
+public enum SpawnableItemType {
     // Weapons
-    public static final int GATLING_GUN = 0;
-    public static final int LASER_CANNON = 4;
-    public static final int DOUBLE_GATLING_GUN = 10;
-    public static final int SHOTGUN = 14;
+    GATLING_GUN,
+    LASER_CANNON,
+    DOUBLE_GATLING_GUN,
+    SHOTGUN,
 
-    // Power up's
-    public static final int INCREASE_DAMAGE = 1;
-    public static final int INCRASE_RATE_OF_FIRE = 3;
-    public static final int INCREASE_MANEUVERABILITY = 5;
-    public static final int INCREASE_SPEED = 6;
+    // Power-ups
+    INCREASE_DAMAGE,
+    INCRASE_RATE_OF_FIRE,
+    INCREASE_MANEUVERABILITY,
+    INCREASE_SPEED,
 
     // Shields
-    public static final int ATOM_SHIELD = 8;
-    public static final int PLASMA_SHIELD = 9;
+    ATOM_SHIELD,
+    PLASMA_SHIELD,
 
     // Other
-    public static final int HEALTH_PACK = 2;
-    public static final int INCREASE_SCORE = 7;
+    HEALTH_PACK,
+    INCREASE_SCORE;
+
+    public static int count() {
+        return values().length;
+    }
+
+    public static SpawnableItemType get(int index) {
+        if (index >= 0 && index < count())
+            return values()[index];
+        else
+            throw new IllegalArgumentException();
+    }
 }

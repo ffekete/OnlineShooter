@@ -1,7 +1,7 @@
-package game.datatypes.shield;
+package game.datatype.shield;
 
-import game.datatypes.PlayerData;
-import game.datatypes.Items.ItemParent;
+import game.datatype.PlayerData;
+import game.datatype.item.ItemParent;
 import game.interfaces.Shield;
 
 public class ShieldParent extends ItemParent implements Shield{

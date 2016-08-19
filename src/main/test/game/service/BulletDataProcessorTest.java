@@ -1,4 +1,4 @@
-package services;
+package game.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -8,10 +8,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import game.config.constants.GameConfig;
-import game.datatypes.PlayerData;
-import game.datatypes.bullet.BulletData;
-import game.datatypes.weapons.GatlingGun;
+import game.config.constant.GameConfig;
+import game.datatype.PlayerData;
+import game.datatype.bullet.BulletData;
+import game.datatype.weapon.GatlingGun;
 import game.entrypoint.Application;
 import game.interfaces.Bullet;
 import game.interfaces.BulletDataProcessorInterface;

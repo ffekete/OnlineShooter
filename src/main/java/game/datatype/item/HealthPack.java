@@ -1,6 +1,6 @@
-package game.datatypes.Items;
+package game.datatype.item;
 
-import game.datatypes.PlayerData;
+import game.datatype.PlayerData;
 import game.service.Spawner;
 
 public class HealthPack extends ItemParent{

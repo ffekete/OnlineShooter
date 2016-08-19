@@ -1,7 +1,7 @@
-package game.datatypes.Items;
+package game.datatype.item;
 
-import game.config.constants.GameConfig;
-import game.datatypes.PlayerData;
+import game.config.constant.GameConfig;
+import game.datatype.PlayerData;
 import game.service.Spawner;
 
 public class IncreaseScore extends ItemParent{

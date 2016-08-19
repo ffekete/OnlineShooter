@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import game.config.constants.ShipConfig;
+import game.config.constant.ShipConfig;
 import game.datahandler.ItemCreationHandler;
 import game.interfaces.SpawnableItem;
 
@@ -16,7 +16,7 @@ public class CarriageBuilder {
         int cargoSize = pickRandomSizeForCargo();
 
         for (int i = 0; i < cargoSize; i++) {
-            cargo.add(createOneRandomItem());
+            cargo.add(new ItemCreationHandler().createRandomItem());
         }
 
         return cargo;
@@ -25,9 +25,5 @@ public class CarriageBuilder {
     private static int pickRandomSizeForCargo() {
         Random random = new Random();
         return random.nextInt(ShipConfig.CARGO_SHIP_MAX_CAPACITY_DURING_CREATION - 1) + 1; // 1..CARGO_SHIP_MAX_CAPACITY_DURING_CREATION
-    }
-
-    private static SpawnableItem createOneRandomItem() {
-        return new ItemCreationHandler().createItem(new Random().nextInt(15));
     }
 }

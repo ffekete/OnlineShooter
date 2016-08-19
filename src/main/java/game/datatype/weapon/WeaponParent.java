@@ -1,13 +1,12 @@
-package game.datatypes.weapons;
+package game.datatype.weapon;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
 import factory.BulletBuilder;
-import game.datatypes.PlayerData;
-import game.datatypes.Items.ItemParent;
-import game.datatypes.bullet.BulletData;
+import game.datatype.PlayerData;
+import game.datatype.item.ItemParent;
 import game.interfaces.Bullet;
 import game.interfaces.Weapon;
 

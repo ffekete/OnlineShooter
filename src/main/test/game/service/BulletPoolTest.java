@@ -1,4 +1,4 @@
-package services;
+package game.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -7,8 +7,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import game.datatypes.PlayerData;
-import game.datatypes.weapons.GatlingGun;
+import game.datatype.PlayerData;
+import game.datatype.weapon.GatlingGun;
 import game.entrypoint.Application;
 import game.interfaces.Bullet;
 import game.interfaces.BulletPoolList;

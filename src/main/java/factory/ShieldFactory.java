@@ -3,9 +3,9 @@ package factory;
 import org.springframework.stereotype.Component;
 
 import game.config.ShieldId;
-import game.datatypes.shield.AtomShield;
-import game.datatypes.shield.NormalShield;
-import game.datatypes.shield.PlasmaShield;
+import game.datatype.shield.AtomShield;
+import game.datatype.shield.NormalShield;
+import game.datatype.shield.PlasmaShield;
 import game.interfaces.Shield;
 
 @Component

@@ -1,6 +1,6 @@
-package game.datatypes.shield;
+package game.datatype.shield;
 
-import game.config.constants.ShieldConfig;
+import game.config.constant.ShieldConfig;
 
 public class NormalShield extends ShieldParent{
     public NormalShield(){

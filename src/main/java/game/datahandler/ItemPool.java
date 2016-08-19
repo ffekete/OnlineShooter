@@ -8,8 +8,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import game.config.constants.GameConfig;
-import game.datatypes.PlayerData;
+import game.config.constant.GameConfig;
+import game.datatype.PlayerData;
 import game.interfaces.ItemPoolList;
 import game.interfaces.PlayerPoolMap;
 import game.interfaces.SpawnableItem;
@@ -48,10 +48,8 @@ public class ItemPool implements ItemPoolList<SpawnableItem> {
     @Override
     public void createNewRandomItem() {
         if (isPlaceItem()) {
-            SpawnableItem item = new ItemCreationHandler().createItem(new Random().nextInt(15));
-            if (item != null) {
-                this.add(item);
-            }
+            SpawnableItem item = new ItemCreationHandler().createRandomItem();
+            this.add(item);
         }
     }
 

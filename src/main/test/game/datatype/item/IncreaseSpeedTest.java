@@ -1,11 +1,11 @@
-package items;
+package game.datatype.item;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import game.config.constants.ItemConfig;
-import game.datatypes.PlayerData;
-import game.datatypes.Items.IncreaseSpeed;
+import game.config.constant.ItemConfig;
+import game.datatype.PlayerData;
+import game.datatype.item.IncreaseSpeed;
 
 public class IncreaseSpeedTest {
     

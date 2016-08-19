@@ -1,10 +1,10 @@
-package game.datatypes.ship;
+package game.datatype.ship;
 
 import java.awt.geom.Point2D;
 import java.util.List;
 
 import factory.WeaponFactory;
-import game.config.constants.ShipConfig;
+import game.config.constant.ShipConfig;
 import game.interfaces.SpawnableItem;
 
 public class CargoShip extends ShipParent {

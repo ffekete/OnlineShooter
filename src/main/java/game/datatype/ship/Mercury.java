@@ -1,9 +1,9 @@
-package game.datatypes.ship;
+package game.datatype.ship;
 
 import java.awt.geom.Point2D;
 
 import factory.WeaponFactory;
-import game.config.constants.ShipConfig;
+import game.config.constant.ShipConfig;
 
 public class Mercury extends ShipParent {
 

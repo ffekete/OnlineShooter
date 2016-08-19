@@ -1,4 +1,4 @@
-package game.config.constants;
+package game.config.constant;
 
 public class BrokerPaths {
     public static final String PROVIDE_PLAYER_DATA = "/providePlayerData_node";

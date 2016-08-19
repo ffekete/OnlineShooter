@@ -1,12 +1,12 @@
-package shields;
+package game.datatype.shield;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import game.config.constants.ShieldConfig;
-import game.datatypes.PlayerData;
-import game.datatypes.shield.AtomShield;
-import game.datatypes.shield.NormalShield;
+import game.config.constant.ShieldConfig;
+import game.datatype.PlayerData;
+import game.datatype.shield.AtomShield;
+import game.datatype.shield.NormalShield;
 
 public class NormalShieldTest {
 

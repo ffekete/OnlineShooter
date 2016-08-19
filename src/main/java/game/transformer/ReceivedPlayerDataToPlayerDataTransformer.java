@@ -3,8 +3,8 @@ package game.transformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import game.datatypes.PlayerData;
-import game.datatypes.ReceivedPlayerData;
+import game.datatype.PlayerData;
+import game.datatype.ReceivedPlayerData;
 import game.interfaces.PlayerPoolMap;
 
 @Component

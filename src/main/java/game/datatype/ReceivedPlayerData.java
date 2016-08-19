@@ -1,4 +1,4 @@
-package game.datatypes;
+package game.datatype;
 
 /** This type of data will be received from client side during gameplay. */
 public class ReceivedPlayerData {

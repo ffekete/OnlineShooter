@@ -1,10 +1,10 @@
-package weapons;
+package game.datatype.weapon;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import game.datatypes.weapons.DoubleGatlingGun;
+import game.datatype.weapon.DoubleGatlingGun;
 
 public class WeaponTest {
 

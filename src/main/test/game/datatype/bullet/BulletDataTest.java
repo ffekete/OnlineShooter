@@ -1,4 +1,4 @@
-package bullets;
+package game.datatype.bullet;
 
 import java.awt.geom.Point2D;
 
@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import factory.BulletBuilder;
-import game.datatypes.bullet.BulletData;
+import game.datatype.bullet.BulletData;
 import game.interfaces.Bullet;
 
 public class BulletDataTest {

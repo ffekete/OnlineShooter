@@ -1,4 +1,4 @@
-package game.datatypes.ship;
+package game.datatype.ship;
 
 import java.awt.geom.Point2D;
 

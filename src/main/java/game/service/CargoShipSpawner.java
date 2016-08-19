@@ -3,7 +3,7 @@ package game.service;
 import java.awt.geom.Point2D;
 import java.util.Random;
 
-import game.config.constants.GameConfig;
+import game.config.constant.GameConfig;
 import game.interfaces.Spawnable;
 
 public class CargoShipSpawner extends Spawner {

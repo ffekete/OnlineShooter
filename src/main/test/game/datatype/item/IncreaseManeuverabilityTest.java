@@ -1,15 +1,14 @@
-package items;
+package game.datatype.item;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import game.config.constants.ItemConfig;
-import game.datatypes.PlayerData;
-import game.datatypes.Items.IncreaseMAneuverability;
+import game.config.constant.ItemConfig;
+import game.datatype.PlayerData;
 
 public class IncreaseManeuverabilityTest {
 
-    IncreaseMAneuverability im = new IncreaseMAneuverability();
+    IncreaseManeuverability im = new IncreaseManeuverability();
     
     @Test
     public void testShouldCreateIncreaseManeuverability(){

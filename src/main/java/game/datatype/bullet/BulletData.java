@@ -1,8 +1,8 @@
-package game.datatypes.bullet;
+package game.datatype.bullet;
 
 import java.awt.geom.Point2D;
 
-import game.config.constants.GameConfig;
+import game.config.constant.GameConfig;
 import game.controller.EventSender;
 import game.interfaces.Bullet;
 import game.interfaces.Spawnable;

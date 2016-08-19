@@ -1,11 +1,11 @@
-package items;
+package game.datatype.item;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import game.config.constants.GameConfig;
-import game.datatypes.PlayerData;
-import game.datatypes.Items.IncreaseScore;
+import game.config.constant.GameConfig;
+import game.datatype.PlayerData;
+import game.datatype.item.IncreaseScore;
 
 public class IncreaseScoreTest {
 

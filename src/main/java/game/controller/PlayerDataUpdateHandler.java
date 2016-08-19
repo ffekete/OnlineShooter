@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 
-import game.config.constants.EndpointPaths;
-import game.datatypes.PlayerData;
-import game.datatypes.ReceivedPlayerData;
+import game.config.constant.EndpointPaths;
+import game.datatype.PlayerData;
+import game.datatype.ReceivedPlayerData;
 import game.transformer.ReceivedPlayerDataToPlayerDataTransformer;
 
 @Controller

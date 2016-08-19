@@ -1,4 +1,4 @@
-package game.datatypes;
+package game.datatype;
 
 public class Event {
     private String eventCommand;

@@ -1,4 +1,4 @@
-package bullets;
+package game.datatype.bullet;
 
 import java.awt.geom.Point2D;
 
@@ -7,8 +7,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import factory.ShipFactory;
-import game.config.constants.WeaponConfig;
-import game.datatypes.bullet.LaserBeam;
+import game.config.constant.WeaponConfig;
+import game.datatype.bullet.LaserBeam;
 import game.interfaces.Ship;
 
 public class LaserBeamTest {

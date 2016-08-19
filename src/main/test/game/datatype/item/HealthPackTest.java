@@ -1,12 +1,12 @@
-package items;
+package game.datatype.item;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import game.config.constants.ShipConfig;
-import game.datatypes.PlayerData;
-import game.datatypes.Items.HealthPack;
+import game.config.constant.ShipConfig;
+import game.datatype.PlayerData;
+import game.datatype.item.HealthPack;
 
 public class HealthPackTest {
 

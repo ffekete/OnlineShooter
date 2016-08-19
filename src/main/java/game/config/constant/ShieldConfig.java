@@ -1,4 +1,4 @@
-package game.config.constants;
+package game.config.constant;
 
 public class ShieldConfig {
     public final static long NORMAL_SHIELD_PROTECTION = 10L;

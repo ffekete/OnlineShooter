@@ -10,11 +10,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import game.config.constants.ConnectionPreferences;
+import game.config.constant.ConnectionPreferences;
 import game.connection.ConnectionPool;
-import game.datatypes.HighScore;
-import game.datatypes.PlayerData;
-import game.datatypes.RegistrationData;
+import game.datatype.HighScore;
+import game.datatype.PlayerData;
+import game.datatype.RegistrationData;
 import game.interfaces.PlayerPoolMap;
 import game.transformer.RegistrationDataToPlayerDataTransformer;
 

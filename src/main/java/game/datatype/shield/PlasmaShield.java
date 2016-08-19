@@ -1,6 +1,6 @@
-package game.datatypes.shield;
+package game.datatype.shield;
 
-import game.config.constants.ShieldConfig;
+import game.config.constant.ShieldConfig;
 
 public class PlasmaShield extends ShieldParent{
     public PlasmaShield(){

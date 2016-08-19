@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import game.config.constants.GameConfig;
-import game.config.constants.TimerValues;
+import game.config.constant.GameConfig;
+import game.config.constant.TimerValues;
 import game.datahandler.HighScoreTable;
-import game.datatypes.PlayerData;
+import game.datatype.PlayerData;
 import game.interfaces.BulletDataProcessorInterface;
 import game.interfaces.ItemProcessorInterface;
 import game.interfaces.PlayerDataProcessorInterface;

@@ -1,11 +1,11 @@
-package game.datatypes.Items;
+package game.datatype.item;
 
-import game.config.constants.ItemConfig;
-import game.datatypes.PlayerData;
+import game.config.constant.ItemConfig;
+import game.datatype.PlayerData;
 import game.service.Spawner;
 
-public class IncreaseMAneuverability extends ItemParent{
-    public IncreaseMAneuverability(){
+public class IncreaseManeuverability extends ItemParent{
+    public IncreaseManeuverability(){
         Spawner.spawn(this);
         super.setName("Maneuverability +1");
     }

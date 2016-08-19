@@ -1,4 +1,4 @@
-package game.config.constants;
+package game.config.constant;
 
 public class GameConfig {
     public final static int ITEM_SPAWNING_RATE = 800;

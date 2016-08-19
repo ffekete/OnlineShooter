@@ -1,12 +1,12 @@
-package game.datatypes;
+package game.datatype;
 
 import java.util.List;
 
 import factory.ShieldFactory;
 import factory.ShipFactory;
 import game.config.ShieldId;
-import game.config.constants.CanvasConstants;
-import game.config.constants.GameConfig;
+import game.config.constant.CanvasConstants;
+import game.config.constant.GameConfig;
 import game.interfaces.Bullet;
 import game.interfaces.Shield;
 import game.interfaces.Ship;

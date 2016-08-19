@@ -1,6 +1,6 @@
-package game.datatypes.weapons;
+package game.datatype.weapon;
 
-import game.config.constants.WeaponConfig;
+import game.config.constant.WeaponConfig;
 import game.service.Spawner;
 
 public class Machinegun extends WeaponParent {

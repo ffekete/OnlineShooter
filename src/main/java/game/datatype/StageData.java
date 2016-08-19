@@ -1,8 +1,8 @@
-package game.datatypes;
+package game.datatype;
 
 import java.awt.geom.Point2D;
 
-import game.config.constants.GameConfig;
+import game.config.constant.GameConfig;
 
 public class StageData {
     private static StageData data = null;

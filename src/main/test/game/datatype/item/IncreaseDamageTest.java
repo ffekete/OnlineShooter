@@ -1,11 +1,11 @@
-package items;
+package game.datatype.item;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import game.datatypes.PlayerData;
-import game.datatypes.Items.IncreaseDamage;
+import game.datatype.PlayerData;
+import game.datatype.item.IncreaseDamage;
 
 public class IncreaseDamageTest {
 

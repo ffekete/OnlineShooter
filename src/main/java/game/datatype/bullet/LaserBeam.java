@@ -1,10 +1,10 @@
-package game.datatypes.bullet;
+package game.datatype.bullet;
 
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
-import game.config.constants.GameConfig;
-import game.config.constants.WeaponConfig;
+import game.config.constant.GameConfig;
+import game.config.constant.WeaponConfig;
 import game.interfaces.Spawnable;
 
 public class LaserBeam extends BulletData {

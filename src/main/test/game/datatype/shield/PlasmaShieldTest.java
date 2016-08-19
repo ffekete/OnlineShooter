@@ -1,11 +1,11 @@
-package shields;
+package game.datatype.shield;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import game.config.constants.ShieldConfig;
-import game.datatypes.PlayerData;
-import game.datatypes.shield.PlasmaShield;
+import game.config.constant.ShieldConfig;
+import game.datatype.PlayerData;
+import game.datatype.shield.PlasmaShield;
 
 public class PlasmaShieldTest {
 

@@ -1,4 +1,4 @@
-package game.config.constants;
+package game.config.constant;
 
 public class CanvasConstants {
     

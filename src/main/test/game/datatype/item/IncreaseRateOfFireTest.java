@@ -1,10 +1,10 @@
-package items;
+package game.datatype.item;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import game.datatypes.PlayerData;
-import game.datatypes.Items.IncreaseRateOfFire;
+import game.datatype.PlayerData;
+import game.datatype.item.IncreaseRateOfFire;
 
 public class IncreaseRateOfFireTest {
 

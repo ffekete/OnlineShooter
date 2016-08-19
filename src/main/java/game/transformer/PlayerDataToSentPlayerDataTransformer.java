@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import game.datahandler.HighScoreTable;
-import game.datatypes.PlayerData;
+import game.datatype.PlayerData;
 import game.interfaces.Bullet;
 import game.interfaces.BulletPoolList;
 import game.interfaces.ItemPoolList;

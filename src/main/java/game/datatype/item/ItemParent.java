@@ -1,4 +1,4 @@
-package game.datatypes.Items;
+package game.datatype.item;
 
 import java.awt.geom.Point2D;
 

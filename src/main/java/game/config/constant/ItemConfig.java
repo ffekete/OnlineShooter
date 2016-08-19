@@ -1,4 +1,4 @@
-package game.config.constants;
+package game.config.constant;
 
 public class ItemConfig {
     public static final double MANEUVERABILITY_INCREASE_VALE = 3.0d;
