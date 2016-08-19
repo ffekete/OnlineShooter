@@ -1,13 +1,24 @@
 package game.datatypes.Items;
 
+import java.util.Locale;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Component;
+
 import game.config.constants.ItemConfig;
 import game.datatypes.PlayerData;
 import game.service.Spawner;
 
-public class IncreaseSpeed extends ItemParent{
-    public IncreaseSpeed(){
+@Component
+public class IncreaseSpeed extends ItemParent {
+
+    @Autowired
+    private MessageSource messages;
+
+    public IncreaseSpeed() {
         Spawner.spawn(this);
-        this.setName("Speed +1");
+        this.setName(messages.getMessage("item.increasespeed", null, Locale.US));
     }
 
     @Override

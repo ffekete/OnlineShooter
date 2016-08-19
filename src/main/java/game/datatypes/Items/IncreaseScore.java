@@ -1,13 +1,24 @@
 package game.datatypes.Items;
 
+import java.util.Locale;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Component;
+
 import game.config.constants.GameConfig;
 import game.datatypes.PlayerData;
 import game.service.Spawner;
 
-public class IncreaseScore extends ItemParent{
-    public IncreaseScore(){
+@Component
+public class IncreaseScore extends ItemParent {
+
+    @Autowired
+    private MessageSource messages;
+
+    public IncreaseScore() {
         Spawner.spawn(this);
-        this.setName("Score++");
+        this.setName(messages.getMessage("item.increasescore", null, Locale.US));
     }
 
     @Override
