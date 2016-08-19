@@ -112,3 +112,5 @@ local.properties
 
 # Code Recommenders
 .recommenders/
+.idea/
+gs-messaging-stomp-websocket.iml
