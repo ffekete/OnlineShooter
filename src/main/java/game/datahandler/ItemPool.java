@@ -48,7 +48,7 @@ public class ItemPool implements ItemPoolList<SpawnableItem> {
     @Override
     public void createNewRandomItem() {
         if (isPlaceItem()) {
-            SpawnableItem item = itemHandler.createItem(new Random().nextInt(15));
+            SpawnableItem item = new ItemCreationHandler().createItem(new Random().nextInt(15));
             if (item != null) {
                 this.add(item);
             }

@@ -19,7 +19,7 @@ import game.interfaces.Spawnable;
 import game.interfaces.SpawnableItem;
 
 @Component
-public class ItemHandler implements ItemCreation {
+public class ItemHandler {
 
     public boolean isItOnScreen(PlayerData player, Spawnable item) {
         boolean result = false;
@@ -30,49 +30,5 @@ public class ItemHandler implements ItemCreation {
         }
 
         return result;
-    }
-
-    @Override
-    public SpawnableItem createItem(int id) {
-        SpawnableItem item = null;
-        switch (id) {
-        case SpawnableItemTypeConstants.GATLING_GUN:
-            item = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.GATLING_GUN);
-            break;
-        case SpawnableItemTypeConstants.INCREASE_DAMAGE:
-            item = (SpawnableItem) new IncreaseDamage();
-            break;
-        case SpawnableItemTypeConstants.HEALTH_PACK:
-            item = (SpawnableItem) new HealthPack();
-            break;
-        case SpawnableItemTypeConstants.INCRASE_RATE_OF_FIRE:
-            item = (SpawnableItem) new IncreaseRateOfFire();
-            break;
-        case SpawnableItemTypeConstants.LASER_CANNON:
-            item = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.LASER_CANNON);
-            break;
-        case SpawnableItemTypeConstants.INCREASE_MANEUVERABILITY:
-            item = (SpawnableItem) new IncreaseMAneuverability();
-            break;
-        case SpawnableItemTypeConstants.INCREASE_SPEED:
-            item = (SpawnableItem) new IncreaseSpeed();
-            break;
-        case SpawnableItemTypeConstants.INCREASE_SCORE:
-            item = (SpawnableItem) new IncreaseScore();
-            break;
-        case SpawnableItemTypeConstants.ATOM_SHIELD:
-            item = (SpawnableItem) ShieldFactory.createShield(ShieldId.ATOM_SHIELD);
-            break;
-        case SpawnableItemTypeConstants.PLASMA_SHIELD:
-            item = (SpawnableItem) ShieldFactory.createShield(ShieldId.PLASMA_SHIELD);
-            break;
-        case SpawnableItemTypeConstants.DOUBLE_GATLING_GUN:
-            item = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.DOUBLE_GATLING);
-            break;
-        case SpawnableItemTypeConstants.SHOTGUN:
-            item = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.SHOTGUN);
-            break;
-        }
-        return item;
     }
 }
