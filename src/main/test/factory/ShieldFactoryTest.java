@@ -1,15 +1,9 @@
 package factory;
 
-import javax.validation.constraints.AssertTrue;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import game.config.*;
 import game.datatypes.shield.*;
-import game.entrypoint.Application;
 import game.interfaces.Shield;
 
 public class ShieldFactoryTest {
