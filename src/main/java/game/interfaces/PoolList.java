@@ -9,10 +9,10 @@ public interface PoolList<T> {
     public boolean remove(T t);
 
     public void clear();
-    
+
     public int poolSize();
-    
+
     public Iterator<T> getIterator();
-    
+
     public List<T> getAllOnScreen(Long playerId);
 }
