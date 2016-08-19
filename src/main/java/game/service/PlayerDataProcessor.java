@@ -233,6 +233,6 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
      * Updates a given players coordinate.
      */
     private void updatePlayerCoordinates(PlayerData player) {
-        player.setLocation(coordinateHandler.calculateItemCoordinates(player.getSpaceShip(), player.getSpeed()));
+        player.setCoordinate(coordinateHandler.calculateItemCoordinates(player.getSpaceShip(), player.getSpeed()));
     }
 }

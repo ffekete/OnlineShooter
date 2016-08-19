@@ -55,7 +55,7 @@ public class BulletDataProcessorTest extends AbstractTestNGSpringContextTests {
         // given
         // setting this weapon for player ship because it will create one bullet
         player.setWeapon(new GatlingGun());
-        player.setLocation(x, y);
+        player.setCoordinate(x, y);
         player.setShipAngle(angle);
         pp.put(200L, player);
         bp.addBullet(player.getId());

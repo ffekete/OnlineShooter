@@ -54,7 +54,7 @@ public class PlayerData {
         this.setShipAngle(player2.getShipAngle());
         this.setSpeed(player2.getSpeed());
         this.setWeapon(player2.getWeapon());
-        this.setLocation(player2.getCoordinate());
+        this.setCoordinate(player2.getCoordinate());
         this.setPreviousAngle(this.getPreviousAngle());
         this.setCanvas(player2.getCanvas());
     }
@@ -311,11 +311,11 @@ public class PlayerData {
         return getSpaceShip().getCoordinate();
     }
 
-    public void setLocation(Point2D coordinate) {
+    public void setCoordinate(Point2D coordinate) {
         this.getSpaceShip().setLocation(coordinate);
     }
 
-    public void setLocation(double x, double y) {
+    public void setCoordinate(double x, double y) {
         this.getSpaceShip().setLocation(x, y);
     }
 
