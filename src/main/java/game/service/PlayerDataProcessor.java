@@ -1,6 +1,5 @@
 package game.service;
 
-import java.awt.geom.Point2D;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -234,8 +233,6 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
      * Updates a given players coordinate.
      */
     private void updatePlayerCoordinates(PlayerData player) {
-        Point2D coordinate = coordinateHandler.calculateItemCoordinates(player.getSpaceShip(), player.getSpeed());
-        player.setX(coordinate.getX());
-        player.setY(coordinate.getY());
+        player.setLocation(coordinateHandler.calculateItemCoordinates(player.getSpaceShip(), player.getSpeed()));
     }
 }
