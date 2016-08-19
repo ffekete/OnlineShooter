@@ -1,13 +1,11 @@
 package game.datatypes.weapons;
 
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
 import factory.BulletBuilder;
 import game.config.constants.WeaponConfig;
 import game.datatypes.PlayerData;
-import game.datatypes.bullet.BulletData;
 import game.interfaces.Bullet;
 import game.service.Spawner;
 
@@ -15,15 +13,15 @@ public class DoubleGatlingGun extends WeaponParent {
 
     public List<Bullet> createBullet(PlayerData player) {
         ArrayList<Bullet> bulletsToCreate = new ArrayList<>();
-
+        
         bulletsToCreate.add(new BulletBuilder()
-                            .setCoordinate(new Point2D.Double(player.getX(), player.getY()))
+                            .setCoordinate(player.getCoordinate())
                             .setAngle(player.getShipAngle() + 0.5d).setPlayerId(player.getId())
                             .setDamage(player.getWeapon().getDamage())
                             .build());
         
         bulletsToCreate.add(new BulletBuilder()
-                            .setCoordinate(new Point2D.Double(player.getX(), player.getY()))
+                            .setCoordinate(player.getCoordinate())
                             .setAngle(player.getShipAngle() - 0.5d).setPlayerId(player.getId())
                             .setDamage(player.getWeapon().getDamage())
                             .build());

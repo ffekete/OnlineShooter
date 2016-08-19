@@ -1,13 +1,11 @@
 package game.datatypes.weapons;
 
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
 import factory.BulletBuilder;
 import game.datatypes.PlayerData;
 import game.datatypes.Items.ItemParent;
-import game.datatypes.bullet.BulletData;
 import game.interfaces.Bullet;
 import game.interfaces.Weapon;
 
@@ -103,7 +101,7 @@ public abstract class WeaponParent extends ItemParent implements Weapon {
         ArrayList<Bullet> bulletsToCreate = new ArrayList<>();
 
         bulletsToCreate.add(new BulletBuilder()
-                            .setCoordinate(new Point2D.Double(player.getX(), player.getY()))
+                            .setCoordinate(player.getCoordinate())
                             .setAngle(player.getShipAngle())
                             .setPlayerId(player.getId())
                             .setDamage(player.getWeapon().getDamage())
