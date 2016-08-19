@@ -12,8 +12,7 @@ import game.datatypes.shield.*;
 import game.entrypoint.Application;
 import game.interfaces.Shield;
 
-@ContextConfiguration(classes = Application.class)
-public class ShieldFactoryTest extends AbstractTestNGSpringContextTests {
+public class ShieldFactoryTest {
     
     @Test
     public void testShouldCreateNormalShield() {
@@ -30,8 +29,4 @@ public class ShieldFactoryTest extends AbstractTestNGSpringContextTests {
         Shield shield = ShieldFactory.createShield(ShieldId.ATOM_SHIELD);
         Assert.assertTrue(shield instanceof AtomShield);
     }
-    //@Test(expectedExceptions=RuntimeException.class)
-    //public void testShouldThowException() {
-    //    Shield shield = ShieldFactory.createShield();
-    //}
 }
