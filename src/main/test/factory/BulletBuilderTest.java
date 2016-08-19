@@ -2,23 +2,12 @@ package factory;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import game.interfaces.Bullet;
-
-import static org.mockito.Mockito.*;
-
 import java.awt.geom.Point2D;
 
-import org.mockito.Mock;
 
 public class BulletBuilderTest {
     
-    @Mock
-    BulletBuilder bulletBuilder;
-    
-    @Mock
-    Point2D coordinates;
-
     @Test(expectedExceptions=RuntimeException.class, expectedExceptionsMessageRegExp = ".*coordinate.*")
     public void testShouldThrowCoordinateException() {
         BulletBuilder bulletBuilder = new BulletBuilder();
