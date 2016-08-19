@@ -10,6 +10,6 @@ public interface PlayerPoolMap<T1, T2> extends PoolMap<T1, T2> {
     public boolean registerPlayer(T1 t1, RegistrationData data);
 
     public void updatePlayerPoolData();
-    
+
     public Iterator<T1> getKeySetIterator();
 }

@@ -1,5 +1,6 @@
 package game.datatypes;
 
+import java.awt.geom.Point2D;
 import java.util.List;
 
 import factory.ShieldFactory;
@@ -53,8 +54,7 @@ public class PlayerData {
         this.setShipAngle(player2.getShipAngle());
         this.setSpeed(player2.getSpeed());
         this.setWeapon(player2.getWeapon());
-        this.setX(player2.getX());
-        this.setY(player2.getY());
+        this.setCoordinate(player2.getCoordinate());
         this.setPreviousAngle(this.getPreviousAngle());
         this.setCanvas(player2.getCanvas());
     }
@@ -303,16 +303,20 @@ public class PlayerData {
         return getSpaceShip().getX();
     }
 
-    public void setX(double x) {
-        this.getSpaceShip().setX(x);
-    }
-
     public double getY() {
         return getSpaceShip().getY();
     }
 
-    public void setY(double y) {
-        this.getSpaceShip().setY(y);
+    public Point2D getCoordinate() {
+        return getSpaceShip().getCoordinate();
+    }
+
+    public void setCoordinate(Point2D coordinate) {
+        this.getSpaceShip().setLocation(coordinate);
+    }
+
+    public void setCoordinate(double x, double y) {
+        this.getSpaceShip().setLocation(x, y);
     }
 
     public Long getMouseX() {
