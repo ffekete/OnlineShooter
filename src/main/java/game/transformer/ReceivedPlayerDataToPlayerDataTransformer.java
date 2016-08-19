@@ -11,19 +11,17 @@ import game.interfaces.PlayerPoolMap;
 public class ReceivedPlayerDataToPlayerDataTransformer {
     @Autowired
     PlayerPoolMap<Long, PlayerData> playerPool;
-    
-    public PlayerData transform(ReceivedPlayerData receivedPlayerData){
+
+    public PlayerData transform(ReceivedPlayerData receivedPlayerData) {
         PlayerData playerData = playerPool.get(receivedPlayerData.getId());
-        
-        if(playerData != null){
+
+        if (playerData != null) {
             playerData.setMouseX(receivedPlayerData.getMouseX());
             playerData.setMouseY(receivedPlayerData.getMouseY());
-            playerData.updateCanvasProperties(receivedPlayerData.getCanvasX(), receivedPlayerData.getCanvasY(), receivedPlayerData.getCanvasHeight(), receivedPlayerData.getCanvasWidth());
-            return playerData;
+            playerData.updateCanvasProperties(receivedPlayerData.getCanvasX(), receivedPlayerData.getCanvasY(),
+                    receivedPlayerData.getCanvasHeight(), receivedPlayerData.getCanvasWidth());
+
         }
-        else
-        {
-            return null;
-        }
+        return playerData;
     }
 }
