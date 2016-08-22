@@ -1,11 +1,8 @@
 package game.datahandler;
 
-import org.springframework.stereotype.Component;
-
 import game.datatype.PlayerData;
 import game.interfaces.Spawnable;
 
-@Component
 public class ItemHandler {
 
     public boolean isItOnScreen(PlayerData player, Spawnable item) {

@@ -8,7 +8,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import game.config.constant.ConnectionPreferences;
 import game.connection.ConnectionPool;
@@ -18,7 +17,6 @@ import game.datatype.RegistrationData;
 import game.interfaces.PlayerPoolMap;
 import game.transformer.RegistrationDataToPlayerDataTransformer;
 
-@Component
 public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
 
     @Autowired

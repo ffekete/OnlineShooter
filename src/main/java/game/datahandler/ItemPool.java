@@ -6,7 +6,6 @@ import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import game.config.constant.GameConfig;
 import game.datatype.PlayerData;
@@ -14,7 +13,6 @@ import game.interfaces.ItemPoolList;
 import game.interfaces.PlayerPoolMap;
 import game.interfaces.SpawnableItem;
 
-@Component
 public class ItemPool implements ItemPoolList<SpawnableItem> {
     private List<SpawnableItem> itemPool;
 

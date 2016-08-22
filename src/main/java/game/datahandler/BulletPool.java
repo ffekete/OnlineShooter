@@ -5,14 +5,12 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import game.datatype.PlayerData;
 import game.interfaces.Bullet;
 import game.interfaces.BulletPoolList;
 import game.interfaces.PlayerPoolMap;
 
-@Component
 public class BulletPool implements BulletPoolList<Bullet> {
 
     @Autowired
