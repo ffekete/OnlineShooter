@@ -1,8 +1,5 @@
 package game.scheduler;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 import game.config.constant.TimerValues;
 import game.datahandler.HighScoreTable;
 import game.datatype.PlayerData;
@@ -11,8 +8,10 @@ import game.interfaces.ItemProcessorInterface;
 import game.interfaces.PlayerDataProcessorInterface;
 import game.interfaces.PlayerPoolMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+
 /** A basic scheduler for the main loop of the game. */
-@Component
 public class TaskScheduler {
 
     private long timer = 0;
