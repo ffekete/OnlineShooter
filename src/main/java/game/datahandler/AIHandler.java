@@ -19,9 +19,6 @@ public class AIHandler implements AIBase {
     @Override
     public void updateAIData() {
         if (!playerPool.hasAIOnScreen()) {
-            
-            System.out.println("GENERATE NEW CARGO SHIP");
-            
             RegistrationData data = new RegistrationData();
             data.setName(GameConfig.AI);
             data.setShipType(ShipConfig.SHIP_TYPE_CARGOSHIP);

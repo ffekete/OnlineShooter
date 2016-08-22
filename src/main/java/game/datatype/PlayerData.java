@@ -12,7 +12,7 @@ import game.interfaces.Bullet;
 import game.interfaces.Shield;
 import game.interfaces.Ship;
 import game.interfaces.Weapon;
-import game.service.CargoShipSpawner;
+import game.service.AISpawner;
 import game.service.Spawner;
 
 public class PlayerData {
@@ -68,16 +68,16 @@ public class PlayerData {
         this.isAI = isAI;
 
         this.spaceShip = ShipFactory.createShip(shipType);
+        Spawner.spawn(this.getSpaceShip());
 
-        if (isAI) {
-            CargoShipSpawner.spawn(this.getSpaceShip());
-        } else {
-            Spawner.spawn(this.getSpaceShip());
-        }
-
+        this.getSpaceShip().setAngle(0.0d);
         this.mouseX = 0L;
         this.mouseY = 0L;
-        this.getSpaceShip().setAngle(0.0d);
+
+        if (isAI) {
+            this.setNewMousePointForAI();
+        }
+
         this.connectionId = 0L;
         this.getSpaceShip().resetHp();
         this.initWeapon();
@@ -99,11 +99,10 @@ public class PlayerData {
     public void kill() {
         if (this.isAI) {
             // TODO: drop items from cargo
-            CargoShipSpawner.spawn(this.getSpaceShip());
-        } else {
-            Spawner.spawn(this.getSpaceShip());
+            this.setNewMousePointForAI();
         }
 
+        Spawner.spawn(this.getSpaceShip());
         this.inactivityCounter = 0;
         this.getSpaceShip().resetHp();
         this.invulnerabilityCounter = GameConfig.INVULN_CTR_MAX_VALUE;
@@ -418,5 +417,11 @@ public class PlayerData {
 
     public void setIsAI(boolean isAI) {
         this.isAI = isAI;
+    }
+
+    private void setNewMousePointForAI() {
+        Point2D newrandomPoint = AISpawner.generateRandomCoordinate();
+        this.mouseX = (long) newrandomPoint.getX();
+        this.mouseY = (long) newrandomPoint.getY();
     }
 }
