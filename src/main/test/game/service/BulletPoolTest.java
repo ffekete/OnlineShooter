@@ -27,7 +27,7 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests{
     @BeforeMethod
     public void initBulletPool(){
         bp.clear();
-        player = new PlayerData(200L, "P01", "Deltawing");
+        player = new PlayerData(200L, "P01", "Deltawing", false);
     }
     
     @Test

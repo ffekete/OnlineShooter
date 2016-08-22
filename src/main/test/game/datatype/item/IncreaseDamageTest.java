@@ -23,7 +23,7 @@ public class IncreaseDamageTest {
     
     @Test
     public void testIncreaseDamageShouldIncreaseDamage(){
-        PlayerData player = new PlayerData(1L, "P01", "Deltawing"); 
+        PlayerData player = new PlayerData(1L, "P01", "Deltawing", false); 
         
         /* Given*/
         long initDamage = player.getWeapon().getDamage();

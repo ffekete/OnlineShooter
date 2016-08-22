@@ -15,7 +15,7 @@ public class HealthPackTest {
     
     @BeforeMethod
     public void initFields(){
-        player = new PlayerData(0L, "P01", "Interceptor");
+        player = new PlayerData(0L, "P01", "Interceptor", false);
     }
     
     @Test

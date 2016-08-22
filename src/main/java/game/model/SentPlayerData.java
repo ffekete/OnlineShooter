@@ -11,35 +11,37 @@ public class SentPlayerData {
     private Long id;
     private double x;
     private double y;
-    
+
     List<String> scores;
-    
+
     private long respawnTime;
-    
+
     private String color;
-    
+
     private String shipType;
-    
+
     private long score;
-    
+
     private List<SpawnableItem> items;
-    
+
     private Double shipAngle;
-    
+
     private Long connectionId;
-    
+
     private Long shipHp;
-    
+
     private boolean invulnerable;
-    
+
     private long shieldAmount;
-    
+
     private long maxShieldAmount;
-    
+
+    private boolean isAI;
+
     Weapon weapon;
-    
+
     List<PlayerData> visiblePlayers;
-    
+
     List<Bullet> visibleBullets;
 
     public Long getId() {
@@ -165,7 +167,7 @@ public class SentPlayerData {
     public List<Bullet> getVisibleBullets() {
         return visibleBullets;
     }
-    
+
     public List<PlayerData> getVisiblePlayers() {
         return visiblePlayers;
     }
@@ -184,5 +186,13 @@ public class SentPlayerData {
 
     public void setVisibleBullets(List<Bullet> visibleBullets) {
         this.visibleBullets = visibleBullets;
+    }
+
+    public boolean getIsAI() {
+        return isAI;
+    }
+
+    public void setIsAI(boolean isAI) {
+        this.isAI = isAI;
     }
 }

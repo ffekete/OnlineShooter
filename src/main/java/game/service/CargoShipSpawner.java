@@ -9,9 +9,7 @@ import game.interfaces.Spawnable;
 public class CargoShipSpawner extends Spawner {
 
     private static double pickRandomAngle() {
-        Random random = new Random();
-
-        return (double) random.nextInt(360);
+        return Math.random() * 360;
     }
 
     private static Point2D pickRandomCoordinateForItemOnGameSpace() {

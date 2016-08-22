@@ -72,6 +72,7 @@ public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
                 newPlayerData.setConnectionId(connectionId);
                 newPlayerData.setColor(data.getColor());
                 newPlayerData.setShipType(data.getShipType());
+                newPlayerData.setIsAI(data.getIsAI());
                 this.put(newPlayerId, newPlayerData);
                 return true;
             }
@@ -82,8 +83,9 @@ public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
     private void increasePlayerInactivityCounters() {
         for (long i : this.getAll()) {
             PlayerData currentPlayer = this.get(i);
-
-            currentPlayer.increaseInactivityCounter();
+            if (!currentPlayer.getIsAI()) {
+                currentPlayer.increaseInactivityCounter();
+            }
         }
     }
 
@@ -149,5 +151,19 @@ public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
     @Override
     public PlayerData get(Long playerId) {
         return playerPool.get(playerId);
+    }
+
+    public boolean hasAIOnScreen() {
+        boolean result = false;
+
+        for (long i : this.getAll()) {
+            PlayerData currentPlayer = this.get(i);
+            if (currentPlayer.getIsAI()) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
     }
 }

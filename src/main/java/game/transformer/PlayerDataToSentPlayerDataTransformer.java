@@ -52,6 +52,7 @@ public class PlayerDataToSentPlayerDataTransformer {
         sentPlayerData.setRespawnTime(playerData.getRespawnTime());
         sentPlayerData.setColor(playerData.getColor());
         sentPlayerData.setShipType(playerData.getShipType());
+        sentPlayerData.setIsAI(playerData.getIsAI());
         return sentPlayerData;
     }
 }
