@@ -27,7 +27,7 @@ public class CoordinateHandler {
         if (resultY > GameConfig.STAGE_POS_LIMIT_Y)
             resultY = GameConfig.STAGE_NEG_LIMIT_Y + (resultY - GameConfig.STAGE_POS_LIMIT_Y);
         if (resultY < GameConfig.STAGE_NEG_LIMIT_Y)
-            resultY = GameConfig.STAGE_POS_LIMIT_Y + (resultY + GameConfig.STAGE_NEG_LIMIT_Y);
+            resultY = GameConfig.STAGE_POS_LIMIT_Y + (resultY + GameConfig.STAGE_POS_LIMIT_Y);
 
         return new Point2D.Double(resultX, resultY);
     }
