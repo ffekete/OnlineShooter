@@ -1,18 +1,17 @@
 package game.service;
 
-import java.awt.geom.Point2D;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import game.config.constants.GameConfig;
-import game.config.constants.Physics;
+import game.config.constant.GameConfig;
+import game.config.constant.Physics;
 import game.controller.EventSender;
 import game.datahandler.HighScoreTable;
-import game.datatypes.HighScore;
-import game.datatypes.PlayerData;
+import game.datatype.HighScore;
+import game.datatype.PlayerData;
 import game.interfaces.Bullet;
 import game.interfaces.BulletPoolList;
 import game.interfaces.ItemPoolList;
@@ -234,8 +233,6 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
      * Updates a given players coordinate.
      */
     private void updatePlayerCoordinates(PlayerData player) {
-        Point2D coordinate = coordinateHandler.calculateItemCoordinates(player.getSpaceShip(), player.getSpeed());
-        player.setX(coordinate.getX());
-        player.setY(coordinate.getY());
+        player.setCoordinate(coordinateHandler.calculateItemCoordinates(player.getSpaceShip(), player.getSpeed()));
     }
 }

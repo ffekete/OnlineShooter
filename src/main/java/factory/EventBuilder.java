@@ -2,7 +2,7 @@ package factory;
 
 import org.springframework.stereotype.Component;
 
-import game.datatypes.Event;
+import game.datatype.Event;
 
 @Component
 public class EventBuilder {

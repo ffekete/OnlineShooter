@@ -2,7 +2,7 @@ package game.datahandler;
 
 import org.springframework.stereotype.Component;
 
-import game.datatypes.PlayerData;
+import game.datatype.PlayerData;
 import game.interfaces.Spawnable;
 
 @Component

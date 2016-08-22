@@ -2,12 +2,12 @@ package factory;
 
 import java.util.List;
 
-import game.config.constants.ShipConfig;
-import game.datatypes.ship.CargoShip;
-import game.datatypes.ship.Deltawing;
-import game.datatypes.ship.Interceptor;
-import game.datatypes.ship.Mercury;
-import game.datatypes.ship.Quicksilver;
+import game.config.constant.ShipConfig;
+import game.datatype.ship.CargoShip;
+import game.datatype.ship.Deltawing;
+import game.datatype.ship.Interceptor;
+import game.datatype.ship.Mercury;
+import game.datatype.ship.Quicksilver;
 import game.interfaces.Ship;
 import game.interfaces.SpawnableItem;
 

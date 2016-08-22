@@ -2,8 +2,8 @@ package game.transformer;
 
 import org.springframework.stereotype.Component;
 
-import game.datatypes.PlayerData;
-import game.datatypes.RegistrationData;
+import game.datatype.PlayerData;
+import game.datatype.RegistrationData;
 
 @Component
 public class RegistrationDataToPlayerDataTransformer {
