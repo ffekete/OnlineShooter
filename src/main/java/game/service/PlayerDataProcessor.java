@@ -113,7 +113,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                          */
                         if (player.getScore() > 0L) {
                             highScores.addScore(new HighScore(player.getScore(), player.getName()));
-                            highScores.KeepTopThreePlayersInHighScoreTable();
+                            highScores.keepTopThreePlayersInHighScoreTable();
                         }
 
                         highScores.addScore(new HighScore(playerWhoKilledMe.getScore(), playerWhoKilledMe.getName()));
