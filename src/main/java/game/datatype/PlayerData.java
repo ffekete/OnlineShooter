@@ -325,11 +325,11 @@ public class PlayerData {
     }
 
     public void setCoordinate(Point2D coordinate) {
-        this.getSpaceShip().setLocation(coordinate);
+        this.getSpaceShip().setCoordinate(coordinate);
     }
 
     public void setCoordinate(double x, double y) {
-        this.getSpaceShip().setLocation(x, y);
+        this.getSpaceShip().setCoordinate(x, y);
     }
 
     public Long getMouseX() {

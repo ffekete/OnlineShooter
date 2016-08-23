@@ -67,21 +67,21 @@ public abstract class ShipParent implements Ship {
 
     @Override
     public void setX(double x) {
-        this.setLocation(x, this.coordinate.getY());
+        this.setCoordinate(x, this.coordinate.getY());
     }
 
     @Override
     public void setY(double y) {
-        this.setLocation(this.coordinate.getX(), y);
+        this.setCoordinate(this.coordinate.getX(), y);
     }
 
     @Override
-    public void setLocation(double x, double y) {
+    public void setCoordinate(double x, double y) {
         this.coordinate.setLocation(x, y);
     }
 
     @Override
-    public void setLocation(Point2D coordinate) {
+    public void setCoordinate(Point2D coordinate) {
         this.coordinate = coordinate;
     }
 
@@ -165,16 +165,6 @@ public abstract class ShipParent implements Ship {
     @Override
     public Point2D getCoordinate() {
         return coordinate;
-    }
-
-    @Override
-    public void setCoordinate(double x, double y) {
-        this.coordinate.setLocation(x, y);
-    }
-
-    @Override
-    public void setCoordinate(Point2D coordinate) {
-        this.coordinate = coordinate;
     }
 
     public double getManeuverability() {

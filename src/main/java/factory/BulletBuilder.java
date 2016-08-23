@@ -52,7 +52,7 @@ public class BulletBuilder {
         }
 
         Bullet bullet = new BulletData();
-        bullet.setLocation(this.coordinate);
+        bullet.setCoordinate(this.coordinate);
         bullet.setAngle(angle);
         bullet.setPlayerId(playerId);
         bullet.setDamage(damage);

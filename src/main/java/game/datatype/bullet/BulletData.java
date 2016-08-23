@@ -106,17 +106,22 @@ public class BulletData implements Bullet {
 
     @Override
     public String getPhysicalRepresentation() {
-        return new String(
-                "{\"shape\": \"circle\", \"startx\": \"" + this.coordinate.getX() + "\", \"starty\": \"" + this.coordinate.getY() + "\", \"radius\" : \"15\"}");
+        return new String("{\"shape\": \"circle\", \"startx\": \"" + this.coordinate.getX() + "\", \"starty\": \""
+                + this.coordinate.getY() + "\", \"radius\" : \"15\"}");
     }
 
     @Override
-    public void setLocation(double x, double y) {
+    public void setCoordinate(double x, double y) {
         this.coordinate.setLocation(x, y);
     }
-    
+
     @Override
-    public void setLocation(Point2D coordinate) {
+    public void setCoordinate(Point2D coordinate) {
         this.coordinate = coordinate;
+    }
+
+    @Override
+    public Point2D getCoordinate() {
+        return this.coordinate;
     }
 }
