@@ -1,13 +1,11 @@
 package game.transformer;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import game.datatype.PlayerData;
 import game.datatype.ReceivedPlayerData;
 import game.interfaces.PlayerPoolMap;
 
-@Component
 public class ReceivedPlayerDataToPlayerDataTransformer {
     @Autowired
     PlayerPoolMap<Long, PlayerData> playerPool;

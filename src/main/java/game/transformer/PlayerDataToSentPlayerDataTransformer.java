@@ -1,8 +1,6 @@
 package game.transformer;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import game.datahandler.HighScoreTable;
 import game.datatype.PlayerData;
@@ -13,8 +11,6 @@ import game.interfaces.PlayerPoolMap;
 import game.interfaces.SpawnableItem;
 import game.model.SentPlayerData;
 
-@Component
-@Scope("prototype")
 public class PlayerDataToSentPlayerDataTransformer {
 
     @Autowired

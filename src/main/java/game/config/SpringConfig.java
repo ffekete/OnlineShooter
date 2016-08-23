@@ -14,6 +14,10 @@ import game.service.BulletDataProcessor;
 import game.service.CoordinateHandler;
 import game.service.ItemProcessor;
 import game.service.PlayerDataProcessor;
+import game.transformer.PlayerDataToRegistrationAnswerTransformer;
+import game.transformer.PlayerDataToSentPlayerDataTransformer;
+import game.transformer.ReceivedPlayerDataToPlayerDataTransformer;
+import game.transformer.RegistrationDataToPlayerDataTransformer;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -89,6 +93,26 @@ public class SpringConfig {
     @Bean
     public ConnectionNodeBuilder connectionNodeBuilder() {
         return new ConnectionNodeBuilder();
+    }
+
+    @Bean
+    public PlayerDataToRegistrationAnswerTransformer playerDataToRegistrationAnswerTransformer() {
+        return new PlayerDataToRegistrationAnswerTransformer();
+    }
+
+    @Bean
+    public PlayerDataToSentPlayerDataTransformer playerDataToSentPlayerDataTransformer() {
+        return new PlayerDataToSentPlayerDataTransformer();
+    }
+
+    @Bean
+    public ReceivedPlayerDataToPlayerDataTransformer receivedPlayerDataToPlayerDataTransformer() {
+        return new ReceivedPlayerDataToPlayerDataTransformer();
+    }
+
+    @Bean
+    public RegistrationDataToPlayerDataTransformer registrationDataToPlayerDataTransformer() {
+        return new RegistrationDataToPlayerDataTransformer();
     }
 
 }
