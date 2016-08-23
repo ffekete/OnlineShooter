@@ -1,5 +1,6 @@
 package game.config;
 
+import game.connection.ConnectionPool;
 import game.datahandler.AIHandler;
 import game.datahandler.BulletPool;
 import game.datahandler.HighScoreTable;
@@ -71,6 +72,11 @@ public class SpringConfig {
     @Bean
     public PlayerDataProcessor playerDataProcessor() {
         return new PlayerDataProcessor();
+    }
+
+    @Bean
+    public ConnectionPool connectionPool() {
+        return new ConnectionPool();
     }
 
 }

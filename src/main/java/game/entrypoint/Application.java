@@ -10,8 +10,7 @@ import org.springframework.context.annotation.Import;
 
 /** Main entry point of the server-side application. */
 @SpringBootApplication(scanBasePackages = {"game.controller", "game.restcontroller", 
-                                           "game.transformer", 
-                                           "game.connection", "game.director", "factory"} )
+                                           "game.transformer", "game.director", "factory"} )
 @Import({ SpringConfig.class, JerseyConfig.class, WebSocketConfig.class })
 public class Application {
     

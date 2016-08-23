@@ -5,13 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import factory.ConnectionNodeBuilder;
 import game.config.constant.BrokerPaths;
 import game.config.constant.ConnectionPreferences;
 
-@Component
 public class ConnectionPool {
 
     @Autowired
