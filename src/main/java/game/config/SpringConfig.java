@@ -1,5 +1,7 @@
 package game.config;
 
+import factory.ConnectionNodeBuilder;
+import factory.EventBuilder;
 import game.connection.ConnectionPool;
 import game.datahandler.AIHandler;
 import game.datahandler.BulletPool;
@@ -77,6 +79,16 @@ public class SpringConfig {
     @Bean
     public ConnectionPool connectionPool() {
         return new ConnectionPool();
+    }
+
+    @Bean
+    public EventBuilder eventBuilder() {
+        return new EventBuilder();
+    }
+
+    @Bean
+    public ConnectionNodeBuilder connectionNodeBuilder() {
+        return new ConnectionNodeBuilder();
     }
 
 }

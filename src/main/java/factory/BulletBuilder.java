@@ -2,12 +2,9 @@ package factory;
 
 import java.awt.geom.Point2D;
 
-import org.springframework.stereotype.Component;
-
 import game.datatype.bullet.BulletData;
 import game.interfaces.Bullet;
 
-@Component
 public class BulletBuilder {
     private Point2D coordinate = null;
     private Double angle = null;
