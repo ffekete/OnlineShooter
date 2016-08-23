@@ -9,8 +9,6 @@ import game.interfaces.SpawnableItem;
 
 public class CargoShip extends ShipParent {
 
-    private List<SpawnableItem> carriage;
-
     public CargoShip(List<SpawnableItem> carriage) {
         super.setCoordinate(new Point2D.Double(0, 0));
         this.setHp(ShipConfig.CARGO_SHIP_INIT_HP);
@@ -18,7 +16,7 @@ public class CargoShip extends ShipParent {
         super.setMaxSpeed(ShipConfig.CARGO_SHIP_INIT_SPEED);
         super.setManeuverability(ShipConfig.CARGO_SHIP_INIT_MANEUVERABILITY);
         super.setShipType(ShipConfig.SHIP_TYPE_CARGOSHIP);
-        this.carriage = carriage;
+        super.setCarriage(carriage);
     }
 
     @Override
@@ -48,9 +46,5 @@ public class CargoShip extends ShipParent {
     @Override
     public void initWeapon() {
         super.setWeapon(WeaponFactory.createWeapon(ShipConfig.CARGO_SHIP_INIT_WEAPON));
-    }
-
-    public List<SpawnableItem> dropItem() {
-        return this.carriage;
     }
 }

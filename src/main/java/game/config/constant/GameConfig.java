@@ -23,4 +23,6 @@ public class GameConfig {
     public static final boolean FREE_SYSTEM_TIME_MEASUREMENT_ENABLED = false;
 
     public static final String AI = "AI";
+
+    public static final int MAX_ITEM_DROP_DISTANCE = 100;
 }

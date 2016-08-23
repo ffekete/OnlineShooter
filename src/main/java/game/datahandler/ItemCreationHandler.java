@@ -1,7 +1,5 @@
 package game.datahandler;
 
-import java.util.Random;
-
 import factory.ShieldFactory;
 import factory.WeaponFactory;
 import game.config.ShieldId;
@@ -15,6 +13,7 @@ import game.datatype.item.IncreaseScore;
 import game.datatype.item.IncreaseSpeed;
 import game.interfaces.ItemCreation;
 import game.interfaces.SpawnableItem;
+import game.util.RandomGenerator;
 
 public class ItemCreationHandler implements ItemCreation {
     @Override
@@ -62,7 +61,6 @@ public class ItemCreationHandler implements ItemCreation {
     }
 
     public SpawnableItem createRandomItem() {
-        int random = new Random().nextInt(SpawnableItemType.count());
-        return createItem(SpawnableItemType.get(random));
+        return createItem(SpawnableItemType.get(RandomGenerator.getRandomInRange(0, SpawnableItemType.count() - 1)));
     }
 }

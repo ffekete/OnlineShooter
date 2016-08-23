@@ -1,9 +1,12 @@
 package game.datatype.ship;
 
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.List;
 
 import game.interfaces.Shield;
 import game.interfaces.Ship;
+import game.interfaces.SpawnableItem;
 import game.interfaces.Weapon;
 
 public abstract class ShipParent implements Ship {
@@ -17,6 +20,7 @@ public abstract class ShipParent implements Ship {
     private double speed;
     private double maxSpeed;
     private double maneuverability;
+    private List<SpawnableItem> carriage = new ArrayList<SpawnableItem>();
 
     @Override
     public void increaseManeuverablility(double value) {
@@ -183,5 +187,13 @@ public abstract class ShipParent implements Ship {
 
     public void setManeuverability(double maneuverability) {
         this.maneuverability = maneuverability;
+    }
+
+    public List<SpawnableItem> getCarriage() {
+        return this.carriage;
+    }
+
+    public void setCarriage(List<SpawnableItem> carriage) {
+        this.carriage = carriage;
     }
 }

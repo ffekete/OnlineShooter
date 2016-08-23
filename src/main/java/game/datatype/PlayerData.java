@@ -98,7 +98,6 @@ public class PlayerData {
 
     public void kill() {
         if (this.isAI) {
-            // TODO: drop items from cargo
             this.setNewMousePointForAI();
         }
 
@@ -268,6 +267,7 @@ public class PlayerData {
         spaceShipToStore.setShipType(spaceShip.getShipType());
         spaceShipToStore.setSpeed(spaceShip.getSpeed());
         spaceShipToStore.setWeapon(spaceShip.getWeapon());
+        spaceShipToStore.setCarriage(spaceShip.getCarriage());
 
         return spaceShipToStore;
     }

@@ -1,6 +1,7 @@
 package game.interfaces;
 
 import java.awt.geom.Point2D;
+import java.util.List;
 
 public interface Ship extends Spawnable {
     public void initWeapon();
@@ -68,4 +69,8 @@ public interface Ship extends Spawnable {
     public void resetManeuverability();
 
     public void resetSpeed();
+
+    public List<SpawnableItem> getCarriage();
+
+    public void setCarriage(List<SpawnableItem> carriage);
 }
