@@ -1,5 +1,6 @@
 package game.config;
 
+import game.datahandler.AIHandler;
 import game.datahandler.BulletPool;
 import game.datahandler.HighScoreTable;
 import game.datahandler.ItemHandler;
@@ -43,4 +44,9 @@ public class SpringConfig {
         return new PlayerPool();
     }
 
+    @Bean
+    public AIHandler aIHandler() {
+        return new AIHandler();
+    }
+    
 }
