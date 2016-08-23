@@ -1,5 +1,6 @@
 package game.model;
 
+import java.awt.geom.Point2D;
 import java.util.List;
 
 import game.datatype.PlayerData;
@@ -9,8 +10,7 @@ import game.interfaces.Weapon;
 
 public class SentPlayerData {
     private Long id;
-    private double x;
-    private double y;
+    private Point2D coordinate;
 
     List<String> scores;
 
@@ -124,12 +124,20 @@ public class SentPlayerData {
         this.scores = scores;
     }
 
+    public void setLocation(double x, double y) {
+        this.coordinate = Point2D.Double(x, y);
+    }
+
+    public void setLocation(Point2D coordinate) {
+        this.coordinate = coordinate;
+    }
+
     public double getX() {
-        return x;
+        return this.coordinate.getX();
     }
 
     public void setX(double x) {
-        this.x = x;
+        this.setLocation(x, this.coordinate.getY());
     }
 
     public long getRespawnTime() {
@@ -141,11 +149,11 @@ public class SentPlayerData {
     }
 
     public double getY() {
-        return y;
+        return this.coordinate.getY();
     }
 
     public void setY(double y) {
-        this.y = y;
+        this.setLocation(this.coordinate.getX(), y);
     }
 
     public Double getShipAngle() {

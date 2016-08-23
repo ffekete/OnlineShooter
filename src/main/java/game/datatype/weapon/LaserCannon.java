@@ -1,6 +1,5 @@
 package game.datatype.weapon;
 
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +14,8 @@ public class LaserCannon extends WeaponParent {
     public List<Bullet> createBullet(PlayerData player) {
         ArrayList<Bullet> bulletsToCreate = new ArrayList<>();
 
-        bulletsToCreate.add(new LaserBeam(new Point2D.Double(player.getX(), player.getY()), player.getShipAngle(),
-                player.getId(), player.getWeapon().getDamage()));
+        bulletsToCreate.add(new LaserBeam(player.getCoordinate(), player.getShipAngle(), player.getId(),
+                player.getWeapon().getDamage()));
         return bulletsToCreate;
     }
 
