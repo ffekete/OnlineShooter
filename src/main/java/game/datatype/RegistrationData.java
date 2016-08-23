@@ -5,6 +5,8 @@ public class RegistrationData {
     private String color;
     private String shipType;
 
+    private boolean isAI = false;
+
     public String getShipType() {
         return shipType;
     }
@@ -27,5 +29,13 @@ public class RegistrationData {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public boolean getIsAI() {
+        return this.isAI;
+    }
+
+    public void setIsAI(boolean isAI) {
+        this.isAI = isAI;
     }
 }

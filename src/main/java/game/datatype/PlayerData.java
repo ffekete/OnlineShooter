@@ -12,6 +12,7 @@ import game.interfaces.Bullet;
 import game.interfaces.Shield;
 import game.interfaces.Ship;
 import game.interfaces.Weapon;
+import game.service.AISpawner;
 import game.service.Spawner;
 
 public class PlayerData {
@@ -38,6 +39,8 @@ public class PlayerData {
 
     private long connectionId;
 
+    private boolean isAI;
+
     public PlayerData(PlayerData player2) {
         this.spaceShip = this.cloneSpaceShip(player2.getSpaceShip());
         this.setConnectionId(player2.getConnectionId());
@@ -59,17 +62,22 @@ public class PlayerData {
         this.setCanvas(player2.getCanvas());
     }
 
-    public PlayerData(Long id, String name, String shipType) {
+    public PlayerData(Long id, String name, String shipType, boolean isAI) {
         this.name = name;
         this.id = id;
+        this.isAI = isAI;
 
         this.spaceShip = ShipFactory.createShip(shipType);
-
         Spawner.spawn(this.getSpaceShip());
 
+        this.getSpaceShip().setAngle(0.0d);
         this.mouseX = 0L;
         this.mouseY = 0L;
-        this.getSpaceShip().setAngle(0.0d);
+
+        if (isAI) {
+            this.setNewMousePointForAI();
+        }
+
         this.connectionId = 0L;
         this.getSpaceShip().resetHp();
         this.initWeapon();
@@ -89,6 +97,11 @@ public class PlayerData {
     }
 
     public void kill() {
+        if (this.isAI) {
+            // TODO: drop items from cargo
+            this.setNewMousePointForAI();
+        }
+
         Spawner.spawn(this.getSpaceShip());
         this.inactivityCounter = 0;
         this.getSpaceShip().resetHp();
@@ -396,5 +409,19 @@ public class PlayerData {
 
     public String toString() {
         return this.name + " " + this.mouseX + " " + this.mouseY;
+    }
+
+    public boolean getIsAI() {
+        return this.isAI;
+    }
+
+    public void setIsAI(boolean isAI) {
+        this.isAI = isAI;
+    }
+
+    private void setNewMousePointForAI() {
+        Point2D newrandomPoint = AISpawner.generateRandomCoordinate();
+        this.mouseX = (long) newrandomPoint.getX();
+        this.mouseY = (long) newrandomPoint.getY();
     }
 }

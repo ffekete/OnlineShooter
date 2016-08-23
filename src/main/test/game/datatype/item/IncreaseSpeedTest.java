@@ -18,7 +18,7 @@ public class IncreaseSpeedTest {
     
     @Test
     public void testShouldIncreaseSpeed(){
-        PlayerData player = new PlayerData(3L, "P04", "Mercury");
+        PlayerData player = new PlayerData(3L, "P04", "Mercury", false);
         
         double initSpeed = player.getSpeed();
         

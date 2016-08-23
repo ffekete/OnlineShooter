@@ -18,7 +18,7 @@ public class IncreaseScoreTest {
     
     @Test
     public void testShouldIncreaseScore(){
-        PlayerData player = new PlayerData(6L, "P00", "Interceptor");
+        PlayerData player = new PlayerData(6L, "P00", "Interceptor", false);
         
         long initScore = player.getScore();
         

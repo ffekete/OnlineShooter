@@ -17,7 +17,7 @@ public class IncreaseManeuverabilityTest {
     
     @Test
     public void testShouldIncreaseManeuverability(){
-        PlayerData player = new PlayerData(5L, "P01", "Quicksilver");
+        PlayerData player = new PlayerData(5L, "P01", "Quicksilver", false);
         double initIm = player.getManeuverability();
         
         /* When */

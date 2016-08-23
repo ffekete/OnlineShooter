@@ -1,5 +1,6 @@
 package game.model;
 
+import java.awt.geom.Point2D;
 import java.util.List;
 
 import game.datatype.PlayerData;
@@ -9,37 +10,38 @@ import game.interfaces.Weapon;
 
 public class SentPlayerData {
     private Long id;
-    private double x;
-    private double y;
-    
+    private Point2D coordinate;
+
     List<String> scores;
-    
+
     private long respawnTime;
-    
+
     private String color;
-    
+
     private String shipType;
-    
+
     private long score;
-    
+
     private List<SpawnableItem> items;
-    
+
     private Double shipAngle;
-    
+
     private Long connectionId;
-    
+
     private Long shipHp;
-    
+
     private boolean invulnerable;
-    
+
     private long shieldAmount;
-    
+
     private long maxShieldAmount;
-    
+
+    private boolean isAI;
+
     Weapon weapon;
-    
+
     List<PlayerData> visiblePlayers;
-    
+
     List<Bullet> visibleBullets;
 
     public Long getId() {
@@ -122,12 +124,20 @@ public class SentPlayerData {
         this.scores = scores;
     }
 
+    public void setCoordinate(double x, double y) {
+        this.coordinate = new Point2D.Double(x, y);
+    }
+
+    public void setCoordinate(Point2D coordinate) {
+        this.coordinate = coordinate;
+    }
+
     public double getX() {
-        return x;
+        return this.coordinate.getX();
     }
 
     public void setX(double x) {
-        this.x = x;
+        this.setCoordinate(x, this.coordinate.getY());
     }
 
     public long getRespawnTime() {
@@ -139,11 +149,11 @@ public class SentPlayerData {
     }
 
     public double getY() {
-        return y;
+        return this.coordinate.getY();
     }
 
     public void setY(double y) {
-        this.y = y;
+        this.setCoordinate(this.coordinate.getX(), y);
     }
 
     public Double getShipAngle() {
@@ -165,7 +175,7 @@ public class SentPlayerData {
     public List<Bullet> getVisibleBullets() {
         return visibleBullets;
     }
-    
+
     public List<PlayerData> getVisiblePlayers() {
         return visiblePlayers;
     }
@@ -184,5 +194,13 @@ public class SentPlayerData {
 
     public void setVisibleBullets(List<Bullet> visibleBullets) {
         this.visibleBullets = visibleBullets;
+    }
+
+    public boolean getIsAI() {
+        return isAI;
+    }
+
+    public void setIsAI(boolean isAI) {
+        this.isAI = isAI;
     }
 }
