@@ -58,22 +58,18 @@ public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
 
     @Override
     public boolean registerPlayer(Long id, RegistrationData data) {
-        return storePlayer(id, data);
-    }
-
-    public boolean storePlayer(Long newPlayerId, RegistrationData data) {
-        if (playerPool.containsKey(newPlayerId)) {
+        if (playerPool.containsKey(id)) {
             return false;
         } else {
-            PlayerData newPlayerData = registrationDataToPlayerDataTransformer.transform(data, newPlayerId);
-            Long connectionId = connectionPool.registerNewConnection(newPlayerId);
+            PlayerData newPlayerData = registrationDataToPlayerDataTransformer.transform(data, id);
+            Long connectionId = connectionPool.registerNewConnection(id);
 
             if (connectionId != null) {
                 newPlayerData.setConnectionId(connectionId);
                 newPlayerData.setColor(data.getColor());
                 newPlayerData.setShipType(data.getShipType());
                 newPlayerData.setIsAI(data.getIsAI());
-                this.put(newPlayerId, newPlayerData);
+                this.put(id, newPlayerData);
                 return true;
             }
             return false;
