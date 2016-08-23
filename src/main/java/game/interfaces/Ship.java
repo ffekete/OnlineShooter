@@ -73,4 +73,6 @@ public interface Ship extends Spawnable {
     public List<SpawnableItem> getCarriage();
 
     public void setCarriage(List<SpawnableItem> carriage);
+
+    public void addItemToCargo(SpawnableItem item);
 }

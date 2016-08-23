@@ -16,6 +16,7 @@ public class CargoShip extends ShipParent {
         super.setMaxSpeed(ShipConfig.CARGO_SHIP_INIT_SPEED);
         super.setManeuverability(ShipConfig.CARGO_SHIP_INIT_MANEUVERABILITY);
         super.setShipType(ShipConfig.SHIP_TYPE_CARGOSHIP);
+        super.setMaxCargoCapacity(ShipConfig.CARGO_SHIP_CARGO_CAPACITY);
         super.setCarriage(carriage);
     }
 

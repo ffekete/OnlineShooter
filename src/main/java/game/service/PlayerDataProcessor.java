@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import game.config.constant.GameConfig;
 import game.config.constant.Physics;
+import game.config.constant.ShipConfig;
 import game.controller.EventSender;
 import game.datahandler.HighScoreTable;
 import game.datahandler.ItemHandler;
@@ -211,7 +212,12 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                     && Math.abs(actualItem.getY() - player.getY()) < 10.0d;
 
             if (areaCheck) {
-                actualItem.applyEffect(player);
+                if (player.getIsAI() && player.getShipType() == ShipConfig.SHIP_TYPE_CARGOSHIP) {
+                    player.getSpaceShip().addItemToCargo(actualItem);
+                } else {
+                    actualItem.applyEffect(player);
+                }
+
                 itemPool.remove(actualItem);
             }
         }
