@@ -26,16 +26,17 @@ public class ItemHandlerTest extends AbstractTestNGSpringContextTests {
     @Autowired
     ItemHandler itemHandler;
 
+    public List<SpawnableItem> carriage = new ArrayList<SpawnableItem>();
+
     @BeforeMethod
     public void initPool() {
         itemPool.clear();
+        carriage.clear();
+        carriage.add(new ItemCreationHandler().createRandomItem());
     }
 
     @Test
     public void shouldDropOneSpawnableitem() {
-        List<SpawnableItem> carriage = new ArrayList<SpawnableItem>();
-        carriage.add(new ItemCreationHandler().createRandomItem());
-
         itemHandler.dropCargoToCoordinate(carriage, new Point2D.Double(0, 0));
 
         Assert.assertEquals(itemPool.poolSize(), 1);
@@ -43,9 +44,6 @@ public class ItemHandlerTest extends AbstractTestNGSpringContextTests {
 
     @Test(dataProvider = "coordinatesData")
     public void droppedItemCoordinateShouldBetweenRange(double x, double y) {
-        List<SpawnableItem> carriage = new ArrayList<SpawnableItem>();
-        carriage.add(new ItemCreationHandler().createRandomItem());
-
         itemHandler.dropCargoToCoordinate(carriage, new Point2D.Double(x, y));
 
         Iterator<SpawnableItem> bit = itemPool.getIterator();
