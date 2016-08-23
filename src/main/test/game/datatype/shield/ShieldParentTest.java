@@ -13,7 +13,7 @@ public class ShieldParentTest {
 
     @Test
     public void testShouldDecreaseShieldProtection_AS(){
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor");
+        PlayerData player = new PlayerData(1l, "P02", "Interceptor", false);
         AtomShield as = new AtomShield();
         
         as.applyEffect(player);
@@ -25,7 +25,7 @@ public class ShieldParentTest {
     
     @Test
     public void testShouldDecreaseShieldProtection_PS(){
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor");
+        PlayerData player = new PlayerData(1l, "P02", "Interceptor", false);
 
         PlasmaShield ps = new PlasmaShield();
         
@@ -38,7 +38,7 @@ public class ShieldParentTest {
     
     @Test
     public void testShouldDecreaseShieldProtection_NS(){
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor");
+        PlayerData player = new PlayerData(1l, "P02", "Interceptor", false);
 
         NormalShield ns = new NormalShield();
         
@@ -51,7 +51,7 @@ public class ShieldParentTest {
     
     @Test
     public void testShouldDecreaseShieldProtection_AS_0(){
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor");
+        PlayerData player = new PlayerData(1l, "P02", "Interceptor", false);
         AtomShield as = new AtomShield();
         
         as.applyEffect(player);
@@ -63,7 +63,7 @@ public class ShieldParentTest {
     
     @Test
     public void testShouldDecreaseShieldProtection_PS_0(){
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor");
+        PlayerData player = new PlayerData(1l, "P02", "Interceptor", false);
 
         PlasmaShield ps = new PlasmaShield();
         
@@ -76,7 +76,7 @@ public class ShieldParentTest {
     
     @Test
     public void testShouldDecreaseShieldProtection_NS_0(){
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor");
+        PlayerData player = new PlayerData(1l, "P02", "Interceptor", false);
 
         NormalShield ns = new NormalShield();
         
@@ -88,7 +88,7 @@ public class ShieldParentTest {
     }
     
     public void testShouldIncreaseShieldProtection_AS(){
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor");
+        PlayerData player = new PlayerData(1l, "P02", "Interceptor", false);
         AtomShield as = new AtomShield();
         
         as.applyEffect(player);
@@ -102,7 +102,7 @@ public class ShieldParentTest {
     
     @Test
     public void testShouldIncreaseShieldProtection_PS(){
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor");
+        PlayerData player = new PlayerData(1l, "P02", "Interceptor", false);
 
         PlasmaShield ps = new PlasmaShield();
         
@@ -115,7 +115,7 @@ public class ShieldParentTest {
     
     @Test
     public void testShouldIncreaseShieldProtection_NS(){
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor");
+        PlayerData player = new PlayerData(1l, "P02", "Interceptor", false);
 
         NormalShield ns = new NormalShield();
         
@@ -128,7 +128,7 @@ public class ShieldParentTest {
     }
     
     public void testShouldIncreaseShieldProtection_AS_MAX(){
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor");
+        PlayerData player = new PlayerData(1l, "P02", "Interceptor", false);
         AtomShield as = new AtomShield();
         
         as.applyEffect(player);
@@ -142,7 +142,7 @@ public class ShieldParentTest {
     
     @Test
     public void testShouldIncreaseShieldProtection_PS_MAX(){
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor");
+        PlayerData player = new PlayerData(1l, "P02", "Interceptor", false);
 
         PlasmaShield ps = new PlasmaShield();
         
@@ -155,7 +155,7 @@ public class ShieldParentTest {
     
     @Test
     public void testShouldIncreaseShieldProtection_NS_MAX(){
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor");
+        PlayerData player = new PlayerData(1l, "P02", "Interceptor", false);
 
         NormalShield ns = new NormalShield();
         

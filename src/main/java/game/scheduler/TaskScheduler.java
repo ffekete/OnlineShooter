@@ -3,9 +3,11 @@ package game.scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
 import game.config.constant.TimerValues;
 import game.datahandler.HighScoreTable;
 import game.datatype.PlayerData;
+import game.interfaces.AIBase;
 import game.interfaces.BulletDataProcessorInterface;
 import game.interfaces.ItemProcessorInterface;
 import game.interfaces.PlayerDataProcessorInterface;
@@ -38,6 +40,9 @@ public class TaskScheduler {
     @Autowired
     HighScoreTable highScoreTable;
 
+    @Autowired
+    AIBase ai;
+
     /** Main game loop. */
     @Scheduled(fixedRate = TimerValues.GAME_MAIN_PERIOD_IN_MS)
     public void run() throws InterruptedException {
@@ -48,10 +53,13 @@ public class TaskScheduler {
 
         bulletDataProcessor.updateBulletData();
 
-        /* handle player inactivity counters */
+        // AI ship handler
+        ai.updateAIData();
+
+        // handle player inactivity counters
         playerPool.updatePlayerPoolData();
 
-        /* Do the math */
+        // Do the math
         playerDataPrcessor.updatePlayerData();
 
         if (timer == 0) {

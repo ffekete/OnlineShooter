@@ -32,7 +32,7 @@ public class CoordinateHandler {
 
         if (coordinate.getY() < GameConfig.STAGE_NEG_LIMIT_Y) {
             coordinate.setLocation(coordinate.getX(),
-                    GameConfig.STAGE_POS_LIMIT_Y + (coordinate.getY() + GameConfig.STAGE_NEG_LIMIT_Y));
+                    GameConfig.STAGE_POS_LIMIT_Y + (coordinate.getY() + GameConfig.STAGE_POS_LIMIT_Y));
         }
 
         return coordinate;

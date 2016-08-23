@@ -33,7 +33,7 @@ public class BulletDataProcessorTest extends AbstractTestNGSpringContextTests {
     @BeforeMethod
     public void initTests() {
         bp.clear();
-        player = new PlayerData(200L, "P01", "Deltawing");
+        player = new PlayerData(200L, "P01", "Deltawing", false);
     }
 
     @DataProvider(name = "bulletDataInput")

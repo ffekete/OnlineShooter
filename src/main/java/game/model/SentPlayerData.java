@@ -36,6 +36,8 @@ public class SentPlayerData {
 
     private long maxShieldAmount;
 
+    private boolean isAI;
+
     Weapon weapon;
 
     List<PlayerData> visiblePlayers;
@@ -122,11 +124,11 @@ public class SentPlayerData {
         this.scores = scores;
     }
 
-    public void setLocation(double x, double y) {
-        this.coordinate = Point2D.Double(x, y);
+    public void setCoordinate(double x, double y) {
+        this.coordinate = new Point2D.Double(x, y);
     }
 
-    public void setLocation(Point2D coordinate) {
+    public void setCoordinate(Point2D coordinate) {
         this.coordinate = coordinate;
     }
 
@@ -135,7 +137,7 @@ public class SentPlayerData {
     }
 
     public void setX(double x) {
-        this.setLocation(x, this.coordinate.getY());
+        this.setCoordinate(x, this.coordinate.getY());
     }
 
     public long getRespawnTime() {
@@ -151,7 +153,7 @@ public class SentPlayerData {
     }
 
     public void setY(double y) {
-        this.setLocation(this.coordinate.getX(), y);
+        this.setCoordinate(this.coordinate.getX(), y);
     }
 
     public Double getShipAngle() {
@@ -192,5 +194,13 @@ public class SentPlayerData {
 
     public void setVisibleBullets(List<Bullet> visibleBullets) {
         this.visibleBullets = visibleBullets;
+    }
+
+    public boolean getIsAI() {
+        return isAI;
+    }
+
+    public void setIsAI(boolean isAI) {
+        this.isAI = isAI;
     }
 }

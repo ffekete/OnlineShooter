@@ -5,6 +5,7 @@ import game.datatype.weapon.DoubleGatlingGun;
 import game.datatype.weapon.GatlingGun;
 import game.datatype.weapon.LaserCannon;
 import game.datatype.weapon.Machinegun;
+import game.datatype.weapon.NoWeapon;
 import game.datatype.weapon.Shotgun;
 import game.interfaces.Weapon;
 
@@ -22,6 +23,8 @@ public class WeaponFactory {
             return new DoubleGatlingGun();
         case SHOTGUN:
             return new Shotgun();
+        case NO_WEAPON:
+            return new NoWeapon();
         default:
             throw new RuntimeException("Unknownw weapon type!");
         }

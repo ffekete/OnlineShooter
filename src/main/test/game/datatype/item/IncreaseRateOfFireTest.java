@@ -17,7 +17,7 @@ public class IncreaseRateOfFireTest {
     
     @Test
     public void testShouldIncreasePlayersRateOfFire(){
-        PlayerData player = new PlayerData(3L, "P04", "Mercury");
+        PlayerData player = new PlayerData(3L, "P04", "Mercury", false);
         
         long initRateOfFire = player.getWeapon().getRateOfFire();
         

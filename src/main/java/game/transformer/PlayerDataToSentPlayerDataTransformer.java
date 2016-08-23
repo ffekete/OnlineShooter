@@ -38,8 +38,7 @@ public class PlayerDataToSentPlayerDataTransformer {
         sentPlayerData.setId(playerId);
         sentPlayerData.setShipAngle(playerData.getShipAngle());
         sentPlayerData.setVisibleBullets(bulletPool.getAllOnScreen(playerId));
-        sentPlayerData.setX(playerData.getX());
-        sentPlayerData.setY(playerData.getY());
+        sentPlayerData.setCoordinate(playerData.getCoordinate());
         sentPlayerData.setVisiblePlayers(playerPool.getAllOnScreen(playerId));
         sentPlayerData.setShipHp(playerData.getHp());
         sentPlayerData.setInvulnerable(playerData.isInvulnerable());
@@ -52,6 +51,7 @@ public class PlayerDataToSentPlayerDataTransformer {
         sentPlayerData.setRespawnTime(playerData.getRespawnTime());
         sentPlayerData.setColor(playerData.getColor());
         sentPlayerData.setShipType(playerData.getShipType());
+        sentPlayerData.setIsAI(playerData.getIsAI());
         return sentPlayerData;
     }
 }

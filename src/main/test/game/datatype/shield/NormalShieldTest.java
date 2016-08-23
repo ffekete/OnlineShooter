@@ -20,7 +20,7 @@ public class NormalShieldTest {
     
     @Test
     public void testShouldIncreaseShield(){
-        PlayerData player = new PlayerData(0L, "P05", "Interceptor");
+        PlayerData player = new PlayerData(0L, "P05", "Interceptor", false);
         
         long initProtection = player.getShield().getProtection();
         long initMaxProtection = player.getShield().getMaxProtectionValue();
@@ -34,7 +34,7 @@ public class NormalShieldTest {
     
     @Test
     public void testShouldIncreaseShieldAndSwitchBackToNormal(){
-        PlayerData player = new PlayerData(0L, "P05", "Interceptor");
+        PlayerData player = new PlayerData(0L, "P05", "Interceptor", false);
         
         long initProtection = player.getShield().getProtection();
         long initMaxProtection = player.getShield().getMaxProtectionValue();

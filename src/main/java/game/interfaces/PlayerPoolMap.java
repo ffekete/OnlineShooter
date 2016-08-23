@@ -12,4 +12,6 @@ public interface PlayerPoolMap<T1, T2> extends PoolMap<T1, T2> {
     public void updatePlayerPoolData();
 
     public Iterator<T1> getKeySetIterator();
+
+    public boolean hasAIOnScreen();
 }

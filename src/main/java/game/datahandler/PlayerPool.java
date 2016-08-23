@@ -58,21 +58,18 @@ public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
 
     @Override
     public boolean registerPlayer(Long id, RegistrationData data) {
-        return storePlayer(id, data);
-    }
-
-    public boolean storePlayer(Long newPlayerId, RegistrationData data) {
-        if (playerPool.containsKey(newPlayerId)) {
+        if (playerPool.containsKey(id)) {
             return false;
         } else {
-            PlayerData newPlayerData = registrationDataToPlayerDataTransformer.transform(data, newPlayerId);
-            Long connectionId = connectionPool.registerNewConnection(newPlayerId);
+            PlayerData newPlayerData = registrationDataToPlayerDataTransformer.transform(data, id);
+            Long connectionId = connectionPool.registerNewConnection(id);
 
             if (connectionId != null) {
                 newPlayerData.setConnectionId(connectionId);
                 newPlayerData.setColor(data.getColor());
                 newPlayerData.setShipType(data.getShipType());
-                this.put(newPlayerId, newPlayerData);
+                newPlayerData.setIsAI(data.getIsAI());
+                this.put(id, newPlayerData);
                 return true;
             }
             return false;
@@ -82,8 +79,9 @@ public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
     private void increasePlayerInactivityCounters() {
         for (long i : this.getAll()) {
             PlayerData currentPlayer = this.get(i);
-
-            currentPlayer.increaseInactivityCounter();
+            if (!currentPlayer.getIsAI()) {
+                currentPlayer.increaseInactivityCounter();
+            }
         }
     }
 
@@ -149,5 +147,19 @@ public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
     @Override
     public PlayerData get(Long playerId) {
         return playerPool.get(playerId);
+    }
+
+    public boolean hasAIOnScreen() {
+        boolean result = false;
+
+        for (long i : this.getAll()) {
+            PlayerData currentPlayer = this.get(i);
+            if (currentPlayer.getIsAI()) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
     }
 }
