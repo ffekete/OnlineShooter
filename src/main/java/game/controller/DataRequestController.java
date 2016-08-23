@@ -13,7 +13,7 @@ import game.model.SentPlayerData;
 import game.transformer.PlayerDataToSentPlayerDataTransformer;
 
 @Controller
-public class DataRequestController {
+public class DataRequestController implements ControllerBase {
     
     @Autowired
     PlayerDataToSentPlayerDataTransformer playerDataToSentPlayerDataTransformer;

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import game.config.constant.BrokerPaths;
 
 @Controller
-public class MessageSender {
+public class MessageSender implements ControllerBase {
 
     @Autowired
     private SimpMessagingTemplate template;    

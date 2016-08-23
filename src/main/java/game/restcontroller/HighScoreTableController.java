@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Path("/highScore")
 @RestController
-public class HighScoreTableController {
+public class HighScoreTableController implements RestControllerBase {
 
     private HighScoreTable highScoreTable;
 

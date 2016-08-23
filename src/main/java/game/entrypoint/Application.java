@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
 /** Main entry point of the server-side application. */
-@SpringBootApplication(scanBasePackages = {"game.controller", "game.restcontroller"} )
+@SpringBootApplication(scanBasePackageClasses = {game.controller.ControllerBase.class, game.restcontroller.RestControllerBase.class} )
 @Import({ SpringConfig.class, JerseyConfig.class, WebSocketConfig.class })
 public class Application {
     

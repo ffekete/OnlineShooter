@@ -9,7 +9,7 @@ import game.interfaces.Bullet;
 import game.interfaces.BulletPoolList;
 
 @Controller
-public class NewBulletHandler {
+public class NewBulletHandler implements ControllerBase {
 
     @Autowired
     BulletPoolList<Bullet> bulletPool;

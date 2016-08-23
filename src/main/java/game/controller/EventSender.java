@@ -11,7 +11,7 @@ import game.datatype.Event;
 import game.interfaces.Spawnable;
 
 @Controller
-public class EventSender {
+public class EventSender implements ControllerBase {
 
     @Autowired
     private SimpMessagingTemplate template;    
