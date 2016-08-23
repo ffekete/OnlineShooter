@@ -2,12 +2,9 @@ package game.service;
 
 import java.awt.geom.Point2D;
 
-import org.springframework.stereotype.Component;
-
 import game.config.constant.GameConfig;
 import game.interfaces.Spawnable;
 
-@Component
 public class CoordinateHandler {
 
     public Point2D calculateItemCoordinates(Spawnable item, double speed) {

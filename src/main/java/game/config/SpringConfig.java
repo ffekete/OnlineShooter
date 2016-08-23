@@ -7,6 +7,10 @@ import game.datahandler.ItemHandler;
 import game.datahandler.ItemPool;
 import game.datahandler.PlayerPool;
 import game.scheduler.TaskScheduler;
+import game.service.BulletDataProcessor;
+import game.service.CoordinateHandler;
+import game.service.ItemProcessor;
+import game.service.PlayerDataProcessor;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,5 +52,25 @@ public class SpringConfig {
     public AIHandler aIHandler() {
         return new AIHandler();
     }
-    
+
+    @Bean
+    public BulletDataProcessor bulletDataProcessor() {
+        return new BulletDataProcessor();
+    }
+
+    @Bean
+    public CoordinateHandler coordinateHandler() {
+        return new CoordinateHandler();
+    }
+
+    @Bean
+    public ItemProcessor itemProcessor() {
+        return new ItemProcessor();
+    }
+
+    @Bean
+    public PlayerDataProcessor playerDataProcessor() {
+        return new PlayerDataProcessor();
+    }
+
 }

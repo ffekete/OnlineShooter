@@ -2,12 +2,9 @@ package game.service;
 
 import java.util.Random;
 
-import org.springframework.stereotype.Component;
-
 import game.config.constant.GameConfig;
 import game.interfaces.Spawnable;
 
-@Component
 public class Spawner {
 
     public static void spawn(Spawnable item) {

@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import game.config.constant.GameConfig;
 import game.config.constant.Physics;
@@ -21,7 +20,6 @@ import game.interfaces.SpawnableItem;
 import game.scheduler.TaskScheduler;
 
 /** Basic class to calculate player related values e.g. ship angles,... */
-@Component
 public class PlayerDataProcessor implements PlayerDataProcessorInterface {
     @Autowired
     private PlayerPoolMap<Long, PlayerData> playerPool;
@@ -138,10 +136,8 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
         double canvasHalfHeight = player.getCanvas().getHalfHeight();
         double horizontalDistanceFromMidPoint = Math.abs(player.getMouseX() - canvasHalfWidth);
         double verticalDistanceFromMidPoint = Math.abs(player.getMouseY() - canvasHalfHeight);
-        double actualDistanceFromScreenMidpoint = Math
-                .sqrt(horizontalDistanceFromMidPoint * horizontalDistanceFromMidPoint
-                        + verticalDistanceFromMidPoint * verticalDistanceFromMidPoint)
-                / 2.0d;
+        double actualDistanceFromScreenMidpoint = Math.sqrt(horizontalDistanceFromMidPoint * horizontalDistanceFromMidPoint
+                + verticalDistanceFromMidPoint * verticalDistanceFromMidPoint) / 2.0d;
 
         double maxDistance = Math.sqrt(canvasHalfWidth * canvasHalfWidth + canvasHalfHeight * canvasHalfHeight) / 2.0d;
 
@@ -155,8 +151,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
     }
 
     private void updateShipAngles(PlayerData player) throws InterruptedException {
-        double angle = calculateAngleAndFilterIt(player, (double) player.getCanvas().getHalfWidth(),
-                (double) player.getCanvas().getHalfHeight());
+        double angle = calculateAngleAndFilterIt(player, (double) player.getCanvas().getHalfWidth(), (double) player.getCanvas().getHalfHeight());
         player.setPreviousAngle(player.getShipAngle());
         player.setShipAngle(angle);
     }
@@ -196,15 +191,13 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
      */
     @Override
     public void checkIfPlayerGetsAnItem(PlayerData player) {
-        CopyOnWriteArrayList<SpawnableItem> items = (CopyOnWriteArrayList<SpawnableItem>) itemPool
-                .getAllOnScreen(player.getId());
+        CopyOnWriteArrayList<SpawnableItem> items = (CopyOnWriteArrayList<SpawnableItem>) itemPool.getAllOnScreen(player.getId());
 
         Iterator<SpawnableItem> itemIterator = items.iterator();
 
         while (itemIterator.hasNext()) {
             SpawnableItem actualItem = itemIterator.next();
-            boolean areaCheck = Math.abs(actualItem.getX() - player.getX()) < 10.0d
-                    && Math.abs(actualItem.getY() - player.getY()) < 10.0d;
+            boolean areaCheck = Math.abs(actualItem.getX() - player.getX()) < 10.0d && Math.abs(actualItem.getY() - player.getY()) < 10.0d;
 
             if (areaCheck) {
                 actualItem.applyEffect(player);
@@ -216,8 +209,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
     private void updatePlayerCollisions(PlayerData player1) {
         for (Long j : playerPool.getAll()) {
             PlayerData player2 = playerPool.get(j);
-            if (player2.isSpawned() && player1.getId() != player2.getId()
-                    && Math.abs(player1.getX() - player2.getX()) <= 15
+            if (player2.isSpawned() && player1.getId() != player2.getId() && Math.abs(player1.getX() - player2.getX()) <= 15
                     && Math.abs(player1.getY() - player2.getY()) <= 15) {
                 player1.setShieldProtection(0L);
                 if (player1.decreaseHp(Physics.COLLISION_STRENGTH) < 0L) {

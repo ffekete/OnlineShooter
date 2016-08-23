@@ -3,14 +3,12 @@ package game.service;
 import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import game.config.constant.GameConfig;
 import game.interfaces.Bullet;
 import game.interfaces.BulletDataProcessorInterface;
 import game.interfaces.BulletPoolList;
 
-@Component
 public class BulletDataProcessor implements BulletDataProcessorInterface {
 
     @Autowired
