@@ -8,8 +8,10 @@ import org.springframework.stereotype.Component;
 
 import game.config.constant.GameConfig;
 import game.config.constant.Physics;
+import game.config.constant.ShipConfig;
 import game.controller.EventSender;
 import game.datahandler.HighScoreTable;
+import game.datahandler.ItemHandler;
 import game.datatype.HighScore;
 import game.datatype.PlayerData;
 import game.interfaces.Bullet;
@@ -43,6 +45,9 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
 
     @Autowired
     private CoordinateHandler coordinateHandler;
+
+    @Autowired
+    private ItemHandler itemHandler;
 
     /**
      * Calculates an angle using two points.
@@ -122,7 +127,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                         }
 
                         highScores.addScore(new HighScore(playerWhoKilledMe.getScore(), playerWhoKilledMe.getName()));
-
+                        itemHandler.dropCargoToCoordinate(player.getSpaceShip().getCarriage(), player.getCoordinate());
                         player.kill();
                     } else {
                         eventSender.sendItemHitNotification(player.getSpaceShip());
@@ -213,7 +218,12 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                     && Math.abs(actualItem.getY() - player.getY()) < 10.0d;
 
             if (areaCheck) {
-                actualItem.applyEffect(player);
+                if (player.getIsAI() && player.getShipType() == ShipConfig.SHIP_TYPE_CARGOSHIP) {
+                    player.getSpaceShip().addItemToCargo(actualItem);
+                } else {
+                    actualItem.applyEffect(player);
+                }
+
                 itemPool.remove(actualItem);
             }
         }
