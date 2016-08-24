@@ -30,6 +30,8 @@ public class SentPlayerData {
 
     private Long shipHp;
 
+    private Long shipMaxHp;
+
     private boolean invulnerable;
 
     private long shieldAmount;
@@ -102,6 +104,14 @@ public class SentPlayerData {
 
     public void setShipHp(Long shipHp) {
         this.shipHp = shipHp;
+    }
+
+    public Long getShipMaxHp() {
+        return this.shipMaxHp;
+    }
+
+    public void setShipMaxHp(Long shipMaxHp) {
+        this.shipMaxHp = shipMaxHp;
     }
 
     public long getMaxShieldAmount() {

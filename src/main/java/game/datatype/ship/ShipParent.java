@@ -15,6 +15,8 @@ public abstract class ShipParent implements Ship {
     private String shipType;
     private Shield shield;
     private long hp;
+    private long maxHp;
+
     private Double angle;
     private Weapon weapon;
     private double speed;
@@ -33,6 +35,16 @@ public abstract class ShipParent implements Ship {
     @Override
     public void setHp(long hp) {
         this.hp = hp;
+    }
+
+    @Override
+    public long getMaxHp() {
+        return maxHp;
+    }
+
+    @Override
+    public void setMaxHp(long maxHp) {
+        this.maxHp = maxHp;
     }
 
     @Override

@@ -9,7 +9,8 @@ public class Interceptor extends ShipParent {
 
     public Interceptor() {
         super.setCoordinate(new Point2D.Double(0, 0));
-        this.setHp(ShipConfig.INTERCEPTOR_INIT_HP);
+        this.setHp(ShipConfig.INTERCEPTOR_MAX_HP);
+        this.setMaxHp(ShipConfig.INTERCEPTOR_MAX_HP);
         super.setSpeed(ShipConfig.INTERCEPTOR_INIT_SPEED);
         super.setMaxSpeed(ShipConfig.INTERCEPTOR_INIT_SPEED);
         super.setManeuverability(ShipConfig.INTERCEPTOR_INIT_MANEUVERABILITY);
@@ -19,15 +20,15 @@ public class Interceptor extends ShipParent {
     @Override
     public void setHp(long hp) {
         long hpToSet = hp;
-        if (hpToSet > ShipConfig.INTERCEPTOR_INIT_HP)
-            hpToSet = ShipConfig.INTERCEPTOR_INIT_HP;
+        if (hpToSet > ShipConfig.INTERCEPTOR_MAX_HP)
+            hpToSet = ShipConfig.INTERCEPTOR_MAX_HP;
 
         super.setHp(hpToSet);
     }
 
     @Override
     public void resetHp() {
-        this.setHp(ShipConfig.INTERCEPTOR_INIT_HP);
+        this.setHp(ShipConfig.INTERCEPTOR_MAX_HP);
 
     }
 

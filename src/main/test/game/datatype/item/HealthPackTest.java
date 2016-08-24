@@ -34,10 +34,10 @@ public class HealthPackTest {
     
     @Test
     public void testHealthpackShouldNotIncreaseBeyondLimit(){
-        player.setHp(ShipConfig.INTERCEPTOR_INIT_HP - 2);
+        player.setHp(ShipConfig.INTERCEPTOR_MAX_HP - 2);
 
         hp.applyEffect(player);
         
-        Assert.assertEquals(player.getHp(), (Long)ShipConfig.INTERCEPTOR_INIT_HP);
+        Assert.assertEquals(player.getHp(), (Long)ShipConfig.INTERCEPTOR_MAX_HP);
     }
 }

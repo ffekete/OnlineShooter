@@ -9,7 +9,8 @@ public class Mercury extends ShipParent {
 
     public Mercury() {
         super.setCoordinate(new Point2D.Double(0, 0));
-        this.setHp(ShipConfig.MERCURY_INIT_HP);
+        this.setHp(ShipConfig.MERCURY_MAX_HP);
+        this.setMaxHp(ShipConfig.MERCURY_MAX_HP);
         super.setSpeed(ShipConfig.MERCURY_INIT_SPEED);
         super.setMaxSpeed(ShipConfig.MERCURY_INIT_SPEED);
         super.setManeuverability(ShipConfig.MERCURY_INIT_MANEUVERABILITY);
@@ -19,14 +20,14 @@ public class Mercury extends ShipParent {
     @Override
     public void setHp(long hp) {
         long hpToSet = hp;
-        if (hpToSet > ShipConfig.MERCURY_INIT_HP)
-            hpToSet = ShipConfig.MERCURY_INIT_HP;
+        if (hpToSet > ShipConfig.MERCURY_MAX_HP)
+            hpToSet = ShipConfig.MERCURY_MAX_HP;
         super.setHp(hpToSet);
     }
 
     @Override
     public void resetHp() {
-        this.setHp(ShipConfig.MERCURY_INIT_HP);
+        this.setHp(ShipConfig.MERCURY_MAX_HP);
     }
 
     @Override

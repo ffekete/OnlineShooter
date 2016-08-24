@@ -41,6 +41,7 @@ public class PlayerDataToSentPlayerDataTransformer {
         sentPlayerData.setCoordinate(playerData.getCoordinate());
         sentPlayerData.setVisiblePlayers(playerPool.getAllOnScreen(playerId));
         sentPlayerData.setShipHp(playerData.getHp());
+        sentPlayerData.setShipMaxHp(playerData.getSpaceShip().getMaxHp());
         sentPlayerData.setInvulnerable(playerData.isInvulnerable());
         sentPlayerData.setWeapon(playerData.getWeapon());
         sentPlayerData.setItems(itemPool.getAllOnScreen(playerId));
