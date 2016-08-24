@@ -9,7 +9,7 @@ import game.datatype.shield.PlasmaShield;
 import game.interfaces.Shield;
 
 @Component
-public class ShieldFactory {
+public abstract class ShieldFactory {
 
     public static Shield createShield(ShieldId shieldId) {
         switch (shieldId) {

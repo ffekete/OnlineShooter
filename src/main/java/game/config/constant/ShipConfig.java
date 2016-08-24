@@ -33,6 +33,6 @@ public class ShipConfig {
     public final static double   CARGO_SHIP_INIT_SPEED = 3.0D;
     public final static double   CARGO_SHIP_INIT_MANEUVERABILITY = 16.0D;
     public final static WeaponId CARGO_SHIP_INIT_WEAPON = WeaponId.NO_WEAPON;
-    public final static int      CARGO_SHIP_MAX_CAPACITY_DURING_CREATION = 5;
+    public final static int      CARGO_SHIP_CARGO_CAPACITY = 10;
     
 }
