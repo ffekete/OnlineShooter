@@ -71,6 +71,6 @@ public class HighScoreTableTest {
 		
 		// then
 		Assert.assertEquals(highScoreTable.getThreeBestScores().size(), 2);
-		Assert.assertEquals(highScoreTable.getThreeBestScores().get(0), "A 1");
+		Assert.assertEquals(highScoreTable.getThreeBestScores().get(0), "B 2");
 	}
 }

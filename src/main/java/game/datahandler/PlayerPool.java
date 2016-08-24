@@ -99,7 +99,6 @@ public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
 
             if (currentPlayer.getInactivityCounter() >= ConnectionPreferences.PLAYER_INACTIVITY_LIMIT) {
                 highScores.addScore(new HighScore(currentPlayer.getScore(), currentPlayer.getName()));
-                highScores.keepTopThreePlayersInHighScoreTable();
                 connectionPool.removeConnectionNode(i);
                 System.out.println("Removing inactive player with id " + i + ".");
                 this.remove(i);

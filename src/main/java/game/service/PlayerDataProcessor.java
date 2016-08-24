@@ -108,21 +108,18 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                         PlayerData playerWhoKilledMe = playerPool.get(actualBullet.getPlayerId());
                         if (player.getIsAI()) {
                             playerWhoKilledMe.increaseScore(GameConfig.AI_SCORE_VALUE);
+                            
+                            /*
+                             * Save the killed player only if he/she has more than 0
+                             * points
+                             */
+                            if (player.getScore() > 0L) {
+                                highScores.addScore(new HighScore(player.getScore(), player.getName()));
+                            }
+                            highScores.addScore(new HighScore(playerWhoKilledMe.getScore(), playerWhoKilledMe.getName()));
                         } else {
                             playerWhoKilledMe.increaseScore(GameConfig.PLAYER_SCORE_VALUE);
                         }
-
-                        /*
-                         * Save the killed player only if he/she has more than 0
-                         * points
-                         */
-                        if (player.getScore() > 0L) {
-                            highScores.addScore(new HighScore(player.getScore(), player.getName()));
-                            highScores.keepTopThreePlayersInHighScoreTable();
-                        }
-
-                        highScores.addScore(new HighScore(playerWhoKilledMe.getScore(), playerWhoKilledMe.getName()));
-
                         player.kill();
                     } else {
                         eventSender.sendItemHitNotification(player.getSpaceShip());

@@ -46,6 +46,7 @@ public class HighScoreTable {
     	}
     	highScores.remove(remove);
     	highScores.add(newHs);
+    	keepTopThreePlayersInHighScoreTable();
     }
 
     @GET
