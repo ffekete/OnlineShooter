@@ -425,8 +425,8 @@ public class PlayerData {
     public void setNewMousePointForAI() {
         if (isAI) {
             Point2D newrandomPoint = AISpawner.generateRandomCoordinate();
-            this.mouseX = (long) newrandomPoint.getX();
-            this.mouseY = (long) newrandomPoint.getY();
+            this.setMouseX((long) newrandomPoint.getX());
+            this.setMouseY((long) newrandomPoint.getY());
         }
     }
 
