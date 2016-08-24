@@ -2,8 +2,9 @@ package factory;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import game.config.*;
-import game.datatypes.shield.*;
+
+import game.config.ShieldId;
+import game.datatype.shield.*;
 import game.interfaces.Shield;
 
 public class ShieldFactoryTest {

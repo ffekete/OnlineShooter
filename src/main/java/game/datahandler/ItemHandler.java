@@ -38,7 +38,7 @@ public class ItemHandler {
                             GameConfig.MAX_ITEM_DROP_DISTANCE),
                     coordinate.getY() + RandomGenerator.getRandomInRange(-1 * (GameConfig.MAX_ITEM_DROP_DISTANCE),
                             GameConfig.MAX_ITEM_DROP_DISTANCE));
-            item.setLocation(itemDropCoordinate);
+            item.setCoordinate(itemDropCoordinate);
             itemPool.add(item);
         }
     }
