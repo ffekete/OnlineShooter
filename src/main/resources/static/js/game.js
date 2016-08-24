@@ -90,7 +90,6 @@ function randomFloat (min, max)
  */
 function createExplosion(x, y, color)
 {
-	console.log("Creating explosion: " + x + " "  + y);
 	var minSize = 10;
 	var maxSize = 30;
 	var count = 10;
@@ -128,8 +127,6 @@ function createExplosion(x, y, color)
  */
 function createBasicExplosion(x, y)
 {
-	console.log("Creating basic explosion: " + x + " "  + y);
-	
 	// creating 4 particles that scatter at 0, 90, 180 and 270 degrees
 	for (var angle=0; angle<360; angle+=90)
 	{
@@ -210,14 +207,13 @@ function draw(){
 	drawItems();
 	drawExplosions();
 	drawHighScores();
+	drawPlayerData();
 }
 
 function connect() {
 	var socket = new SockJS('/requestPlayerData_node' + playerData.connectionId);
 	stompClient = Stomp.over(socket);
 	stompClient.connect({}, function(frame) {
-		console.log('Connected: ' + frame);
-		
 		stompClient.subscribe('/providePlayerData_node' + playerData.connectionId, playerDataArrived);
 		stompClient.subscribe('/messages', messageArrived);
 		stompClient.subscribe('/events', eventArrived);
@@ -265,6 +261,7 @@ function playerDataArrived(playerDataFromServer){
 	playerData.respawnTime = JSON.parse(playerDataFromServer.body).respawnTime;
 	playerData.color = JSON.parse(playerDataFromServer.body).color;
 	playerData.shipType = JSON.parse(playerDataFromServer.body).shipType;
+	playerData.weapon = JSON.parse(playerDataFromServer.body).weapon;
 }
 
 function drawBorder(){
@@ -295,6 +292,17 @@ function drawHighScores(){
 		canvasContext.fillText(playerData.highScores[i], 10 ,y);
 		y+=10;
 	}
+}
+
+function drawPlayerData(){
+	canvasContext.fillText("Player details: ",150 ,15);
+	canvasContext.fillText("Ship type: " + playerData.shipType, 150 ,25);
+	canvasContext.fillText("HP: " + playerData.hp, 150, 35);
+	canvasContext.fillText("Shield amount: " + playerData.shieldAmount, 150, 45);
+	canvasContext.fillText("Weapon: " + playerData.weapon.name, 150, 55);
+	canvasContext.fillText("RoF: " + playerData.weapon.rateOfFire, 150, 65);
+	canvasContext.fillText("Ammo: " + playerData.weapon.ammo, 150, 75);
+	canvasContext.fillText("Damage: " + playerData.weapon.damage, 150, 85);
 }
 
 function drawBackground(){
