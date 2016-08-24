@@ -143,7 +143,13 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                         + verticalDistanceFromMidPoint * verticalDistanceFromMidPoint)
                 / 2.0d;
 
-        double maxDistance = Math.sqrt(canvasHalfWidth * canvasHalfWidth + canvasHalfHeight * canvasHalfHeight) / 2.0d;
+        double shorterCanvasValue = canvasHalfWidth > canvasHalfHeight ? canvasHalfHeight : canvasHalfWidth;
+
+        double maxDistance = shorterCanvasValue / 2.0d;
+
+        if (actualDistanceFromScreenMidpoint > maxDistance) {
+            actualDistanceFromScreenMidpoint = maxDistance;
+        }
 
         double limitation = (actualDistanceFromScreenMidpoint / maxDistance);
 
