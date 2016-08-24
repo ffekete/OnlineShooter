@@ -124,6 +124,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                             playerWhoKilledMe.increaseScore(GameConfig.PLAYER_SCORE_VALUE);
                         }
                         highScores.addScore(new HighScore(playerWhoKilledMe.getScore(), playerWhoKilledMe.getName()));
+                        itemHandler.dropCargoToCoordinate(player.getSpaceShip().getCarriage(), player.getCoordinate());
                         player.kill();
                     } else {
                         eventSender.sendItemHitNotification(player.getSpaceShip());
