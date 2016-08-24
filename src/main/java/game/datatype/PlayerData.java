@@ -12,6 +12,7 @@ import game.interfaces.Bullet;
 import game.interfaces.Shield;
 import game.interfaces.Ship;
 import game.interfaces.Weapon;
+import game.scheduler.AIMovementTimerTask;
 import game.service.AISpawner;
 import game.service.Spawner;
 
@@ -87,6 +88,8 @@ public class PlayerData {
         this.getSpaceShip().setShield(ShieldFactory.createShield(ShieldId.NORMAL_SHIELD));
         this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
         this.setCanvas(new Canvas(0, 0, CanvasConstants.CANVAS_HEIGHT, CanvasConstants.CANVAS_WIDTH));
+
+        this.setAIMovementTimer();
     }
 
     public void updateCanvasProperties(long x, long y, long height, long width) {
@@ -419,9 +422,17 @@ public class PlayerData {
         this.isAI = isAI;
     }
 
-    private void setNewMousePointForAI() {
-        Point2D newrandomPoint = AISpawner.generateRandomCoordinate();
-        this.mouseX = (long) newrandomPoint.getX();
-        this.mouseY = (long) newrandomPoint.getY();
+    public void setNewMousePointForAI() {
+        if (isAI) {
+            Point2D newrandomPoint = AISpawner.generateRandomCoordinate();
+            this.setMouseX((long) newrandomPoint.getX());
+            this.setMouseY((long) newrandomPoint.getY());
+        }
+    }
+
+    private void setAIMovementTimer() {
+        if (isAI) {
+            AIMovementTimerTask task = new AIMovementTimerTask(this);
+        }
     }
 }
