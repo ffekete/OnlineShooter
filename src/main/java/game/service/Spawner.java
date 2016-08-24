@@ -18,6 +18,6 @@ public class Spawner {
         double py = GameConfig.STAGE_POS_LIMIT_Y
                 - random.nextInt((int) (GameConfig.STAGE_POS_LIMIT_Y - GameConfig.STAGE_NEG_LIMIT_Y));
 
-        item.setLocation(px, py);
+        item.setCoordinate(px, py);
     }
 }
