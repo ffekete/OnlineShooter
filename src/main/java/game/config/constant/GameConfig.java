@@ -21,6 +21,4 @@ public class GameConfig {
     public final static long PLAYER_RESPAWN_TIME = 300l;
 
     public static final boolean FREE_SYSTEM_TIME_MEASUREMENT_ENABLED = false;
-
-    public static final String AI = "AI";
 }
