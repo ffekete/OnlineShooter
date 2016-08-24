@@ -141,11 +141,11 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
         double actualDistanceFromScreenMidpoint = Math
                 .sqrt(horizontalDistanceFromMidPoint * horizontalDistanceFromMidPoint
                         + verticalDistanceFromMidPoint * verticalDistanceFromMidPoint)
-                / 2.0d;
+                * GameConfig.MOUSE_SPEED_SENSITIVITY_PERCENT;
 
         double shorterCanvasValue = canvasHalfWidth > canvasHalfHeight ? canvasHalfHeight : canvasHalfWidth;
 
-        double maxDistance = shorterCanvasValue / 2.0d;
+        double maxDistance = shorterCanvasValue * GameConfig.MOUSE_SPEED_SENSITIVITY_PERCENT;
 
         if (actualDistanceFromScreenMidpoint > maxDistance) {
             actualDistanceFromScreenMidpoint = maxDistance;
