@@ -9,7 +9,8 @@ public class Deltawing extends ShipParent {
 
     public Deltawing() {
         super.setCoordinate(new Point2D.Double(0, 0));
-        this.setHp(ShipConfig.DELTAWING_INIT_HP);
+        this.setHp(ShipConfig.DELTAWING_MAX_HP);
+        this.setMaxHp(ShipConfig.DELTAWING_MAX_HP);
         super.setSpeed(ShipConfig.DELTAWING_INIT_SPEED);
         super.setMaxSpeed(ShipConfig.DELTAWING_INIT_SPEED);
         super.setManeuverability(ShipConfig.DELTAWING_INIT_MANEUVERABILITY);
@@ -19,14 +20,14 @@ public class Deltawing extends ShipParent {
     @Override
     public void setHp(long hp) {
         long hpToSet = hp;
-        if (hpToSet > ShipConfig.DELTAWING_INIT_HP)
-            hpToSet = ShipConfig.DELTAWING_INIT_HP;
+        if (hpToSet > ShipConfig.DELTAWING_MAX_HP)
+            hpToSet = ShipConfig.DELTAWING_MAX_HP;
         super.setHp(hpToSet);
     }
 
     @Override
     public void resetHp() {
-        this.setHp(ShipConfig.DELTAWING_INIT_HP);
+        this.setHp(ShipConfig.DELTAWING_MAX_HP);
     }
 
     @Override

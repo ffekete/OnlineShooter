@@ -363,6 +363,10 @@ public class PlayerData {
         this.getSpaceShip().setHp(hp);
     }
 
+    public Long getMaxHp() {
+        return this.getSpaceShip().getMaxHp();
+    }
+
     public boolean isInvulnerable() {
         return this.getInvulnerabilityCounter() > 0L;
     }

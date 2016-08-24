@@ -186,7 +186,7 @@ function draw(){
 	
 	
 	if(playerData.respawnTime == 0){
-		drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.name, playerData.hp, playerData.invulnerable, playerData.shieldAmount, playerData.maxShieldAmount, playerData.color, playerData.shipType);
+		drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.name, playerData.hp, playerData.maxHp, playerData.invulnerable, playerData.shieldAmount, playerData.maxShieldAmount, playerData.color, playerData.shipType);
 	}
 	else
 	{
@@ -203,7 +203,7 @@ function draw(){
 			
 			var dx = playerData.x - actualShip.x;
 			var dy = playerData.y - actualShip.y;
-			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue, actualShip.color, actualShip.shipType);
+			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.maxHp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue, actualShip.color, actualShip.shipType);
 		}
 	}
 	drawBullets();
@@ -255,6 +255,7 @@ function playerDataArrived(playerDataFromServer){
 	playerData.x = JSON.parse(playerDataFromServer.body).x;
 	playerData.y = JSON.parse(playerDataFromServer.body).y;
 	playerData.hp = JSON.parse(playerDataFromServer.body).shipHp;
+	playerData.maxHp = JSON.parse(playerDataFromServer.body).shipMaxHp;
 	playerData.invulnerable = JSON.parse(playerDataFromServer.body).invulnerable;
 	playerData.itemsOnScreen = JSON.parse(playerDataFromServer.body).items;
 	playerData.score = JSON.parse(playerDataFromServer.body).score;
@@ -386,7 +387,7 @@ function drawExplosion(x, y){
 	canvasContext.restore();
 }
 
-function drawShip(x, y, angle, name, hp, invulnerability, shield, maxShield, color, type){
+function drawShip(x, y, angle, name, hp, maxHp, invulnerability, shield, maxShield, color, type){
 	canvasContext.save();
 
 	canvasContext.fillStyle = "red";	
@@ -398,7 +399,7 @@ function drawShip(x, y, angle, name, hp, invulnerability, shield, maxShield, col
 	
 	
 	canvasContext.fillStyle = "green";
-	canvasContext.fillRect(-39,-10,5,hp);
+	canvasContext.fillRect(-39,-10,5,(21*hp/maxHp));
 	
 	if(invulnerability == false){
 		canvasContext.strokeStyle = "black";

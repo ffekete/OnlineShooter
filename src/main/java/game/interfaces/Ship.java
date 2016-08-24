@@ -34,6 +34,10 @@ public interface Ship extends Spawnable {
 
     public void setHp(long hp);
 
+    public long getMaxHp();
+
+    public void setMaxHp(long maxHp);
+
     public Weapon getWeapon();
 
     public void setWeapon(Weapon weapon);
