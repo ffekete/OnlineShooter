@@ -50,10 +50,10 @@ public class ItemHandlerTest extends AbstractTestNGSpringContextTests {
         while (bit.hasNext()) {
             SpawnableItem droppedItem = bit.next();
 
-            Assert.assertTrue((droppedItem.getX() > (-1 * GameConfig.MAX_ITEM_DROP_DISTANCE) + x)
-                    && (droppedItem.getX() < GameConfig.MAX_ITEM_DROP_DISTANCE + x)
-                    && (droppedItem.getY() > (-1 * GameConfig.MAX_ITEM_DROP_DISTANCE) + y)
-                    && (droppedItem.getY() < GameConfig.MAX_ITEM_DROP_DISTANCE + y));
+            Assert.assertTrue((droppedItem.getX() >= (-1 * GameConfig.MAX_ITEM_DROP_DISTANCE) + x)
+                    && (droppedItem.getX() <= GameConfig.MAX_ITEM_DROP_DISTANCE + x)
+                    && (droppedItem.getY() >= (-1 * GameConfig.MAX_ITEM_DROP_DISTANCE) + y)
+                    && (droppedItem.getY() <= GameConfig.MAX_ITEM_DROP_DISTANCE + y));
         }
     }
 
