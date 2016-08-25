@@ -12,4 +12,6 @@ public interface Shield {
     public void decreaseProtection(long value);
 
     public void increaseShieldPower();
+
+    public void increaseShieldPowerBy(long amount);
 }

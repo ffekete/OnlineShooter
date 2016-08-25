@@ -2,27 +2,36 @@ package game.config.constant;
 
 public enum SpawnableItemType {
     // Weapons
-    GATLING_GUN,
-    LASER_CANNON,
-    DOUBLE_GATLING_GUN,
-    SHOTGUN,
+    GATLING_GUN("gatlingGun", "Gatling Gun"),
+    LASER_CANNON("laserCannon", "Laser Cannon"),
+    DOUBLE_GATLING_GUN("doubleGatlingGun", "Double Gatling Gun"),
+    SHOTGUN("shotgun", "Shotgun"),
 
     // Power-ups
-    INCREASE_DAMAGE,
-    INCRASE_RATE_OF_FIRE,
-    INCREASE_MANEUVERABILITY,
-    INCREASE_SPEED,
+    INCREASE_DAMAGE("increaseDamage", "Damage +1"),
+    INCRASE_RATE_OF_FIRE("increaseRof","Rate Of Fire +1"),
+    INCREASE_MANEUVERABILITY("increaseManeuverability","Maneuverability +1"),
+    INCREASE_SPEED("increaseSpeed", "Speed +1"),
 
     // Shields
-    ATOM_SHIELD,
-    PLASMA_SHIELD,
+    NORMAL_SHIELD("normalShield", "Normal Shield"),
+    ATOM_SHIELD("atomShield","Atom Shield"),
+    PLASMA_SHIELD("plasmaShield", "Plasma Shield"),
 
     // Other
-    HEALTH_PACK,
-    INCREASE_SCORE;
+    HEALTH_PACK("healthPack", "Health Pack +5"),
+    INCREASE_SCORE("increaseScore", "Score++");
+    
+    private final String id;
+    private final String visibleName;
 
     public static int count() {
         return values().length;
+    }
+
+    private SpawnableItemType(String id, String visibleName) {
+        this.id = id;
+        this.visibleName = visibleName;
     }
 
     public static SpawnableItemType get(int index) {
@@ -30,5 +39,13 @@ public enum SpawnableItemType {
             return values()[index];
         else
             throw new IllegalArgumentException();
+    }
+    
+    public String getId(){
+        return this.id;
+    }
+    
+    public String getVisibleName() {
+        return this.visibleName;
     }
 }

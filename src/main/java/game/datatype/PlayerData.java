@@ -1,13 +1,16 @@
 package game.datatype;
 
 import java.awt.geom.Point2D;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import factory.ShieldFactory;
 import factory.ShipFactory;
-import game.config.ShieldId;
+import game.config.constant.Bonuses;
 import game.config.constant.CanvasConstants;
 import game.config.constant.GameConfig;
+import game.config.constant.SpawnableItemType;
 import game.interfaces.Bullet;
 import game.interfaces.Shield;
 import game.interfaces.Ship;
@@ -41,6 +44,8 @@ public class PlayerData {
     private long connectionId;
 
     private boolean isAI;
+
+    private Map<Bonuses, Long> bonuses;
 
     public PlayerData(PlayerData player2) {
         this.spaceShip = this.cloneSpaceShip(player2.getSpaceShip());
@@ -85,11 +90,13 @@ public class PlayerData {
         this.getSpaceShip().resetManeuverability();
         this.getSpaceShip().resetSpeed();
         this.score = 0l;
-        this.getSpaceShip().setShield(ShieldFactory.createShield(ShieldId.NORMAL_SHIELD));
+        this.getSpaceShip().setShield(ShieldFactory.createShield(SpawnableItemType.NORMAL_SHIELD));
         this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
         this.setCanvas(new Canvas(0, 0, CanvasConstants.CANVAS_HEIGHT, CanvasConstants.CANVAS_WIDTH));
 
         this.setAIMovementTimer();
+
+        this.initBonuses();
     }
 
     public void updateCanvasProperties(long x, long y, long height, long width) {
@@ -105,6 +112,7 @@ public class PlayerData {
         }
 
         Spawner.spawn(this.getSpaceShip());
+        this.resetBonuses();
         this.inactivityCounter = 0;
         this.getSpaceShip().resetHp();
         this.invulnerabilityCounter = GameConfig.INVULN_CTR_MAX_VALUE;
@@ -112,7 +120,7 @@ public class PlayerData {
         this.getSpaceShip().resetManeuverability();
         this.getSpaceShip().resetSpeed();
         this.score = 0l;
-        this.getSpaceShip().setShield(ShieldFactory.createShield(ShieldId.NORMAL_SHIELD));
+        this.getSpaceShip().setShield(ShieldFactory.createShield(SpawnableItemType.NORMAL_SHIELD));
         this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
     }
 
@@ -446,5 +454,23 @@ public class PlayerData {
         if (isAI) {
             AIMovementTimerTask task = new AIMovementTimerTask(this);
         }
+    }
+
+    private void initBonuses() {
+        this.bonuses = new HashMap<Bonuses, Long>();
+        this.resetBonuses();
+    }
+
+    private void resetBonuses() {
+        this.bonuses.put(Bonuses.DAMAGE, 0L);
+        this.bonuses.put(Bonuses.RATE_OF_FIRE, 0L);
+    }
+
+    public Map<Bonuses, Long> getBonuses() {
+        return this.bonuses;
+    }
+
+    public void updateBonus(Bonuses bonus, long value) {
+        this.bonuses.put(bonus, this.bonuses.get(bonus) + value);
     }
 }

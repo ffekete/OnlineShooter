@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 import game.config.constant.ShipConfig;
 import game.datatype.PlayerData;
 import game.datatype.weapon.GatlingGun;
-import game.datatype.weapon.Machinegun;
 import game.entrypoint.Application;
 import game.interfaces.Bullet;
 import game.interfaces.BulletPoolList;
@@ -37,7 +36,7 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests {
     public void testShouldCreateTwoBulletsForTwoDifferentPlayers() {
         // given
         PlayerData player2 = new PlayerData(300L, "P02", ShipConfig.SHIP_TYPE_DELTAWING, false);
-        player2.setWeapon(new Machinegun());
+        player2.setWeapon(new GatlingGun());
         player.setWeapon(new GatlingGun()); // setting this weapon for player
                                             // ship because it will create one
                                             // bullet

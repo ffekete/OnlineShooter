@@ -3,7 +3,7 @@ package game.datatype.weapon;
 import java.util.ArrayList;
 import java.util.List;
 
-import game.config.WeaponId;
+import game.config.constant.SpawnableItemType;
 import game.config.constant.WeaponConfig;
 import game.datatype.PlayerData;
 import game.datatype.bullet.LaserBeam;
@@ -24,8 +24,8 @@ public class LaserCannon extends WeaponParent {
         Spawner.spawn(this);
         super.setDamage(WeaponConfig.LASER_CANNON_INIT_DAMAGE);
         super.setAmmo(WeaponConfig.LASER_CANNON_INIT_AMMO);
-        super.setName("Laser cannon");
+        super.setName(SpawnableItemType.LASER_CANNON.getVisibleName());
         super.setRateOfFire(WeaponConfig.LASER_CANNON_INIT_RATE_OF_FIRE);
-        super.setType(WeaponId.LASER_CANNON);
+        super.setType(SpawnableItemType.LASER_CANNON);
     }
 }
