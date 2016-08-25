@@ -17,7 +17,7 @@ public class ShipConfig {
     public final static long     MERCURY_MAX_HP = 25L;
     public final static double   MERCURY_INIT_SPEED = 5.0D;
     public final static double   MERCURY_INIT_MANEUVERABILITY = 12.0D;
-    public final static WeaponId MERCURY_INIT_WEAPON = WeaponId.MACHINEGUN;
+    public final static WeaponId MERCURY_INIT_WEAPON = WeaponId.GATLING_GUN;
     
     public final static long     INTERCEPTOR_MAX_HP = 20L;
     public final static double   INTERCEPTOR_INIT_SPEED = 7.0D;
