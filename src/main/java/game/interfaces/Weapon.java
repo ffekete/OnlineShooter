@@ -9,6 +9,8 @@ public interface Weapon {
 	
 	public WeaponId getType();
 	
+	public void setType(WeaponId type);
+	
     public long getDamage();
 
     public void decreaseAmmo(long value);

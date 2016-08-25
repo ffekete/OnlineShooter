@@ -44,6 +44,7 @@ public class PlayerDataToSentPlayerDataTransformer {
         sentPlayerData.setShipMaxHp(playerData.getSpaceShip().getMaxHp());
         sentPlayerData.setInvulnerable(playerData.isInvulnerable());
         sentPlayerData.setWeapon(playerData.getWeapon());
+        sentPlayerData.setWeapons(playerData.getSpaceShip().getWeapons());
         sentPlayerData.setItems(itemPool.getAllOnScreen(playerId));
         sentPlayerData.setScore(playerData.getScore());
         sentPlayerData.setScores(highScoreTable.getThreeBestScores());

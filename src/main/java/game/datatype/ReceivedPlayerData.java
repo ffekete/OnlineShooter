@@ -9,6 +9,7 @@ public class ReceivedPlayerData {
     private long canvasY;
     private long canvasWidth;
     private long canvasHeight;
+    private int weaponIndex;
 
     /* Getters/setters and constructors */
     public Long getId() {
@@ -66,4 +67,12 @@ public class ReceivedPlayerData {
     public void setCanvasHeight(long canvasHeight) {
         this.canvasHeight = canvasHeight;
     }
+
+	public int getWeaponIndex() {
+		return weaponIndex;
+	}
+
+	public void setWeaponIndex(int weaponIndex) {
+		this.weaponIndex = weaponIndex;
+	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import factory.BulletBuilder;
+import game.config.WeaponId;
 import game.config.constant.WeaponConfig;
 import game.datatype.PlayerData;
 import game.interfaces.Bullet;
@@ -35,5 +36,6 @@ public class DoubleGatlingGun extends WeaponParent {
         super.setAmmo(WeaponConfig.GATLING_GUN_INIT_AMMO);
         super.setName("Double Gatling gun");
         super.setRateOfFire(WeaponConfig.GATLING_GUN_INIT_RATE_OF_FIRE);
+        super.setType(WeaponId.DOUBLE_GATLING);
     }
 }

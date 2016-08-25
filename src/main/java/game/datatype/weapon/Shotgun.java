@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import factory.BulletBuilder;
+import game.config.WeaponId;
 import game.config.constant.WeaponConfig;
 import game.datatype.PlayerData;
 import game.interfaces.Bullet;
@@ -53,5 +54,6 @@ public class Shotgun extends WeaponParent {
         super.setAmmo(WeaponConfig.SHOTGUN_INIT_AMMO);
         super.setName("Shotgun");
         super.setRateOfFire(WeaponConfig.SHOTGUN_INIT_RATE_OF_FIRE);
+        super.setType(WeaponId.SHOTGUN);
     }
 }

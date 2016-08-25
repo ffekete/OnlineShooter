@@ -21,6 +21,11 @@ public abstract class WeaponParent extends ItemParent implements Weapon {
     public WeaponId getType() {
     	return this.type;
     }
+    
+    @Override
+    public void setType(WeaponId type) {
+    	this.type = type;
+    }
 
     @Override
     public void applyEffect(PlayerData player) {

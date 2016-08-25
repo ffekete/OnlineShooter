@@ -4,6 +4,8 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import factory.WeaponFactory;
+import game.config.constant.ShipConfig;
 import game.interfaces.Shield;
 import game.interfaces.Ship;
 import game.interfaces.SpawnableItem;
@@ -27,9 +29,8 @@ public abstract class ShipParent implements Ship {
     private int maxCargoCapacity = 0;
     
     public ShipParent() {
-    	coordinate = new Point2D.Double(0, 0);
-    	weapons = new ArrayList<Weapon>();
-    	carriage = new ArrayList<SpawnableItem>();
+    	this.coordinate = new Point2D.Double(0, 0);
+    	this.carriage = new ArrayList<SpawnableItem>();
     }
 
     @Override
@@ -77,7 +78,9 @@ public abstract class ShipParent implements Ship {
     }
 
     @Override
-    public abstract void initWeapons();
+    public void initWeapons() {
+    	this.weapons = new ArrayList<Weapon>();
+    }
 
     @Override
     public double getX() {
@@ -189,7 +192,7 @@ public abstract class ShipParent implements Ship {
 	
     @Override
 	public void selectWeapon(int index) {
-    	if (index < this.weapons.size()) {
+    	if (index >= 0 && index < this.weapons.size()) {
     		this.weapon = this.weapons.get(index);
     	}
     }

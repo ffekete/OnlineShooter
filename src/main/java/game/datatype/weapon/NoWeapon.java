@@ -3,6 +3,7 @@ package game.datatype.weapon;
 import java.util.ArrayList;
 import java.util.List;
 
+import game.config.WeaponId;
 import game.config.constant.WeaponConfig;
 import game.datatype.PlayerData;
 import game.interfaces.Bullet;
@@ -15,6 +16,7 @@ public class NoWeapon extends WeaponParent {
         super.setAmmo(WeaponConfig.NO_WEAPON_INIT_AMMO);
         super.setName("No_weapon");
         super.setRateOfFire(WeaponConfig.NO_WEAPON_INIT_RATE_OF_FIRE);
+        super.setType(WeaponId.NO_WEAPON);
     }
 
     public List<Bullet> createBullet(PlayerData player) {

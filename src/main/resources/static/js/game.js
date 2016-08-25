@@ -1,3 +1,4 @@
+
 var screen_x = $("#gameArea").width();
 var screen_y = $("#gameArea").height();
 
@@ -27,7 +28,16 @@ var playerData = {
 	connectionId: window.sessionStorage.getItem("connectionId"),
 	mouseX : 0,
 	mouseY : 0,
-	shipAngle: 0.0,
+	shipAngle: 0.0
+};
+
+var playerDataToSend = {
+	id: playerData.id,
+	mouseX : playerData.mouseX,
+	mouseY : playerData.mouseY,
+	canvasWidth: playerData.canvasWidth,
+	canvasHeight: playerData.canvasHeight,
+	weaponIndex : 0
 };
 
 /*
@@ -208,6 +218,7 @@ function draw(){
 	drawExplosions();
 	drawHighScores();
 	drawPlayerData();
+	drawWeaponKeys();
 }
 
 function connect() {
@@ -245,23 +256,25 @@ function shootBullet(){
 }
 
 function playerDataArrived(playerDataFromServer){
-	playerData.shipAngle = JSON.parse(playerDataFromServer.body).shipAngle;	
-	playerData.bullets = JSON.parse(playerDataFromServer.body).visibleBullets;
-	playerData.otherPlayers = JSON.parse(playerDataFromServer.body).visiblePlayers;
-	playerData.x = JSON.parse(playerDataFromServer.body).x;
-	playerData.y = JSON.parse(playerDataFromServer.body).y;
-	playerData.hp = JSON.parse(playerDataFromServer.body).shipHp;
-	playerData.maxHp = JSON.parse(playerDataFromServer.body).shipMaxHp;
-	playerData.invulnerable = JSON.parse(playerDataFromServer.body).invulnerable;
-	playerData.itemsOnScreen = JSON.parse(playerDataFromServer.body).items;
-	playerData.score = JSON.parse(playerDataFromServer.body).score;
-	playerData.highScores = JSON.parse(playerDataFromServer.body).scores;
-	playerData.shieldAmount = JSON.parse(playerDataFromServer.body).shieldAmount;
-	playerData.maxShieldAmount = JSON.parse(playerDataFromServer.body).maxShieldAmount;
-	playerData.respawnTime = JSON.parse(playerDataFromServer.body).respawnTime;
-	playerData.color = JSON.parse(playerDataFromServer.body).color;
-	playerData.shipType = JSON.parse(playerDataFromServer.body).shipType;
-	playerData.weapon = JSON.parse(playerDataFromServer.body).weapon;
+	var parsedPlayerData = JSON.parse(playerDataFromServer.body);
+	playerData.shipAngle = parsedPlayerData.shipAngle;	
+	playerData.bullets = parsedPlayerData.visibleBullets;
+	playerData.otherPlayers = parsedPlayerData.visiblePlayers;
+	playerData.x = parsedPlayerData.x;
+	playerData.y = parsedPlayerData.y;
+	playerData.hp = parsedPlayerData.shipHp;
+	playerData.maxHp = parsedPlayerData.shipMaxHp;
+	playerData.invulnerable = parsedPlayerData.invulnerable;
+	playerData.itemsOnScreen = parsedPlayerData.items;
+	playerData.score = parsedPlayerData.score;
+	playerData.highScores = parsedPlayerData.scores;
+	playerData.shieldAmount = parsedPlayerData.shieldAmount;
+	playerData.maxShieldAmount = parsedPlayerData.maxShieldAmount;
+	playerData.respawnTime = parsedPlayerData.respawnTime;
+	playerData.color = parsedPlayerData.color;
+	playerData.shipType = parsedPlayerData.shipType;
+	playerData.weapon = parsedPlayerData.weapon;
+	playerData.weapons = parsedPlayerData.weapons;
 }
 
 function drawBorder(){
@@ -289,24 +302,36 @@ function drawHighScores(){
 	canvasContext.fillText("High score table: ", 10 ,25);
 	var y = 35;
 	for(var i in playerData.highScores){
-		canvasContext.fillText(playerData.highScores[i], 10 ,y);
-		y+=10;
+		canvasContext.fillText(playerData.highScores[i], 10, y);
+		y += 10;
 	}
 }
 
 function drawPlayerData(){
-	canvasContext.fillText("Player details: ",150 ,15);
-	canvasContext.fillText("Ship type: " + playerData.shipType, 150 ,25);
-	canvasContext.fillText("HP: " + playerData.hp, 150, 35);
-	canvasContext.fillText("Shield amount: " + playerData.shieldAmount, 150, 45);
-	canvasContext.fillText("Weapon: " + playerData.weapon.name, 150, 55);
-	canvasContext.fillText("RoF: " + playerData.weapon.rateOfFire, 150, 65);
-	canvasContext.fillText("Ammo: " + playerData.weapon.ammo, 150, 75);
-	canvasContext.fillText("Damage: " + playerData.weapon.damage, 150, 85);
+	var fromLeft = 150;
+	var fromTop = 15;
+	var verticalSpace = 10;
+	canvasContext.fillText("Player details: ", fromLeft, fromTop);
+	canvasContext.fillText("Ship type: " + playerData.shipType, fromLeft, fromTop + verticalSpace);
+	canvasContext.fillText("HP: " + playerData.hp, fromLeft, fromTop + verticalSpace * 2);
+	canvasContext.fillText("Shield amount: " + playerData.shieldAmount, fromLeft, fromTop + verticalSpace * 3);
+	canvasContext.fillText("Weapon: " + playerData.weapon.name, fromLeft, fromTop + verticalSpace * 4);
+	canvasContext.fillText("RoF: " + playerData.weapon.rateOfFire, fromLeft, fromTop + verticalSpace * 5);
+	canvasContext.fillText("Ammo: " + playerData.weapon.ammo, fromLeft, fromTop + verticalSpace * 6);
+	canvasContext.fillText("Damage: " + playerData.weapon.damage, fromLeft, fromTop + verticalSpace * 7);
+}
+
+function drawWeaponKeys(){
+	var fromLeft = 300;
+	var fromTop = 15;
+	var verticalSpace = 10;
+	$.each(playerData.weapons, function(index, weapon) {
+		canvasContext.fillText("[" + (index + 1) + "]: " + weapon.name +" (" + weapon.ammo + ")", fromLeft, fromTop + verticalSpace * index);
+	});
 }
 
 function drawBackground(){
-	var img = document.getElementById("bg");
+	var img = $("#bg")[0];
 	for(var i = -5; i < 10; i++)
 	for(var j = -5; j < 10; j++)
 		{
@@ -486,20 +511,17 @@ function pollPlayerData(){
 	stompClient.send("/app/requestPlayerData_node" + playerData.connectionId, {}, playerData.id);
 }
 
-function updatePlayerData(){
-	var playerDataToSend = {
-			id: playerData.id,
-			mouseX : playerData.mouseX,
-			mouseY : playerData.mouseY,
-			canvasWidth: playerData.canvasWidth,
-			canvasHeight: playerData.canvasHeight
-	};
-	
+function updatePlayerData(){	
+	playerDataToSend.id = playerData.id;
+	playerDataToSend.mouseX = playerData.mouseX;
+	playerDataToSend.mouseY = playerData.mouseY;
+	playerDataToSend.canvasWidth = playerData.canvasWidth;
+	playerDataToSend.canvasHeight = playerData.canvasHeight;
 	stompClient.send("/app/updatePlayerData", {}, JSON.stringify(playerDataToSend));
 }
 
 function start(){
-	canvas = document.getElementById("gameArea");
+	canvas = $("#gameArea")[0];
 	canvasContext = canvas.getContext("2d");
 	
 	drawBorder();
@@ -522,6 +544,14 @@ function start(){
 
 	$('#gameArea').mouseup(function(){
 		shootBulletSwitch = false;
+	});
+	
+	$(document).keypress(function(e){
+		// key pressed is inclusively between '1' and '9'
+		if(e.which >= 49 && e.which <= 57) {
+			playerDataToSend.weaponIndex = e.which - 49;
+			stompClient.send("/app/selectWeapon", {}, JSON.stringify(playerDataToSend));
+		}
 	});
 	
 	screen_x = $("#gameArea").width();
