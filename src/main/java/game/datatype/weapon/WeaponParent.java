@@ -4,20 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import factory.BulletBuilder;
+import game.config.WeaponId;
 import game.datatype.PlayerData;
 import game.datatype.item.ItemParent;
 import game.interfaces.Bullet;
 import game.interfaces.Weapon;
 
 public abstract class WeaponParent extends ItemParent implements Weapon {
+	private WeaponId type;
     private long rateOfFireCooldown;
     private long rateOfFire;
     private long ammo;
     private long damage;
+    
+    @Override
+    public WeaponId getType() {
+    	return this.type;
+    }
 
     @Override
     public void applyEffect(PlayerData player) {
-        player.setWeapon(this);
+        player.addWeapon(this);
     }
 
     @Override
@@ -48,6 +55,11 @@ public abstract class WeaponParent extends ItemParent implements Weapon {
             if (this.ammo < 0L)
                 this.ammo = 0L;
         }
+    }
+    
+    @Override
+    public void addAmmo(long ammo) {
+    	this.ammo += ammo;
     }
 
     @Override

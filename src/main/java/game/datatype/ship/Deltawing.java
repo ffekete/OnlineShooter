@@ -41,8 +41,8 @@ public class Deltawing extends ShipParent {
     }
 
     @Override
-    public void initWeapon() {
-        super.setWeapon(WeaponFactory.createWeapon(ShipConfig.DELTAWING_INIT_WEAPON));
-
+    public void initWeapons() {
+    	super.addWeapon(WeaponFactory.createWeapon(ShipConfig.DELTAWING_INIT_WEAPON));
+        super.selectWeapon(0);
     }
 }

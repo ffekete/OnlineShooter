@@ -40,6 +40,8 @@ public class SentPlayerData {
 
     Weapon weapon;
 
+	List<Weapon> weapons;
+
     List<PlayerData> visiblePlayers;
 
     List<Bullet> visibleBullets;
@@ -55,6 +57,14 @@ public class SentPlayerData {
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
+    
+    public List<Weapon> getWeapons() {
+		return weapons;
+	}
+
+	public void setWeapons(List<Weapon> weapons) {
+		this.weapons = weapons;
+	}
 
     public boolean isInvulnerable() {
         return invulnerable;

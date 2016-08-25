@@ -81,7 +81,7 @@ public class PlayerData {
 
         this.connectionId = 0L;
         this.getSpaceShip().resetHp();
-        this.initWeapon();
+        this.initWeapons();
         this.getSpaceShip().resetManeuverability();
         this.getSpaceShip().resetSpeed();
         this.score = 0l;
@@ -108,7 +108,7 @@ public class PlayerData {
         this.inactivityCounter = 0;
         this.getSpaceShip().resetHp();
         this.invulnerabilityCounter = GameConfig.INVULN_CTR_MAX_VALUE;
-        this.initWeapon();
+        this.initWeapons();
         this.getSpaceShip().resetManeuverability();
         this.getSpaceShip().resetSpeed();
         this.score = 0l;
@@ -162,8 +162,8 @@ public class PlayerData {
         return false;
     }
 
-    public void initWeapon() {
-        this.getSpaceShip().initWeapon();
+    public void initWeapons() {
+        this.getSpaceShip().initWeapons();
     }
 
     public void decreasePlayerRespawnTime() {
@@ -373,6 +373,14 @@ public class PlayerData {
 
     public void setWeapon(Weapon weapon) {
         this.getSpaceShip().setWeapon(weapon);
+    }
+    
+    public void addWeapon(Weapon weapon) {
+    	this.getSpaceShip().addWeapon(weapon);
+    }
+    
+    public void selectWeapon(int index) {
+    	this.getSpaceShip().selectWeapon(index);
     }
 
     public double getManeuverability() {

@@ -10,18 +10,25 @@ import game.interfaces.SpawnableItem;
 import game.interfaces.Weapon;
 
 public abstract class ShipParent implements Ship {
-    private Point2D coordinate = new Point2D.Double(0, 0);
+    private Point2D coordinate;
     private String color;
     private String shipType;
     private Shield shield;
     private long hp;
     private Double angle;
     private Weapon weapon;
+    private List<Weapon> weapons;
     private double speed;
     private double maxSpeed;
     private double maneuverability;
-    private List<SpawnableItem> carriage = new ArrayList<SpawnableItem>();
+    private List<SpawnableItem> carriage;
     private int maxCargoCapacity = 0;
+    
+    public ShipParent() {
+    	coordinate = new Point2D.Double(0, 0);
+    	weapons = new ArrayList<Weapon>();
+    	carriage = new ArrayList<SpawnableItem>();
+    }
 
     @Override
     public void increaseManeuverablility(double value) {
@@ -58,7 +65,7 @@ public abstract class ShipParent implements Ship {
     }
 
     @Override
-    public abstract void initWeapon();
+    public abstract void initWeapons();
 
     @Override
     public double getX() {
@@ -145,6 +152,34 @@ public abstract class ShipParent implements Ship {
     @Override
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
+    }
+    
+    @Override
+    public List<Weapon> getWeapons() {
+		return weapons;
+	}
+
+    @Override
+	public void setWeapons(List<Weapon> weapons) {
+		this.weapons = weapons;
+	}
+    
+    @Override
+    public void addWeapon(Weapon weapon) {
+    	for (Weapon w : this.weapons) {
+    		if (w.getType() == weapon.getType()) {
+    			w.addAmmo(weapon.getAmmo());
+    			return;
+    		}
+    	}
+    	this.weapons.add(weapon);
+    }
+	
+    @Override
+	public void selectWeapon(int index) {
+    	if (index < this.weapons.size()) {
+    		this.weapon = this.weapons.get(index);
+    	}
     }
 
     @Override

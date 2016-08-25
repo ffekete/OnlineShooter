@@ -4,7 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.List;
 
 public interface Ship extends Spawnable {
-    public void initWeapon();
+    public void initWeapons();
 
     public long decreaseHp(long value);
 
@@ -37,6 +37,14 @@ public interface Ship extends Spawnable {
     public Weapon getWeapon();
 
     public void setWeapon(Weapon weapon);
+    
+    public List<Weapon> getWeapons();
+
+	public void setWeapons(List<Weapon> weapons);
+	
+	public void addWeapon(Weapon weapon);
+	
+	public void selectWeapon(int index);
 
     public double getManeuverability();
 

@@ -80,7 +80,7 @@ public class BulletPool implements BulletPoolList<Bullet> {
         player.startShootingRateCooldownEffect();
         player.decreasAmmoForPlayerWeapon(1L);
         if (player.getActualWeaponAmmo() == 0L) {
-            player.initWeapon();
+            player.initWeapons();
         }
     }
 

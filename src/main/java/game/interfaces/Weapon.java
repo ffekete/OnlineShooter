@@ -1,13 +1,19 @@
-package game.interfaces;
+ package game.interfaces;
 
 import java.util.List;
 
+import game.config.WeaponId;
 import game.datatype.PlayerData;
 
 public interface Weapon {
+	
+	public WeaponId getType();
+	
     public long getDamage();
 
     public void decreaseAmmo(long value);
+    
+    public void addAmmo(long ammo);
 
     public boolean hasAmmo();
 
