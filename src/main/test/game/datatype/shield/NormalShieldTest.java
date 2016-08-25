@@ -32,7 +32,7 @@ public class NormalShieldTest {
     }
 
     @Test
-    public void testShouldIncreaseShieldAndSwitchBackToNormal() {
+    public void testShouldIncreaseShieldAndPowerUp() {
         PlayerData player = new PlayerData(0L, "P05", "Interceptor", false);
 
         long initProtection = player.getShield().getProtection();
@@ -44,8 +44,9 @@ public class NormalShieldTest {
         Assert.assertEquals(player.getShield().getProtection(), ShieldConfig.ATOM_SHIELD_PROTECTION);
         Assert.assertEquals(player.getShield().getMaxProtectionValue(), ShieldConfig.ATOM_SHIELD_PROTECTION);
 
+        player.getShield().decreaseProtection(15);
         ns.applyEffect(player);
-        Assert.assertEquals(player.getShield().getProtection(), ShieldConfig.NORMAL_SHIELD_PROTECTION);
-        Assert.assertEquals(player.getShield().getMaxProtectionValue(), ShieldConfig.NORMAL_SHIELD_PROTECTION);
+        Assert.assertEquals(player.getShield().getProtection(), 5 + ShieldConfig.NORMAL_SHIELD_PROTECTION);
+        Assert.assertEquals(player.getShield().getMaxProtectionValue(), ShieldConfig.ATOM_SHIELD_PROTECTION);
     }
 }

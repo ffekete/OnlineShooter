@@ -7,6 +7,7 @@ import java.util.Map;
 
 import factory.ShieldFactory;
 import factory.ShipFactory;
+import game.config.constant.Bonuses;
 import game.config.constant.CanvasConstants;
 import game.config.constant.GameConfig;
 import game.config.constant.SpawnableItemType;
@@ -44,7 +45,7 @@ public class PlayerData {
 
     private boolean isAI;
 
-    private Map<String, Integer> bonuses;
+    private Map<Bonuses, Long> bonuses;
 
     public PlayerData(PlayerData player2) {
         this.spaceShip = this.cloneSpaceShip(player2.getSpaceShip());
@@ -111,6 +112,7 @@ public class PlayerData {
         }
 
         Spawner.spawn(this.getSpaceShip());
+        this.resetBonuses();
         this.inactivityCounter = 0;
         this.getSpaceShip().resetHp();
         this.invulnerabilityCounter = GameConfig.INVULN_CTR_MAX_VALUE;
@@ -446,16 +448,21 @@ public class PlayerData {
         }
     }
 
-    public Map<String, Integer> getBonuses() {
+    private void initBonuses() {
+        this.bonuses = new HashMap<Bonuses, Long>();
+        this.resetBonuses();
+    }
+
+    private void resetBonuses() {
+        this.bonuses.put(Bonuses.DAMAGE, 0L);
+        this.bonuses.put(Bonuses.RATE_OF_FIRE, 0L);
+    }
+
+    public Map<Bonuses, Long> getBonuses() {
         return this.bonuses;
     }
 
-    private void initBonuses() {
-        Map<String, Integer> bonuses = new HashMap<String, Integer>();
-        this.setBonuses(bonuses);
-    }
-
-    private void setBonuses(Map<String, Integer> bonuses) {
-        this.bonuses = bonuses;
+    public void updateBonus(Bonuses bonus, long value) {
+        this.bonuses.put(bonus, value);
     }
 }

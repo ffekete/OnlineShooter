@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import factory.BulletBuilder;
+import game.config.constant.Bonuses;
 import game.datatype.PlayerData;
 import game.datatype.item.ItemParent;
 import game.interfaces.Bullet;
@@ -18,6 +19,8 @@ public abstract class WeaponParent extends ItemParent implements Weapon {
     @Override
     public void applyEffect(PlayerData player) {
         player.setWeapon(this);
+        this.increaseDamage(player.getBonuses().get(Bonuses.DAMAGE));
+        this.increaseRateOfFire(player.getBonuses().get(Bonuses.RATE_OF_FIRE));
     }
 
     @Override
@@ -100,12 +103,8 @@ public abstract class WeaponParent extends ItemParent implements Weapon {
     public List<Bullet> createBullet(PlayerData player) {
         ArrayList<Bullet> bulletsToCreate = new ArrayList<>();
 
-        bulletsToCreate.add(new BulletBuilder()
-                            .setCoordinate(player.getCoordinate())
-                            .setAngle(player.getShipAngle())
-                            .setPlayerId(player.getId())
-                            .setDamage(player.getWeapon().getDamage())
-                            .build());
+        bulletsToCreate.add(new BulletBuilder().setCoordinate(player.getCoordinate()).setAngle(player.getShipAngle())
+                .setPlayerId(player.getId()).setDamage(player.getWeapon().getDamage()).build());
 
         return bulletsToCreate;
     }

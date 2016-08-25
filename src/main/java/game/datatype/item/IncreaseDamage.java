@@ -1,5 +1,6 @@
 package game.datatype.item;
 
+import game.config.constant.Bonuses;
 import game.config.constant.SpawnableItemType;
 import game.datatype.PlayerData;
 import game.service.Spawner;
@@ -12,6 +13,7 @@ public class IncreaseDamage extends ItemParent {
 
     @Override
     public void applyEffect(PlayerData player) {
+        player.updateBonus(Bonuses.DAMAGE, 1L);
         player.getWeapon().increaseDamage(1L);
     }
 }
