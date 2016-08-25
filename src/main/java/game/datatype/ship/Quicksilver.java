@@ -9,7 +9,8 @@ public class Quicksilver extends ShipParent {
 
     public Quicksilver() {
         super.setCoordinate(new Point2D.Double(0, 0));
-        this.setHp(ShipConfig.QUICKSILVER_INIT_HP);
+        this.setHp(ShipConfig.QUICKSILVER_MAX_HP);
+        this.setMaxHp(ShipConfig.QUICKSILVER_MAX_HP);
         super.setSpeed(ShipConfig.QUICKSILVER_INIT_SPEED);
         super.setMaxSpeed(ShipConfig.QUICKSILVER_INIT_SPEED);
         super.setManeuverability(ShipConfig.QUICKSILVER_INIT_MANEUVERABILITY);
@@ -19,14 +20,14 @@ public class Quicksilver extends ShipParent {
     @Override
     public void setHp(long hp) {
         long hpToSet = hp;
-        if (hpToSet > ShipConfig.QUICKSILVER_INIT_HP)
-            hpToSet = ShipConfig.QUICKSILVER_INIT_HP;
+        if (hpToSet > ShipConfig.QUICKSILVER_MAX_HP)
+            hpToSet = ShipConfig.QUICKSILVER_MAX_HP;
         super.setHp(hpToSet);
     }
 
     @Override
     public void resetHp() {
-        this.setHp(ShipConfig.QUICKSILVER_INIT_HP);
+        this.setHp(ShipConfig.QUICKSILVER_MAX_HP);
     }
 
     @Override

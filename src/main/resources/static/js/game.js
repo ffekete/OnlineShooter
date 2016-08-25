@@ -90,7 +90,6 @@ function randomFloat (min, max)
  */
 function createExplosion(x, y, color)
 {
-	console.log("Creating explosion: " + x + " "  + y);
 	var minSize = 10;
 	var maxSize = 30;
 	var count = 10;
@@ -128,8 +127,6 @@ function createExplosion(x, y, color)
  */
 function createBasicExplosion(x, y)
 {
-	console.log("Creating basic explosion: " + x + " "  + y);
-	
 	// creating 4 particles that scatter at 0, 90, 180 and 270 degrees
 	for (var angle=0; angle<360; angle+=90)
 	{
@@ -186,7 +183,7 @@ function draw(){
 	
 	
 	if(playerData.respawnTime == 0){
-		drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.name, playerData.hp, playerData.invulnerable, playerData.shieldAmount, playerData.maxShieldAmount, playerData.color, playerData.shipType);
+		drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.name, playerData.hp, playerData.maxHp, playerData.invulnerable, playerData.shieldAmount, playerData.maxShieldAmount, playerData.color, playerData.shipType);
 	}
 	else
 	{
@@ -203,21 +200,20 @@ function draw(){
 			
 			var dx = playerData.x - actualShip.x;
 			var dy = playerData.y - actualShip.y;
-			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue, actualShip.color, actualShip.shipType);
+			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.maxHp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue, actualShip.color, actualShip.shipType);
 		}
 	}
 	drawBullets();
 	drawItems();
 	drawExplosions();
 	drawHighScores();
+	drawPlayerData();
 }
 
 function connect() {
 	var socket = new SockJS('/requestPlayerData_node' + playerData.connectionId);
 	stompClient = Stomp.over(socket);
 	stompClient.connect({}, function(frame) {
-		console.log('Connected: ' + frame);
-		
 		stompClient.subscribe('/providePlayerData_node' + playerData.connectionId, playerDataArrived);
 		stompClient.subscribe('/messages', messageArrived);
 		stompClient.subscribe('/events', eventArrived);
@@ -255,6 +251,7 @@ function playerDataArrived(playerDataFromServer){
 	playerData.x = JSON.parse(playerDataFromServer.body).x;
 	playerData.y = JSON.parse(playerDataFromServer.body).y;
 	playerData.hp = JSON.parse(playerDataFromServer.body).shipHp;
+	playerData.maxHp = JSON.parse(playerDataFromServer.body).shipMaxHp;
 	playerData.invulnerable = JSON.parse(playerDataFromServer.body).invulnerable;
 	playerData.itemsOnScreen = JSON.parse(playerDataFromServer.body).items;
 	playerData.score = JSON.parse(playerDataFromServer.body).score;
@@ -264,6 +261,7 @@ function playerDataArrived(playerDataFromServer){
 	playerData.respawnTime = JSON.parse(playerDataFromServer.body).respawnTime;
 	playerData.color = JSON.parse(playerDataFromServer.body).color;
 	playerData.shipType = JSON.parse(playerDataFromServer.body).shipType;
+	playerData.weapon = JSON.parse(playerDataFromServer.body).weapon;
 }
 
 function drawBorder(){
@@ -294,6 +292,17 @@ function drawHighScores(){
 		canvasContext.fillText(playerData.highScores[i], 10 ,y);
 		y+=10;
 	}
+}
+
+function drawPlayerData(){
+	canvasContext.fillText("Player details: ",150 ,15);
+	canvasContext.fillText("Ship type: " + playerData.shipType, 150 ,25);
+	canvasContext.fillText("HP: " + playerData.hp, 150, 35);
+	canvasContext.fillText("Shield amount: " + playerData.shieldAmount, 150, 45);
+	canvasContext.fillText("Weapon: " + playerData.weapon.name, 150, 55);
+	canvasContext.fillText("RoF: " + playerData.weapon.rateOfFire, 150, 65);
+	canvasContext.fillText("Ammo: " + playerData.weapon.ammo, 150, 75);
+	canvasContext.fillText("Damage: " + playerData.weapon.damage, 150, 85);
 }
 
 function drawBackground(){
@@ -386,7 +395,7 @@ function drawExplosion(x, y){
 	canvasContext.restore();
 }
 
-function drawShip(x, y, angle, name, hp, invulnerability, shield, maxShield, color, type){
+function drawShip(x, y, angle, name, hp, maxHp, invulnerability, shield, maxShield, color, type){
 	canvasContext.save();
 
 	canvasContext.fillStyle = "red";	
@@ -398,7 +407,7 @@ function drawShip(x, y, angle, name, hp, invulnerability, shield, maxShield, col
 	
 	
 	canvasContext.fillStyle = "green";
-	canvasContext.fillRect(-39,-10,5,hp);
+	canvasContext.fillRect(-39,-10,5,(21*hp/maxHp));
 	
 	if(invulnerability == false){
 		canvasContext.strokeStyle = "black";

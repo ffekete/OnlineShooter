@@ -11,7 +11,8 @@ public class CargoShip extends ShipParent {
 
     public CargoShip(List<SpawnableItem> carriage) {
         super.setCoordinate(new Point2D.Double(0, 0));
-        this.setHp(ShipConfig.CARGO_SHIP_INIT_HP);
+        this.setHp(ShipConfig.CARGO_SHIP_MAX_HP);
+        this.setMaxHp(ShipConfig.CARGO_SHIP_MAX_HP);
         super.setSpeed(ShipConfig.CARGO_SHIP_INIT_SPEED);
         super.setMaxSpeed(ShipConfig.CARGO_SHIP_INIT_SPEED);
         super.setManeuverability(ShipConfig.CARGO_SHIP_INIT_MANEUVERABILITY);
@@ -23,14 +24,14 @@ public class CargoShip extends ShipParent {
     @Override
     public void setHp(long hp) {
         long hpToSet = hp;
-        if (hpToSet > ShipConfig.CARGO_SHIP_INIT_HP)
-            hpToSet = ShipConfig.CARGO_SHIP_INIT_HP;
+        if (hpToSet > ShipConfig.CARGO_SHIP_MAX_HP)
+            hpToSet = ShipConfig.CARGO_SHIP_MAX_HP;
         super.setHp(hpToSet);
     }
 
     @Override
     public void resetHp() {
-        this.setHp(ShipConfig.CARGO_SHIP_INIT_HP);
+        this.setHp(ShipConfig.CARGO_SHIP_MAX_HP);
     }
 
     @Override
