@@ -41,14 +41,14 @@ public interface Ship extends Spawnable {
     public Weapon getWeapon();
 
     public void setWeapon(Weapon weapon);
-    
+
     public List<Weapon> getWeapons();
 
-	public void setWeapons(List<Weapon> weapons);
-	
-	public void addWeapon(Weapon weapon);
-	
-	public void selectWeapon(int index);
+    public void setWeapons(List<Weapon> weapons);
+
+    public void addWeapon(Weapon weapon);
+
+    public void selectWeapon(int index);
 
     public double getManeuverability();
 
@@ -87,4 +87,6 @@ public interface Ship extends Spawnable {
     public void setCarriage(List<SpawnableItem> carriage);
 
     public void addItemToCargo(SpawnableItem item);
+
+    public void resetCarriage();
 }

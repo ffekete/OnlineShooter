@@ -4,8 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import factory.WeaponFactory;
-import game.config.constant.ShipConfig;
+import factory.CarriageBuilder;
 import game.interfaces.Shield;
 import game.interfaces.Ship;
 import game.interfaces.SpawnableItem;
@@ -27,10 +26,10 @@ public abstract class ShipParent implements Ship {
     private double maneuverability;
     private List<SpawnableItem> carriage;
     private int maxCargoCapacity = 0;
-    
+
     public ShipParent() {
-    	this.coordinate = new Point2D.Double(0, 0);
-    	this.carriage = new ArrayList<SpawnableItem>();
+        this.coordinate = new Point2D.Double(0, 0);
+        this.carriage = new ArrayList<SpawnableItem>();
     }
 
     @Override
@@ -79,7 +78,7 @@ public abstract class ShipParent implements Ship {
 
     @Override
     public void initWeapons() {
-    	this.weapons = new ArrayList<Weapon>();
+        this.weapons = new ArrayList<Weapon>();
     }
 
     @Override
@@ -168,33 +167,33 @@ public abstract class ShipParent implements Ship {
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
-    
-    @Override
-    public List<Weapon> getWeapons() {
-		return weapons;
-	}
 
     @Override
-	public void setWeapons(List<Weapon> weapons) {
-		this.weapons = weapons;
-	}
-    
+    public List<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    @Override
+    public void setWeapons(List<Weapon> weapons) {
+        this.weapons = weapons;
+    }
+
     @Override
     public void addWeapon(Weapon weapon) {
-    	for (Weapon w : this.weapons) {
-    		if (w.getType() == weapon.getType()) {
-    			w.addAmmo(weapon.getAmmo());
-    			return;
-    		}
-    	}
-    	this.weapons.add(weapon);
+        for (Weapon w : this.weapons) {
+            if (w.getType() == weapon.getType()) {
+                w.addAmmo(weapon.getAmmo());
+                return;
+            }
+        }
+        this.weapons.add(weapon);
     }
-	
+
     @Override
-	public void selectWeapon(int index) {
-    	if (index >= 0 && index < this.weapons.size()) {
-    		this.weapon = this.weapons.get(index);
-    	}
+    public void selectWeapon(int index) {
+        if (index >= 0 && index < this.weapons.size()) {
+            this.weapon = this.weapons.get(index);
+        }
     }
 
     @Override
@@ -250,5 +249,10 @@ public abstract class ShipParent implements Ship {
         if (this.carriage.size() < this.maxCargoCapacity) {
             this.carriage.add(item);
         }
+    }
+
+    @Override
+    public void resetCarriage() {
+        this.setCarriage(CarriageBuilder.buildHalfCargo(this.maxCargoCapacity));
     }
 }

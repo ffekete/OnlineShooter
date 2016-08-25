@@ -114,9 +114,9 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                         if (player.getIsAI()) {
                             playerWhoKilledMe.increaseScore(GameConfig.AI_SCORE_VALUE);
                         } else {
-                        	/*
-                             * Save the killed player only if he/she has more than 0
-                             * points
+                            /*
+                             * Save the killed player only if he/she has more
+                             * than 0 points
                              */
                             if (player.getScore() > 0L) {
                                 highScores.addScore(new HighScore(player.getScore(), player.getName()));
@@ -124,7 +124,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                             playerWhoKilledMe.increaseScore(GameConfig.PLAYER_SCORE_VALUE);
                         }
                         highScores.addScore(new HighScore(playerWhoKilledMe.getScore(), playerWhoKilledMe.getName()));
-                        itemHandler.dropCargoToCoordinate(player.getSpaceShip().getCarriage(), player.getCoordinate());
+                        itemHandler.dropCargoToCoordinate(player.getSpaceShip(), player.getCoordinate());
                         player.kill();
                     } else {
                         eventSender.sendItemHitNotification(player.getSpaceShip());

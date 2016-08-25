@@ -14,6 +14,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import game.config.constant.GameConfig;
+import game.config.constant.ShipConfig;
+import game.datatype.PlayerData;
 import game.entrypoint.Application;
 import game.interfaces.SpawnableItem;
 
@@ -26,25 +28,30 @@ public class ItemHandlerTest extends AbstractTestNGSpringContextTests {
     @Autowired
     ItemHandler itemHandler;
 
+    PlayerData player;
+
     public List<SpawnableItem> carriage = new ArrayList<SpawnableItem>();
 
     @BeforeMethod
     public void initPool() {
+        player = new PlayerData(1L, "Test", ShipConfig.SHIP_TYPE_CARGOSHIP, true);
         itemPool.clear();
         carriage.clear();
         carriage.add(new ItemCreationHandler().createRandomItem());
+        player.getSpaceShip().setCarriage(carriage);
+
     }
 
     @Test
     public void shouldDropOneSpawnableitem() {
-        itemHandler.dropCargoToCoordinate(carriage, new Point2D.Double(0, 0));
+        itemHandler.dropCargoToCoordinate(player.getSpaceShip(), new Point2D.Double(0, 0));
 
         Assert.assertEquals(itemPool.poolSize(), 1);
     }
 
     @Test(dataProvider = "coordinatesData")
     public void droppedItemCoordinateShouldBetweenRange(double x, double y) {
-        itemHandler.dropCargoToCoordinate(carriage, new Point2D.Double(x, y));
+        itemHandler.dropCargoToCoordinate(player.getSpaceShip(), new Point2D.Double(x, y));
 
         Iterator<SpawnableItem> bit = itemPool.getIterator();
         while (bit.hasNext()) {

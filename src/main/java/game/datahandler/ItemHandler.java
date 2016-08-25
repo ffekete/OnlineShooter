@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import game.config.constant.GameConfig;
 import game.datatype.PlayerData;
 import game.interfaces.ItemPoolList;
+import game.interfaces.Ship;
 import game.interfaces.Spawnable;
 import game.interfaces.SpawnableItem;
 import game.util.RandomGenerator;
@@ -30,7 +31,8 @@ public class ItemHandler {
         return result;
     }
 
-    public void dropCargoToCoordinate(List<SpawnableItem> carriage, Point2D coordinate) {
+    public void dropCargoToCoordinate(Ship ship, Point2D coordinate) {
+        List<SpawnableItem> carriage = ship.getCarriage();
         for (SpawnableItem item : carriage) {
             Point2D itemDropCoordinate = new Point2D.Double();
             itemDropCoordinate.setLocation(
@@ -41,5 +43,6 @@ public class ItemHandler {
             item.setCoordinate(itemDropCoordinate);
             itemPool.add(item);
         }
+        ship.resetCarriage();
     }
 }
