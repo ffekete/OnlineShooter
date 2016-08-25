@@ -4,25 +4,26 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import game.config.constant.ItemConfig;
+import game.config.constant.SpawnableItemType;
 import game.datatype.PlayerData;
 
 public class IncreaseManeuverabilityTest {
 
     IncreaseManeuverability im = new IncreaseManeuverability();
-    
+
     @Test
-    public void testShouldCreateIncreaseManeuverability(){
-        Assert.assertEquals(im.getName(), "Maneuverability +1");
+    public void testShouldCreateIncreaseManeuverability() {
+        Assert.assertEquals(im.getName(), SpawnableItemType.INCREASE_MANEUVERABILITY.getVisibleName());
     }
-    
+
     @Test
-    public void testShouldIncreaseManeuverability(){
+    public void testShouldIncreaseManeuverability() {
         PlayerData player = new PlayerData(5L, "P01", "Quicksilver", false);
         double initIm = player.getManeuverability();
-        
+
         /* When */
         im.applyEffect(player);
-        
+
         /* Then */
         Assert.assertEquals(initIm, player.getManeuverability() + ItemConfig.MANEUVERABILITY_INCREASE_VALE);
     }

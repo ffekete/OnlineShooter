@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import game.config.constant.ShieldConfig;
+import game.config.constant.SpawnableItemType;
 import game.datatype.PlayerData;
 import game.datatype.shield.PlasmaShield;
 
@@ -13,7 +14,7 @@ public class PlasmaShieldTest {
     
     @Test
     public void testShouldCreateShield(){
-        Assert.assertEquals(ps.getName(), "Plasma shield");
+        Assert.assertEquals(ps.getName(), SpawnableItemType.PLASMA_SHIELD.getVisibleName());
     }
     
     @Test

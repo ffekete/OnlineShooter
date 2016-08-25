@@ -5,39 +5,39 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import game.config.constant.ShipConfig;
+import game.config.constant.SpawnableItemType;
 import game.datatype.PlayerData;
-import game.datatype.item.HealthPack;
 
 public class HealthPackTest {
 
     PlayerData player;
-    HealthPack hp = new HealthPack();    
-    
+    HealthPack hp = new HealthPack();
+
     @BeforeMethod
-    public void initFields(){
+    public void initFields() {
         player = new PlayerData(0L, "P01", "Interceptor", false);
     }
-    
+
     @Test
-    public void testCreateHealthPackShouldCreate(){
-        Assert.assertEquals(hp.getName(), "Health +5");
+    public void testCreateHealthPackShouldCreate() {
+        Assert.assertEquals(hp.getName(), SpawnableItemType.HEALTH_PACK.getVisibleName());
     }
-    
+
     @Test
-    public void testHealthpackShouldIncreasePlayerHpBy5(){
+    public void testHealthpackShouldIncreasePlayerHpBy5() {
         player.setHp(0L);
-        
+
         hp.applyEffect(player);
-        
-        Assert.assertEquals(player.getHp(), (Long)(5L));
+
+        Assert.assertEquals(player.getHp(), (Long) (5L));
     }
-    
+
     @Test
-    public void testHealthpackShouldNotIncreaseBeyondLimit(){
+    public void testHealthpackShouldNotIncreaseBeyondLimit() {
         player.setHp(ShipConfig.INTERCEPTOR_MAX_HP - 2);
 
         hp.applyEffect(player);
-        
-        Assert.assertEquals(player.getHp(), (Long)ShipConfig.INTERCEPTOR_MAX_HP);
+
+        Assert.assertEquals(player.getHp(), (Long) ShipConfig.INTERCEPTOR_MAX_HP);
     }
 }

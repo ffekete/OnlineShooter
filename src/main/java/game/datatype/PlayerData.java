@@ -1,7 +1,9 @@
 package game.datatype;
 
 import java.awt.geom.Point2D;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import factory.ShieldFactory;
 import factory.ShipFactory;
@@ -41,6 +43,8 @@ public class PlayerData {
     private long connectionId;
 
     private boolean isAI;
+
+    private Map<String, Integer> bonuses;
 
     public PlayerData(PlayerData player2) {
         this.spaceShip = this.cloneSpaceShip(player2.getSpaceShip());
@@ -90,6 +94,8 @@ public class PlayerData {
         this.setCanvas(new Canvas(0, 0, CanvasConstants.CANVAS_HEIGHT, CanvasConstants.CANVAS_WIDTH));
 
         this.setAIMovementTimer();
+
+        this.initBonuses();
     }
 
     public void updateCanvasProperties(long x, long y, long height, long width) {
@@ -438,5 +444,18 @@ public class PlayerData {
         if (isAI) {
             AIMovementTimerTask task = new AIMovementTimerTask(this);
         }
+    }
+
+    public Map<String, Integer> getBonuses() {
+        return this.bonuses;
+    }
+
+    private void initBonuses() {
+        Map<String, Integer> bonuses = new HashMap<String, Integer>();
+        this.setBonuses(bonuses);
+    }
+
+    private void setBonuses(Map<String, Integer> bonuses) {
+        this.bonuses = bonuses;
     }
 }

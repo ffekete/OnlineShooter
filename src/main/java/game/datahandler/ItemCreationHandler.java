@@ -20,20 +20,25 @@ public class ItemCreationHandler implements ItemCreation {
     public SpawnableItem createItem(SpawnableItemType type) {
         SpawnableItem item = null;
         switch (type) {
+        // weapons
         case GATLING_GUN:
             item = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.GATLING_GUN);
             break;
+        case LASER_CANNON:
+            item = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.LASER_CANNON);
+            break;
+        case DOUBLE_GATLING_GUN:
+            item = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.DOUBLE_GATLING);
+            break;
+        case SHOTGUN:
+            item = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.SHOTGUN);
+            break;
+        // power up-s
         case INCREASE_DAMAGE:
             item = (SpawnableItem) new IncreaseDamage();
             break;
-        case HEALTH_PACK:
-            item = (SpawnableItem) new HealthPack();
-            break;
         case INCRASE_RATE_OF_FIRE:
             item = (SpawnableItem) new IncreaseRateOfFire();
-            break;
-        case LASER_CANNON:
-            item = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.LASER_CANNON);
             break;
         case INCREASE_MANEUVERABILITY:
             item = (SpawnableItem) new IncreaseManeuverability();
@@ -41,20 +46,22 @@ public class ItemCreationHandler implements ItemCreation {
         case INCREASE_SPEED:
             item = (SpawnableItem) new IncreaseSpeed();
             break;
-        case INCREASE_SCORE:
-            item = (SpawnableItem) new IncreaseScore();
-            break;
-        case ATOM_SHIELD:
-            item = (SpawnableItem) ShieldFactory.createShield(ShieldId.ATOM_SHIELD);
+        // shields
+        case NORMAL_SHIELD:
+            item = (SpawnableItem) ShieldFactory.createShield(ShieldId.NORMAL_SHIELD);
             break;
         case PLASMA_SHIELD:
             item = (SpawnableItem) ShieldFactory.createShield(ShieldId.PLASMA_SHIELD);
             break;
-        case DOUBLE_GATLING_GUN:
-            item = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.DOUBLE_GATLING);
+        case ATOM_SHIELD:
+            item = (SpawnableItem) ShieldFactory.createShield(ShieldId.ATOM_SHIELD);
             break;
-        case SHOTGUN:
-            item = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.SHOTGUN);
+        // other
+        case HEALTH_PACK:
+            item = (SpawnableItem) new HealthPack();
+            break;
+        case INCREASE_SCORE:
+            item = (SpawnableItem) new IncreaseScore();
             break;
         }
         return item;
