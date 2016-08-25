@@ -2,14 +2,14 @@
 
 import java.util.List;
 
-import game.config.WeaponId;
+import game.config.constant.SpawnableItemType;
 import game.datatype.PlayerData;
 
 public interface Weapon {
 	
-	public WeaponId getType();
+	public SpawnableItemType getType();
 	
-	public void setType(WeaponId type);
+	public void setType(SpawnableItemType type);
 	
     public long getDamage();
 
