@@ -463,6 +463,6 @@ public class PlayerData {
     }
 
     public void updateBonus(Bonuses bonus, long value) {
-        this.bonuses.put(bonus, value);
+        this.bonuses.put(bonus, this.bonuses.get(bonus) + value);
     }
 }
