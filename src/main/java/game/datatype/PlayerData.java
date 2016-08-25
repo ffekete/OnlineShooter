@@ -7,9 +7,9 @@ import java.util.Map;
 
 import factory.ShieldFactory;
 import factory.ShipFactory;
-import game.config.ShieldId;
 import game.config.constant.CanvasConstants;
 import game.config.constant.GameConfig;
+import game.config.constant.SpawnableItemType;
 import game.interfaces.Bullet;
 import game.interfaces.Shield;
 import game.interfaces.Ship;
@@ -89,7 +89,7 @@ public class PlayerData {
         this.getSpaceShip().resetManeuverability();
         this.getSpaceShip().resetSpeed();
         this.score = 0l;
-        this.getSpaceShip().setShield(ShieldFactory.createShield(ShieldId.NORMAL_SHIELD));
+        this.getSpaceShip().setShield(ShieldFactory.createShield(SpawnableItemType.NORMAL_SHIELD));
         this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
         this.setCanvas(new Canvas(0, 0, CanvasConstants.CANVAS_HEIGHT, CanvasConstants.CANVAS_WIDTH));
 
@@ -118,7 +118,7 @@ public class PlayerData {
         this.getSpaceShip().resetManeuverability();
         this.getSpaceShip().resetSpeed();
         this.score = 0l;
-        this.getSpaceShip().setShield(ShieldFactory.createShield(ShieldId.NORMAL_SHIELD));
+        this.getSpaceShip().setShield(ShieldFactory.createShield(SpawnableItemType.NORMAL_SHIELD));
         this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
     }
 

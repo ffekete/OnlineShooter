@@ -2,8 +2,6 @@ package game.datahandler;
 
 import factory.ShieldFactory;
 import factory.WeaponFactory;
-import game.config.ShieldId;
-import game.config.WeaponId;
 import game.config.constant.SpawnableItemType;
 import game.datatype.item.HealthPack;
 import game.datatype.item.IncreaseDamage;
@@ -22,16 +20,16 @@ public class ItemCreationHandler implements ItemCreation {
         switch (type) {
         // weapons
         case GATLING_GUN:
-            item = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.GATLING_GUN);
+            item = (SpawnableItem) WeaponFactory.createWeapon(SpawnableItemType.GATLING_GUN);
             break;
         case LASER_CANNON:
-            item = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.LASER_CANNON);
+            item = (SpawnableItem) WeaponFactory.createWeapon(SpawnableItemType.LASER_CANNON);
             break;
         case DOUBLE_GATLING_GUN:
-            item = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.DOUBLE_GATLING);
+            item = (SpawnableItem) WeaponFactory.createWeapon(SpawnableItemType.DOUBLE_GATLING_GUN);
             break;
         case SHOTGUN:
-            item = (SpawnableItem) WeaponFactory.createWeapon(WeaponId.SHOTGUN);
+            item = (SpawnableItem) WeaponFactory.createWeapon(SpawnableItemType.SHOTGUN);
             break;
         // power up-s
         case INCREASE_DAMAGE:
@@ -48,13 +46,13 @@ public class ItemCreationHandler implements ItemCreation {
             break;
         // shields
         case NORMAL_SHIELD:
-            item = (SpawnableItem) ShieldFactory.createShield(ShieldId.NORMAL_SHIELD);
+            item = (SpawnableItem) ShieldFactory.createShield(SpawnableItemType.NORMAL_SHIELD);
             break;
         case PLASMA_SHIELD:
-            item = (SpawnableItem) ShieldFactory.createShield(ShieldId.PLASMA_SHIELD);
+            item = (SpawnableItem) ShieldFactory.createShield(SpawnableItemType.PLASMA_SHIELD);
             break;
         case ATOM_SHIELD:
-            item = (SpawnableItem) ShieldFactory.createShield(ShieldId.ATOM_SHIELD);
+            item = (SpawnableItem) ShieldFactory.createShield(SpawnableItemType.ATOM_SHIELD);
             break;
         // other
         case HEALTH_PACK:

@@ -51,7 +51,7 @@ public class ItemCreationHandlerTest {
 	public void testItemCreation(SpawnableItemType type, Class<? extends SpawnableItem> clazz) {
 		// when
 		SpawnableItem result = itemCreationHandler.createItem(type);
-		
+		System.out.println(result.getClass());
 		// then
 		Assert.assertTrue(result.getClass() == clazz);
 	}
