@@ -13,6 +13,7 @@ import game.config.constant.CanvasConstants;
 import game.config.constant.GameConfig;
 import game.config.constant.ItemType;
 import game.config.constant.ShipConfig;
+import game.interfaces.Ammo;
 import game.interfaces.Shield;
 import game.interfaces.Ship;
 import game.interfaces.Weapon;

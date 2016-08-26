@@ -27,4 +27,7 @@ public class AmmoConfig {
     public static final double HEAT_SEEKING_MISSILE_INIT_AGE = 200.0;
     public static final double HEAT_SEEKING_MISSILE_INIT_SPEED = 5.0;
     public static final double HEAT_SEEKING_MISSILE_INIT_HIT_RADIUS = 50.0;
+    
+	public static final double NO_AMMO_INIT_DAMAGE = 0.0;
+	public static final double NO_AMMO_DAMAGE_BONUS = 0.0;
 }

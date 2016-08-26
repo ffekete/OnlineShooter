@@ -79,9 +79,6 @@ public class AmmoPool implements AmmoPoolList<Ammo> {
         }
         player.startShootingRateCooldownEffect();
         player.decreasAmmoForPlayerWeapon();
-        if (player.getActualWeaponAmmoCount() == 0L) {
-            player.initWeapons();
-        }
     }
 
     @Override

@@ -23,13 +23,13 @@ public class AmmoPoolTest extends AbstractTestNGSpringContextTests {
     PlayerPoolMap<Long, PlayerData> pp;
 
     @Autowired
-    AmmoPoolList<Ammo> bp;
+    AmmoPoolList<Ammo> ap;
 
     PlayerData player;
 
     @BeforeMethod
     public void initBulletPool() {
-        bp.clear();
+        ap.clear();
         AIDao aiDao = new AIDao();
         aiDao.setIsAi(false);
         aiDao.setIsAsteroid(false);
@@ -51,11 +51,11 @@ public class AmmoPoolTest extends AbstractTestNGSpringContextTests {
         pp.put(300L, player2);
 
         // when
-        bp.addAmmo(player.getId());
-        bp.addAmmo(player2.getId());
+        ap.addAmmo(player.getId());
+        ap.addAmmo(player2.getId());
 
         // then
-        Assert.assertEquals(bp.poolSize(), 2);
+        Assert.assertEquals(ap.poolSize(), 2);
     }
 
     @Test
@@ -67,11 +67,11 @@ public class AmmoPoolTest extends AbstractTestNGSpringContextTests {
         pp.put(200L, player);
 
         // when
-        bp.addAmmo(player.getId());
-        bp.addAmmo(player.getId());
+        ap.addAmmo(player.getId());
+        ap.addAmmo(player.getId());
 
         // then
-        Assert.assertEquals(bp.poolSize(), 1);
+        Assert.assertEquals(ap.poolSize(), 1);
     }
 
     @Test
@@ -83,10 +83,10 @@ public class AmmoPoolTest extends AbstractTestNGSpringContextTests {
         pp.put(200L, player);
 
         // when
-        bp.addAmmo(player.getId());
+        ap.addAmmo(player.getId());
 
         // then
-        Assert.assertEquals(bp.poolSize(), 1);
+        Assert.assertEquals(ap.poolSize(), 1);
     }
 
     @Test
@@ -97,16 +97,16 @@ public class AmmoPoolTest extends AbstractTestNGSpringContextTests {
                                             // bullet
         pp.put(10L, player);
 
-        bp.addAmmo(10L);
-        Assert.assertEquals(bp.poolSize(), 1);
+        ap.addAmmo(10L);
+        Assert.assertEquals(ap.poolSize(), 1);
 
         // get rid of waiting for player to be able to shoot again
         player.getWeapon().decreaseCooldownValue(player.getWeapon().getCooldown());
 
-        bp.addAmmo(10L);
-        Assert.assertEquals(bp.poolSize(), 2);
+        ap.addAmmo(10L);
+        Assert.assertEquals(ap.poolSize(), 2);
 
-        bp.clear();
-        Assert.assertEquals(bp.poolSize(), 0);
+        ap.clear();
+        Assert.assertEquals(ap.poolSize(), 0);
     }
 }

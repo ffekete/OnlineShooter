@@ -2,7 +2,7 @@ package game.config.constant;
 
 public enum ShipConfig {
     QUICKSILVER("Quicksilver", 15L, 6.0D, 6.0D, 10.0D, ItemType.SHOTGUN, 0),
-    MERCURY("Merqury", 25L, 5.0D, 5.0D, 12.0D, ItemType.GATLING_GUN, 0),
+    MERCURY("Mercury", 25L, 5.0D, 5.0D, 12.0D, ItemType.GATLING_GUN, 0),
     INTERCEPTOR("Interceptor", 20L, 7.0D, 7.0D, 14.0D, ItemType.LASER_CANNON, 0),
     DELTAWING("Deltawing", 11L, 9.0D, 9.0D, 16.0D, ItemType.DOUBLE_GATLING_GUN, 0),
     CARGOSHIP("Cargoship", 40L, 3.0D, 3.0D, 16.0D, ItemType.NO_WEAPON, 10),

@@ -61,6 +61,8 @@ public class ItemCreationHandler implements ItemCreation {
         case INCREASE_SCORE:
             item = (SpawnableItem) new IncreaseScore();
             break;
+		default:
+			break;
         }
         return item;
     }

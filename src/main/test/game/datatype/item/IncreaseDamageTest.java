@@ -15,11 +15,6 @@ public class IncreaseDamageTest {
     
     PlayerData player;
 
-    @BeforeMethod
-    public void initPlayer() {
-    	player = new PlayerData(1L, "P01", "Deltawing", false);
-    }
-
     @Test
     public void testShouldCreateInitDamage() {
         Assert.assertEquals(id.getName(), ItemType.INCREASE_DAMAGE.getVisibleName());
