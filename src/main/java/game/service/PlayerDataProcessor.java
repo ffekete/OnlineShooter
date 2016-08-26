@@ -240,12 +240,14 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                 player1.setShieldProtection(0L);
                 if (player1.decreaseHp(Physics.COLLISION_STRENGTH) < 0L) {
                     eventSender.sendItemDestroyedNotification(player1.getSpaceShip());
+                    itemHandler.dropCargoToCoordinate(player1.getSpaceShip(), player1.getCoordinate());
                     player1.kill();
 
                 }
                 player2.setShieldProtection(0L);
                 if (player2.decreaseHp(Physics.COLLISION_STRENGTH) < 1L) {
                     eventSender.sendItemDestroyedNotification(player2.getSpaceShip());
+                    itemHandler.dropCargoToCoordinate(player2.getSpaceShip(), player2.getCoordinate());
                     player2.kill();
                 }
             }
