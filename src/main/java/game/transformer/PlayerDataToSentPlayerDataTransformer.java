@@ -52,7 +52,7 @@ public class PlayerDataToSentPlayerDataTransformer {
         sentPlayerData.setMaxShieldAmount(playerData.getShield().getMaxProtectionValue());
         sentPlayerData.setRespawnTime(playerData.getRespawnTime());
         sentPlayerData.setColor(playerData.getColor());
-        sentPlayerData.setShipType(playerData.getShipType());
+        sentPlayerData.setShipType(playerData.getShipConfig().getType());
         sentPlayerData.setIsAI(playerData.getIsAI());
         sentPlayerData.setIsAsteroid(playerData.getIsAsteroid());
         return sentPlayerData;

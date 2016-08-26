@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import game.config.constant.ItemConfig;
 import game.config.constant.ItemType;
+import game.config.constant.ShipConfig;
 import game.datatype.AIDao;
 import game.datatype.PlayerData;
 
@@ -22,7 +23,7 @@ public class IncreaseManeuverabilityTest {
         AIDao aiDao = new AIDao();
         aiDao.setIsAi(false);
         aiDao.setIsAsteroid(false);
-        PlayerData player = new PlayerData(5L, "P01", "Quicksilver", aiDao);
+        PlayerData player = new PlayerData(5L, "P01", ShipConfig.QUICKSILVER, aiDao);
         double initIm = player.getManeuverability();
 
         /* When */

@@ -9,42 +9,41 @@ public class Mercury extends ShipParent {
 
     public Mercury() {
         super.setCoordinate(new Point2D.Double(0, 0));
-        this.setHp(ShipConfig.MERCURY_MAX_HP);
-        this.setMaxHp(ShipConfig.MERCURY_MAX_HP);
-        super.setSpeed(ShipConfig.MERCURY_INIT_SPEED);
-        super.setMaxSpeed(ShipConfig.MERCURY_INIT_SPEED);
-        super.setManeuverability(ShipConfig.MERCURY_INIT_MANEUVERABILITY);
-        super.setShipType(ShipConfig.SHIP_TYPE_MERCURY);
+        super.setShipConfig(ShipConfig.MERCURY);
+        this.resetSpeed();
+        this.resetManeuverability();
+        this.resetHp();
+        this.setMaxHp(ShipConfig.MERCURY.getMaxHP());
     }
 
     @Override
     public void setHp(long hp) {
         long hpToSet = hp;
-        if (hpToSet > ShipConfig.MERCURY_MAX_HP)
-            hpToSet = ShipConfig.MERCURY_MAX_HP;
+        if (hpToSet > ShipConfig.MERCURY.getMaxHP())
+            hpToSet = ShipConfig.MERCURY.getMaxHP();
         super.setHp(hpToSet);
     }
 
     @Override
     public void resetHp() {
-        this.setHp(ShipConfig.MERCURY_MAX_HP);
+        this.setHp(ShipConfig.MERCURY.getMaxHP());
     }
 
     @Override
     public void resetManeuverability() {
-        super.setManeuverability(ShipConfig.MERCURY_INIT_MANEUVERABILITY);
+        super.setManeuverability(ShipConfig.MERCURY.getInitManeuverability());
     }
 
     @Override
     public void resetSpeed() {
-        super.setSpeed(ShipConfig.MERCURY_INIT_SPEED);
-        super.setMaxSpeed(ShipConfig.MERCURY_INIT_SPEED);
+        super.setSpeed(ShipConfig.MERCURY.getInitMaxSpeed());
+        super.setMaxSpeed(ShipConfig.MERCURY.getInitMaxSpeed());
     }
 
     @Override
     public void initWeapons() {
-    	super.initWeapons();
-        super.addWeapon(WeaponFactory.createWeapon(ShipConfig.MERCURY_INIT_WEAPON));
+        super.initWeapons();
+        super.addWeapon(WeaponFactory.createWeapon(ShipConfig.MERCURY.getInitWeapon()));
         super.selectWeapon(0);
     }
 

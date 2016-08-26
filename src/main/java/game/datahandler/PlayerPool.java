@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import game.config.constant.ConnectionPreferences;
+import game.config.constant.ShipConfig;
 import game.connection.ConnectionPool;
 import game.datatype.HighScore;
 import game.datatype.PlayerData;
@@ -67,7 +68,7 @@ public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
             if (connectionId != null) {
                 newPlayerData.setConnectionId(connectionId);
                 newPlayerData.setColor(data.getColor());
-                newPlayerData.setShipType(data.getShipType());
+                newPlayerData.setShipConfig(ShipConfig.getSpecificConfig(data.getShipType()));
                 newPlayerData.setIsAI(data.getIsAI());
                 newPlayerData.setIsAsteroid(data.getIsAsteroid());
                 this.put(id, newPlayerData);

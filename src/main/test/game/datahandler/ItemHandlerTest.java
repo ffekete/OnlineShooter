@@ -38,7 +38,7 @@ public class ItemHandlerTest extends AbstractTestNGSpringContextTests {
         AIDao aiDao = new AIDao();
         aiDao.setIsAi(true);
         aiDao.setIsAsteroid(false);
-        player = new PlayerData(1L, "Test", ShipConfig.SHIP_TYPE_CARGOSHIP, aiDao);
+        player = new PlayerData(1L, "Test", ShipConfig.CARGOSHIP, aiDao);
         itemPool.clear();
         carriage.clear();
         carriage.add(new ItemCreationHandler().createRandomItem());

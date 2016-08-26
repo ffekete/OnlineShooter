@@ -4,8 +4,9 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import game.config.constant.ShieldConfig;
 import game.config.constant.ItemType;
+import game.config.constant.ShieldConfig;
+import game.config.constant.ShipConfig;
 import game.datatype.AIDao;
 import game.datatype.PlayerData;
 
@@ -16,11 +17,14 @@ public class NormalShieldTest {
 
     public AIDao aiDao;
 
+    public PlayerData player;
+
     @BeforeMethod
     public void init() {
         aiDao = new AIDao();
         aiDao.setIsAi(false);
         aiDao.setIsAsteroid(false);
+        player = new PlayerData(0L, "P05", ShipConfig.INTERCEPTOR, aiDao);
     }
 
     @Test
@@ -30,9 +34,6 @@ public class NormalShieldTest {
 
     @Test
     public void testShouldIncreaseShield() {
-
-        PlayerData player = new PlayerData(0L, "P05", "Interceptor", aiDao);
-
         long initProtection = player.getShield().getProtection();
         long initMaxProtection = player.getShield().getMaxProtectionValue();
         Assert.assertEquals(initProtection, ShieldConfig.NORMAL_SHIELD_PROTECTION);
@@ -45,8 +46,6 @@ public class NormalShieldTest {
 
     @Test
     public void testShouldIncreaseShieldAndPowerUp() {
-        PlayerData player = new PlayerData(0L, "P05", "Interceptor", aiDao);
-
         long initProtection = player.getShield().getProtection();
         long initMaxProtection = player.getShield().getMaxProtectionValue();
         Assert.assertEquals(initProtection, ShieldConfig.NORMAL_SHIELD_PROTECTION);

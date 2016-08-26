@@ -2,6 +2,7 @@ package game.transformer;
 
 import org.springframework.stereotype.Component;
 
+import game.config.constant.ShipConfig;
 import game.datatype.AIDao;
 import game.datatype.PlayerData;
 import game.datatype.RegistrationData;
@@ -13,6 +14,6 @@ public class RegistrationDataToPlayerDataTransformer {
         AIDao aiDao = new AIDao();
         aiDao.setIsAi(data.getIsAI());
         aiDao.setIsAsteroid(data.getIsAsteroid());
-        return new PlayerData(newPlayerId, data.getName(), data.getShipType(), aiDao);
+        return new PlayerData(newPlayerId, data.getName(), ShipConfig.getSpecificConfig(data.getShipType()), aiDao);
     }
 }
