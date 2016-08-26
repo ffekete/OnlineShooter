@@ -20,7 +20,7 @@ public class BulletDataProcessor implements BulletDataProcessorInterface {
     private CoordinateHandler coordinateHandler;
 
     private void updateBulletCoordinates(Bullet bullet) {
-        bullet.setCoordinate(coordinateHandler.calculateItemCoordinates(bullet, GameConfig.BULLET_INITIAL_SPEED));
+        bullet.setCoordinate(coordinateHandler.calculateItemCoordinates(bullet, GameConfig.BULLET_INITIAL_SPEED, null));
     }
 
     private void processAgeCounter(Bullet bullet) {

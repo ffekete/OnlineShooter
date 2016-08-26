@@ -127,7 +127,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                             playerWhoKilledMe.increaseScore(GameConfig.PLAYER_SCORE_VALUE);
                         }
                         highScores.addScore(new HighScore(playerWhoKilledMe.getScore(), playerWhoKilledMe.getName()));
-                        itemHandler.dropCargoToCoordinate(player.getSpaceShip(), player.getCoordinate());
+                        itemHandler.dropCargoToCoordinate(player.getSpaceShip());
                         player.kill();
                     } else {
                         eventSender.sendItemHitNotification(player.getSpaceShip());
@@ -240,14 +240,14 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                 player1.setShieldProtection(0L);
                 if (player1.decreaseHp(Physics.COLLISION_STRENGTH) < 0L) {
                     eventSender.sendItemDestroyedNotification(player1.getSpaceShip());
-                    itemHandler.dropCargoToCoordinate(player1.getSpaceShip(), player1.getCoordinate());
+                    itemHandler.dropCargoToCoordinate(player1.getSpaceShip());
                     player1.kill();
 
                 }
                 player2.setShieldProtection(0L);
                 if (player2.decreaseHp(Physics.COLLISION_STRENGTH) < 1L) {
                     eventSender.sendItemDestroyedNotification(player2.getSpaceShip());
-                    itemHandler.dropCargoToCoordinate(player2.getSpaceShip(), player2.getCoordinate());
+                    itemHandler.dropCargoToCoordinate(player2.getSpaceShip());
                     player2.kill();
                 }
             }
@@ -258,6 +258,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
      * Updates a given players coordinate.
      */
     private void updatePlayerCoordinates(PlayerData player) {
-        player.setCoordinate(coordinateHandler.calculateItemCoordinates(player.getSpaceShip(), player.getSpeed()));
+        player.setCoordinate(
+                coordinateHandler.calculateItemCoordinates(player.getSpaceShip(), player.getSpeed(), null));
     }
 }
