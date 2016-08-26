@@ -14,8 +14,8 @@ import game.datahandler.HighScoreTable;
 import game.datahandler.ItemHandler;
 import game.datatype.HighScore;
 import game.datatype.PlayerData;
-import game.interfaces.Bullet;
-import game.interfaces.BulletPoolList;
+import game.interfaces.Ammo;
+import game.interfaces.AmmoPoolList;
 import game.interfaces.ItemPoolList;
 import game.interfaces.PlayerDataProcessorInterface;
 import game.interfaces.PlayerPoolMap;
@@ -29,7 +29,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
     private PlayerPoolMap<Long, PlayerData> playerPool;
 
     @Autowired
-    private BulletPoolList<Bullet> bulletPool;
+    private AmmoPoolList<Ammo> bulletPool;
 
     @Autowired
     private ItemPoolList<SpawnableItem> itemPool;
@@ -86,9 +86,9 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
     }
 
     private void checkBulletHits(PlayerData player) {
-        CopyOnWriteArrayList<Bullet> bullets = (CopyOnWriteArrayList<Bullet>) bulletPool.getAllOnScreen(player.getId());
+        CopyOnWriteArrayList<Ammo> bullets = (CopyOnWriteArrayList<Ammo>) bulletPool.getAllOnScreen(player.getId());
 
-        Iterator<Bullet> bulletIterator = bullets.iterator();
+        Iterator<Ammo> bulletIterator = bullets.iterator();
 
         // true, if player is not invulnerable
         if (player.getInvulnerabilityCounter() < 1L == false) {
@@ -97,7 +97,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
         }
 
         while (bulletIterator.hasNext()) {
-            Bullet actualBullet = bulletIterator.next();
+            Ammo actualBullet = bulletIterator.next();
 
             // the player who shot the bullet cannot hit itself
             if (actualBullet.getPlayerId() != player.getId()) {
@@ -183,7 +183,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                 checkBulletHits(player);
                 checkIfPlayerGetsAnItem(player);
                 player.decreaseInvulnerabilityCounter(1L);
-                player.getWeapon().decreaseRateOfFireCooldownValue(1L);
+                player.getWeapon().decreaseCooldownValue(1L);
                 if (taskScheduler.getTimer() == 0) {
                     // increases shield value in every 5th loop
                     player.increaseShieldPower();

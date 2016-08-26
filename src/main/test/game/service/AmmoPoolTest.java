@@ -11,18 +11,18 @@ import game.config.constant.ShipConfig;
 import game.datatype.PlayerData;
 import game.datatype.weapon.GatlingGun;
 import game.entrypoint.Application;
-import game.interfaces.Bullet;
-import game.interfaces.BulletPoolList;
+import game.interfaces.Ammo;
+import game.interfaces.AmmoPoolList;
 import game.interfaces.PlayerPoolMap;
 
 @ContextConfiguration(classes = { Application.class })
-public class BulletPoolTest extends AbstractTestNGSpringContextTests {
+public class AmmoPoolTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     PlayerPoolMap<Long, PlayerData> pp;
 
     @Autowired
-    BulletPoolList<Bullet> bp;
+    AmmoPoolList<Ammo> bp;
 
     PlayerData player;
 
@@ -44,29 +44,11 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests {
         pp.put(300L, player2);
 
         // when
-        bp.addBullet(player.getId());
-        bp.addBullet(player2.getId());
+        bp.addAmmo(player.getId());
+        bp.addAmmo(player2.getId());
 
         // then
         Assert.assertEquals(bp.poolSize(), 2);
-    }
-
-    @Test
-    public void testShouldCreateOneBullet_OutOfAmmo() {
-        // given
-        GatlingGun modifiedGatlingGun = new GatlingGun();
-        modifiedGatlingGun.setAmmo(0);
-
-        player.setWeapon(modifiedGatlingGun); // setting this weapon for player
-                                              // ship because it will create one
-                                              // bullet
-        pp.put(200L, player);
-
-        // when
-        bp.addBullet(player.getId());
-
-        // then
-        Assert.assertEquals(bp.poolSize(), 0);
     }
 
     @Test
@@ -78,8 +60,8 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests {
         pp.put(200L, player);
 
         // when
-        bp.addBullet(player.getId());
-        bp.addBullet(player.getId());
+        bp.addAmmo(player.getId());
+        bp.addAmmo(player.getId());
 
         // then
         Assert.assertEquals(bp.poolSize(), 1);
@@ -94,7 +76,7 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests {
         pp.put(200L, player);
 
         // when
-        bp.addBullet(player.getId());
+        bp.addAmmo(player.getId());
 
         // then
         Assert.assertEquals(bp.poolSize(), 1);
@@ -108,13 +90,13 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests {
                                             // bullet
         pp.put(10L, player);
 
-        bp.addBullet(10L);
+        bp.addAmmo(10L);
         Assert.assertEquals(bp.poolSize(), 1);
 
         // get rid of waiting for player to be able to shoot again
-        player.getWeapon().decreaseRateOfFireCooldownValue(player.getWeapon().getRateOfFireCooldown());
+        player.getWeapon().decreaseCooldownValue(player.getWeapon().getCooldown());
 
-        bp.addBullet(10L);
+        bp.addAmmo(10L);
         Assert.assertEquals(bp.poolSize(), 2);
 
         bp.clear();

@@ -7,11 +7,12 @@ import java.util.Map;
 
 import factory.ShieldFactory;
 import factory.ShipFactory;
+import game.config.constant.AmmoType;
 import game.config.constant.Bonuses;
 import game.config.constant.CanvasConstants;
 import game.config.constant.GameConfig;
 import game.config.constant.SpawnableItemType;
-import game.interfaces.Bullet;
+import game.interfaces.Ammo;
 import game.interfaces.Shield;
 import game.interfaces.Ship;
 import game.interfaces.Weapon;
@@ -124,24 +125,24 @@ public class PlayerData {
         this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
     }
 
-    public long getActualWeaponAmmo() {
-        return getWeapon().getAmmo();
+    public long getActualWeaponAmmoCount() {
+        return this.getSpaceShip().getActualAmmoCount();
     }
 
-    public void decreasAmmoForPlayerWeapon(long amount) {
-        getWeapon().decreaseAmmo(amount);
+    public void decreasAmmoForPlayerWeapon() {
+    	this.getSpaceShip().decreaseAmmoCount();
     }
 
     public void startShootingRateCooldownEffect() {
-        getWeapon().startShootingRateCooldownEffect();
+        getWeapon().startCooldownEffect();
     }
 
-    public List<Bullet> createBulletWithPlayerWeapon() {
-        return getWeapon().createBullet(this);
+    public List<Ammo> createAmmoWithPlayerWeapon() {
+        return getWeapon().createAmmo(this);
     }
 
     public boolean canShootWeapon() {
-        return getWeapon().canShoot();
+        return getSpaceShip().canShoot();
     }
 
     public double getScreenHalfWidth() {
@@ -171,7 +172,7 @@ public class PlayerData {
     }
 
     public void initWeapons() {
-        this.getSpaceShip().initWeapons();
+        this.getSpaceShip().initWeaponsAndAmmo();
     }
 
     public void decreasePlayerRespawnTime() {
@@ -187,8 +188,8 @@ public class PlayerData {
         getShield().increaseShieldPower();
     }
 
-    public long decreaseHp(long value) {
-        long hpRemaining = getSpaceShip().decreaseHp(value);
+    public double decreaseHp(double value) {
+        double hpRemaining = getSpaceShip().decreaseHp(value);
 
         return hpRemaining;
     }
@@ -388,6 +389,7 @@ public class PlayerData {
     }
     
     public void addWeapon(Weapon weapon) {
+    	weapon.applyBonuses(this);
     	this.getSpaceShip().addWeapon(weapon);
     }
     
@@ -469,8 +471,16 @@ public class PlayerData {
     public Map<Bonuses, Long> getBonuses() {
         return this.bonuses;
     }
+    
+    public long getDamageBonus() {
+    	return this.bonuses.get(Bonuses.DAMAGE);
+    }
+    
+    public long getRateOfFireBonus() {
+    	return this.bonuses.get(Bonuses.RATE_OF_FIRE);
+    }
 
-    public void updateBonus(Bonuses bonus, long value) {
+    public void increaseBonus(Bonuses bonus, long value) {
         this.bonuses.put(bonus, this.bonuses.get(bonus) + value);
     }
 }

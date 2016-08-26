@@ -42,8 +42,8 @@ public class Quicksilver extends ShipParent {
     }
 
     @Override
-    public void initWeapons() {
-    	super.initWeapons();
+    public void initWeaponsAndAmmo() {
+    	super.initWeaponsAndAmmo();
         super.addWeapon(WeaponFactory.createWeapon(ShipConfig.QUICKSILVER_INIT_WEAPON));
         super.selectWeapon(0);
     }

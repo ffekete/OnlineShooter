@@ -11,10 +11,12 @@ import game.datatype.item.IncreaseDamage;
 public class IncreaseDamageTest {
 
     IncreaseDamage id = new IncreaseDamage();
+    
+    PlayerData player;
 
     @BeforeMethod
     public void initPlayer() {
-
+    	player = new PlayerData(1L, "P01", "Deltawing", false);
     }
 
     @Test
@@ -24,15 +26,11 @@ public class IncreaseDamageTest {
 
     @Test
     public void testIncreaseDamageShouldIncreaseDamage() {
-        PlayerData player = new PlayerData(1L, "P01", "Deltawing", false);
-
-        /* Given */
-        long initDamage = player.getWeapon().getDamage();
 
         /* When */
         id.applyEffect(player);
 
         /* Then */
-        Assert.assertEquals(player.getWeapon().getDamage(), initDamage + 1L);
+        Assert.assertEquals(player.getWeapon().getDamage(), player.getWeapon().getAmmoType().getDamage(1));
     }
 }

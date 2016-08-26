@@ -13,7 +13,6 @@ public class WeaponSelectHandler {
 	
 	@Autowired
     PlayerPool playerPool;
-    
 
 	@MessageMapping(EndpointPaths.SELECT_WEAPON)
     public void handleSelectWeaponRequest(ReceivedPlayerData playerData){

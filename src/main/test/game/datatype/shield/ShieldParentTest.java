@@ -18,9 +18,9 @@ public class ShieldParentTest {
         
         as.applyEffect(player);
 
-        player.getShield().decreaseProtection(10L);
+        player.getShield().decreaseProtection(10.0);
         
-        Assert.assertEquals(player.getShield().getProtection(), ShieldConfig.ATOM_SHIELD_PROTECTION - 10L);
+        Assert.assertEquals((long)player.getShield().getProtection(), (long)ShieldConfig.ATOM_SHIELD_PROTECTION - 10L);
     }
     
     @Test
@@ -31,9 +31,9 @@ public class ShieldParentTest {
         
         ps.applyEffect(player);
 
-        player.getShield().decreaseProtection(10L);
+        player.getShield().decreaseProtection(10.0);
         
-        Assert.assertEquals(player.getShield().getProtection(), ShieldConfig.PLASMA_SHIELD_PROTECTION - 10L);
+        Assert.assertEquals((long)player.getShield().getProtection(), (long)ShieldConfig.PLASMA_SHIELD_PROTECTION - 10L);
     }
     
     @Test
@@ -44,9 +44,9 @@ public class ShieldParentTest {
         
         ns.applyEffect(player);
 
-        player.getShield().decreaseProtection(10L);
+        player.getShield().decreaseProtection(10.0);
         
-        Assert.assertEquals(player.getShield().getProtection(), ShieldConfig.NORMAL_SHIELD_PROTECTION - 10L);
+        Assert.assertEquals((long)player.getShield().getProtection(), (long)ShieldConfig.NORMAL_SHIELD_PROTECTION - 10L);
     }
     
     @Test
@@ -58,7 +58,7 @@ public class ShieldParentTest {
 
         player.getShield().decreaseProtection(ShieldConfig.ATOM_SHIELD_PROTECTION + 1L);
         
-        Assert.assertEquals(player.getShield().getProtection(), 0L);
+        Assert.assertEquals((long)player.getShield().getProtection(), 0L);
     }
     
     @Test
@@ -71,7 +71,7 @@ public class ShieldParentTest {
 
         player.getShield().decreaseProtection(ShieldConfig.PLASMA_SHIELD_PROTECTION + 1L);
         
-        Assert.assertEquals(player.getShield().getProtection(), 0L);
+        Assert.assertEquals((long)player.getShield().getProtection(), 0L);
     }
     
     @Test
@@ -84,7 +84,7 @@ public class ShieldParentTest {
 
         player.getShield().decreaseProtection(ShieldConfig.NORMAL_SHIELD_PROTECTION + 1L);
         
-        Assert.assertEquals(player.getShield().getProtection(), 0L);
+        Assert.assertEquals((long)player.getShield().getProtection(), 0L);
     }
     
     public void testShouldIncreaseShieldProtection_AS(){
@@ -97,7 +97,7 @@ public class ShieldParentTest {
         
         player.getShield().increaseShieldPower();
         
-        Assert.assertEquals(player.getShield().getProtection(), 1L);
+        Assert.assertEquals((long)player.getShield().getProtection(), 1L);
     }
     
     @Test
@@ -110,7 +110,7 @@ public class ShieldParentTest {
         player.getShield().setProtection(0L);
         player.getShield().increaseShieldPower();
         
-        Assert.assertEquals(player.getShield().getProtection(), 1L);
+        Assert.assertEquals((long)player.getShield().getProtection(), 1L);
     }
     
     @Test
@@ -124,7 +124,7 @@ public class ShieldParentTest {
 
         player.getShield().increaseShieldPower();
         
-        Assert.assertEquals(player.getShield().getProtection(), 1L);
+        Assert.assertEquals((long)player.getShield().getProtection(), 1L);
     }
     
     public void testShouldIncreaseShieldProtection_AS_MAX(){
@@ -137,7 +137,7 @@ public class ShieldParentTest {
         
         player.getShield().increaseShieldPower();
         
-        Assert.assertEquals(player.getShield().getProtection(), ShieldConfig.ATOM_SHIELD_PROTECTION);
+        Assert.assertEquals((long)player.getShield().getProtection(), (long)ShieldConfig.ATOM_SHIELD_PROTECTION);
     }
     
     @Test
@@ -150,7 +150,7 @@ public class ShieldParentTest {
         player.getShield().setProtection(ShieldConfig.PLASMA_SHIELD_PROTECTION);
         player.getShield().increaseShieldPower();
         
-        Assert.assertEquals(player.getShield().getProtection(), ShieldConfig.PLASMA_SHIELD_PROTECTION);
+        Assert.assertEquals((long)player.getShield().getProtection(), (long)ShieldConfig.PLASMA_SHIELD_PROTECTION);
     }
     
     @Test
@@ -164,6 +164,6 @@ public class ShieldParentTest {
 
         player.getShield().increaseShieldPower();
         
-        Assert.assertEquals(player.getShield().getProtection(),ShieldConfig.NORMAL_SHIELD_PROTECTION);
+        Assert.assertEquals((long)player.getShield().getProtection(), (long)ShieldConfig.NORMAL_SHIELD_PROTECTION);
     }
 }

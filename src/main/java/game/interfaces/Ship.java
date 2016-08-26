@@ -2,11 +2,14 @@ package game.interfaces;
 
 import java.awt.geom.Point2D;
 import java.util.List;
+import java.util.Map;
+
+import game.config.constant.AmmoType;
 
 public interface Ship extends Spawnable {
-    public void initWeapons();
+    public void initWeaponsAndAmmo();
 
-    public long decreaseHp(long value);
+    public double decreaseHp(double value);
 
     public String getColor();
 
@@ -49,6 +52,22 @@ public interface Ship extends Spawnable {
 	public void addWeapon(Weapon weapon);
 	
 	public void selectWeapon(int index);
+	
+	public Map<AmmoType, Long> getAmmoCount();
+
+	public void setAmmoCount(Map<AmmoType, Long> ammo);
+	
+	public long getActualAmmoCount();
+	
+	public long getAmmoCount(AmmoType ammoType);
+	
+	public void addActualAmmoCount(long ammoAdd);
+
+	public void addAmmoCount(AmmoType ammoType, long ammoAdd);
+
+	public boolean hasAmmoLeft();
+	
+	public void decreaseAmmoCount();
 
     public double getManeuverability();
 
@@ -87,4 +106,10 @@ public interface Ship extends Spawnable {
     public void setCarriage(List<SpawnableItem> carriage);
 
     public void addItemToCargo(SpawnableItem item);
+
+	boolean canShoot();
+
+	int getMaxCargoCapacity();
+
+	void setMaxCargoCapacity(int maxCargoCapacity);
 }

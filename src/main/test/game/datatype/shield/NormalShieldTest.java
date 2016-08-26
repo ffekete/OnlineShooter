@@ -21,8 +21,8 @@ public class NormalShieldTest {
     public void testShouldIncreaseShield() {
         PlayerData player = new PlayerData(0L, "P05", "Interceptor", false);
 
-        long initProtection = player.getShield().getProtection();
-        long initMaxProtection = player.getShield().getMaxProtectionValue();
+        double initProtection = player.getShield().getProtection();
+        double initMaxProtection = player.getShield().getMaxProtectionValue();
         Assert.assertEquals(initProtection, ShieldConfig.NORMAL_SHIELD_PROTECTION);
         Assert.assertEquals(initMaxProtection, ShieldConfig.NORMAL_SHIELD_PROTECTION);
 
@@ -35,8 +35,8 @@ public class NormalShieldTest {
     public void testShouldIncreaseShieldAndPowerUp() {
         PlayerData player = new PlayerData(0L, "P05", "Interceptor", false);
 
-        long initProtection = player.getShield().getProtection();
-        long initMaxProtection = player.getShield().getMaxProtectionValue();
+        double initProtection = player.getShield().getProtection();
+        double initMaxProtection = player.getShield().getMaxProtectionValue();
         Assert.assertEquals(initProtection, ShieldConfig.NORMAL_SHIELD_PROTECTION);
         Assert.assertEquals(initMaxProtection, ShieldConfig.NORMAL_SHIELD_PROTECTION);
 
