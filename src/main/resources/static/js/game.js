@@ -190,7 +190,7 @@ function draw(){
 	
 	drawBackground();
 	drawBorder();
-	
+	drawMinimap();
 	
 	if(playerData.respawnTime == 0){
 		drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.name, playerData.hp, playerData.maxHp, playerData.invulnerable, playerData.shieldAmount, playerData.maxShieldAmount, playerData.color, playerData.shipType);
@@ -219,6 +219,7 @@ function draw(){
 	drawHighScores();
 	drawPlayerData();
 	drawWeaponKeys();
+	updateMinimap();
 }
 
 function connect() {
@@ -544,6 +545,7 @@ function start(){
 	canvasContext = canvas.getContext("2d");
 	
 	drawBorder();
+	drawMinimap();
 	connect();
 	setInterval(draw, 5);
 	setInterval(updatePlayerData, 10);
@@ -600,3 +602,23 @@ function updateMouseCoordinates(event){
 											// = 10
 	playerData.mouseY = event.clientY - 10;
 }
+
+function drawMinimap() {
+	canvasContext.save();
+	
+	canvasContext.beginPath();
+	canvasContext.arc(screen_x-110, screen_y-110, 100, 0, 2*Math.PI);
+	canvasContext.fillStyle = "white";
+	canvasContext.fill();
+	canvasContext.arc(screen_x-110, screen_y-110, 100, 0, 2*Math.PI);
+	canvasContext.strokeStyle = "black";
+    canvasContext.stroke();
+	canvasContext.closePath();
+
+	canvasContext.restore();
+}
+
+function updateMinimap() {
+	
+}
+
