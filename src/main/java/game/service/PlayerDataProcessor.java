@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import game.config.constant.GameConfig;
 import game.config.constant.Physics;
-import game.config.constant.ShipConfig;
 import game.controller.EventSender;
 import game.datahandler.HighScoreTable;
 import game.datahandler.ItemHandler;
@@ -112,7 +111,11 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
 
                         PlayerData playerWhoKilledMe = playerPool.get(actualBullet.getPlayerId());
                         if (player.getIsAI()) {
-                            playerWhoKilledMe.increaseScore(GameConfig.AI_SCORE_VALUE);
+                            if (player.getIsAsteroid()) {
+                                playerWhoKilledMe.increaseScore(GameConfig.ASTEROID_SCORE_VALUE);
+                            } else {
+                                playerWhoKilledMe.increaseScore(GameConfig.AI_SCORE_VALUE);
+                            }
                         } else {
                             /*
                              * Save the killed player only if he/she has more
@@ -215,13 +218,15 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                     && Math.abs(actualItem.getY() - player.getY()) < 10.0d;
 
             if (areaCheck) {
-                if (player.getIsAI() && player.getShipType() == ShipConfig.SHIP_TYPE_CARGOSHIP) {
+                if (player.getIsAI() && !player.getIsAsteroid()) {
                     player.getSpaceShip().addItemToCargo(actualItem);
-                } else {
+                } else if (!player.getIsAsteroid()) {
                     actualItem.applyEffect(player);
                 }
 
-                itemPool.remove(actualItem);
+                if (!player.getIsAsteroid()) {
+                    itemPool.remove(actualItem);
+                }
             }
         }
     }

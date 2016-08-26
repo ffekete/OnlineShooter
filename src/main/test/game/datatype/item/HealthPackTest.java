@@ -5,7 +5,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import game.config.constant.ShipConfig;
-import game.config.constant.SpawnableItemType;
+import game.config.constant.ItemType;
+import game.datatype.AIDao;
 import game.datatype.PlayerData;
 
 public class HealthPackTest {
@@ -15,12 +16,16 @@ public class HealthPackTest {
 
     @BeforeMethod
     public void initFields() {
-        player = new PlayerData(0L, "P01", "Interceptor", false);
+        AIDao aiDao = new AIDao();
+        aiDao.setIsAi(false);
+        aiDao.setIsAsteroid(false);
+        player = new PlayerData(0L, "P01", "Interceptor", aiDao);
+
     }
 
     @Test
     public void testCreateHealthPackShouldCreate() {
-        Assert.assertEquals(hp.getName(), SpawnableItemType.HEALTH_PACK.getVisibleName());
+        Assert.assertEquals(hp.getName(), ItemType.HEALTH_PACK.getVisibleName());
     }
 
     @Test

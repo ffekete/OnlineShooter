@@ -4,7 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import game.config.constant.ItemConfig;
-import game.config.constant.SpawnableItemType;
+import game.config.constant.ItemType;
+import game.datatype.AIDao;
 import game.datatype.PlayerData;
 
 public class IncreaseSpeedTest {
@@ -13,12 +14,15 @@ public class IncreaseSpeedTest {
 
     @Test
     public void testShouldCreateIncreaseSpeed() {
-        Assert.assertEquals(is.getName(), SpawnableItemType.INCREASE_SPEED.getVisibleName());
+        Assert.assertEquals(is.getName(), ItemType.INCREASE_SPEED.getVisibleName());
     }
 
     @Test
     public void testShouldIncreaseSpeed() {
-        PlayerData player = new PlayerData(3L, "P04", "Mercury", false);
+        AIDao aiDao = new AIDao();
+        aiDao.setIsAi(false);
+        aiDao.setIsAsteroid(false);
+        PlayerData player = new PlayerData(3L, "P04", "Mercury", aiDao);
 
         double initSpeed = player.getSpeed();
 

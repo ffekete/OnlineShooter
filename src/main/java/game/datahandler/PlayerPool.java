@@ -69,6 +69,7 @@ public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
                 newPlayerData.setColor(data.getColor());
                 newPlayerData.setShipType(data.getShipType());
                 newPlayerData.setIsAI(data.getIsAI());
+                newPlayerData.setIsAsteroid(data.getIsAsteroid());
                 this.put(id, newPlayerData);
                 return true;
             }
@@ -153,12 +154,24 @@ public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
 
         for (long i : this.getAll()) {
             PlayerData currentPlayer = this.get(i);
-            if (currentPlayer.getIsAI()) {
+            if (currentPlayer.getIsAI() && !currentPlayer.getIsAsteroid()) {
                 result = true;
                 break;
             }
         }
 
+        return result;
+    }
+
+    @Override
+    public int numberOfAsteroidsOnScreen() {
+        int result = 0;
+        for (long i : this.getAll()) {
+            PlayerData currentPlayer = this.get(i);
+            if (currentPlayer.getIsAsteroid()) {
+                result++;
+            }
+        }
         return result;
     }
 }

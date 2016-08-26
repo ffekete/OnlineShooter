@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import game.config.constant.SpawnableItemType;
+import game.config.constant.ItemType;
 import game.datatype.item.HealthPack;
 import game.datatype.item.IncreaseDamage;
 import game.datatype.item.IncreaseManeuverability;
@@ -32,22 +32,22 @@ public class ItemCreationHandlerTest {
 
     @DataProvider(name = "itemTypes")
     public Object[][] itemTypes() {
-        return new Object[][] { { SpawnableItemType.GATLING_GUN, GatlingGun.class },
-                { SpawnableItemType.LASER_CANNON, LaserCannon.class },
-                { SpawnableItemType.DOUBLE_GATLING_GUN, DoubleGatlingGun.class },
-                { SpawnableItemType.SHOTGUN, Shotgun.class },
-                { SpawnableItemType.INCREASE_DAMAGE, IncreaseDamage.class },
-                { SpawnableItemType.INCRASE_RATE_OF_FIRE, IncreaseRateOfFire.class },
-                { SpawnableItemType.INCREASE_MANEUVERABILITY, IncreaseManeuverability.class },
-                { SpawnableItemType.INCREASE_SPEED, IncreaseSpeed.class },
-                { SpawnableItemType.ATOM_SHIELD, AtomShield.class },
-                { SpawnableItemType.PLASMA_SHIELD, PlasmaShield.class },
-                { SpawnableItemType.HEALTH_PACK, HealthPack.class },
-                { SpawnableItemType.INCREASE_SCORE, IncreaseScore.class } };
+        return new Object[][] { { ItemType.GATLING_GUN, GatlingGun.class },
+                { ItemType.LASER_CANNON, LaserCannon.class },
+                { ItemType.DOUBLE_GATLING_GUN, DoubleGatlingGun.class },
+                { ItemType.SHOTGUN, Shotgun.class },
+                { ItemType.INCREASE_DAMAGE, IncreaseDamage.class },
+                { ItemType.INCRASE_RATE_OF_FIRE, IncreaseRateOfFire.class },
+                { ItemType.INCREASE_MANEUVERABILITY, IncreaseManeuverability.class },
+                { ItemType.INCREASE_SPEED, IncreaseSpeed.class },
+                { ItemType.ATOM_SHIELD, AtomShield.class },
+                { ItemType.PLASMA_SHIELD, PlasmaShield.class },
+                { ItemType.HEALTH_PACK, HealthPack.class },
+                { ItemType.INCREASE_SCORE, IncreaseScore.class } };
     }
 
     @Test(dataProvider = "itemTypes")
-    public void testItemCreation(SpawnableItemType type, Class<? extends SpawnableItem> clazz) {
+    public void testItemCreation(ItemType type, Class<? extends SpawnableItem> clazz) {
         // when
         SpawnableItem result = itemCreationHandler.createItem(type);
         // then

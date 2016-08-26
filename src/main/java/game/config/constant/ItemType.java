@@ -1,6 +1,6 @@
 package game.config.constant;
 
-public enum SpawnableItemType {
+public enum ItemType {
     // Weapons
     GATLING_GUN("gatlingGun", "Gatling Gun"),
     LASER_CANNON("laserCannon", "Laser Cannon"),
@@ -17,10 +17,13 @@ public enum SpawnableItemType {
     NORMAL_SHIELD("normalShield", "Normal Shield"),
     ATOM_SHIELD("atomShield","Atom Shield"),
     PLASMA_SHIELD("plasmaShield", "Plasma Shield"),
-
+    
     // Other
     HEALTH_PACK("healthPack", "Health Pack +5"),
-    INCREASE_SCORE("increaseScore", "Score++");
+    INCREASE_SCORE("increaseScore", "Score++"),
+    
+    NO_SHIELD("noShield", ""),
+    NO_WEAPON("noWeapon", "");
     
     private final String id;
     private final String visibleName;
@@ -29,12 +32,12 @@ public enum SpawnableItemType {
         return values().length;
     }
 
-    private SpawnableItemType(String id, String visibleName) {
+    private ItemType(String id, String visibleName) {
         this.id = id;
         this.visibleName = visibleName;
     }
 
-    public static SpawnableItemType get(int index) {
+    public static ItemType get(int index) {
         if (index >= 0 && index < count())
             return values()[index];
         else

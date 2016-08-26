@@ -7,7 +7,9 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
 import game.config.constant.GameConfig;
+import game.datatype.AIDao;
 import game.datatype.PlayerData;
 import game.datatype.weapon.GatlingGun;
 import game.entrypoint.Application;
@@ -33,7 +35,10 @@ public class BulletDataProcessorTest extends AbstractTestNGSpringContextTests {
     @BeforeMethod
     public void initTests() {
         bp.clear();
-        player = new PlayerData(200L, "P01", "Deltawing", false);
+        AIDao aiDao = new AIDao();
+        aiDao.setIsAi(false);
+        aiDao.setIsAsteroid(false);
+        player = new PlayerData(200L, "P01", "Deltawing", aiDao);
     }
 
     @DataProvider(name = "bulletDataInput")

@@ -23,12 +23,12 @@ public class BulletPool implements BulletPoolList<Bullet> {
     public BulletPool() {
         bulletPool = new CopyOnWriteArrayList<Bullet>();
     }
-    
+
     @Override
     public Iterator<Bullet> getIterator() {
         return bulletPool.iterator();
     }
-    
+
     @Override
     public List<Bullet> getAllOnScreen(Long playerId) {
         CopyOnWriteArrayList<Bullet> allBulletsOnScreen = new CopyOnWriteArrayList<Bullet>();
@@ -57,11 +57,12 @@ public class BulletPool implements BulletPoolList<Bullet> {
         }
         return bulletPool.get(index);
     }
+
     @Override
     public int poolSize() {
         return bulletPool.size();
     }
-    
+
     @Override
     public void addBullet(Long playerId) {
         PlayerData player = playerPool.get(playerId);

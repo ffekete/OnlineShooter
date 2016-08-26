@@ -10,7 +10,8 @@ import factory.ShipFactory;
 import game.config.constant.Bonuses;
 import game.config.constant.CanvasConstants;
 import game.config.constant.GameConfig;
-import game.config.constant.SpawnableItemType;
+import game.config.constant.ItemType;
+import game.config.constant.ShipConfig;
 import game.interfaces.Bullet;
 import game.interfaces.Shield;
 import game.interfaces.Ship;
@@ -45,6 +46,8 @@ public class PlayerData {
 
     private boolean isAI;
 
+    private boolean isAsteroid;
+
     private Map<Bonuses, Long> bonuses;
 
     public PlayerData(PlayerData player2) {
@@ -68,10 +71,11 @@ public class PlayerData {
         this.setCanvas(player2.getCanvas());
     }
 
-    public PlayerData(Long id, String name, String shipType, boolean isAI) {
+    public PlayerData(Long id, String name, String shipType, AIDao aiDao) {
         this.name = name;
         this.id = id;
-        this.isAI = isAI;
+        this.isAI = aiDao.getIsAi();
+        this.isAsteroid = aiDao.getIsAsteroid();
 
         this.spaceShip = ShipFactory.createShip(shipType);
         Spawner.spawn(this.getSpaceShip());
@@ -80,9 +84,7 @@ public class PlayerData {
         this.mouseX = 0L;
         this.mouseY = 0L;
 
-        if (isAI) {
-            this.setNewMousePointForAI();
-        }
+        this.setNewMousePointForAI();
 
         this.connectionId = 0L;
         this.getSpaceShip().resetHp();
@@ -90,7 +92,14 @@ public class PlayerData {
         this.getSpaceShip().resetManeuverability();
         this.getSpaceShip().resetSpeed();
         this.score = 0l;
-        this.getSpaceShip().setShield(ShieldFactory.createShield(SpawnableItemType.NORMAL_SHIELD));
+
+        if (shipType == ShipConfig.SHIP_TYPE_ASTEROID) {
+            this.setInvulnerabilityCounter(0L);
+            this.getSpaceShip().setShield(ShieldFactory.createShield(ItemType.NO_SHIELD));
+        } else {
+            this.getSpaceShip().setShield(ShieldFactory.createShield(ItemType.NORMAL_SHIELD));
+        }
+
         this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
         this.setCanvas(new Canvas(0, 0, CanvasConstants.CANVAS_HEIGHT, CanvasConstants.CANVAS_WIDTH));
 
@@ -107,20 +116,18 @@ public class PlayerData {
     }
 
     public void kill() {
-        if (this.isAI) {
-            this.setNewMousePointForAI();
-        }
+        this.setNewMousePointForAI();
 
         Spawner.spawn(this.getSpaceShip());
         this.resetBonuses();
         this.inactivityCounter = 0;
         this.getSpaceShip().resetHp();
-        this.invulnerabilityCounter = GameConfig.INVULN_CTR_MAX_VALUE;
+        this.invulnerabilityCounter = this.isAsteroid ? 0L : GameConfig.INVULN_CTR_MAX_VALUE;
         this.initWeapons();
         this.getSpaceShip().resetManeuverability();
         this.getSpaceShip().resetSpeed();
         this.score = 0l;
-        this.getSpaceShip().setShield(ShieldFactory.createShield(SpawnableItemType.NORMAL_SHIELD));
+        this.getSpaceShip().setShield(ShieldFactory.createShield(ItemType.NORMAL_SHIELD));
         this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
     }
 
@@ -386,13 +393,13 @@ public class PlayerData {
     public void setWeapon(Weapon weapon) {
         this.getSpaceShip().setWeapon(weapon);
     }
-    
+
     public void addWeapon(Weapon weapon) {
-    	this.getSpaceShip().addWeapon(weapon);
+        this.getSpaceShip().addWeapon(weapon);
     }
-    
+
     public void selectWeapon(int index) {
-    	this.getSpaceShip().selectWeapon(index);
+        this.getSpaceShip().selectWeapon(index);
     }
 
     public double getManeuverability() {
@@ -443,7 +450,7 @@ public class PlayerData {
     }
 
     public void setNewMousePointForAI() {
-        if (isAI) {
+        if (this.isAI) {
             Point2D newrandomPoint = AISpawner.generateRandomCoordinate();
             this.setMouseX((long) newrandomPoint.getX());
             this.setMouseY((long) newrandomPoint.getY());
@@ -451,7 +458,7 @@ public class PlayerData {
     }
 
     private void setAIMovementTimer() {
-        if (isAI) {
+        if (this.isAI && !this.isAsteroid) {
             AIMovementTimerTask task = new AIMovementTimerTask(this);
         }
     }
@@ -472,5 +479,13 @@ public class PlayerData {
 
     public void updateBonus(Bonuses bonus, long value) {
         this.bonuses.put(bonus, this.bonuses.get(bonus) + value);
+    }
+
+    public boolean getIsAsteroid() {
+        return this.isAsteroid;
+    }
+
+    public void setIsAsteroid(boolean isAsteroid) {
+        this.isAsteroid = isAsteroid;
     }
 }

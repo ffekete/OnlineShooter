@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import game.config.constant.ShipConfig;
+import game.datatype.AIDao;
 import game.datatype.PlayerData;
 import game.datatype.weapon.GatlingGun;
 import game.entrypoint.Application;
@@ -29,13 +30,19 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests {
     @BeforeMethod
     public void initBulletPool() {
         bp.clear();
-        player = new PlayerData(200L, "P01", ShipConfig.SHIP_TYPE_DELTAWING, false);
+        AIDao aiDao = new AIDao();
+        aiDao.setIsAi(false);
+        aiDao.setIsAsteroid(false);
+        player = new PlayerData(200L, "P01", ShipConfig.SHIP_TYPE_DELTAWING, aiDao);
     }
 
     @Test
     public void testShouldCreateTwoBulletsForTwoDifferentPlayers() {
         // given
-        PlayerData player2 = new PlayerData(300L, "P02", ShipConfig.SHIP_TYPE_DELTAWING, false);
+        AIDao aiDao = new AIDao();
+        aiDao.setIsAi(false);
+        aiDao.setIsAsteroid(false);
+        PlayerData player2 = new PlayerData(300L, "P02", ShipConfig.SHIP_TYPE_DELTAWING, aiDao);
         player2.setWeapon(new GatlingGun());
         player.setWeapon(new GatlingGun()); // setting this weapon for player
                                             // ship because it will create one

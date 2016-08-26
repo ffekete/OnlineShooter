@@ -3,7 +3,8 @@ package game.datatype.item;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import game.config.constant.SpawnableItemType;
+import game.config.constant.ItemType;
+import game.datatype.AIDao;
 import game.datatype.PlayerData;
 
 public class IncreaseRateOfFireTest {
@@ -12,12 +13,15 @@ public class IncreaseRateOfFireTest {
 
     @Test
     public void testShouldCreateIrf() {
-        Assert.assertEquals(irf.getName(), SpawnableItemType.INCRASE_RATE_OF_FIRE.getVisibleName());
+        Assert.assertEquals(irf.getName(), ItemType.INCRASE_RATE_OF_FIRE.getVisibleName());
     }
 
     @Test
     public void testShouldIncreasePlayersRateOfFire() {
-        PlayerData player = new PlayerData(3L, "P04", "Mercury", false);
+        AIDao aiDao = new AIDao();
+        aiDao.setIsAi(false);
+        aiDao.setIsAsteroid(false);
+        PlayerData player = new PlayerData(3L, "P04", "Mercury", aiDao);
 
         long initRateOfFire = player.getWeapon().getRateOfFire();
 

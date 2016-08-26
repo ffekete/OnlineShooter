@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import game.config.constant.GameConfig;
 import game.config.constant.ShipConfig;
+import game.datatype.AIDao;
 import game.datatype.PlayerData;
 import game.entrypoint.Application;
 import game.interfaces.SpawnableItem;
@@ -34,7 +35,10 @@ public class ItemHandlerTest extends AbstractTestNGSpringContextTests {
 
     @BeforeMethod
     public void initPool() {
-        player = new PlayerData(1L, "Test", ShipConfig.SHIP_TYPE_CARGOSHIP, true);
+        AIDao aiDao = new AIDao();
+        aiDao.setIsAi(true);
+        aiDao.setIsAsteroid(false);
+        player = new PlayerData(1L, "Test", ShipConfig.SHIP_TYPE_CARGOSHIP, aiDao);
         itemPool.clear();
         carriage.clear();
         carriage.add(new ItemCreationHandler().createRandomItem());

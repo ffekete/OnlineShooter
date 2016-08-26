@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import game.config.constant.ShipConfig;
+import game.datatype.AIDao;
 import game.datatype.PlayerData;
 import game.datatype.RegistrationData;
 import game.entrypoint.Application;
@@ -25,6 +26,8 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests {
     @Autowired
     BulletPool bulletPool;
 
+    public AIDao aiDao;
+
     @BeforeMethod
     public void init() {
         RegistrationData data = new RegistrationData();
@@ -35,11 +38,15 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests {
         playerPool.registerPlayer(1L, data);
 
         bulletPool.clear();
+
+        aiDao = new AIDao();
+        aiDao.setIsAi(false);
+        aiDao.setIsAsteroid(false);
     }
 
     @Test
     public void testShouldAddOneBullet() {
-        bulletPool.addBullet(1L);
+        bulletPool.addBullet(563L);
         Assert.assertEquals(bulletPool.poolSize(), 1);
     }
 
@@ -55,14 +62,14 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testShouldAddSpecificBulletToPool() {
-        PlayerData player = new PlayerData(999L, "Test", ShipConfig.SHIP_TYPE_QUICKSILVER, false);
+        PlayerData player = new PlayerData(999L, "Test", ShipConfig.SHIP_TYPE_QUICKSILVER, aiDao);
         List<Bullet> list = player.createBulletWithPlayerWeapon();
         Assert.assertEquals(list.get(0).getPlayerId(), 999L);
     }
 
     @Test
     public void testShouldAddOneSpecificBullet() {
-        PlayerData player = new PlayerData(987L, "Test", ShipConfig.SHIP_TYPE_QUICKSILVER, false);
+        PlayerData player = new PlayerData(987L, "Test", ShipConfig.SHIP_TYPE_QUICKSILVER, aiDao);
         List<Bullet> list = player.createBulletWithPlayerWeapon();
         bulletPool.add(list.get(0));
         Assert.assertEquals(bulletPool.poolSize(), 1);
@@ -70,7 +77,7 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testShouldRemoveOneBullet() {
-        PlayerData player = new PlayerData(987L, "Test", ShipConfig.SHIP_TYPE_QUICKSILVER, false);
+        PlayerData player = new PlayerData(987L, "Test", ShipConfig.SHIP_TYPE_QUICKSILVER, aiDao);
         List<Bullet> list1 = player.createBulletWithPlayerWeapon();
         List<Bullet> list2 = player.createBulletWithPlayerWeapon();
         bulletPool.add(list1.get(0));

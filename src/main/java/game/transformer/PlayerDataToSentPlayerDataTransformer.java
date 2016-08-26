@@ -54,6 +54,7 @@ public class PlayerDataToSentPlayerDataTransformer {
         sentPlayerData.setColor(playerData.getColor());
         sentPlayerData.setShipType(playerData.getShipType());
         sentPlayerData.setIsAI(playerData.getIsAI());
+        sentPlayerData.setIsAsteroid(playerData.getIsAsteroid());
         return sentPlayerData;
     }
 }

@@ -1,14 +1,14 @@
 package game.datatype.item;
 
 import game.config.constant.Bonuses;
-import game.config.constant.SpawnableItemType;
+import game.config.constant.ItemType;
 import game.datatype.PlayerData;
 import game.service.Spawner;
 
 public class IncreaseDamage extends ItemParent {
     public IncreaseDamage() {
         Spawner.spawn(this);
-        super.setName(SpawnableItemType.INCREASE_DAMAGE.getVisibleName());
+        super.setName(ItemType.INCREASE_DAMAGE.getVisibleName());
     }
 
     @Override

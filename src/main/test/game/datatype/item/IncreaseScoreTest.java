@@ -4,7 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import game.config.constant.GameConfig;
-import game.config.constant.SpawnableItemType;
+import game.config.constant.ItemType;
+import game.datatype.AIDao;
 import game.datatype.PlayerData;
 
 public class IncreaseScoreTest {
@@ -13,12 +14,15 @@ public class IncreaseScoreTest {
 
     @Test
     public void testShouldCreateIncreaseScore() {
-        Assert.assertEquals(is.getName(), SpawnableItemType.INCREASE_SCORE.getVisibleName());
+        Assert.assertEquals(is.getName(), ItemType.INCREASE_SCORE.getVisibleName());
     }
 
     @Test
     public void testShouldIncreaseScore() {
-        PlayerData player = new PlayerData(6L, "P00", "Interceptor", false);
+        AIDao aiDao = new AIDao();
+        aiDao.setIsAi(false);
+        aiDao.setIsAsteroid(false);
+        PlayerData player = new PlayerData(6L, "P00", "Interceptor", aiDao);
 
         long initScore = player.getScore();
 

@@ -4,7 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import game.config.constant.ShieldConfig;
-import game.config.constant.SpawnableItemType;
+import game.config.constant.ItemType;
+import game.datatype.AIDao;
 import game.datatype.PlayerData;
 
 public class AtomShieldTest {
@@ -13,12 +14,15 @@ public class AtomShieldTest {
 
     @Test
     public void testShouldCreateShield() {
-        Assert.assertEquals(as.getName(), SpawnableItemType.ATOM_SHIELD.getVisibleName());
+        Assert.assertEquals(as.getName(), ItemType.ATOM_SHIELD.getVisibleName());
     }
 
     @Test
     public void testShouldIncreaseShield() {
-        PlayerData player = new PlayerData(0L, "P05", "Interceptor", false);
+        AIDao aiDao = new AIDao();
+        aiDao.setIsAi(false);
+        aiDao.setIsAsteroid(false);
+        PlayerData player = new PlayerData(0L, "P05", "Interceptor", aiDao);
 
         long initProtection = player.getShield().getProtection();
         long initMaxProtection = player.getShield().getMaxProtectionValue();

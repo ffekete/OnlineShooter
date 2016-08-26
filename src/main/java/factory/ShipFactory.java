@@ -1,6 +1,7 @@
 package factory;
 
 import game.config.constant.ShipConfig;
+import game.datatype.ship.Asteroid;
 import game.datatype.ship.CargoShip;
 import game.datatype.ship.Deltawing;
 import game.datatype.ship.Interceptor;
@@ -21,6 +22,8 @@ public class ShipFactory {
             return new Deltawing();
         case ShipConfig.SHIP_TYPE_CARGOSHIP:
             return new CargoShip(CarriageBuilder.buildHalfCargo(ShipConfig.CARGO_SHIP_CARGO_CAPACITY));
+        case ShipConfig.SHIP_TYPE_ASTEROID:
+            return new Asteroid();
         default:
             throw new RuntimeException("Unknownw ship type!");
         }

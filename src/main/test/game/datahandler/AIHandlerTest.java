@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import game.config.constant.AIConfig;
 import game.datatype.PlayerData;
 import game.entrypoint.Application;
 
@@ -32,20 +33,7 @@ public class AIHandlerTest extends AbstractTestNGSpringContextTests {
         int aiCount = 0;
         for (long i : playerPool.getAll()) {
             PlayerData player = playerPool.get(i);
-            if (player.getIsAI()) {
-                aiCount++;
-            }
-        }
-        Assert.assertEquals(aiCount, 1);
-    }
-
-    @Test
-    public void testShouldGiveBackOneAiAgain() {
-        aiHandler.updateAIData();
-        int aiCount = 0;
-        for (long i : playerPool.getAll()) {
-            PlayerData player = playerPool.get(i);
-            if (player.getIsAI()) {
+            if (player.getIsAI() && !player.getIsAsteroid()) {
                 aiCount++;
             }
         }

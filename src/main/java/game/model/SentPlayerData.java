@@ -40,9 +40,11 @@ public class SentPlayerData {
 
     private boolean isAI;
 
+    private boolean isAsteroid;
+
     Weapon weapon;
 
-	List<Weapon> weapons;
+    List<Weapon> weapons;
 
     List<PlayerData> visiblePlayers;
 
@@ -59,14 +61,14 @@ public class SentPlayerData {
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
-    
-    public List<Weapon> getWeapons() {
-		return weapons;
-	}
 
-	public void setWeapons(List<Weapon> weapons) {
-		this.weapons = weapons;
-	}
+    public List<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public void setWeapons(List<Weapon> weapons) {
+        this.weapons = weapons;
+    }
 
     public boolean isInvulnerable() {
         return invulnerable;
@@ -222,5 +224,13 @@ public class SentPlayerData {
 
     public void setIsAI(boolean isAI) {
         this.isAI = isAI;
+    }
+
+    public boolean getIsAsteroid() {
+        return this.isAsteroid;
+    }
+
+    public void setIsAsteroid(boolean isAsteroid) {
+        this.isAsteroid = isAsteroid;
     }
 }
