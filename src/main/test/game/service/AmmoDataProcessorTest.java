@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
 
 import game.config.constant.AmmoConfig;
 import game.config.constant.GameConfig;
+import game.config.constant.ShipConfig;
+import game.datatype.AIDao;
 import game.datatype.PlayerData;
 import game.datatype.weapon.GatlingGun;
 import game.entrypoint.Application;
@@ -35,7 +37,10 @@ public class AmmoDataProcessorTest extends AbstractTestNGSpringContextTests {
     @BeforeMethod
     public void initTests() {
         ap.clear();
-        player = new PlayerData(200L, "P01", "Deltawing", false);
+        AIDao aiDao = new AIDao();
+        aiDao.setIsAi(false);
+        aiDao.setIsAsteroid(false);
+        player = new PlayerData(200L, "P01", ShipConfig.DELTAWING, aiDao);
     }
 
     @DataProvider(name = "ammoDataInput")

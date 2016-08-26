@@ -9,44 +9,43 @@ public class Interceptor extends ShipParent {
 
     public Interceptor() {
         super.setCoordinate(new Point2D.Double(0, 0));
-        this.setHp(ShipConfig.INTERCEPTOR_MAX_HP);
-        this.setMaxHp(ShipConfig.INTERCEPTOR_MAX_HP);
-        super.setSpeed(ShipConfig.INTERCEPTOR_INIT_SPEED);
-        super.setMaxSpeed(ShipConfig.INTERCEPTOR_INIT_SPEED);
-        super.setManeuverability(ShipConfig.INTERCEPTOR_INIT_MANEUVERABILITY);
-        super.setShipType(ShipConfig.SHIP_TYPE_INTERCEPTOR);
+        super.setShipConfig(ShipConfig.INTERCEPTOR);
+        this.resetSpeed();
+        this.resetManeuverability();
+        this.resetHp();
+        this.setMaxHp(ShipConfig.INTERCEPTOR.getMaxHP());
     }
 
     @Override
     public void setHp(long hp) {
         long hpToSet = hp;
-        if (hpToSet > ShipConfig.INTERCEPTOR_MAX_HP)
-            hpToSet = ShipConfig.INTERCEPTOR_MAX_HP;
+        if (hpToSet > ShipConfig.INTERCEPTOR.getMaxHP())
+            hpToSet = ShipConfig.INTERCEPTOR.getMaxHP();
 
         super.setHp(hpToSet);
     }
 
     @Override
     public void resetHp() {
-        this.setHp(ShipConfig.INTERCEPTOR_MAX_HP);
+        this.setHp(ShipConfig.INTERCEPTOR.getMaxHP());
 
     }
 
     @Override
     public void resetManeuverability() {
-        super.setManeuverability(ShipConfig.INTERCEPTOR_INIT_MANEUVERABILITY);
+        super.setManeuverability(ShipConfig.INTERCEPTOR.getInitManeuverability());
     }
 
     @Override
     public void resetSpeed() {
-        super.setSpeed(ShipConfig.INTERCEPTOR_INIT_SPEED);
-        super.setMaxSpeed(ShipConfig.INTERCEPTOR_INIT_SPEED);
+        super.setSpeed(ShipConfig.INTERCEPTOR.getInitMaxSpeed());
+        super.setMaxSpeed(ShipConfig.INTERCEPTOR.getInitMaxSpeed());
     }
 
     @Override
     public void initWeaponsAndAmmo() {
     	super.initWeaponsAndAmmo();
-        super.addWeapon(WeaponFactory.createWeapon(ShipConfig.INTERCEPTOR_INIT_WEAPON));
+        super.addWeapon(WeaponFactory.createWeapon(ShipConfig.INTERCEPTOR.getInitWeapon()));
         super.selectWeapon(0);
     }
 }

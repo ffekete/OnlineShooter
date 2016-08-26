@@ -1,7 +1,7 @@
 package game.datatype.weapon;
 
 import game.config.constant.AmmoType;
-import game.config.constant.SpawnableItemType;
+import game.config.constant.ItemType;
 import game.config.constant.WeaponConfig;
 import game.service.Spawner;
 
@@ -9,8 +9,8 @@ public class LaserCannon extends WeaponParent {
 
     public LaserCannon() {
         Spawner.spawn(this);
-        super.setName(SpawnableItemType.LASER_CANNON.getVisibleName());
-		super.setType(SpawnableItemType.LASER_CANNON);
+        super.setName(ItemType.LASER_CANNON.getVisibleName());
+        super.setType(ItemType.LASER_CANNON);
 		super.setAmmoType(AmmoType.LASER_BEAM);
 		super.setShotCount(WeaponConfig.LASER_CANNON_INIT_SHOT_COUNT);
 		super.setShotAngle(WeaponConfig.LASER_CANNON_INIT_SHOT_ANGLE);

@@ -1,10 +1,13 @@
 package game.datatype.shield;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import game.config.constant.ItemType;
 import game.config.constant.ShieldConfig;
-import game.config.constant.SpawnableItemType;
+import game.config.constant.ShipConfig;
+import game.datatype.AIDao;
 import game.datatype.PlayerData;
 
 public class NormalShieldTest {
@@ -12,15 +15,25 @@ public class NormalShieldTest {
     final NormalShield ns = new NormalShield();
     final AtomShield as = new AtomShield();
 
+    public AIDao aiDao;
+
+    public PlayerData player;
+
+    @BeforeMethod
+    public void init() {
+        aiDao = new AIDao();
+        aiDao.setIsAi(false);
+        aiDao.setIsAsteroid(false);
+        player = new PlayerData(0L, "P05", ShipConfig.INTERCEPTOR, aiDao);
+    }
+
     @Test
     public void testShouldCreateShield() {
-        Assert.assertEquals(ns.getName(), SpawnableItemType.NORMAL_SHIELD.getVisibleName());
+        Assert.assertEquals(ns.getName(), ItemType.NORMAL_SHIELD.getVisibleName());
     }
 
     @Test
     public void testShouldIncreaseShield() {
-        PlayerData player = new PlayerData(0L, "P05", "Interceptor", false);
-
         double initProtection = player.getShield().getProtection();
         double initMaxProtection = player.getShield().getMaxProtectionValue();
         Assert.assertEquals(initProtection, ShieldConfig.NORMAL_SHIELD_PROTECTION);
@@ -33,8 +46,6 @@ public class NormalShieldTest {
 
     @Test
     public void testShouldIncreaseShieldAndPowerUp() {
-        PlayerData player = new PlayerData(0L, "P05", "Interceptor", false);
-
         double initProtection = player.getShield().getProtection();
         double initMaxProtection = player.getShield().getMaxProtectionValue();
         Assert.assertEquals(initProtection, ShieldConfig.NORMAL_SHIELD_PROTECTION);

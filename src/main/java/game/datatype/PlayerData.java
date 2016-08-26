@@ -11,8 +11,8 @@ import game.config.constant.AmmoType;
 import game.config.constant.Bonuses;
 import game.config.constant.CanvasConstants;
 import game.config.constant.GameConfig;
-import game.config.constant.SpawnableItemType;
-import game.interfaces.Ammo;
+import game.config.constant.ItemType;
+import game.config.constant.ShipConfig;
 import game.interfaces.Shield;
 import game.interfaces.Ship;
 import game.interfaces.Weapon;
@@ -46,6 +46,10 @@ public class PlayerData {
 
     private boolean isAI;
 
+    private boolean isAsteroid;
+
+    private String shipType;
+
     private Map<Bonuses, Long> bonuses;
 
     public PlayerData(PlayerData player2) {
@@ -67,23 +71,24 @@ public class PlayerData {
         this.setCoordinate(player2.getCoordinate());
         this.setPreviousAngle(this.getPreviousAngle());
         this.setCanvas(player2.getCanvas());
+        this.setShipType(player2.getShipType());
     }
 
-    public PlayerData(Long id, String name, String shipType, boolean isAI) {
+    public PlayerData(Long id, String name, ShipConfig shipConfig, AIDao aiDao) {
         this.name = name;
         this.id = id;
-        this.isAI = isAI;
+        this.isAI = aiDao.getIsAi();
+        this.isAsteroid = aiDao.getIsAsteroid();
 
-        this.spaceShip = ShipFactory.createShip(shipType);
+        this.spaceShip = ShipFactory.createShip(shipConfig);
+        this.setShipType(shipConfig.getType());
         Spawner.spawn(this.getSpaceShip());
 
         this.getSpaceShip().setAngle(0.0d);
         this.mouseX = 0L;
         this.mouseY = 0L;
 
-        if (isAI) {
-            this.setNewMousePointForAI();
-        }
+        this.setNewMousePointForAI();
 
         this.connectionId = 0L;
         this.getSpaceShip().resetHp();
@@ -91,7 +96,14 @@ public class PlayerData {
         this.getSpaceShip().resetManeuverability();
         this.getSpaceShip().resetSpeed();
         this.score = 0l;
-        this.getSpaceShip().setShield(ShieldFactory.createShield(SpawnableItemType.NORMAL_SHIELD));
+
+        if (shipConfig == ShipConfig.ASTEROID) {
+            this.setInvulnerabilityCounter(0L);
+            this.getSpaceShip().setShield(ShieldFactory.createShield(ItemType.NO_SHIELD));
+        } else {
+            this.getSpaceShip().setShield(ShieldFactory.createShield(ItemType.NORMAL_SHIELD));
+        }
+
         this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
         this.setCanvas(new Canvas(0, 0, CanvasConstants.CANVAS_HEIGHT, CanvasConstants.CANVAS_WIDTH));
 
@@ -108,20 +120,18 @@ public class PlayerData {
     }
 
     public void kill() {
-        if (this.isAI) {
-            this.setNewMousePointForAI();
-        }
+        this.setNewMousePointForAI();
 
         Spawner.spawn(this.getSpaceShip());
         this.resetBonuses();
         this.inactivityCounter = 0;
         this.getSpaceShip().resetHp();
-        this.invulnerabilityCounter = GameConfig.INVULN_CTR_MAX_VALUE;
+        this.invulnerabilityCounter = this.isAsteroid ? 0L : GameConfig.INVULN_CTR_MAX_VALUE;
         this.initWeapons();
         this.getSpaceShip().resetManeuverability();
         this.getSpaceShip().resetSpeed();
         this.score = 0l;
-        this.getSpaceShip().setShield(ShieldFactory.createShield(SpawnableItemType.NORMAL_SHIELD));
+        this.getSpaceShip().setShield(ShieldFactory.createShield(ItemType.NORMAL_SHIELD));
         this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
     }
 
@@ -218,12 +228,12 @@ public class PlayerData {
         return name;
     }
 
-    public String getShipType() {
-        return this.getSpaceShip().getShipType();
+    public ShipConfig getShipConfig() {
+        return this.getSpaceShip().getShipConfig();
     }
 
-    public void setShipType(String shipType) {
-        this.getSpaceShip().setShipType(shipType);
+    public void setShipConfig(ShipConfig shipConfig) {
+        this.getSpaceShip().setShipConfig(shipConfig);
     }
 
     public String getColor() {
@@ -267,7 +277,7 @@ public class PlayerData {
     }
 
     public Ship cloneSpaceShip(Ship spaceShip) {
-        Ship spaceShipToStore = ShipFactory.createShip(spaceShip.getShipType());
+        Ship spaceShipToStore = ShipFactory.createShip(spaceShip.getShipConfig());
 
         spaceShipToStore.setColor(spaceShip.getColor());
         spaceShipToStore.setCoordinate(spaceShip.getCoordinate());
@@ -276,7 +286,7 @@ public class PlayerData {
         spaceShipToStore.setMaxSpeed(spaceShip.getMaxSpeed());
         spaceShipToStore.setShield(spaceShip.getShield());
         spaceShipToStore.setAngle(spaceShip.getAngle());
-        spaceShipToStore.setShipType(spaceShip.getShipType());
+        spaceShipToStore.setShipConfig(spaceShip.getShipConfig());
         spaceShipToStore.setSpeed(spaceShip.getSpeed());
         spaceShipToStore.setWeapon(spaceShip.getWeapon());
         spaceShipToStore.setCarriage(spaceShip.getCarriage());
@@ -387,14 +397,14 @@ public class PlayerData {
     public void setWeapon(Weapon weapon) {
         this.getSpaceShip().setWeapon(weapon);
     }
-    
+
     public void addWeapon(Weapon weapon) {
     	weapon.applyBonuses(this);
-    	this.getSpaceShip().addWeapon(weapon);
+        this.getSpaceShip().addWeapon(weapon);
     }
-    
+
     public void selectWeapon(int index) {
-    	this.getSpaceShip().selectWeapon(index);
+        this.getSpaceShip().selectWeapon(index);
     }
 
     public double getManeuverability() {
@@ -445,7 +455,7 @@ public class PlayerData {
     }
 
     public void setNewMousePointForAI() {
-        if (isAI) {
+        if (this.isAI) {
             Point2D newrandomPoint = AISpawner.generateRandomCoordinate();
             this.setMouseX((long) newrandomPoint.getX());
             this.setMouseY((long) newrandomPoint.getY());
@@ -453,7 +463,7 @@ public class PlayerData {
     }
 
     private void setAIMovementTimer() {
-        if (isAI) {
+        if (this.isAI && !this.isAsteroid) {
             AIMovementTimerTask task = new AIMovementTimerTask(this);
         }
     }
@@ -482,5 +492,21 @@ public class PlayerData {
 
     public void increaseBonus(Bonuses bonus, long value) {
         this.bonuses.put(bonus, this.bonuses.get(bonus) + value);
+    }
+
+    public boolean getIsAsteroid() {
+        return this.isAsteroid;
+    }
+
+    public void setIsAsteroid(boolean isAsteroid) {
+        this.isAsteroid = isAsteroid;
+    }
+
+    public String getShipType() {
+        return shipType;
+    }
+
+    public void setShipType(String shipType) {
+        this.shipType = shipType;
     }
 }

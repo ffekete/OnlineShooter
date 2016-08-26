@@ -14,4 +14,6 @@ public interface PlayerPoolMap<T1, T2> extends PoolMap<T1, T2> {
     public Iterator<T1> getKeySetIterator();
 
     public boolean hasAIOnScreen();
+
+    public int numberOfAsteroidsOnScreen();
 }

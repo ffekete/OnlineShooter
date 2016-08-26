@@ -6,6 +6,8 @@ import java.util.Map;
 
 import game.config.constant.AmmoType;
 
+import game.config.constant.ShipConfig;
+
 public interface Ship extends Spawnable {
     public void initWeaponsAndAmmo();
 
@@ -44,14 +46,14 @@ public interface Ship extends Spawnable {
     public Weapon getWeapon();
 
     public void setWeapon(Weapon weapon);
-    
+
     public List<Weapon> getWeapons();
 
-	public void setWeapons(List<Weapon> weapons);
-	
-	public void addWeapon(Weapon weapon);
-	
-	public void selectWeapon(int index);
+    public void setWeapons(List<Weapon> weapons);
+
+    public void addWeapon(Weapon weapon);
+
+    public void selectWeapon(int index);
 	
 	public Map<AmmoType, Long> getAmmoCount();
 
@@ -87,9 +89,9 @@ public interface Ship extends Spawnable {
 
     public void setY(double y);
 
-    public String getShipType();
+    public ShipConfig getShipConfig();
 
-    public void setShipType(String shipType);
+    public void setShipConfig(ShipConfig shipType);
 
     public void increaseShieldPower();
 
@@ -107,9 +109,11 @@ public interface Ship extends Spawnable {
 
     public void addItemToCargo(SpawnableItem item);
 
-	boolean canShoot();
+    boolean canShoot();
+    
+    public void resetCarriage();
 
-	int getMaxCargoCapacity();
+    int getMaxCargoCapacity();
 
-	void setMaxCargoCapacity(int maxCargoCapacity);
+    void setMaxCargoCapacity(int maxCargoCapacity);
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import factory.AmmoBuilder;
 import game.config.constant.AmmoType;
 import game.config.constant.Bonuses;
-import game.config.constant.SpawnableItemType;
+import game.config.constant.ItemType;
 import game.config.constant.WeaponConfig;
 import game.datatype.PlayerData;
 import game.datatype.item.ItemParent;
@@ -14,7 +14,7 @@ import game.interfaces.Ammo;
 import game.interfaces.Weapon;
 
 public abstract class WeaponParent extends ItemParent implements Weapon {
-    private SpawnableItemType type;
+    private ItemType type;
     private AmmoType ammoType;
     private long shotCount;
     private double shotAngle;
@@ -23,12 +23,12 @@ public abstract class WeaponParent extends ItemParent implements Weapon {
     private double damage;
     
     @Override
-    public SpawnableItemType getType() {
+    public ItemType getType() {
     	return this.type;
     }
     
     @Override
-    public void setType(SpawnableItemType type) {
+    public void setType(ItemType type) {
     	this.type = type;
     }
 

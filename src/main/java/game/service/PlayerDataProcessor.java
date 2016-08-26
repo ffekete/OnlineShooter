@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import game.config.constant.GameConfig;
 import game.config.constant.Physics;
-import game.config.constant.ShipConfig;
 import game.controller.EventSender;
 import game.datahandler.HighScoreTable;
 import game.datahandler.ItemHandler;
@@ -112,11 +111,15 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
 
                         PlayerData playerWhoKilledMe = playerPool.get(actualBullet.getPlayerId());
                         if (player.getIsAI()) {
-                            playerWhoKilledMe.increaseScore(GameConfig.AI_SCORE_VALUE);
+                            if (player.getIsAsteroid()) {
+                                playerWhoKilledMe.increaseScore(GameConfig.ASTEROID_SCORE_VALUE);
+                            } else {
+                                playerWhoKilledMe.increaseScore(GameConfig.AI_SCORE_VALUE);
+                            }
                         } else {
-                        	/*
-                             * Save the killed player only if he/she has more than 0
-                             * points
+                            /*
+                             * Save the killed player only if he/she has more
+                             * than 0 points
                              */
                             if (player.getScore() > 0L) {
                                 highScores.addScore(new HighScore(player.getScore(), player.getName()));
@@ -124,7 +127,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                             playerWhoKilledMe.increaseScore(GameConfig.PLAYER_SCORE_VALUE);
                         }
                         highScores.addScore(new HighScore(playerWhoKilledMe.getScore(), playerWhoKilledMe.getName()));
-                        itemHandler.dropCargoToCoordinate(player.getSpaceShip().getCarriage(), player.getCoordinate());
+                        itemHandler.dropCargoToCoordinate(player.getSpaceShip(), player.getCoordinate());
                         player.kill();
                     } else {
                         eventSender.sendItemHitNotification(player.getSpaceShip());
@@ -215,13 +218,15 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                     && Math.abs(actualItem.getY() - player.getY()) < 10.0d;
 
             if (areaCheck) {
-                if (player.getIsAI() && player.getShipType() == ShipConfig.SHIP_TYPE_CARGOSHIP) {
+                if (player.getIsAI() && !player.getIsAsteroid()) {
                     player.getSpaceShip().addItemToCargo(actualItem);
-                } else {
+                } else if (!player.getIsAsteroid()) {
                     actualItem.applyEffect(player);
                 }
 
-                itemPool.remove(actualItem);
+                if (!player.getIsAsteroid()) {
+                    itemPool.remove(actualItem);
+                }
             }
         }
     }
@@ -235,12 +240,14 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                 player1.setShieldProtection(0L);
                 if (player1.decreaseHp(Physics.COLLISION_STRENGTH) < 0L) {
                     eventSender.sendItemDestroyedNotification(player1.getSpaceShip());
+                    itemHandler.dropCargoToCoordinate(player1.getSpaceShip(), player1.getCoordinate());
                     player1.kill();
 
                 }
                 player2.setShieldProtection(0L);
                 if (player2.decreaseHp(Physics.COLLISION_STRENGTH) < 1L) {
                     eventSender.sendItemDestroyedNotification(player2.getSpaceShip());
+                    itemHandler.dropCargoToCoordinate(player2.getSpaceShip(), player2.getCoordinate());
                     player2.kill();
                 }
             }

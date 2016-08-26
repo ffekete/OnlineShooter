@@ -1,7 +1,7 @@
 package game.datatype.weapon;
 
 import game.config.constant.AmmoType;
-import game.config.constant.SpawnableItemType;
+import game.config.constant.ItemType;
 import game.config.constant.WeaponConfig;
 import game.service.Spawner;
 
@@ -9,8 +9,8 @@ public class Shotgun extends WeaponParent {
 
     public Shotgun() {
         Spawner.spawn(this);
-        super.setName(SpawnableItemType.SHOTGUN.getVisibleName());
-		super.setType(SpawnableItemType.SHOTGUN);
+        super.setName(ItemType.SHOTGUN.getVisibleName());
+		super.setType(ItemType.SHOTGUN);
 		super.setAmmoType(AmmoType.CANISTER);
 		super.setShotCount(WeaponConfig.SHOTGUN_INIT_SHOT_COUNT);
 		super.setShotAngle(WeaponConfig.SHOTGUN_INIT_SHOT_ANGLE);

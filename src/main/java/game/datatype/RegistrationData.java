@@ -7,6 +7,8 @@ public class RegistrationData {
 
     private boolean isAI = false;
 
+    private boolean isAsteroid = false;
+
     public String getShipType() {
         return shipType;
     }
@@ -37,5 +39,13 @@ public class RegistrationData {
 
     public void setIsAI(boolean isAI) {
         this.isAI = isAI;
+    }
+
+    public boolean getIsAsteroid() {
+        return this.isAsteroid;
+    }
+
+    public void setIsAsteroid(boolean isAsteroid) {
+        this.isAsteroid = isAsteroid;
     }
 }

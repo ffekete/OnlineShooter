@@ -53,8 +53,11 @@ public class TaskScheduler {
 
         bulletDataProcessor.updateAmmoData();
 
-        // AI ship handler
+        // AI ship creation handler
         ai.updateAIData();
+        
+        // Asteroid ship creation handler
+        ai.updateAsteroidData();
 
         // handle player inactivity counters
         playerPool.updatePlayerPoolData();

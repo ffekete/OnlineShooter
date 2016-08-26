@@ -42,9 +42,11 @@ public class SentPlayerData {
 
     private boolean isAI;
 
+    private boolean isAsteroid;
+
     Weapon weapon;
 
-	List<Weapon> weapons;
+    List<Weapon> weapons;
 	
 	Map<AmmoType, Long> ammoCount;
 
@@ -63,14 +65,14 @@ public class SentPlayerData {
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
-    
-    public List<Weapon> getWeapons() {
-		return weapons;
-	}
 
-	public void setWeapons(List<Weapon> weapons) {
-		this.weapons = weapons;
-	}
+    public List<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public void setWeapons(List<Weapon> weapons) {
+        this.weapons = weapons;
+    }
 
     public Map<AmmoType, Long> getAmmoCount() {
 		return ammoCount;
@@ -89,7 +91,7 @@ public class SentPlayerData {
     }
 
     public String getShipType() {
-        return shipType;
+        return this.shipType;
     }
 
     public void setShipType(String shipType) {
@@ -234,5 +236,13 @@ public class SentPlayerData {
 
     public void setIsAI(boolean isAI) {
         this.isAI = isAI;
+    }
+
+    public boolean getIsAsteroid() {
+        return this.isAsteroid;
+    }
+
+    public void setIsAsteroid(boolean isAsteroid) {
+        this.isAsteroid = isAsteroid;
     }
 }

@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import game.config.constant.ShipConfig;
+import game.datatype.AIDao;
 import game.datatype.PlayerData;
 import game.datatype.RegistrationData;
 import game.entrypoint.Application;
@@ -25,16 +26,22 @@ public class AmmoPoolTest extends AbstractTestNGSpringContextTests {
     @Autowired
     AmmoPool ammoPool;
 
+    public AIDao aiDao;
+
     @BeforeMethod
     public void init() {
         RegistrationData data = new RegistrationData();
         data.setName("Test");
-        data.setShipType(ShipConfig.SHIP_TYPE_INTERCEPTOR);
+        data.setShipType(ShipConfig.INTERCEPTOR.getType());
         data.setColor("#0000FF");
         data.setIsAI(false);
         playerPool.registerPlayer(1L, data);
 
         ammoPool.clear();
+
+        aiDao = new AIDao();
+        aiDao.setIsAi(false);
+        aiDao.setIsAsteroid(false);
     }
 
     @Test
@@ -55,14 +62,14 @@ public class AmmoPoolTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testShouldAddSpecificAmmoToPool() {
-        PlayerData player = new PlayerData(999L, "Test", ShipConfig.SHIP_TYPE_QUICKSILVER, false);
+        PlayerData player = new PlayerData(999L, "Test", ShipConfig.QUICKSILVER, aiDao);
         List<Ammo> list = player.createAmmoWithPlayerWeapon();
         Assert.assertEquals(list.get(0).getPlayerId(), 999L);
     }
 
     @Test
     public void testShouldAddOneSpecificAmmo() {
-        PlayerData player = new PlayerData(987L, "Test", ShipConfig.SHIP_TYPE_QUICKSILVER, false);
+        PlayerData player = new PlayerData(987L, "Test", ShipConfig.QUICKSILVER, aiDao);
         List<Ammo> list = player.createAmmoWithPlayerWeapon();
         ammoPool.add(list.get(0));
         Assert.assertEquals(ammoPool.poolSize(), 1);
@@ -70,7 +77,7 @@ public class AmmoPoolTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testShouldRemoveOneAmmo() {
-        PlayerData player = new PlayerData(987L, "Test", ShipConfig.SHIP_TYPE_QUICKSILVER, false);
+        PlayerData player = new PlayerData(987L, "Test", ShipConfig.QUICKSILVER, aiDao);
         List<Ammo> list1 = player.createAmmoWithPlayerWeapon();
         List<Ammo> list2 = player.createAmmoWithPlayerWeapon();
         ammoPool.add(list1.get(0));

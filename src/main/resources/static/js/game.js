@@ -423,7 +423,7 @@ function drawExplosion(x, y){
 
 function drawShip(x, y, angle, name, hp, maxHp, invulnerability, shield, maxShield, color, type){
 	canvasContext.save();
-
+	
 	canvasContext.fillStyle = "red";	
 	canvasContext.translate(x,y);
 	canvasContext.rotate(angle * Math.PI / 180);
@@ -431,21 +431,22 @@ function drawShip(x, y, angle, name, hp, maxHp, invulnerability, shield, maxShie
 	canvasContext.fillStyle = "red";
 	canvasContext.fillRect(-41,-11,8,22);
 	
-	
 	canvasContext.fillStyle = "green";
 	canvasContext.fillRect(-39,-10,5,(21*hp/maxHp));
 	
 	if(invulnerability == false){
-		canvasContext.strokeStyle = "black";
+	   	canvasContext.strokeStyle = "black";
 	}
 	else
 	{
 		canvasContext.strokeStyle = "aqua";
 	}
 	
-	canvasContext.beginPath();
-	canvasContext.arc(-5, 0, 17, 0, (2 * shield / maxShield)*Math.PI);
-	canvasContext.stroke();
+	if(type != "Asteroid"){
+	    canvasContext.beginPath();
+	    canvasContext.arc(-5, 0, 17, 0, (2 * shield / maxShield)*Math.PI);
+	    canvasContext.stroke();
+	}
 	
 	canvasContext.save();
 	
@@ -494,6 +495,24 @@ function drawShip(x, y, angle, name, hp, maxHp, invulnerability, shield, maxShie
 		canvasContext.bezierCurveTo(-15,-3,15,-3,15,0);
 		canvasContext.bezierCurveTo(15,3,-15,3,-7,3);
 		canvasContext.lineTo(-7, 15);
+		canvasContext.closePath();
+	}
+	
+	if(type === "Cargoship")
+	{
+		canvasContext.beginPath();
+		canvasContext.moveTo(-13, -10);
+		canvasContext.lineTo(-18, 0);
+		canvasContext.lineTo(-13, 10);
+		canvasContext.lineTo(10, 0);
+		canvasContext.lineTo(-13, -10);
+		canvasContext.closePath();
+	}
+	
+	if(type === "Asteroid")
+	{
+		canvasContext.beginPath();
+		canvasContext.arc(0, 0, 15, 0, 2*Math.PI);
 		canvasContext.closePath();
 	}
 	
@@ -576,6 +595,9 @@ function updateCanwasSize(){
 
 function updateMouseCoordinates(event){
 	playerData.mouseX = event.clientX - 10; // -10: the canvas starts with
-											// coordinates x = 10,y = 10
+											// coordinates
+											// x =
+											// 10,y
+											// = 10
 	playerData.mouseY = event.clientY - 10;
 }

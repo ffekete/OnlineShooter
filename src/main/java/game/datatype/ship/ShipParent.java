@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import factory.CarriageBuilder;
+import game.config.constant.ShipConfig;
 import game.config.constant.AmmoType;
 import game.interfaces.Shield;
 import game.interfaces.Ship;
@@ -15,7 +17,7 @@ import game.interfaces.Weapon;
 public abstract class ShipParent implements Ship {
 	private Point2D coordinate;
 	private String color;
-	private String shipType;
+    private ShipConfig shipConfig;
 	private Shield shield;
 	private long hp;
 	private long maxHp;
@@ -131,13 +133,13 @@ public abstract class ShipParent implements Ship {
 	}
 
 	@Override
-	public String getShipType() {
-		return shipType;
+    public ShipConfig getShipConfig() {
+        return shipConfig;
 	}
 
 	@Override
-	public void setShipType(String shipType) {
-		this.shipType = shipType;
+    public void setShipConfig(ShipConfig shipConfig) {
+        this.shipConfig = shipConfig;
 	}
 
 	@Override
@@ -177,13 +179,13 @@ public abstract class ShipParent implements Ship {
 
 	@Override
 	public List<Weapon> getWeapons() {
-		return weapons;
-	}
+        return weapons;
+    }
 
 	@Override
-	public void setWeapons(List<Weapon> weapons) {
-		this.weapons = weapons;
-	}
+    public void setWeapons(List<Weapon> weapons) {
+        this.weapons = weapons;
+    }
 
 	@Override
 	public void addWeapon(Weapon weapon) {
@@ -205,7 +207,7 @@ public abstract class ShipParent implements Ship {
 	}
 
 	@Override
-	public void selectWeapon(int index) {
+    public void selectWeapon(int index) {
 		if (index >= 0 && index < this.weapons.size()) {
 			this.weapon = this.weapons.get(index);
 		}
@@ -322,5 +324,10 @@ public abstract class ShipParent implements Ship {
 		if (this.carriage.size() < this.maxCargoCapacity) {
 			this.carriage.add(item);
 		}
+    }
+
+    @Override
+    public void resetCarriage() {
+        this.setCarriage(CarriageBuilder.buildHalfCargo(this.maxCargoCapacity));
 	}
 }

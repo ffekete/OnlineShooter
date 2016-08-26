@@ -11,44 +11,43 @@ public class CargoShip extends ShipParent {
 
     public CargoShip(List<SpawnableItem> carriage) {
         super.setCoordinate(new Point2D.Double(0, 0));
-        this.setHp(ShipConfig.CARGO_SHIP_MAX_HP);
-        this.setMaxHp(ShipConfig.CARGO_SHIP_MAX_HP);
-        super.setSpeed(ShipConfig.CARGO_SHIP_INIT_SPEED);
-        super.setMaxSpeed(ShipConfig.CARGO_SHIP_INIT_SPEED);
-        super.setManeuverability(ShipConfig.CARGO_SHIP_INIT_MANEUVERABILITY);
-        super.setShipType(ShipConfig.SHIP_TYPE_CARGOSHIP);
-        super.setMaxCargoCapacity(ShipConfig.CARGO_SHIP_CARGO_CAPACITY);
+        super.setShipConfig(ShipConfig.CARGOSHIP);
+        super.setMaxCargoCapacity(ShipConfig.CARGOSHIP.getCargoCapacity());
         super.setCarriage(carriage);
+        this.resetSpeed();
+        this.resetManeuverability();
+        this.resetHp();
+        this.setMaxHp(ShipConfig.CARGOSHIP.getMaxHP());
     }
 
     @Override
     public void setHp(long hp) {
         long hpToSet = hp;
-        if (hpToSet > ShipConfig.CARGO_SHIP_MAX_HP)
-            hpToSet = ShipConfig.CARGO_SHIP_MAX_HP;
+        if (hpToSet > ShipConfig.CARGOSHIP.getMaxHP())
+            hpToSet = ShipConfig.CARGOSHIP.getMaxHP();
         super.setHp(hpToSet);
     }
 
     @Override
     public void resetHp() {
-        this.setHp(ShipConfig.CARGO_SHIP_MAX_HP);
+        this.setHp(ShipConfig.CARGOSHIP.getMaxHP());
     }
 
     @Override
     public void resetManeuverability() {
-        super.setManeuverability(ShipConfig.CARGO_SHIP_INIT_MANEUVERABILITY);
+        super.setManeuverability(ShipConfig.CARGOSHIP.getInitManeuverability());
     }
 
     @Override
     public void resetSpeed() {
-        super.setSpeed(ShipConfig.CARGO_SHIP_INIT_SPEED);
-        super.setMaxSpeed(ShipConfig.CARGO_SHIP_INIT_SPEED);
+        super.setSpeed(ShipConfig.CARGOSHIP.getInitMaxSpeed());
+        super.setMaxSpeed(ShipConfig.CARGOSHIP.getInitMaxSpeed());
     }
 
     @Override
     public void initWeaponsAndAmmo() {
     	super.initWeaponsAndAmmo();
-    	super.addWeapon(WeaponFactory.createWeapon(ShipConfig.CARGO_SHIP_INIT_WEAPON));
+        super.addWeapon(WeaponFactory.createWeapon(ShipConfig.CARGOSHIP.getInitWeapon()));
         super.selectWeapon(0);
     }
 }

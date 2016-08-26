@@ -3,14 +3,14 @@
 import java.util.List;
 
 import game.config.constant.AmmoType;
-import game.config.constant.SpawnableItemType;
+import game.config.constant.ItemType;
 import game.datatype.PlayerData;
 
 public interface Weapon {
 	
-	public SpawnableItemType getType();
+	public ItemType getType();
 	
-	public void setType(SpawnableItemType type);
+	public void setType(ItemType type);
 	
     public AmmoType getAmmoType();
 

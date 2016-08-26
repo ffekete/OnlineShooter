@@ -3,7 +3,7 @@ package factory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import game.config.constant.SpawnableItemType;
+import game.config.constant.ItemType;
 import game.datatype.shield.AtomShield;
 import game.datatype.shield.NormalShield;
 import game.datatype.shield.PlasmaShield;
@@ -13,24 +13,24 @@ public class ShieldFactoryTest {
 
     @Test
     public void testShouldCreateNormalShield() {
-        Shield shield = ShieldFactory.createShield(SpawnableItemType.NORMAL_SHIELD);
+        Shield shield = ShieldFactory.createShield(ItemType.NORMAL_SHIELD);
         Assert.assertTrue(shield instanceof NormalShield);
     }
 
     @Test
     public void testShouldCreatePlasmaShield() {
-        Shield shield = ShieldFactory.createShield(SpawnableItemType.PLASMA_SHIELD);
+        Shield shield = ShieldFactory.createShield(ItemType.PLASMA_SHIELD);
         Assert.assertTrue(shield instanceof PlasmaShield);
     }
 
     @Test
     public void testShouldCreateAtomShield() {
-        Shield shield = ShieldFactory.createShield(SpawnableItemType.ATOM_SHIELD);
+        Shield shield = ShieldFactory.createShield(ItemType.ATOM_SHIELD);
         Assert.assertTrue(shield instanceof AtomShield);
     }
 
     @Test(expectedExceptions = RuntimeException.class)
     public void testShouldThrowRuntimeException() {
-        ShieldFactory.createShield(SpawnableItemType.DOUBLE_GATLING_GUN);
+        ShieldFactory.createShield(ItemType.DOUBLE_GATLING_GUN);
     }
 }
