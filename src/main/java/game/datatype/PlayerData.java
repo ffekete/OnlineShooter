@@ -48,6 +48,8 @@ public class PlayerData {
 
     private boolean isAsteroid;
 
+    private String shipType;
+
     private Map<Bonuses, Long> bonuses;
 
     public PlayerData(PlayerData player2) {
@@ -69,15 +71,17 @@ public class PlayerData {
         this.setCoordinate(player2.getCoordinate());
         this.setPreviousAngle(this.getPreviousAngle());
         this.setCanvas(player2.getCanvas());
+        this.setShipType(player2.getShipType());
     }
 
-    public PlayerData(Long id, String name, String shipType, AIDao aiDao) {
+    public PlayerData(Long id, String name, ShipConfig shipConfig, AIDao aiDao) {
         this.name = name;
         this.id = id;
         this.isAI = aiDao.getIsAi();
         this.isAsteroid = aiDao.getIsAsteroid();
 
-        this.spaceShip = ShipFactory.createShip(shipType);
+        this.spaceShip = ShipFactory.createShip(shipConfig);
+        this.setShipType(shipConfig.getType());
         Spawner.spawn(this.getSpaceShip());
 
         this.getSpaceShip().setAngle(0.0d);
@@ -93,7 +97,7 @@ public class PlayerData {
         this.getSpaceShip().resetSpeed();
         this.score = 0l;
 
-        if (shipType == ShipConfig.SHIP_TYPE_ASTEROID) {
+        if (shipConfig == ShipConfig.ASTEROID) {
             this.setInvulnerabilityCounter(0L);
             this.getSpaceShip().setShield(ShieldFactory.createShield(ItemType.NO_SHIELD));
         } else {
@@ -224,12 +228,12 @@ public class PlayerData {
         return name;
     }
 
-    public String getShipType() {
-        return this.getSpaceShip().getShipType();
+    public ShipConfig getShipConfig() {
+        return this.getSpaceShip().getShipConfig();
     }
 
-    public void setShipType(String shipType) {
-        this.getSpaceShip().setShipType(shipType);
+    public void setShipConfig(ShipConfig shipConfig) {
+        this.getSpaceShip().setShipConfig(shipConfig);
     }
 
     public String getColor() {
@@ -273,7 +277,7 @@ public class PlayerData {
     }
 
     public Ship cloneSpaceShip(Ship spaceShip) {
-        Ship spaceShipToStore = ShipFactory.createShip(spaceShip.getShipType());
+        Ship spaceShipToStore = ShipFactory.createShip(spaceShip.getShipConfig());
 
         spaceShipToStore.setColor(spaceShip.getColor());
         spaceShipToStore.setCoordinate(spaceShip.getCoordinate());
@@ -282,7 +286,7 @@ public class PlayerData {
         spaceShipToStore.setMaxSpeed(spaceShip.getMaxSpeed());
         spaceShipToStore.setShield(spaceShip.getShield());
         spaceShipToStore.setAngle(spaceShip.getAngle());
-        spaceShipToStore.setShipType(spaceShip.getShipType());
+        spaceShipToStore.setShipConfig(spaceShip.getShipConfig());
         spaceShipToStore.setSpeed(spaceShip.getSpeed());
         spaceShipToStore.setWeapon(spaceShip.getWeapon());
         spaceShipToStore.setCarriage(spaceShip.getCarriage());
@@ -487,5 +491,13 @@ public class PlayerData {
 
     public void setIsAsteroid(boolean isAsteroid) {
         this.isAsteroid = isAsteroid;
+    }
+
+    public String getShipType() {
+        return shipType;
+    }
+
+    public void setShipType(String shipType) {
+        this.shipType = shipType;
     }
 }

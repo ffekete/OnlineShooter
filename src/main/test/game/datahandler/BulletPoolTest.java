@@ -32,7 +32,7 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests {
     public void init() {
         RegistrationData data = new RegistrationData();
         data.setName("Test");
-        data.setShipType(ShipConfig.SHIP_TYPE_INTERCEPTOR);
+        data.setShipType(ShipConfig.INTERCEPTOR.getType());
         data.setColor("#0000FF");
         data.setIsAI(false);
         playerPool.registerPlayer(1L, data);
@@ -62,14 +62,14 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testShouldAddSpecificBulletToPool() {
-        PlayerData player = new PlayerData(999L, "Test", ShipConfig.SHIP_TYPE_QUICKSILVER, aiDao);
+        PlayerData player = new PlayerData(999L, "Test", ShipConfig.QUICKSILVER, aiDao);
         List<Bullet> list = player.createBulletWithPlayerWeapon();
         Assert.assertEquals(list.get(0).getPlayerId(), 999L);
     }
 
     @Test
     public void testShouldAddOneSpecificBullet() {
-        PlayerData player = new PlayerData(987L, "Test", ShipConfig.SHIP_TYPE_QUICKSILVER, aiDao);
+        PlayerData player = new PlayerData(987L, "Test", ShipConfig.QUICKSILVER, aiDao);
         List<Bullet> list = player.createBulletWithPlayerWeapon();
         bulletPool.add(list.get(0));
         Assert.assertEquals(bulletPool.poolSize(), 1);
@@ -77,7 +77,7 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testShouldRemoveOneBullet() {
-        PlayerData player = new PlayerData(987L, "Test", ShipConfig.SHIP_TYPE_QUICKSILVER, aiDao);
+        PlayerData player = new PlayerData(987L, "Test", ShipConfig.QUICKSILVER, aiDao);
         List<Bullet> list1 = player.createBulletWithPlayerWeapon();
         List<Bullet> list2 = player.createBulletWithPlayerWeapon();
         bulletPool.add(list1.get(0));

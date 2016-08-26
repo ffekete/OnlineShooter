@@ -9,6 +9,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import game.config.constant.GameConfig;
+import game.config.constant.ShipConfig;
 import game.datatype.AIDao;
 import game.datatype.PlayerData;
 import game.datatype.weapon.GatlingGun;
@@ -38,7 +39,7 @@ public class BulletDataProcessorTest extends AbstractTestNGSpringContextTests {
         AIDao aiDao = new AIDao();
         aiDao.setIsAi(false);
         aiDao.setIsAsteroid(false);
-        player = new PlayerData(200L, "P01", "Deltawing", aiDao);
+        player = new PlayerData(200L, "P01", ShipConfig.DELTAWING, aiDao);
     }
 
     @DataProvider(name = "bulletDataInput")

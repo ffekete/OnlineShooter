@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import game.config.constant.GameConfig;
 import game.config.constant.ItemType;
+import game.config.constant.ShipConfig;
 import game.datatype.AIDao;
 import game.datatype.PlayerData;
 
@@ -22,7 +23,7 @@ public class IncreaseScoreTest {
         AIDao aiDao = new AIDao();
         aiDao.setIsAi(false);
         aiDao.setIsAsteroid(false);
-        PlayerData player = new PlayerData(6L, "P00", "Interceptor", aiDao);
+        PlayerData player = new PlayerData(6L, "P00", ShipConfig.INTERCEPTOR, aiDao);
 
         long initScore = player.getScore();
 

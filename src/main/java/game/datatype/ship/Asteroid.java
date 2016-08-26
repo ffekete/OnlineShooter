@@ -11,31 +11,29 @@ public class Asteroid extends ShipParent {
 
     public Asteroid() {
         super.setCoordinate(new Point2D.Double(0, 0));
-        this.setHp(ShipConfig.ASTEROID_MAX_HP);
-        this.setMaxHp(ShipConfig.ASTEROID_MAX_HP);
-        randomSpeed = this.generateRandomSpeed();
-        super.setSpeed(randomSpeed);
-        super.setMaxSpeed(randomSpeed);
-        super.setManeuverability(ShipConfig.ASTEROID_MANEUVERABILITY);
-        super.setShipType(ShipConfig.SHIP_TYPE_ASTEROID);
+        super.setShipConfig(ShipConfig.ASTEROID);
+        this.resetSpeed();
+        this.resetManeuverability();
+        this.resetHp();
+        this.setMaxHp(ShipConfig.ASTEROID.getMaxHP());
     }
 
     @Override
     public void setHp(long hp) {
         long hpToSet = hp;
-        if (hpToSet > ShipConfig.ASTEROID_MAX_HP)
-            hpToSet = ShipConfig.ASTEROID_MAX_HP;
+        if (hpToSet > ShipConfig.ASTEROID.getMaxHP())
+            hpToSet = ShipConfig.ASTEROID.getMaxHP();
         super.setHp(hpToSet);
     }
 
     @Override
     public void resetHp() {
-        this.setHp(ShipConfig.ASTEROID_MAX_HP);
+        this.setHp(ShipConfig.ASTEROID.getMaxHP());
     }
 
     @Override
     public void resetManeuverability() {
-        super.setManeuverability(ShipConfig.ASTEROID_MANEUVERABILITY);
+        super.setManeuverability(ShipConfig.ASTEROID.getInitManeuverability());
     }
 
     @Override
@@ -48,11 +46,12 @@ public class Asteroid extends ShipParent {
     @Override
     public void initWeapons() {
         super.initWeapons();
-        super.addWeapon(WeaponFactory.createWeapon(ShipConfig.ASTEROID_INIT_WEAPON));
+        super.addWeapon(WeaponFactory.createWeapon(ShipConfig.ASTEROID.getInitWeapon()));
         super.selectWeapon(0);
     }
 
     private double generateRandomSpeed() {
-        return RandomGenerator.getRandomInRange(ShipConfig.ASTEROID_INIT_MIN_SPEED, ShipConfig.ASTEROID_INIT_MAX_SPEED);
+        return RandomGenerator.getRandomInRange(ShipConfig.ASTEROID.getInitMinSpeed(),
+                ShipConfig.ASTEROID.getInitMaxSpeed());
     }
 }

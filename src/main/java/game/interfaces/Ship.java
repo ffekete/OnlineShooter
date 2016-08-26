@@ -3,6 +3,8 @@ package game.interfaces;
 import java.awt.geom.Point2D;
 import java.util.List;
 
+import game.config.constant.ShipConfig;
+
 public interface Ship extends Spawnable {
     public void initWeapons();
 
@@ -68,9 +70,9 @@ public interface Ship extends Spawnable {
 
     public void setY(double y);
 
-    public String getShipType();
+    public ShipConfig getShipConfig();
 
-    public void setShipType(String shipType);
+    public void setShipConfig(ShipConfig shipType);
 
     public void increaseShieldPower();
 

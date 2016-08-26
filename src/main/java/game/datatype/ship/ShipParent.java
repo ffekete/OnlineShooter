@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import factory.CarriageBuilder;
+import game.config.constant.ShipConfig;
 import game.interfaces.Shield;
 import game.interfaces.Ship;
 import game.interfaces.SpawnableItem;
@@ -13,7 +14,7 @@ import game.interfaces.Weapon;
 public abstract class ShipParent implements Ship {
     private Point2D coordinate;
     private String color;
-    private String shipType;
+    private ShipConfig shipConfig;
     private Shield shield;
     private long hp;
     private long maxHp;
@@ -124,13 +125,13 @@ public abstract class ShipParent implements Ship {
     }
 
     @Override
-    public String getShipType() {
-        return shipType;
+    public ShipConfig getShipConfig() {
+        return shipConfig;
     }
 
     @Override
-    public void setShipType(String shipType) {
-        this.shipType = shipType;
+    public void setShipConfig(ShipConfig shipConfig) {
+        this.shipConfig = shipConfig;
     }
 
     @Override

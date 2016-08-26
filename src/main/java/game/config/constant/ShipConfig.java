@@ -1,42 +1,66 @@
 package game.config.constant;
 
-public class ShipConfig {
-    public final static String SHIP_TYPE_CARGOSHIP = "Cargoship";
-    public final static String SHIP_TYPE_DELTAWING = "Deltawing";
-    public final static String SHIP_TYPE_INTERCEPTOR = "Interceptor";
-    public final static String SHIP_TYPE_MERCURY = "Mercury";
-    public final static String SHIP_TYPE_QUICKSILVER = "Quicksilver";
-    public final static String SHIP_TYPE_ASTEROID = "Asteroid";
+public enum ShipConfig {
+    QUICKSILVER("Quicksilver", 15L, 6.0D, 6.0D, 10.0D, ItemType.SHOTGUN, 0),
+    MERCURY("Merqury", 25L, 5.0D, 5.0D, 12.0D, ItemType.GATLING_GUN, 0),
+    INTERCEPTOR("Interceptor", 20L, 7.0D, 7.0D, 14.0D, ItemType.LASER_CANNON, 0),
+    DELTAWING("Deltawing", 11L, 9.0D, 9.0D, 16.0D, ItemType.DOUBLE_GATLING_GUN, 0),
+    CARGOSHIP("Cargoship", 40L, 3.0D, 3.0D, 16.0D, ItemType.NO_WEAPON, 10),
+    ASTEROID("Asteroid", 100L, 3.0D, 7.0D, 1.0D, ItemType.NO_WEAPON, 0);
 
-    public final static long QUICKSILVER_MAX_HP = 15L;
-    public final static double QUICKSILVER_INIT_SPEED = 6.0D;
-    public final static double QUICKSILVER_INIT_MANEUVERABILITY = 10.0D;
-    public final static ItemType QUICKSILVER_INIT_WEAPON = ItemType.SHOTGUN;
+    private final String type;
+    private final Long maxHP;
+    private final double initMinSpeed;
+    private final double initMaxSpeed;
+    private final double initManeuverability;
+    private final ItemType initWeapon;
+    private final int cargoCapacity;
 
-    public final static long MERCURY_MAX_HP = 25L;
-    public final static double MERCURY_INIT_SPEED = 5.0D;
-    public final static double MERCURY_INIT_MANEUVERABILITY = 12.0D;
-    public final static ItemType MERCURY_INIT_WEAPON = ItemType.GATLING_GUN;
+    private ShipConfig(String type, Long maxHP, double initMinSpeed, double initMaxSpeed, double initManeuverability,
+            ItemType initWeapon, int cargoCapacity) {
+        this.type = type;
+        this.maxHP = maxHP;
+        this.initMaxSpeed = initMaxSpeed;
+        this.initMinSpeed = initMinSpeed;
+        this.initManeuverability = initManeuverability;
+        this.initWeapon = initWeapon;
+        this.cargoCapacity = cargoCapacity;
+    }
 
-    public final static long INTERCEPTOR_MAX_HP = 20L;
-    public final static double INTERCEPTOR_INIT_SPEED = 7.0D;
-    public final static double INTERCEPTOR_INIT_MANEUVERABILITY = 14.0D;
-    public final static ItemType INTERCEPTOR_INIT_WEAPON = ItemType.LASER_CANNON;
+    public String getType() {
+        return this.type;
+    }
 
-    public final static long DELTAWING_MAX_HP = 11L;
-    public final static double DELTAWING_INIT_SPEED = 9.0D;
-    public final static double DELTAWING_INIT_MANEUVERABILITY = 16.0D;
-    public final static ItemType DELTAWING_INIT_WEAPON = ItemType.DOUBLE_GATLING_GUN;
+    public Long getMaxHP() {
+        return this.maxHP;
+    }
 
-    public final static long CARGO_SHIP_MAX_HP = 40L;
-    public final static double CARGO_SHIP_INIT_SPEED = 3.0D;
-    public final static double CARGO_SHIP_INIT_MANEUVERABILITY = 16.0D;
-    public final static ItemType CARGO_SHIP_INIT_WEAPON = ItemType.NO_WEAPON;
-    public final static int CARGO_SHIP_CARGO_CAPACITY = 10;
+    public double getInitMinSpeed() {
+        return this.initMinSpeed;
+    }
 
-    public final static long ASTEROID_MAX_HP = 100L;
-    public final static double ASTEROID_INIT_MIN_SPEED = 3.0D;
-    public final static double ASTEROID_INIT_MAX_SPEED = 7.0D;
-    public final static double ASTEROID_MANEUVERABILITY = 1.0D;
-    public final static ItemType ASTEROID_INIT_WEAPON = ItemType.GATLING_GUN;
+    public double getInitMaxSpeed() {
+        return this.initMaxSpeed;
+    }
+
+    public double getInitManeuverability() {
+        return this.initManeuverability;
+    }
+
+    public ItemType getInitWeapon() {
+        return this.initWeapon;
+    }
+
+    public int getCargoCapacity() {
+        return this.cargoCapacity;
+    }
+
+    public static ShipConfig getSpecificConfig(String shipType) {
+        for (ShipConfig sc : values()) {
+            if (shipType.equals(sc.getType())) {
+                return sc;
+            }
+        }
+        throw new NullPointerException("Bad ship type! (" + shipType + ")");
+    }
 }

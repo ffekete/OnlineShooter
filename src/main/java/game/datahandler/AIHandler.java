@@ -22,7 +22,7 @@ public class AIHandler implements AIBase {
         if (!playerPool.hasAIOnScreen()) {
             RegistrationData data = new RegistrationData();
             data.setName(AIConfig.AI);
-            data.setShipType(ShipConfig.SHIP_TYPE_CARGOSHIP);
+            data.setShipType(ShipConfig.CARGOSHIP.getType());
             data.setColor("orange");
             data.setIsAI(true);
             playerPool.registerPlayer(PlayerIdGenerator.generateNewId(), data);
@@ -34,7 +34,7 @@ public class AIHandler implements AIBase {
         if (playerPool.numberOfAsteroidsOnScreen() < AIConfig.MAX_ASTEROIDS_ON_SCREEN) {
             RegistrationData data = new RegistrationData();
             data.setName(this.generateRandomAsteroidName());
-            data.setShipType(ShipConfig.SHIP_TYPE_ASTEROID);
+            data.setShipType(ShipConfig.ASTEROID.getType());
             data.setColor("grey");
             data.setIsAI(true);
             data.setIsAsteroid(true);

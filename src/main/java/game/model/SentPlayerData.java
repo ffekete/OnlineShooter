@@ -79,7 +79,7 @@ public class SentPlayerData {
     }
 
     public String getShipType() {
-        return shipType;
+        return this.shipType;
     }
 
     public void setShipType(String shipType) {

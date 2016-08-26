@@ -7,8 +7,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import factory.ShipFactory;
+import game.config.constant.ShipConfig;
 import game.config.constant.WeaponConfig;
-import game.datatype.bullet.LaserBeam;
 import game.interfaces.Ship;
 
 public class LaserBeamTest {
@@ -137,7 +137,7 @@ public class LaserBeamTest {
             double objectY, boolean expHitDetected) {
         LaserBeam laserBeam = new LaserBeam(new Point2D.Double(beamStartX, beamStartY), angle, 0, 0);
 
-        Ship ship = ShipFactory.createShip("Interceptor");
+        Ship ship = ShipFactory.createShip(ShipConfig.INTERCEPTOR);
         ship.setCoordinate(objectX, objectY);
         boolean hitDetected = laserBeam.hits(ship);
         Assert.assertEquals(hitDetected, expHitDetected);

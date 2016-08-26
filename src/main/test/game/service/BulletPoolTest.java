@@ -33,7 +33,7 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests {
         AIDao aiDao = new AIDao();
         aiDao.setIsAi(false);
         aiDao.setIsAsteroid(false);
-        player = new PlayerData(200L, "P01", ShipConfig.SHIP_TYPE_DELTAWING, aiDao);
+        player = new PlayerData(200L, "P01", ShipConfig.DELTAWING, aiDao);
     }
 
     @Test
@@ -42,7 +42,7 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests {
         AIDao aiDao = new AIDao();
         aiDao.setIsAi(false);
         aiDao.setIsAsteroid(false);
-        PlayerData player2 = new PlayerData(300L, "P02", ShipConfig.SHIP_TYPE_DELTAWING, aiDao);
+        PlayerData player2 = new PlayerData(300L, "P02", ShipConfig.DELTAWING, aiDao);
         player2.setWeapon(new GatlingGun());
         player.setWeapon(new GatlingGun()); // setting this weapon for player
                                             // ship because it will create one

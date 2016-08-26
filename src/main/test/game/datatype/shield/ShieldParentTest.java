@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import game.config.constant.ShieldConfig;
+import game.config.constant.ShipConfig;
 import game.datatype.AIDao;
 import game.datatype.PlayerData;
 
@@ -12,18 +13,26 @@ public class ShieldParentTest {
 
     public AIDao aiDao;
 
+    public PlayerData player;
+    public NormalShield ns;
+    public PlasmaShield ps;
+    public AtomShield as;
+
     @BeforeMethod
     public void init() {
         aiDao = new AIDao();
         aiDao.setIsAi(false);
         aiDao.setIsAsteroid(false);
+
+        player = new PlayerData(1l, "P02", ShipConfig.INTERCEPTOR, aiDao);
+
+        ns = new NormalShield();
+        ps = new PlasmaShield();
+        as = new AtomShield();
     }
 
     @Test
     public void testShouldDecreaseShieldProtection_AS() {
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor", aiDao);
-        AtomShield as = new AtomShield();
-
         as.applyEffect(player);
 
         player.getShield().decreaseProtection(10L);
@@ -33,10 +42,6 @@ public class ShieldParentTest {
 
     @Test
     public void testShouldDecreaseShieldProtection_PS() {
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor", aiDao);
-
-        PlasmaShield ps = new PlasmaShield();
-
         ps.applyEffect(player);
 
         player.getShield().decreaseProtection(10L);
@@ -46,10 +51,6 @@ public class ShieldParentTest {
 
     @Test
     public void testShouldDecreaseShieldProtection_NS() {
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor", aiDao);
-
-        NormalShield ns = new NormalShield();
-
         ns.applyEffect(player);
 
         player.getShield().decreaseProtection(10L);
@@ -59,9 +60,6 @@ public class ShieldParentTest {
 
     @Test
     public void testShouldDecreaseShieldProtection_AS_0() {
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor", aiDao);
-        AtomShield as = new AtomShield();
-
         as.applyEffect(player);
 
         player.getShield().decreaseProtection(ShieldConfig.ATOM_SHIELD_PROTECTION + 1L);
@@ -71,10 +69,6 @@ public class ShieldParentTest {
 
     @Test
     public void testShouldDecreaseShieldProtection_PS_0() {
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor", aiDao);
-
-        PlasmaShield ps = new PlasmaShield();
-
         ps.applyEffect(player);
 
         player.getShield().decreaseProtection(ShieldConfig.PLASMA_SHIELD_PROTECTION + 1L);
@@ -84,10 +78,6 @@ public class ShieldParentTest {
 
     @Test
     public void testShouldDecreaseShieldProtection_NS_0() {
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor", aiDao);
-
-        NormalShield ns = new NormalShield();
-
         ns.applyEffect(player);
 
         player.getShield().decreaseProtection(ShieldConfig.NORMAL_SHIELD_PROTECTION + 1L);
@@ -96,9 +86,6 @@ public class ShieldParentTest {
     }
 
     public void testShouldIncreaseShieldProtection_AS() {
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor", aiDao);
-        AtomShield as = new AtomShield();
-
         as.applyEffect(player);
 
         player.getShield().setProtection(0L);
@@ -110,10 +97,6 @@ public class ShieldParentTest {
 
     @Test
     public void testShouldIncreaseShieldProtection_PS() {
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor", aiDao);
-
-        PlasmaShield ps = new PlasmaShield();
-
         ps.applyEffect(player);
         player.getShield().setProtection(0L);
         player.getShield().increaseShieldPower();
@@ -123,10 +106,6 @@ public class ShieldParentTest {
 
     @Test
     public void testShouldIncreaseShieldProtection_NS() {
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor", aiDao);
-
-        NormalShield ns = new NormalShield();
-
         ns.applyEffect(player);
         player.getShield().setProtection(0L);
 
@@ -136,9 +115,6 @@ public class ShieldParentTest {
     }
 
     public void testShouldIncreaseShieldProtection_AS_MAX() {
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor", aiDao);
-        AtomShield as = new AtomShield();
-
         as.applyEffect(player);
 
         player.getShield().setProtection(ShieldConfig.ATOM_SHIELD_PROTECTION);
@@ -150,10 +126,6 @@ public class ShieldParentTest {
 
     @Test
     public void testShouldIncreaseShieldProtection_PS_MAX() {
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor", aiDao);
-
-        PlasmaShield ps = new PlasmaShield();
-
         ps.applyEffect(player);
         player.getShield().setProtection(ShieldConfig.PLASMA_SHIELD_PROTECTION);
         player.getShield().increaseShieldPower();
@@ -163,10 +135,6 @@ public class ShieldParentTest {
 
     @Test
     public void testShouldIncreaseShieldProtection_NS_MAX() {
-        PlayerData player = new PlayerData(1l, "P02", "Interceptor", aiDao);
-
-        NormalShield ns = new NormalShield();
-
         ns.applyEffect(player);
         player.getShield().setProtection(ShieldConfig.NORMAL_SHIELD_PROTECTION);
 
