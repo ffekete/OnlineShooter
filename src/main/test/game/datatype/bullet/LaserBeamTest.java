@@ -7,8 +7,9 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import factory.ShipFactory;
+import game.config.constant.AmmoConfig;
 import game.config.constant.ShipConfig;
-import game.config.constant.WeaponConfig;
+import game.datatype.ammo.LaserBeam;
 import game.interfaces.Ship;
 
 public class LaserBeamTest {
@@ -21,16 +22,16 @@ public class LaserBeamTest {
     public Object[][] angleSourceForY() {
         return new Object[][] {
                 // X Y angle expectedXCoordinate
-                { 0.0D, 0.0D, 90.0D, WeaponConfig.LASER_BEAM_LENGTH }, { 0.0D, 0.0D, 180.0D, 0.0D },
-                { 0.0D, 0.0D, 270.0D, -1.0 * WeaponConfig.LASER_BEAM_LENGTH }, { 0.0D, 0.0D, 0.0D, 0.0D } };
+                { 0.0D, 0.0D, 90.0D, AmmoConfig.LASER_BEAM_INIT_LENGTH }, { 0.0D, 0.0D, 180.0D, 0.0D },
+                { 0.0D, 0.0D, 270.0D, -1.0 * AmmoConfig.LASER_BEAM_INIT_LENGTH }, { 0.0D, 0.0D, 0.0D, 0.0D } };
     }
 
     @DataProvider(name = "angleSourceForX")
     public Object[][] angleSourceForX() {
         return new Object[][] {
                 // X Y angle expectedYCoordinate
-                { 0.0D, 0.0D, 90.0D, 0.0D }, { 0.0D, 0.0D, 180.0D, -1.0 * WeaponConfig.LASER_BEAM_LENGTH },
-                { 0.0D, 0.0D, 270.0D, 0.0D }, { 0.0D, 0.0D, 0.0D, WeaponConfig.LASER_BEAM_LENGTH } };
+                { 0.0D, 0.0D, 90.0D, 0.0D }, { 0.0D, 0.0D, 180.0D, -1.0 * AmmoConfig.LASER_BEAM_INIT_LENGTH },
+                { 0.0D, 0.0D, 270.0D, 0.0D }, { 0.0D, 0.0D, 0.0D, AmmoConfig.LASER_BEAM_INIT_LENGTH } };
     }
 
     @Test(dataProvider = "angleSourceForX")
@@ -61,75 +62,75 @@ public class LaserBeamTest {
     public Object[][] hitCheckerInputList() {
         return new Object[][] {
                 /* hit, 0 degree */
-                { 0.0D, 0.0D, 0.0d, -WeaponConfig.LASER_BEAM_HIT_RADIUS, 0.0d, true },
-                { 0.0D, 0.0D, 0.0d, WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS, 0.0d, true },
-                { 0.0D, 0.0D, 0.0d, (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d,
-                        WeaponConfig.LASER_BEAM_HIT_RADIUS, true },
-                { 0.0D, 0.0D, 0.0d, (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d,
-                        -WeaponConfig.LASER_BEAM_HIT_RADIUS, true },
+                { 0.0D, 0.0D, 0.0d, -AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS, 0.0d, true },
+                { 0.0D, 0.0D, 0.0d, AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS, 0.0d, true },
+                { 0.0D, 0.0D, 0.0d, (AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS) / 2.0d,
+                        AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS, true },
+                { 0.0D, 0.0D, 0.0d, (AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS) / 2.0d,
+                        -AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS, true },
 
                 /* hit, 90 degree */
-                { 0.0D, 0.0D, 90.0d, 0.0d, -WeaponConfig.LASER_BEAM_HIT_RADIUS, true },
-                { 0.0D, 0.0D, 90.0d, 0.0d, WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS, true },
-                { 0.0D, 0.0D, 90.0d, WeaponConfig.LASER_BEAM_HIT_RADIUS,
-                        (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d, true },
-                { 0.0D, 0.0D, 90.0d, -WeaponConfig.LASER_BEAM_HIT_RADIUS,
-                        (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d, true },
+                { 0.0D, 0.0D, 90.0d, 0.0d, -AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS, true },
+                { 0.0D, 0.0D, 90.0d, 0.0d, AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS, true },
+                { 0.0D, 0.0D, 90.0d, AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS,
+                        (AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS) / 2.0d, true },
+                { 0.0D, 0.0D, 90.0d, -AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS,
+                        (AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS) / 2.0d, true },
 
                 /* hit, 180 degree */
-                { 0.0D, 0.0D, 180.0d, WeaponConfig.LASER_BEAM_HIT_RADIUS, 0.0d, true },
-                { 0.0D, 0.0D, 180.0d, -WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS, 0.0d,
+                { 0.0D, 0.0D, 180.0d, AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS, 0.0d, true },
+                { 0.0D, 0.0D, 180.0d, -AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS, 0.0d,
                         true },
-                { 0.0D, 0.0D, 180.0d, -(WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d,
-                        -WeaponConfig.LASER_BEAM_HIT_RADIUS, true },
-                { 0.0D, 0.0D, 180.0d, -(WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d,
-                        WeaponConfig.LASER_BEAM_HIT_RADIUS, true },
+                { 0.0D, 0.0D, 180.0d, -(AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS) / 2.0d,
+                        -AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS, true },
+                { 0.0D, 0.0D, 180.0d, -(AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS) / 2.0d,
+                        AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS, true },
 
                 /* hit, 270 degree */
-                { 0.0D, 0.0D, 270.0d, 0.0d, WeaponConfig.LASER_BEAM_HIT_RADIUS, true },
-                { 0.0D, 0.0D, 270.0d, 0.0d, -(WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS),
+                { 0.0D, 0.0D, 270.0d, 0.0d, AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS, true },
+                { 0.0D, 0.0D, 270.0d, 0.0d, -(AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS),
                         true },
-                { 0.0D, 0.0D, 270.0d, WeaponConfig.LASER_BEAM_HIT_RADIUS - 0.001d,
-                        -((WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d), true },
-                { 0.0D, 0.0D, 270.0d, -WeaponConfig.LASER_BEAM_HIT_RADIUS,
-                        -((WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d), true },
+                { 0.0D, 0.0D, 270.0d, AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS - 0.001d,
+                        -((AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS) / 2.0d), true },
+                { 0.0D, 0.0D, 270.0d, -AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS,
+                        -((AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS) / 2.0d), true },
 
                 /* no hit, 0 degree */
-                { 0.0D, 0.0D, 0.0d, -1.0 - WeaponConfig.LASER_BEAM_HIT_RADIUS, 0.0d, false },
-                { 0.0D, 0.0D, 0.0d, WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS + 1.0d, 0.0d,
+                { 0.0D, 0.0D, 0.0d, -1.0 - AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS, 0.0d, false },
+                { 0.0D, 0.0D, 0.0d, AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS + 1.0d, 0.0d,
                         false },
-                { 0.0D, 0.0D, 0.0d, (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d,
-                        WeaponConfig.LASER_BEAM_HIT_RADIUS + 1.0d, false },
-                { 0.0D, 0.0D, 0.0d, (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d,
-                        -WeaponConfig.LASER_BEAM_HIT_RADIUS - 1.0d, false },
+                { 0.0D, 0.0D, 0.0d, (AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS) / 2.0d,
+                        AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS + 1.0d, false },
+                { 0.0D, 0.0D, 0.0d, (AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS) / 2.0d,
+                        -AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS - 1.0d, false },
 
                 /* no hit, 90 degree */
-                { 0.0D, 0.0D, 90.0d, 0.0d, -1.0 - WeaponConfig.LASER_BEAM_HIT_RADIUS, false },
-                { 0.0D, 0.0D, 90.0d, 0.0d, WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS + 1.0d,
+                { 0.0D, 0.0D, 90.0d, 0.0d, -1.0 - AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS, false },
+                { 0.0D, 0.0D, 90.0d, 0.0d, AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS + 1.0d,
                         false },
-                { 0.0D, 0.0D, 90.0d, WeaponConfig.LASER_BEAM_HIT_RADIUS + 1.0d,
-                        (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d, false },
-                { 0.0D, 0.0D, 90.0d, -WeaponConfig.LASER_BEAM_HIT_RADIUS - 1.0d,
-                        (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d, false },
+                { 0.0D, 0.0D, 90.0d, AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS + 1.0d,
+                        (AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS) / 2.0d, false },
+                { 0.0D, 0.0D, 90.0d, -AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS - 1.0d,
+                        (AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS) / 2.0d, false },
 
                 /* no hit, 180 degree */
-                { 0.0D, 0.0D, 180.0d, 1.0 + WeaponConfig.LASER_BEAM_HIT_RADIUS, 0.0d, false },
+                { 0.0D, 0.0D, 180.0d, 1.0 + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS, 0.0d, false },
                 { 0.0D, 0.0D, 180.0d,
-                        -1.0 * (WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS + 1.0d), 0.0d,
+                        -1.0 * (AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS + 1.0d), 0.0d,
                         false },
-                { 0.0D, 0.0D, 180.0d, -((WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d),
-                        WeaponConfig.LASER_BEAM_HIT_RADIUS + 1.0d, false },
-                { 0.0D, 0.0D, 180.0d, -((WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d),
-                        -WeaponConfig.LASER_BEAM_HIT_RADIUS - 1.0d, false },
+                { 0.0D, 0.0D, 180.0d, -((AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS) / 2.0d),
+                        AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS + 1.0d, false },
+                { 0.0D, 0.0D, 180.0d, -((AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS) / 2.0d),
+                        -AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS - 1.0d, false },
 
                 /* no hit, 270 degree */
-                { 0.0D, 0.0D, 270.0d, 0.0d, -(-1.0 - WeaponConfig.LASER_BEAM_HIT_RADIUS), false },
+                { 0.0D, 0.0D, 270.0d, 0.0d, -(-1.0 - AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS), false },
                 { 0.0D, 0.0D, 270.0d, 0.0d,
-                        -(WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS + 1.0d), false },
-                { 0.0D, 0.0D, 270.0d, WeaponConfig.LASER_BEAM_HIT_RADIUS + 1.0d,
-                        -((WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d), false },
-                { 0.0D, 0.0D, 270.0d, -WeaponConfig.LASER_BEAM_HIT_RADIUS - 1.0d,
-                        -((WeaponConfig.LASER_BEAM_LENGTH + WeaponConfig.LASER_BEAM_HIT_RADIUS) / 2.0d), false }, };
+                        -(AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS + 1.0d), false },
+                { 0.0D, 0.0D, 270.0d, AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS + 1.0d,
+                        -((AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS) / 2.0d), false },
+                { 0.0D, 0.0D, 270.0d, -AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS - 1.0d,
+                        -((AmmoConfig.LASER_BEAM_INIT_LENGTH + AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS) / 2.0d), false }, };
     }
 
     @Test(dataProvider = "hitCheckerInputList")

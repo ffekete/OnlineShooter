@@ -12,11 +12,8 @@ import game.datatype.PlayerData;
 public class IncreaseDamageTest {
 
     IncreaseDamage id = new IncreaseDamage();
-
-    @BeforeMethod
-    public void initPlayer() {
-
-    }
+    
+    PlayerData player;
 
     @Test
     public void testShouldCreateInitDamage() {
@@ -30,13 +27,10 @@ public class IncreaseDamageTest {
         aiDao.setIsAsteroid(false);
         PlayerData player = new PlayerData(1L, "P01", ShipConfig.DELTAWING, aiDao);
 
-        /* Given */
-        long initDamage = player.getWeapon().getDamage();
-
         /* When */
         id.applyEffect(player);
 
         /* Then */
-        Assert.assertEquals(player.getWeapon().getDamage(), initDamage + 1L);
+        Assert.assertEquals(player.getWeapon().getDamage(), player.getWeapon().getAmmoType().getDamage(1));
     }
 }

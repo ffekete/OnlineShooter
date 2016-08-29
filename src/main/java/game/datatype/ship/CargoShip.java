@@ -45,8 +45,8 @@ public class CargoShip extends ShipParent {
     }
 
     @Override
-    public void initWeapons() {
-        super.initWeapons();
+    public void initWeaponsAndAmmo() {
+    	super.initWeaponsAndAmmo();
         super.addWeapon(WeaponFactory.createWeapon(ShipConfig.CARGOSHIP.getInitWeapon()));
         super.selectWeapon(0);
     }

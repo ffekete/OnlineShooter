@@ -43,8 +43,8 @@ public class Interceptor extends ShipParent {
     }
 
     @Override
-    public void initWeapons() {
-        super.initWeapons();
+    public void initWeaponsAndAmmo() {
+    	super.initWeaponsAndAmmo();
         super.addWeapon(WeaponFactory.createWeapon(ShipConfig.INTERCEPTOR.getInitWeapon()));
         super.selectWeapon(0);
     }

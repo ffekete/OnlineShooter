@@ -11,7 +11,7 @@ var STAGE_Y_MAX_LIMIT = 0;
 
 var stompClient = null;
 
-var shootBulletSwitch=false;
+var shootAmmoSwitch = false;
 
 var canvas;
 var canvasContext;
@@ -215,7 +215,7 @@ function draw(){
 			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.maxHp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue, actualShip.color, actualShip.shipType);
 		}
 	}
-	drawBullets();
+	drawAmmo();
 	drawItems();
 	drawExplosions();
 	drawMinimap();
@@ -254,14 +254,14 @@ function messageArrived(message){
 	console.log(message.body);
 }
 
-function shootBullet(){
-	stompClient.send("/app/createBullet", {}, playerData.id);
+function shootAmmo(){
+	stompClient.send("/app/createAmmo", {}, playerData.id);
 }
 
 function playerDataArrived(playerDataFromServer){
 	var parsedPlayerData = JSON.parse(playerDataFromServer.body);
 	playerData.shipAngle = parsedPlayerData.shipAngle;	
-	playerData.bullets = parsedPlayerData.visibleBullets;
+	playerData.ammo = parsedPlayerData.visibleAmmo;
 	playerData.otherPlayers = parsedPlayerData.visiblePlayers;
 	playerData.x = parsedPlayerData.x;
 	playerData.y = parsedPlayerData.y;
@@ -278,6 +278,7 @@ function playerDataArrived(playerDataFromServer){
 	playerData.shipType = parsedPlayerData.shipType;
 	playerData.weapon = parsedPlayerData.weapon;
 	playerData.weapons = parsedPlayerData.weapons;
+	playerData.ammoCount = parsedPlayerData.ammoCount;
 	playerData.allPlayersPosition = parsedPlayerData.allPlayersPosition;
 }
 
@@ -321,7 +322,7 @@ function drawPlayerData(){
 	canvasContext.fillText("Shield amount: " + playerData.shieldAmount, fromLeft, fromTop + verticalSpace * 3);
 	canvasContext.fillText("Weapon: " + playerData.weapon.name, fromLeft, fromTop + verticalSpace * 4);
 	canvasContext.fillText("RoF: " + playerData.weapon.rateOfFire, fromLeft, fromTop + verticalSpace * 5);
-	canvasContext.fillText("Ammo: " + playerData.weapon.ammo, fromLeft, fromTop + verticalSpace * 6);
+	canvasContext.fillText("Ammo: " + playerData.ammoCount[playerData.weapon.ammoType], fromLeft, fromTop + verticalSpace * 6);
 	canvasContext.fillText("Damage: " + playerData.weapon.damage, fromLeft, fromTop + verticalSpace * 7);
 }
 
@@ -330,7 +331,7 @@ function drawWeaponKeys(){
 	var fromTop = 15;
 	var verticalSpace = 10;
 	$.each(playerData.weapons, function(index, weapon) {
-		canvasContext.fillText("[" + (index + 1) + "]: " + weapon.name +" (" + weapon.ammo + ")", fromLeft, fromTop + verticalSpace * index);
+		canvasContext.fillText("[" + (index + 1) + "]: " + weapon.name +" (" + playerData.ammoCount[weapon.ammoType] + ")", fromLeft, fromTop + verticalSpace * index);
 	});
 }
 
@@ -376,22 +377,22 @@ function drawItems(){
 	canvasContext.restore();
 }
 
-function drawBullets(){
+function drawAmmo(){
 	canvasContext.save();
 	
-	for(var bullets in playerData.bullets){
+	for(var ammo in playerData.ammo){
 		canvasContext.beginPath();
 		
-		var dx = playerData.x - playerData.bullets[bullets].x;
-		var dy = playerData.y - playerData.bullets[bullets].y;
+		var dx = playerData.x - playerData.ammo[ammo].x;
+		var dy = playerData.y - playerData.ammo[ammo].y;
 		
-		var physicalRepresentation = JSON.parse(playerData.bullets[bullets].physicalRepresentation);
+		var physicalRepresentation = JSON.parse(playerData.ammo[ammo].physicalRepresentation);
 		
 		canvasContext.save();
 		
 		if(physicalRepresentation.shape === "circle"){
 			canvasContext.fillStyle = "black";
-			canvasContext.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 2, 0, 2*Math.PI);
+			canvasContext.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, physicalRepresentation.radius, 0, 2*Math.PI);
 			canvasContext.fill();
 		}
 		
@@ -556,17 +557,17 @@ function start(){
 	canvasContext.rotate(0*Math.PI*180);
 	
 	setInterval(function(){
-		if (shootBulletSwitch){
-			stompClient.send("/app/createBullet", {}, playerData.id);
+		if (shootAmmoSwitch){
+			stompClient.send("/app/createAmmo", {}, playerData.id);
 		}
 	}, 50);
 
 	$('#gameArea').mousedown(function(){
-		shootBulletSwitch = true;
+		shootAmmoSwitch = true;
 	});
 
 	$('#gameArea').mouseup(function(){
-		shootBulletSwitch = false;
+		shootAmmoSwitch = false;
 	});
 	
 	$(document).keypress(function(e){

@@ -2,10 +2,12 @@ package game.model;
 
 import java.awt.geom.Point2D;
 import java.util.List;
+import java.util.Map;
 
+import game.config.constant.AmmoType;
 import game.datatype.MinimapDao;
 import game.datatype.PlayerData;
-import game.interfaces.Bullet;
+import game.interfaces.Ammo;
 import game.interfaces.SpawnableItem;
 import game.interfaces.Weapon;
 
@@ -29,15 +31,15 @@ public class SentPlayerData {
 
     private Long connectionId;
 
-    private Long shipHp;
+    private double shipHp;
 
-    private Long shipMaxHp;
+    private double shipMaxHp;
 
     private boolean invulnerable;
 
-    private long shieldAmount;
+    private double shieldAmount;
 
-    private long maxShieldAmount;
+    private double maxShieldAmount;
 
     private boolean isAI;
 
@@ -46,10 +48,12 @@ public class SentPlayerData {
     Weapon weapon;
 
     List<Weapon> weapons;
+	
+	Map<AmmoType, Long> ammoCount;
 
     List<PlayerData> visiblePlayers;
 
-    List<Bullet> visibleBullets;
+    List<Ammo> visibleAmmo;
 
     List<MinimapDao> allPlayersPosition;
 
@@ -73,7 +77,15 @@ public class SentPlayerData {
         this.weapons = weapons;
     }
 
-    public boolean isInvulnerable() {
+    public Map<AmmoType, Long> getAmmoCount() {
+		return ammoCount;
+	}
+
+	public void setAmmoCount(Map<AmmoType, Long> ammoCount) {
+		this.ammoCount = ammoCount;
+	}
+
+	public boolean isInvulnerable() {
         return invulnerable;
     }
 
@@ -113,15 +125,15 @@ public class SentPlayerData {
         this.color = color;
     }
 
-    public Long getShipHp() {
+    public double getShipHp() {
         return shipHp;
     }
 
-    public void setShipHp(Long shipHp) {
+    public void setShipHp(double shipHp) {
         this.shipHp = shipHp;
     }
 
-    public Long getShipMaxHp() {
+    public double getShipMaxHp() {
         return this.shipMaxHp;
     }
 
@@ -129,11 +141,11 @@ public class SentPlayerData {
         this.shipMaxHp = shipMaxHp;
     }
 
-    public long getMaxShieldAmount() {
+    public double getMaxShieldAmount() {
         return maxShieldAmount;
     }
 
-    public void setMaxShieldAmount(long maxShieldAmount) {
+    public void setMaxShieldAmount(double maxShieldAmount) {
         this.maxShieldAmount = maxShieldAmount;
     }
 
@@ -197,19 +209,19 @@ public class SentPlayerData {
         this.connectionId = connectionId;
     }
 
-    public List<Bullet> getVisibleBullets() {
-        return visibleBullets;
+    public List<Ammo> getVisibleAmmo() {
+        return visibleAmmo;
     }
 
     public List<PlayerData> getVisiblePlayers() {
         return visiblePlayers;
     }
 
-    public long getShieldAmount() {
+    public double getShieldAmount() {
         return shieldAmount;
     }
 
-    public void setShieldAmount(long shieldAmount) {
+    public void setShieldAmount(double shieldAmount) {
         this.shieldAmount = shieldAmount;
     }
 
@@ -217,8 +229,8 @@ public class SentPlayerData {
         this.visiblePlayers = visiblePlayers;
     }
 
-    public void setVisibleBullets(List<Bullet> visibleBullets) {
-        this.visibleBullets = visibleBullets;
+    public void setVisibleAmmo(List<Ammo> visibleAmmo) {
+        this.visibleAmmo = visibleAmmo;
     }
 
     public boolean getIsAI() {

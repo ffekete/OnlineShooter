@@ -15,16 +15,16 @@ import game.datatype.AIDao;
 import game.datatype.PlayerData;
 import game.datatype.RegistrationData;
 import game.entrypoint.Application;
-import game.interfaces.Bullet;
+import game.interfaces.Ammo;
 
 @ContextConfiguration(classes = { Application.class })
-public class BulletPoolTest extends AbstractTestNGSpringContextTests {
+public class AmmoPoolTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     PlayerPool playerPool;
 
     @Autowired
-    BulletPool bulletPool;
+    AmmoPool ammoPool;
 
     public AIDao aiDao;
 
@@ -37,7 +37,7 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests {
         data.setIsAI(false);
         playerPool.registerPlayer(1L, data);
 
-        bulletPool.clear();
+        ammoPool.clear();
 
         aiDao = new AIDao();
         aiDao.setIsAi(false);
@@ -45,44 +45,44 @@ public class BulletPoolTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testShouldAddOneBullet() {
-        bulletPool.addBullet(563L);
-        Assert.assertEquals(bulletPool.poolSize(), 1);
+    public void testShouldAddOneAmmo() {
+        ammoPool.addAmmo(1L);
+        Assert.assertEquals(ammoPool.poolSize(), 1);
     }
 
     @Test
-    public void testShouldGiveBackBulletIterator() {
-        Assert.assertTrue(bulletPool.getIterator() instanceof Iterator);
+    public void testShouldGiveBackAmmoIterator() {
+        Assert.assertTrue(ammoPool.getIterator() instanceof Iterator);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testShouldThrowIllegalArgumentExceptionForBadIndex() {
-        bulletPool.getNthBullet(999);
+        ammoPool.getNthAmmo(999);
     }
 
     @Test
-    public void testShouldAddSpecificBulletToPool() {
+    public void testShouldAddSpecificAmmoToPool() {
         PlayerData player = new PlayerData(999L, "Test", ShipConfig.QUICKSILVER, aiDao);
-        List<Bullet> list = player.createBulletWithPlayerWeapon();
+        List<Ammo> list = player.createAmmoWithPlayerWeapon();
         Assert.assertEquals(list.get(0).getPlayerId(), 999L);
     }
 
     @Test
-    public void testShouldAddOneSpecificBullet() {
+    public void testShouldAddOneSpecificAmmo() {
         PlayerData player = new PlayerData(987L, "Test", ShipConfig.QUICKSILVER, aiDao);
-        List<Bullet> list = player.createBulletWithPlayerWeapon();
-        bulletPool.add(list.get(0));
-        Assert.assertEquals(bulletPool.poolSize(), 1);
+        List<Ammo> list = player.createAmmoWithPlayerWeapon();
+        ammoPool.add(list.get(0));
+        Assert.assertEquals(ammoPool.poolSize(), 1);
     }
 
     @Test
-    public void testShouldRemoveOneBullet() {
+    public void testShouldRemoveOneAmmo() {
         PlayerData player = new PlayerData(987L, "Test", ShipConfig.QUICKSILVER, aiDao);
-        List<Bullet> list1 = player.createBulletWithPlayerWeapon();
-        List<Bullet> list2 = player.createBulletWithPlayerWeapon();
-        bulletPool.add(list1.get(0));
-        bulletPool.add(list2.get(0));
-        bulletPool.remove(list1.get(0));
-        Assert.assertEquals(bulletPool.poolSize(), 1);
+        List<Ammo> list1 = player.createAmmoWithPlayerWeapon();
+        List<Ammo> list2 = player.createAmmoWithPlayerWeapon();
+        ammoPool.add(list1.get(0));
+        ammoPool.add(list2.get(0));
+        ammoPool.remove(list1.get(0));
+        Assert.assertEquals(ammoPool.poolSize(), 1);
     }
 }
