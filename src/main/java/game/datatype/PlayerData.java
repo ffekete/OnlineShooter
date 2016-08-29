@@ -510,4 +510,12 @@ public class PlayerData {
     public void setShipType(String shipType) {
         this.shipType = shipType;
     }
+    
+	public double getHitRadius() {
+		return this.getSpaceShip().getHitRadius();
+	}
+
+	public void setHitRadius(double hitRadius) {
+		this.getSpaceShip().setHitRadius(hitRadius);
+	}
 }

@@ -14,7 +14,7 @@ public class Deltawing extends ShipParent {
         this.resetManeuverability();
         this.resetHp();
         this.setMaxHp(ShipConfig.DELTAWING.getMaxHP());
-
+        this.setHitRadius(getShipConfig().getHitRadius());
     }
 
     @Override

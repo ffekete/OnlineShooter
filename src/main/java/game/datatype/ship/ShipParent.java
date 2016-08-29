@@ -31,6 +31,7 @@ public abstract class ShipParent implements Ship {
 	private double maneuverability;
 	private List<SpawnableItem> carriage;
 	private int maxCargoCapacity = 0;
+	private double hitRadius;
 
 	public ShipParent() {
 		this.coordinate = new Point2D.Double(0, 0);
@@ -329,5 +330,15 @@ public abstract class ShipParent implements Ship {
     @Override
     public void resetCarriage() {
         this.setCarriage(CarriageBuilder.buildHalfCargo(this.maxCargoCapacity));
+	}
+
+    @Override
+	public double getHitRadius() {
+		return hitRadius;
+	}
+
+    @Override
+	public void setHitRadius(double hitRadius) {
+		this.hitRadius = hitRadius;
 	}
 }

@@ -49,4 +49,13 @@ public abstract class ItemParent implements SpawnableItem {
     public double getAngle() {
         return this.angle;
     }
+    
+    @Override
+	public double getHitRadius() {
+		return 0;
+	}
+
+    @Override
+	public void setHitRadius(double hitRadius) {
+	}
 }
