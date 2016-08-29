@@ -16,6 +16,9 @@ var shootBulletSwitch=false;
 var canvas;
 var canvasContext;
 
+var MINIMAP_WIDTH = 200;
+var MINIMAP_HEIGHT = 200;
+
 /*
  * Array of particles (global variable)
  */
@@ -190,7 +193,6 @@ function draw(){
 	
 	drawBackground();
 	drawBorder();
-	drawMinimap();
 	
 	if(playerData.respawnTime == 0){
 		drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.name, playerData.hp, playerData.maxHp, playerData.invulnerable, playerData.shieldAmount, playerData.maxShieldAmount, playerData.color, playerData.shipType);
@@ -216,10 +218,10 @@ function draw(){
 	drawBullets();
 	drawItems();
 	drawExplosions();
+	drawMinimap();
 	drawHighScores();
 	drawPlayerData();
 	drawWeaponKeys();
-	updateMinimap();
 }
 
 function connect() {
@@ -276,6 +278,7 @@ function playerDataArrived(playerDataFromServer){
 	playerData.shipType = parsedPlayerData.shipType;
 	playerData.weapon = parsedPlayerData.weapon;
 	playerData.weapons = parsedPlayerData.weapons;
+	playerData.allPlayersPosition = parsedPlayerData.allPlayersPosition;
 }
 
 function drawBorder(){
@@ -545,7 +548,6 @@ function start(){
 	canvasContext = canvas.getContext("2d");
 	
 	drawBorder();
-	drawMinimap();
 	connect();
 	setInterval(draw, 5);
 	setInterval(updatePlayerData, 10);
@@ -607,18 +609,49 @@ function drawMinimap() {
 	canvasContext.save();
 	
 	canvasContext.beginPath();
-	canvasContext.arc(screen_x-110, screen_y-110, 100, 0, 2*Math.PI);
+	canvasContext.moveTo(screen_x-10-MINIMAP_WIDTH,screen_y-10-MINIMAP_HEIGHT);
+	canvasContext.lineTo(screen_x-10,screen_y-10-MINIMAP_HEIGHT);
+	canvasContext.lineTo(screen_x-10,screen_y-10);
+	canvasContext.lineTo(screen_x-10-MINIMAP_WIDTH,screen_y-10);
+	canvasContext.lineTo(screen_x-10-MINIMAP_WIDTH,screen_y-10-MINIMAP_HEIGHT);
 	canvasContext.fillStyle = "white";
 	canvasContext.fill();
-	canvasContext.arc(screen_x-110, screen_y-110, 100, 0, 2*Math.PI);
+	canvasContext.moveTo(screen_x-10-MINIMAP_WIDTH,screen_y-10-MINIMAP_HEIGHT);
+	canvasContext.lineTo(screen_x-10,screen_y-10-MINIMAP_HEIGHT);
+	canvasContext.lineTo(screen_x-10,screen_y-10);
+	canvasContext.lineTo(screen_x-10-MINIMAP_WIDTH,screen_y-10);
+	canvasContext.lineTo(screen_x-10-MINIMAP_WIDTH,screen_y-10-MINIMAP_HEIGHT);
 	canvasContext.strokeStyle = "black";
     canvasContext.stroke();
 	canvasContext.closePath();
 
 	canvasContext.restore();
+	
+	if(playerData.allPlayersPosition){
+		for(var i in playerData.allPlayersPosition){
+			var ship = playerData.allPlayersPosition[i];
+			placeOnMinimap(ship.x, ship.y, ship.color);
+		}
+	}
 }
 
-function updateMinimap() {
+function placeOnMinimap(mX, mY, color){
+	stageWidth = STAGE_X_MAX_LIMIT - STAGE_X_MIN_LIMIT;
+	stageHeight = STAGE_Y_MAX_LIMIT - STAGE_Y_MIN_LIMIT;
+	halfWidth = stageWidth / 2;
+	halfHeight = stageHeight / 2;
 	
+	xPercent = (halfWidth  + mX) / stageWidth * 100;
+	yPercent = (halfHeight + mY) / stageHeight * 100;
+	
+	canvasContext.save();
+	
+	canvasContext.beginPath();
+	canvasContext.rect(screen_x - 10-MINIMAP_WIDTH + (xPercent*2) - 2, screen_y - 10-MINIMAP_HEIGHT + (yPercent*2) - 2, 4, 4);
+	canvasContext.fillStyle = color;
+	canvasContext.fill();
+	canvasContext.closePath();
+	
+	canvasContext.restore();
 }
 

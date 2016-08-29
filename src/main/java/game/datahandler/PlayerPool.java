@@ -14,6 +14,7 @@ import game.config.constant.ConnectionPreferences;
 import game.config.constant.ShipConfig;
 import game.connection.ConnectionPool;
 import game.datatype.HighScore;
+import game.datatype.MinimapDao;
 import game.datatype.PlayerData;
 import game.datatype.RegistrationData;
 import game.interfaces.PlayerPoolMap;
@@ -133,6 +134,18 @@ public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
         }
 
         return visiblePlayers;
+    }
+
+    public List<MinimapDao> getAllPlayersPosition() {
+        ArrayList<MinimapDao> allPlayers = new ArrayList<MinimapDao>();
+
+        for (Long id : this.getAll()) {
+            PlayerData currentPlayer = this.get(id);
+            MinimapDao mDao = new MinimapDao(currentPlayer.getX(), currentPlayer.getY(), currentPlayer.getColor());
+            allPlayers.add(mDao);
+        }
+
+        return allPlayers;
     }
 
     @Override

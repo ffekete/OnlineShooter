@@ -3,6 +3,7 @@ package game.model;
 import java.awt.geom.Point2D;
 import java.util.List;
 
+import game.datatype.MinimapDao;
 import game.datatype.PlayerData;
 import game.interfaces.Bullet;
 import game.interfaces.SpawnableItem;
@@ -49,6 +50,8 @@ public class SentPlayerData {
     List<PlayerData> visiblePlayers;
 
     List<Bullet> visibleBullets;
+
+    List<MinimapDao> allPlayersPosition;
 
     public Long getId() {
         return id;
@@ -232,5 +235,13 @@ public class SentPlayerData {
 
     public void setIsAsteroid(boolean isAsteroid) {
         this.isAsteroid = isAsteroid;
+    }
+
+    public List<MinimapDao> getAllPlayersPosition() {
+        return this.allPlayersPosition;
+    }
+
+    public void setAllPlayersPosition(List<MinimapDao> allPlayersPosition) {
+        this.allPlayersPosition = allPlayersPosition;
     }
 }

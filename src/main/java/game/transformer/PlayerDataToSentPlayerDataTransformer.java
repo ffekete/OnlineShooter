@@ -55,6 +55,7 @@ public class PlayerDataToSentPlayerDataTransformer {
         sentPlayerData.setShipType(playerData.getShipConfig().getType());
         sentPlayerData.setIsAI(playerData.getIsAI());
         sentPlayerData.setIsAsteroid(playerData.getIsAsteroid());
+        sentPlayerData.setAllPlayersPosition(playerPool.getAllPlayersPosition());
         return sentPlayerData;
     }
 }
