@@ -19,6 +19,12 @@ var canvasContext;
 var MINIMAP_WIDTH = 200;
 var MINIMAP_HEIGHT = 200;
 
+var STAGE_MAX_WIDTH = 0;
+var STAGE_MAX_HEIGHT = 0;
+
+var STAGE_HALF_WIDTH = 0;
+var STAGE_HALF_HEIGHT = 0;
+
 /*
  * Array of particles (global variable)
  */
@@ -202,6 +208,7 @@ function draw(){
 	else
 	{
 		canvasContext.save();
+		canvasContext.fillStyle = "white";
 		canvasContext.textAlign ="center";
 		canvasContext.font="40px Arial";
 		canvasContext.fillText("Respawning in seconds: " + parseInt(playerData.respawnTime / 100 + 1), screen_x / 2 + 10, screen_y /2 +10);
@@ -217,6 +224,7 @@ function draw(){
 			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.maxHp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue, actualShip.color, actualShip.shipType);
 		}
 	}
+	
 	drawAmmo();
 	drawItems();
 	drawExplosions();
@@ -284,28 +292,8 @@ function playerDataArrived(playerDataFromServer){
 	playerData.allPlayersPosition = parsedPlayerData.allPlayersPosition;
 }
 
-function drawBorder(){
-	canvasContext.save();
-	
-	canvasContext.fillStyle = "black";
-	canvasContext.moveTo(1,1);
-	canvasContext.lineTo(1, canvas.height);
-	
-	canvasContext.moveTo(1, canvas.height);
-	canvasContext.lineTo(canvas.width, canvas.height);
-	
-	canvasContext.moveTo(canvas.width, canvas.height);
-	canvasContext.lineTo(canvas.width, 1);
-	
-	canvasContext.moveTo(canvas.width, 1);
-	canvasContext.lineTo(1, 1);
-	
-	canvasContext.stroke();
-	
-	canvasContext.restore();
-}
-
 function drawHighScores(){
+	canvasContext.fillStyle = "white";
 	canvasContext.fillText("High score table: ", 10 ,25);
 	var y = 35;
 	for(var i in playerData.highScores){
@@ -318,6 +306,7 @@ function drawPlayerData(){
 	var fromLeft = 150;
 	var fromTop = 15;
 	var verticalSpace = 10;
+	canvasContext.fillStyle = "white";
 	canvasContext.fillText("Player details: ", fromLeft, fromTop);
 	canvasContext.fillText("Ship type: " + playerData.shipType, fromLeft, fromTop + verticalSpace);
 	canvasContext.fillText("HP: " + playerData.hp, fromLeft, fromTop + verticalSpace * 2);
@@ -332,6 +321,7 @@ function drawWeaponKeys(){
 	var fromLeft = 300;
 	var fromTop = 15;
 	var verticalSpace = 10;
+	canvasContext.fillStyle = "white";
 	$.each(playerData.weapons, function(index, weapon) {
 		canvasContext.fillText("[" + (index + 1) + "]: " + weapon.name +" (" + playerData.ammoCount[weapon.ammoType] + ")", fromLeft, fromTop + verticalSpace * index);
 	});
@@ -339,23 +329,25 @@ function drawWeaponKeys(){
 
 function drawBackground(){
 	var img = $("#bg")[0];
-	for(var i = -5; i < 10; i++)
-	for(var j = -5; j < 10; j++)
-		{
-		canvasContext.drawImage(img, 0 + j* 250-(playerData.x % 250), 0 + i* 246-(playerData.y % 246));
+	for(var i = -3; i < 3; i++) {
+		for(var j = -3; j < 3; j++) {
+			canvasContext.drawImage(img, j* 1024-(playerData.x % 1024), i* 1024-(playerData.y % 1024));
 		}
+	}
 	
 	canvasContext.fillText("Your score: " + playerData.score, 10,15);
+}
+
+function drawBorder(){
 	canvasContext.save();
-	
 	var dx = Math.abs(playerData.x - STAGE_X_MIN_LIMIT);
 	var dy = Math.abs(playerData.y - STAGE_Y_MIN_LIMIT);
 	
 	var dxm = Math.abs(STAGE_X_MIN_LIMIT) + STAGE_X_MAX_LIMIT;
 	var dym = Math.abs(STAGE_Y_MIN_LIMIT) + STAGE_Y_MAX_LIMIT;
-	
-	
-	canvasContext.rect((screen_x / 2) - dx, (screen_y / 2) - dy, dxm, dym);
+
+	canvasContext.strokeStyle ="white";
+	canvasContext.strokeRect((screen_x / 2) - dx, (screen_y / 2) - dy, dxm, dym);
 	
 	canvasContext.restore();
 }
@@ -369,6 +361,8 @@ function drawItems(){
 		var dx = playerData.x - playerData.itemsOnScreen[items].x;
 		var dy = playerData.y - playerData.itemsOnScreen[items].y;
 		
+		canvasContext.fillStyle = "white";
+		canvasContext.strokeStyle = "white";
 		canvasContext.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 5, 0, 2*Math.PI);
 		canvasContext.stroke();
 		canvasContext.textAlign ="center";
@@ -393,7 +387,7 @@ function drawAmmo(){
 		canvasContext.save();
 		
 		if(physicalRepresentation.shape === "circle"){
-			canvasContext.fillStyle = "black";
+			canvasContext.fillStyle = "white";
 			canvasContext.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, physicalRepresentation.radius, 0, 2*Math.PI);
 			canvasContext.fill();
 		}
@@ -441,7 +435,7 @@ function drawShip(x, y, angle, name, hp, maxHp, invulnerability, shield, maxShie
 	canvasContext.fillRect(-39,-10,5,(21*hp/maxHp));
 	
 	if(invulnerability == false){
-	   	canvasContext.strokeStyle = "black";
+	   	canvasContext.strokeStyle = "white";
 	}
 	else
 	{
@@ -554,7 +548,6 @@ function start(){
 	canvas = $("#gameArea")[0];
 	canvasContext = canvas.getContext("2d");
 	
-	drawBorder();
 	connect();
 	setInterval(draw, 5);
 	setInterval(updatePlayerData, 10);
@@ -595,7 +588,11 @@ function start(){
 	STAGE_X_MAX_LIMIT = stageData.maxCoordinate.x;
 	STAGE_Y_MAX_LIMIT = stageData.maxCoordinate.y;
 	
-	$('#bg').css("display", "none"); // hide the background image
+	STAGE_MAX_WIDTH = STAGE_X_MAX_LIMIT - STAGE_X_MIN_LIMIT;
+	STAGE_MAX_HEIGHT = STAGE_Y_MAX_LIMIT - STAGE_Y_MIN_LIMIT;
+
+	STAGE_HALF_WIDTH = STAGE_MAX_WIDTH / 2;
+	STAGE_HALF_HEIGHT = STAGE_MAX_HEIGHT / 2;
 }
 
 function updateCanwasSize(){
@@ -615,22 +612,13 @@ function updateMouseCoordinates(event){
 function drawMinimap() {
 	canvasContext.save();
 	
-	canvasContext.beginPath();
-	canvasContext.moveTo(screen_x-10-MINIMAP_WIDTH,screen_y-10-MINIMAP_HEIGHT);
-	canvasContext.lineTo(screen_x-10,screen_y-10-MINIMAP_HEIGHT);
-	canvasContext.lineTo(screen_x-10,screen_y-10);
-	canvasContext.lineTo(screen_x-10-MINIMAP_WIDTH,screen_y-10);
-	canvasContext.lineTo(screen_x-10-MINIMAP_WIDTH,screen_y-10-MINIMAP_HEIGHT);
 	canvasContext.fillStyle = "white";
+	canvasContext.fillRect(screen_x-10-MINIMAP_WIDTH,screen_y-10-MINIMAP_HEIGHT,MINIMAP_WIDTH,MINIMAP_HEIGHT);
 	canvasContext.fill();
-	canvasContext.moveTo(screen_x-10-MINIMAP_WIDTH,screen_y-10-MINIMAP_HEIGHT);
-	canvasContext.lineTo(screen_x-10,screen_y-10-MINIMAP_HEIGHT);
-	canvasContext.lineTo(screen_x-10,screen_y-10);
-	canvasContext.lineTo(screen_x-10-MINIMAP_WIDTH,screen_y-10);
-	canvasContext.lineTo(screen_x-10-MINIMAP_WIDTH,screen_y-10-MINIMAP_HEIGHT);
+	
 	canvasContext.strokeStyle = "black";
+	canvasContext.strokeRect(screen_x-10-MINIMAP_WIDTH, screen_y-10-MINIMAP_HEIGHT, MINIMAP_WIDTH, MINIMAP_HEIGHT);
     canvasContext.stroke();
-	canvasContext.closePath();
 
 	canvasContext.restore();
 	
@@ -643,13 +631,8 @@ function drawMinimap() {
 }
 
 function placeOnMinimap(mX, mY, color){
-	stageWidth = STAGE_X_MAX_LIMIT - STAGE_X_MIN_LIMIT;
-	stageHeight = STAGE_Y_MAX_LIMIT - STAGE_Y_MIN_LIMIT;
-	halfWidth = stageWidth / 2;
-	halfHeight = stageHeight / 2;
-	
-	xPercent = (halfWidth  + mX) / stageWidth * 100;
-	yPercent = (halfHeight + mY) / stageHeight * 100;
+	xPercent = (STAGE_HALF_WIDTH  + mX) / STAGE_MAX_WIDTH * 100;
+	yPercent = (STAGE_HALF_HEIGHT + mY) / STAGE_MAX_HEIGHT * 100;
 	
 	canvasContext.save();
 	

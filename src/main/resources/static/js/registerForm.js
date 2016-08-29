@@ -20,16 +20,16 @@ function updateShipImage(){
 	
 	switch(selectedShip){
 	case "Quicksilver":
-		document.getElementById("ship").src = "ship01.png";
+		document.getElementById("ship").src = "img/ship01.png";
 		break;
 	case "Mercury":
-		document.getElementById("ship").src = "ship02.png";
+		document.getElementById("ship").src = "img/ship02.png";
 		break;
 	case "Interceptor":
-		document.getElementById("ship").src = "ship03.png";
+		document.getElementById("ship").src = "img/ship03.png";
 		break;
 	case "Deltawing":
-		document.getElementById("ship").src = "ship04.png";
+		document.getElementById("ship").src = "img/ship04.png";
 		break;
 	}
 	
