@@ -19,6 +19,12 @@ var canvasContext;
 var MINIMAP_WIDTH = 200;
 var MINIMAP_HEIGHT = 200;
 
+var STAGE_MAX_WIDTH = STAGE_X_MAX_LIMIT - STAGE_X_MIN_LIMIT;
+var STAGE_MAX_HEIGHT = STAGE_Y_MAX_LIMIT - STAGE_Y_MIN_LIMIT;
+
+var STAGE_HALF_WIDTH = STAGE_MAX_WIDTH / 2;
+var STAGE_HALF_HEIGHT = STAGE_MAX_HEIGHT / 2;
+
 /*
  * Array of particles (global variable)
  */
@@ -595,7 +601,13 @@ function start(){
 	STAGE_X_MAX_LIMIT = stageData.maxCoordinate.x;
 	STAGE_Y_MAX_LIMIT = stageData.maxCoordinate.y;
 	
-	$('#bg').css("display", "none"); // hide the background image
+	STAGE_MAX_WIDTH = STAGE_X_MAX_LIMIT - STAGE_X_MIN_LIMIT;
+	STAGE_MAX_HEIGHT = STAGE_Y_MAX_LIMIT - STAGE_Y_MIN_LIMIT;
+
+	STAGE_HALF_WIDTH = STAGE_MAX_WIDTH / 2;
+	STAGE_HALF_HEIGHT = STAGE_MAX_HEIGHT / 2;
+	
+	//$('#bg').css("display", "none"); // hide the background image
 }
 
 function updateCanwasSize(){
@@ -643,13 +655,8 @@ function drawMinimap() {
 }
 
 function placeOnMinimap(mX, mY, color){
-	stageWidth = STAGE_X_MAX_LIMIT - STAGE_X_MIN_LIMIT;
-	stageHeight = STAGE_Y_MAX_LIMIT - STAGE_Y_MIN_LIMIT;
-	halfWidth = stageWidth / 2;
-	halfHeight = stageHeight / 2;
-	
-	xPercent = (halfWidth  + mX) / stageWidth * 100;
-	yPercent = (halfHeight + mY) / stageHeight * 100;
+	xPercent = (STAGE_HALF_WIDTH  + mX) / STAGE_MAX_WIDTH * 100;
+	yPercent = (STAGE_HALF_HEIGHT + mY) / STAGE_MAX_HEIGHT * 100;
 	
 	canvasContext.save();
 	
