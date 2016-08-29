@@ -24,6 +24,8 @@ var MINIMAP_HEIGHT = 200;
  */
 var particles = [];
 
+var asteroid_rotation = 0;
+
 var playerData = {
 	name: window.sessionStorage.getItem("playerName"), 
 	id: window.sessionStorage.getItem("playerId"),
@@ -515,9 +517,13 @@ function drawShip(x, y, angle, name, hp, maxHp, invulnerability, shield, maxShie
 	
 	if(type === "Asteroid")
 	{
-		canvasContext.beginPath();
-		canvasContext.arc(0, 0, 15, 0, 2*Math.PI);
-		canvasContext.closePath();
+		var size = 50;
+		var image = new Image();
+		image.src = "../img/asteroid_" + (name.charCodeAt(name.length - 1) % 3 + 1) + "_128.png";
+		image.width = size;
+		image.height = size;
+		canvasContext.rotate(asteroid_rotation++ * Math.PI / 180);
+		canvasContext.drawImage(image, -image.width / 2, -image.height / 2, image.width, image.height);
 	}
 	
 	canvasContext.fillStyle = color;
