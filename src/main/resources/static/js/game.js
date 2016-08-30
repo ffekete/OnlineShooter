@@ -395,8 +395,6 @@ function drawAmmo(){
 		
 		var physicalRepresentation = JSON.parse(playerData.ammo[ammo].physicalRepresentation);
 		
-		canvasContext.save();
-		
 		if(physicalRepresentation.shape === "circle"){
 			canvasContext.fillStyle = ui_color;
 			canvasContext.beginPath();
@@ -460,24 +458,6 @@ function drawShip(x, y, angle, hitRadius, name, hp, maxHp, invulnerability, shie
 	canvasContext.textAlign ="center";
 	canvasContext.fillStyle = ui_color;
 	canvasContext.fillText(name, 0, hitRadius + 30);
-		canvasContext.lineTo(-4,8);
-		canvasContext.lineTo(0,8);
-		canvasContext.lineTo(0, 11);
-		canvasContext.lineTo(-13,11);
-		canvasContext.lineTo(-16,8);
-		canvasContext.lineTo(-16,4);
-		canvasContext.lineTo(-17,3);
-		canvasContext.lineTo(-17,-3);
-		canvasContext.lineTo(-16,-4);
-		canvasContext.lineTo(-16,-8);
-		canvasContext.lineTo(-13,-11);
-		canvasContext.lineTo(0,-11);
-		canvasContext.lineTo(0,-8);
-		canvasContext.lineTo(-4,-8);
-		canvasContext.lineTo(-4,-3);
-		canvasContext.lineTo(-1,-3);
-		canvasContext.lineTo(0,-4);
-		canvasContext.lineTo(8,-4);
 	
     var image = new Image();
 	
@@ -507,6 +487,7 @@ function drawShip(x, y, angle, hitRadius, name, hp, maxHp, invulnerability, shie
 	image.height =  2 * hitRadius + 20;
 	canvasContext.drawImage(image, -image.width / 2, -image.height / 2, image.width, image.height);
 	
+	canvasContext.restore();
 }
 
 function pollPlayerData(){
