@@ -105,7 +105,12 @@ public class PlayerData {
             this.getSpaceShip().setShield(ShieldFactory.createShield(ItemType.NORMAL_SHIELD));
         }
 
-        this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
+        if(this.isAI){
+            this.respawnTime = 1L;
+        } else {
+            this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
+        }
+        
         this.setCanvas(new Canvas(0, 0, CanvasConstants.CANVAS_HEIGHT, CanvasConstants.CANVAS_WIDTH));
 
         this.setAIMovementTimer();
@@ -133,7 +138,11 @@ public class PlayerData {
         this.getSpaceShip().resetSpeed();
         this.score = 0l;
         this.getSpaceShip().setShield(ShieldFactory.createShield(ItemType.NORMAL_SHIELD));
-        this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;
+        if(this.isAI){
+            this.respawnTime = 1L;
+        } else {
+            this.respawnTime = GameConfig.PLAYER_RESPAWN_TIME;            
+        }
     }
 
     public long getActualWeaponAmmoCount() {
