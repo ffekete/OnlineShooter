@@ -566,6 +566,8 @@ function updatePlayerData(){
 }
 
 function start(){
+	disableScroll();
+	
 	canvas = $("#gameArea")[0];
 	canvasContext = canvas.getContext("2d");
 	
@@ -614,6 +616,32 @@ function start(){
 
 	STAGE_HALF_WIDTH = STAGE_MAX_WIDTH / 2;
 	STAGE_HALF_HEIGHT = STAGE_MAX_HEIGHT / 2;
+}
+
+var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+
+function preventDefault(e) {
+  e = e || window.event;
+  if (e.preventDefault)
+      e.preventDefault();
+  e.returnValue = false;  
+}
+
+function preventDefaultForScrollKeys(e) {
+    if (keys[e.keyCode]) {
+        preventDefault(e);
+        return false;
+    }
+}
+
+function disableScroll() {
+	if (window.addEventListener) { // older FF
+		window.addEventListener('DOMMouseScroll', preventDefault, false);
+	}
+	window.onwheel = preventDefault; // modern standard
+	window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+	window.ontouchmove  = preventDefault; // mobile
+	document.onkeydown  = preventDefaultForScrollKeys;
 }
 
 function updateCanwasSize(){
