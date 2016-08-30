@@ -14,7 +14,7 @@ public class Quicksilver extends ShipParent {
         this.resetManeuverability();
         this.resetHp();
         this.setMaxHp(ShipConfig.QUICKSILVER.getMaxHP());
-        this.setHitRadius(getShipConfig().getHitRadius());
+        this.setHitRadius(ShipConfig.QUICKSILVER.getHitRadius());
     }
 
     @Override

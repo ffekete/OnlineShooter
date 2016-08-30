@@ -37,6 +37,7 @@ public class PlayerDataToSentPlayerDataTransformer {
         sentPlayerData.setConnectionId(playerData.getConnectionId());
         sentPlayerData.setId(playerId);
         sentPlayerData.setShipAngle(playerData.getShipAngle());
+        sentPlayerData.setHitRadius(playerData.getHitRadius());
         sentPlayerData.setVisibleAmmo(ammoPool.getAllOnScreen(playerId));
         sentPlayerData.setCoordinate(playerData.getCoordinate());
         sentPlayerData.setVisiblePlayers(playerPool.getAllOnScreen(playerId));

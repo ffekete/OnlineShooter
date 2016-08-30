@@ -17,19 +17,19 @@ function connect() {
 
 function updateShipImage(){
 	selectedShip = document.getElementById("shipSelector").value;
-	
+	console.log("##############" + selectedShip);
 	switch(selectedShip){
 	case "Quicksilver":
-		document.getElementById("ship").src = "img/ship01.png";
+		document.getElementById("ship").src = "img/ship_1_128.png";
 		break;
 	case "Mercury":
-		document.getElementById("ship").src = "img/ship02.png";
+		document.getElementById("ship").src = "img/ship_2_128.png";
 		break;
 	case "Interceptor":
-		document.getElementById("ship").src = "img/ship03.png";
+		document.getElementById("ship").src = "img/ship_3_128.png";
 		break;
 	case "Deltawing":
-		document.getElementById("ship").src = "img/ship04.png";
+		document.getElementById("ship").src = "img/ship_4_128.png";
 		break;
 	}
 	

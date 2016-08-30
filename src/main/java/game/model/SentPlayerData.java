@@ -28,6 +28,8 @@ public class SentPlayerData {
     private List<SpawnableItem> items;
 
     private Double shipAngle;
+    
+    private Double hitRadius;
 
     private Long connectionId;
 
@@ -201,7 +203,15 @@ public class SentPlayerData {
         this.shipAngle = shipAngle;
     }
 
-    public Long getConnectionId() {
+    public Double getHitRadius() {
+		return hitRadius;
+	}
+
+	public void setHitRadius(Double hitRadius) {
+		this.hitRadius = hitRadius;
+	}
+
+	public Long getConnectionId() {
         return connectionId;
     }
 

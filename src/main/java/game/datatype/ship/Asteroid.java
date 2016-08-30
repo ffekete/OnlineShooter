@@ -16,7 +16,7 @@ public class Asteroid extends ShipParent {
         this.resetManeuverability();
         this.resetHp();
         this.setMaxHp(ShipConfig.ASTEROID.getMaxHP());
-        this.setHitRadius(getShipConfig().getHitRadius());
+        this.setHitRadius(ShipConfig.ASTEROID.getHitRadius());
     }
 
     @Override

@@ -32,6 +32,8 @@ var particles = [];
 
 var asteroid_rotation = 0;
 
+var ui_color = "white";
+
 var playerData = {
 	name: window.sessionStorage.getItem("playerName"), 
 	id: window.sessionStorage.getItem("playerId"),
@@ -197,20 +199,20 @@ function draw(){
 	screen_x = $("#gameArea").width();
 	screen_y = $("#gameArea").height();
 	
-	updateCanwasSize();
+	updateCanvasSize();
 	
 	drawBackground();
 	drawBorder();
 	
 	if(playerData.respawnTime == 0){
-		drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.name, playerData.hp, playerData.maxHp, playerData.invulnerable, playerData.shieldAmount, playerData.maxShieldAmount, playerData.color, playerData.shipType);
+		drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.hitRadius, playerData.name, playerData.hp, playerData.maxHp, playerData.invulnerable, playerData.shieldAmount, playerData.maxShieldAmount, playerData.color, playerData.shipType);
 	}
 	else
 	{
 		canvasContext.save();
-		canvasContext.fillStyle = "white";
-		canvasContext.textAlign ="center";
-		canvasContext.font="40px Arial";
+		canvasContext.fillStyle = ui_color;
+		canvasContext.textAlign = "center";
+		canvasContext.font= "40px Arial";
 		canvasContext.fillText("Respawning in seconds: " + parseInt(playerData.respawnTime / 100 + 1), screen_x / 2 + 10, screen_y /2 +10);
 		canvasContext.restore();
 	}
@@ -221,7 +223,7 @@ function draw(){
 			
 			var dx = playerData.x - actualShip.x;
 			var dy = playerData.y - actualShip.y;
-			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.maxHp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue, actualShip.color, actualShip.shipType);
+			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.hitRadius, actualShip.name, actualShip.hp, actualShip.maxHp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue, actualShip.color, actualShip.shipType);
 		}
 	}
 	
@@ -270,7 +272,8 @@ function shootAmmo(){
 
 function playerDataArrived(playerDataFromServer){
 	var parsedPlayerData = JSON.parse(playerDataFromServer.body);
-	playerData.shipAngle = parsedPlayerData.shipAngle;	
+	playerData.shipAngle = parsedPlayerData.shipAngle;
+	playerData.hitRadius = parsedPlayerData.hitRadius;
 	playerData.ammo = parsedPlayerData.visibleAmmo;
 	playerData.otherPlayers = parsedPlayerData.visiblePlayers;
 	playerData.x = parsedPlayerData.x;
@@ -293,8 +296,9 @@ function playerDataArrived(playerDataFromServer){
 }
 
 function drawHighScores(){
-	canvasContext.fillStyle = "white";
-	canvasContext.fillText("High score table: ", 10 ,25);
+	canvasContext.fillStyle = ui_color;
+	canvasContext.fillText("Your score: " + playerData.score, 10,15);
+	canvasContext.fillText("High score table: ", 10, 25);
 	var y = 35;
 	for(var i in playerData.highScores){
 		canvasContext.fillText(playerData.highScores[i], 10, y);
@@ -306,7 +310,7 @@ function drawPlayerData(){
 	var fromLeft = 150;
 	var fromTop = 15;
 	var verticalSpace = 10;
-	canvasContext.fillStyle = "white";
+	canvasContext.fillStyle = ui_color;
 	canvasContext.fillText("Player details: ", fromLeft, fromTop);
 	canvasContext.fillText("Ship type: " + playerData.shipType, fromLeft, fromTop + verticalSpace);
 	canvasContext.fillText("HP: " + playerData.hp, fromLeft, fromTop + verticalSpace * 2);
@@ -321,7 +325,7 @@ function drawWeaponKeys(){
 	var fromLeft = 300;
 	var fromTop = 15;
 	var verticalSpace = 10;
-	canvasContext.fillStyle = "white";
+	canvasContext.fillStyle = ui_color;
 	$.each(playerData.weapons, function(index, weapon) {
 		canvasContext.fillText("[" + (index + 1) + "]: " + weapon.name +" (" + playerData.ammoCount[weapon.ammoType] + ")", fromLeft, fromTop + verticalSpace * index);
 	});
@@ -334,8 +338,6 @@ function drawBackground(){
 			canvasContext.drawImage(img, j* 1024-(playerData.x % 1024), i* 1024-(playerData.y % 1024));
 		}
 	}
-	
-	canvasContext.fillText("Your score: " + playerData.score, 10,15);
 }
 
 function drawBorder(){
@@ -346,7 +348,7 @@ function drawBorder(){
 	var dxm = Math.abs(STAGE_X_MIN_LIMIT) + STAGE_X_MAX_LIMIT;
 	var dym = Math.abs(STAGE_Y_MIN_LIMIT) + STAGE_Y_MAX_LIMIT;
 
-	canvasContext.strokeStyle ="white";
+	canvasContext.strokeStyle = ui_color;
 	canvasContext.strokeRect((screen_x / 2) - dx, (screen_y / 2) - dy, dxm, dym);
 	
 	canvasContext.restore();
@@ -361,8 +363,8 @@ function drawItems(){
 		var dx = playerData.x - playerData.itemsOnScreen[items].x;
 		var dy = playerData.y - playerData.itemsOnScreen[items].y;
 		
-		canvasContext.fillStyle = "white";
-		canvasContext.strokeStyle = "white";
+		canvasContext.fillStyle = ui_color;
+		canvasContext.strokeStyle = ui_color;
 		canvasContext.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 5, 0, 2*Math.PI);
 		canvasContext.stroke();
 		canvasContext.textAlign ="center";
@@ -387,7 +389,7 @@ function drawAmmo(){
 		canvasContext.save();
 		
 		if(physicalRepresentation.shape === "circle"){
-			canvasContext.fillStyle = "white";
+			canvasContext.fillStyle = ui_color;
 			canvasContext.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, physicalRepresentation.radius, 0, 2*Math.PI);
 			canvasContext.fill();
 		}
@@ -421,113 +423,70 @@ function drawExplosion(x, y){
 	canvasContext.restore();
 }
 
-function drawShip(x, y, angle, name, hp, maxHp, invulnerability, shield, maxShield, color, type){
+function drawShip(x, y, angle, hitRadius, name, hp, maxHp, invulnerability, shield, maxShield, color, type){
 	canvasContext.save();
 	
-	canvasContext.fillStyle = "red";	
-	canvasContext.translate(x,y);
+	canvasContext.translate(x, y);
 	canvasContext.rotate(angle * Math.PI / 180);
 	
 	canvasContext.fillStyle = "red";
-	canvasContext.fillRect(-41,-11,8,22);
+	canvasContext.fillRect(-(hitRadius + 30), -20, 5, 40);
 	
 	canvasContext.fillStyle = "green";
-	canvasContext.fillRect(-39,-10,5,(21*hp/maxHp));
+	canvasContext.fillRect(-(hitRadius + 30), -20, 5, (40 * hp / maxHp));
 	
 	if(invulnerability == false){
-	   	canvasContext.strokeStyle = "white";
+	   	canvasContext.strokeStyle = color;
 	}
 	else
 	{
-		canvasContext.strokeStyle = "aqua";
+		canvasContext.strokeStyle = "red";
 	}
 	
-	if(type != "Asteroid"){
-	    canvasContext.beginPath();
-	    canvasContext.arc(-5, 0, 17, 0, (2 * shield / maxShield)*Math.PI);
-	    canvasContext.stroke();
-	}
+	canvasContext.rotate(90 * Math.PI / 180);
 	
 	canvasContext.save();
 	
-	if(type === "Mercury")
-	{
-		canvasContext.beginPath();
-		canvasContext.moveTo(-15, -10);
-		canvasContext.lineTo(-5, 0);
-		canvasContext.lineTo(-15, 10);
-		canvasContext.lineTo(10, 0);
-		canvasContext.lineTo(-15, -10);	
-		canvasContext.closePath();
-	}
-	if(type === "Quicksilver")
-	{
-		canvasContext.beginPath();
-		canvasContext.moveTo(-13, -10);
-		canvasContext.lineTo(-18, 0);
-		canvasContext.lineTo(-13, 10);
-		canvasContext.lineTo(10, 0);
-		canvasContext.lineTo(-13, -10);	
-		canvasContext.closePath();
-	}
+	var image = new Image();
 	
-	if(type === "Interceptor")
-	{
-		canvasContext.beginPath();
-		canvasContext.moveTo(-15, -15);
-		canvasContext.lineTo(-5, -8);
-		canvasContext.lineTo(10, -5);
-		canvasContext.lineTo(5, -2);
-		canvasContext.lineTo(5, 2);
-		canvasContext.lineTo(10, 5);
-		canvasContext.lineTo(-5, 8);
-		canvasContext.lineTo(-15, 15);
-		canvasContext.lineTo(-20, 0);
-		canvasContext.closePath();
-	}
-	
-	if(type === "Deltawing")
-	{
-		canvasContext.beginPath();
-		canvasContext.moveTo(-15, 0);
-		canvasContext.lineTo(-7, -15);
-		canvasContext.lineTo(-7, -3);
-		canvasContext.bezierCurveTo(-15,-3,15,-3,15,0);
-		canvasContext.bezierCurveTo(15,3,-15,3,-7,3);
-		canvasContext.lineTo(-7, 15);
-		canvasContext.closePath();
-	}
-	
-	if(type === "Cargoship")
-	{
-		canvasContext.beginPath();
-		canvasContext.moveTo(-13, -10);
-		canvasContext.lineTo(-18, 0);
-		canvasContext.lineTo(-13, 10);
-		canvasContext.lineTo(10, 0);
-		canvasContext.lineTo(-13, -10);
-		canvasContext.closePath();
-	}
-	
-	if(type === "Asteroid")
-	{
-		var size = 50;
-		var image = new Image();
+	switch(type) {
+	case "Quicksilver":
+		image.src = "../img/ship_1_128.png";
+		break;
+	case "Mercury":
+		image.src = "../img/ship_2_128.png";
+		break;
+	case "Interceptor":
+		image.src = "../img/ship_3_128.png";
+		break;
+	case "Deltawing":
+		image.src = "../img/ship_4_128.png";
+		break;
+	case "Cargoship":
+		image.src = "../img/cargo_ship_120.png";
+		break;
+	case "Asteroid":
 		image.src = "../img/asteroid_" + (name.charCodeAt(name.length - 1) % 3 + 1) + "_128.png";
-		image.width = size;
-		image.height = size;
 		canvasContext.rotate(asteroid_rotation++ * Math.PI / 180);
-		canvasContext.drawImage(image, -image.width / 2, -image.height / 2, image.width, image.height);
+		break;
 	}
 	
-	canvasContext.fillStyle = color;
-	canvasContext.fill();
-
+	image.width = 2 * hitRadius + 15;
+	image.height =  2 * hitRadius + 15;
+	canvasContext.drawImage(image, -image.width / 2, -image.height / 2, image.width, image.height);
+	
 	canvasContext.restore();
 	
-	canvasContext.rotate(90 * Math.PI / 180);
+	if(type != "Asteroid"){
+		var arc = (2 * shield / maxShield)*Math.PI;
+	    canvasContext.beginPath();
+	    canvasContext.arc(0, 0, hitRadius + 15, -arc / 2, arc / 2);
+	    canvasContext.stroke();
+	}
+	
 	canvasContext.textAlign ="center";
-	canvasContext.fillText(name, 0, 29);
+	canvasContext.fillStyle = ui_color;
+	canvasContext.fillText(name, 0, hitRadius + 25);
 	canvasContext.restore();
 }
 
@@ -595,7 +554,7 @@ function start(){
 	STAGE_HALF_HEIGHT = STAGE_MAX_HEIGHT / 2;
 }
 
-function updateCanwasSize(){
+function updateCanvasSize(){
 	playerData.canvasHeight = $("#gameArea").height();
 	playerData.canvasWidth = $("#gameArea").width();
 }

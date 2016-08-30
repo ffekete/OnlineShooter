@@ -18,7 +18,7 @@ public class CargoShip extends ShipParent {
         this.resetManeuverability();
         this.resetHp();
         this.setMaxHp(ShipConfig.CARGOSHIP.getMaxHP());
-        this.setHitRadius(getShipConfig().getHitRadius());
+        this.setHitRadius(ShipConfig.CARGOSHIP.getHitRadius());
     }
 
     @Override

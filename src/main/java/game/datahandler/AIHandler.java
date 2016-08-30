@@ -21,7 +21,7 @@ public class AIHandler implements AIBase {
     public void updateAIData() {
         if (!playerPool.hasAIOnScreen()) {
             RegistrationData data = new RegistrationData();
-            data.setName(AIConfig.AI);
+            data.setName(AIConfig.CARGO_SHIP);
             data.setShipType(ShipConfig.CARGOSHIP.getType());
             data.setColor("orange");
             data.setIsAI(true);

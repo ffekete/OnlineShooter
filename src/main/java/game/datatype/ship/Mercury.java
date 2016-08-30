@@ -14,7 +14,7 @@ public class Mercury extends ShipParent {
         this.resetManeuverability();
         this.resetHp();
         this.setMaxHp(ShipConfig.MERCURY.getMaxHP());
-        this.setHitRadius(getShipConfig().getHitRadius());
+        this.setHitRadius(ShipConfig.MERCURY.getHitRadius());
     }
 
     @Override
