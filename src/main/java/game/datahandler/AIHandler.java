@@ -51,7 +51,7 @@ public class AIHandler implements AIBase {
         }
         name.append("-");
         for (int i = 0; i < 3; i++) {
-            name.append(RandomGenerator.getRandomInRange(1, 10));
+            name.append(RandomGenerator.getRandomInRange(0, 9));
         }
 
         return name.toString();

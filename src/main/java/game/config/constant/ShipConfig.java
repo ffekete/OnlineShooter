@@ -1,11 +1,11 @@
 package game.config.constant;
 
 public enum ShipConfig {
-    QUICKSILVER("Quicksilver", 15L, 6.0D, 6.0D, 10.0D, ItemType.SHOTGUN, 0, 15.0),
-    MERCURY("Mercury", 25L, 5.0D, 5.0D, 12.0D, ItemType.GATLING_GUN, 0, 15),
-    INTERCEPTOR("Interceptor", 20L, 7.0D, 7.0D, 14.0D, ItemType.LASER_CANNON, 0, 15.0),
-    DELTAWING("Deltawing", 11L, 9.0D, 9.0D, 16.0D, ItemType.DOUBLE_GATLING_GUN, 0, 15.0),
-    CARGOSHIP("Cargoship", 40L, 3.0D, 3.0D, 16.0D, ItemType.NO_WEAPON, 10, 20.0),
+    QUICKSILVER("Quicksilver", 30L, 6.0D, 6.0D, 10.0D, ItemType.SHOTGUN, 0, 15.0),
+    MERCURY("Mercury", 50L, 5.0D, 5.0D, 12.0D, ItemType.GATLING_GUN, 0, 15),
+    INTERCEPTOR("Interceptor", 40L, 7.0D, 7.0D, 14.0D, ItemType.LASER_CANNON, 0, 15.0),
+    DELTAWING("Deltawing", 25L, 9.0D, 9.0D, 16.0D, ItemType.DOUBLE_GATLING_GUN, 0, 15.0),
+    CARGOSHIP("Cargoship", 80L, 3.0D, 3.0D, 10.0D, ItemType.NO_WEAPON, 10, 20.0),
     ASTEROID("Asteroid", 100L, 3.0D, 7.0D, 1.0D, ItemType.NO_WEAPON, 0, 20.0);
 
     private final String type;

@@ -193,7 +193,7 @@ function drawExplosions(){
 }
 
 function draw(){
-	canvasContext.canvas.width  = window.innerWidth-20;
+	canvasContext.canvas.width = window.innerWidth-20;
 	canvasContext.canvas.height = window.innerHeight-20;
 	  
 	screen_x = $("#gameArea").width();
@@ -203,6 +203,9 @@ function draw(){
 	
 	drawBackground();
 	drawBorder();
+	
+	drawItems();
+	drawAmmo();
 	
 	if(playerData.respawnTime == 0){
 		drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.hitRadius, playerData.name, playerData.hp, playerData.maxHp, playerData.invulnerable, playerData.shieldAmount, playerData.maxShieldAmount, playerData.color, playerData.shipType);
@@ -227,8 +230,6 @@ function draw(){
 		}
 	}
 	
-	drawAmmo();
-	drawItems();
 	drawExplosions();
 	drawMinimap();
 	drawHighScores();
@@ -338,7 +339,8 @@ function drawWeaponKeys(){
 }
 
 function drawBackground(){
-	var img = $("#bg")[0];
+	var img = new Image();
+	img.src = "img/space_background.jpg";
 	canvasContext.save();
 	for(var i = -3; i < 3; i++) {
 		for(var j = -3; j < 3; j++) {
@@ -412,6 +414,7 @@ function drawAmmo(){
 			var dx2 = playerData.x - physicalRepresentation.endx;
 			var dy2 = playerData.y - physicalRepresentation.endy;
 			
+			canvasContext.beginPath();
 			canvasContext.moveTo((screen_x / 2 + 10) - dx1, (screen_y / 2 + 10) - dy1);
 			canvasContext.lineTo((screen_x / 2 + 10) - dx2, (screen_y / 2 + 10) - dy2);
 			canvasContext.stroke();
@@ -463,22 +466,22 @@ function drawShip(x, y, angle, hitRadius, name, hp, maxHp, invulnerability, shie
 	
 	switch(type) {
 	case "Quicksilver":
-		image.src = "../img/ship_1_128.png";
+		image.src = "img/ship_1_128.png";
 		break;
 	case "Mercury":
-		image.src = "../img/ship_2_128.png";
+		image.src = "img/ship_2_128.png";
 		break;
 	case "Interceptor":
-		image.src = "../img/ship_3_128.png";
+		image.src = "img/ship_3_128.png";
 		break;
 	case "Deltawing":
-		image.src = "../img/ship_4_128.png";
+		image.src = "img/ship_4_128.png";
 		break;
 	case "Cargoship":
-		image.src = "../img/cargo_ship_120.png";
+		image.src = "img/cargo_ship_120.png";
 		break;
 	case "Asteroid":
-		image.src = "../img/asteroid_" + (name.charCodeAt(name.length - 1) % 3 + 1) + "_128.png";
+		image.src = "img/asteroid_" + (name.charCodeAt(name.length - 1) % 3 + 1) + "_128.png";
 		canvasContext.rotate(asteroid_rotation++ * Math.PI / 180);
 		break;
 	}

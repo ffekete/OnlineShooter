@@ -126,8 +126,7 @@ public class PlayerData {
     }
 
     public void kill() {
-        this.setNewMousePointForAI();
-
+    	this.setNewMousePointForAI();
         Spawner.spawn(this.getSpaceShip());
         this.resetBonuses();
         this.inactivityCounter = 0;
@@ -136,8 +135,10 @@ public class PlayerData {
         this.initWeapons();
         this.getSpaceShip().resetManeuverability();
         this.getSpaceShip().resetSpeed();
-        this.score = 0l;
-        this.getSpaceShip().setShield(ShieldFactory.createShield(ItemType.NORMAL_SHIELD));
+        this.score = 0L;
+        this.getSpaceShip().setShield(this.isAsteroid ?
+        		ShieldFactory.createShield(ItemType.NO_SHIELD) :
+        		ShieldFactory.createShield(ItemType.NORMAL_SHIELD));
         if(this.isAI){
             this.respawnTime = 1L;
         } else {

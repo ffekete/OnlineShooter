@@ -41,7 +41,7 @@ public class LaserBeam extends Energy {
     public boolean hits(Spawnable item) {
         double distance = Line2D.ptSegDist(getStartPoint().getX(), getStartPoint().getY(), getEndPoint().getX(), getEndPoint().getY(),
                 item.getX(), item.getY());
-        return Math.abs(distance) <= AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS;
+        return Math.abs(distance) <= (AmmoConfig.LASER_BEAM_INIT_HIT_RADIUS + item.getHitRadius());
     }
 
     @Override
