@@ -72,7 +72,7 @@ public class PlayerDataTest {
 
     @Test
     public void testShouldGiveBackFalseForCanShootWeapon() {
-        for (int i = 0; i < 40; i++) {
+        while (pD.getSpaceShip().getAmmoCount().size() > 0) {
             pD.decreasAmmoForPlayerWeapon();
         }
         Assert.assertFalse(pD.canShootWeapon());
