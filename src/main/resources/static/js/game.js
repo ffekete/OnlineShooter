@@ -358,18 +358,19 @@ function drawItems(){
 	canvasContext.save();
 	
 	for(var items in playerData.itemsOnScreen){
-		canvasContext.beginPath();
 		
 		var dx = playerData.x - playerData.itemsOnScreen[items].x;
 		var dy = playerData.y - playerData.itemsOnScreen[items].y;
 		
 		canvasContext.fillStyle = ui_color;
 		canvasContext.strokeStyle = ui_color;
+		canvasContext.beginPath();
 		canvasContext.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 5, 0, 2*Math.PI);
+		canvasContext.closePath();
 		canvasContext.stroke();
 		canvasContext.textAlign ="center";
 		canvasContext.font="15px Arial";
-		canvasContext.fillText(playerData.itemsOnScreen[items].name, (screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy + 15);
+		canvasContext.fillText(playerData.itemsOnScreen[items].name, (screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy + 20);
 	}
 	
 	canvasContext.restore();
@@ -379,7 +380,6 @@ function drawAmmo(){
 	canvasContext.save();
 	
 	for(var ammo in playerData.ammo){
-		canvasContext.beginPath();
 		
 		var dx = playerData.x - playerData.ammo[ammo].x;
 		var dy = playerData.y - playerData.ammo[ammo].y;
@@ -390,7 +390,9 @@ function drawAmmo(){
 		
 		if(physicalRepresentation.shape === "circle"){
 			canvasContext.fillStyle = ui_color;
+			canvasContext.beginPath();
 			canvasContext.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, physicalRepresentation.radius, 0, 2*Math.PI);
+			canvasContext.closePath();
 			canvasContext.fill();
 		}
 		
@@ -419,6 +421,7 @@ function drawExplosion(x, y){
 	canvasContext.translate(x,y);
 	canvasContext.beginPath();
 	canvasContext.arc(-5, 0, 17, 0, 2*Math.PI);
+	canvasContext.closePath();
 	canvasContext.stroke();
 	canvasContext.restore();
 }
@@ -429,25 +432,29 @@ function drawShip(x, y, angle, hitRadius, name, hp, maxHp, invulnerability, shie
 	canvasContext.translate(x, y);
 	canvasContext.rotate(angle * Math.PI / 180);
 	
+	if(type != "Asteroid"){
+		if(invulnerability == false){
+		   	canvasContext.strokeStyle = color;
+		} else {
+			canvasContext.strokeStyle = "red";
+		}
+		var arc = (2 * shield / maxShield) * Math.PI;
+		canvasContext.beginPath();
+	    canvasContext.arc(-5, 0, hitRadius + 15, -arc / 2, arc / 2);
+	    canvasContext.stroke();
+	}
+	
 	canvasContext.fillStyle = "red";
-	canvasContext.fillRect(-(hitRadius + 30), -20, 5, 40);
-	
+	canvasContext.fillRect(-(hitRadius + 40), -20, 5, 40);
 	canvasContext.fillStyle = "green";
-	canvasContext.fillRect(-(hitRadius + 30), -20, 5, (40 * hp / maxHp));
-	
-	if(invulnerability == false){
-	   	canvasContext.strokeStyle = color;
-	}
-	else
-	{
-		canvasContext.strokeStyle = "red";
-	}
+	canvasContext.fillRect(-(hitRadius + 40), -20, 5, (40 * hp / maxHp));
 	
 	canvasContext.rotate(90 * Math.PI / 180);
+	canvasContext.textAlign ="center";
+	canvasContext.fillStyle = ui_color;
+	canvasContext.fillText(name, 0, hitRadius + 30);
 	
-	canvasContext.save();
-	
-	var image = new Image();
+    var image = new Image();
 	
 	switch(type) {
 	case "Quicksilver":
@@ -471,22 +478,10 @@ function drawShip(x, y, angle, hitRadius, name, hp, maxHp, invulnerability, shie
 		break;
 	}
 	
-	image.width = 2 * hitRadius + 15;
-	image.height =  2 * hitRadius + 15;
+	image.width = 2 * hitRadius + 20;
+	image.height =  2 * hitRadius + 20;
 	canvasContext.drawImage(image, -image.width / 2, -image.height / 2, image.width, image.height);
 	
-	canvasContext.restore();
-	
-	if(type != "Asteroid"){
-		var arc = (2 * shield / maxShield)*Math.PI;
-	    canvasContext.beginPath();
-	    canvasContext.arc(0, 0, hitRadius + 15, -arc / 2, arc / 2);
-	    canvasContext.stroke();
-	}
-	
-	canvasContext.textAlign ="center";
-	canvasContext.fillStyle = ui_color;
-	canvasContext.fillText(name, 0, hitRadius + 25);
 	canvasContext.restore();
 }
 
@@ -573,11 +568,9 @@ function drawMinimap() {
 	
 	canvasContext.fillStyle = "white";
 	canvasContext.fillRect(screen_x-10-MINIMAP_WIDTH,screen_y-10-MINIMAP_HEIGHT,MINIMAP_WIDTH,MINIMAP_HEIGHT);
-	canvasContext.fill();
 	
 	canvasContext.strokeStyle = "black";
 	canvasContext.strokeRect(screen_x-10-MINIMAP_WIDTH, screen_y-10-MINIMAP_HEIGHT, MINIMAP_WIDTH, MINIMAP_HEIGHT);
-    canvasContext.stroke();
 
 	canvasContext.restore();
 	
@@ -595,11 +588,8 @@ function placeOnMinimap(mX, mY, color){
 	
 	canvasContext.save();
 	
-	canvasContext.beginPath();
-	canvasContext.rect(screen_x - 10-MINIMAP_WIDTH + (xPercent*2) - 2, screen_y - 10-MINIMAP_HEIGHT + (yPercent*2) - 2, 4, 4);
 	canvasContext.fillStyle = color;
-	canvasContext.fill();
-	canvasContext.closePath();
+	canvasContext.fillRect(screen_x - 10-MINIMAP_WIDTH + (xPercent*2) - 2, screen_y - 10-MINIMAP_HEIGHT + (yPercent*2) - 2, 4, 4);
 	
 	canvasContext.restore();
 }
