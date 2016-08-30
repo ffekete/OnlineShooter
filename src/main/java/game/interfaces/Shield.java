@@ -1,17 +1,17 @@
 package game.interfaces;
 
 public interface Shield {
-    public long getProtection();
+    public double getProtection();
 
-    public void setProtection(long protection);
+    public void setProtection(double protection);
 
-    public long getMaxProtectionValue();
+    public double getMaxProtectionValue();
 
-    public void setMaxProtectionValue(long maxProtectionValue);
+    public void setMaxProtectionValue(double maxProtectionValue);
 
-    public void decreaseProtection(long value);
+    public void decreaseProtection(double value);
 
     public void increaseShieldPower();
 
-    public void increaseShieldPowerBy(long amount);
+    public void increaseShieldPowerBy(double amount);
 }

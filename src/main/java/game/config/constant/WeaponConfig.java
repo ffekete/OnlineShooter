@@ -1,21 +1,34 @@
 package game.config.constant;
 
 public class WeaponConfig {
-    public static final long GATLING_GUN_INIT_DAMAGE = 1L; 
-    public static final long GATLING_GUN_INIT_AMMO = 1000L;
-    public static final long GATLING_GUN_INIT_RATE_OF_FIRE = 2L;
+	public static final double RATE_OF_FIRE_TIMES_COOLDOWN = 60.0; 
+	
+	public static final long GATLING_GUN_INIT_AMMO_COUNT = 400L;
+	public static final long GATLING_GUN_INIT_SHOT_COUNT = 1L;
+	public static final double GATLING_GUN_INIT_SHOT_ANGLE = 0.0;
+    public static final double GATLING_GUN_INIT_RATE_OF_FIRE = 20.0;
+    public static final double GATLING_GUN_RATE_OF_FIRE_BONUS = 2.0;
+    
+    public static final long DOUBLE_GATLING_GUN_INIT_AMMO_COUNT = 400L;
+    public static final long DOUBLE_GATLING_GUN_INIT_SHOT_COUNT = 2L;
+    public static final double DOUBLE_GATLING_GUN_INIT_SHOT_ANGLE = 0.5;
+    public static final double DOUBLE_GATLING_GUN_INIT_RATE_OF_FIRE = 20.0;
+    public static final double DOUBLE_GATLING_GUN_RATE_OF_FIRE_BONUS = 2.0;
 
-    public static final long SHOTGUN_INIT_DAMAGE = 5L; 
-    public static final long SHOTGUN_INIT_AMMO = 50L;
-    public static final long SHOTGUN_INIT_RATE_OF_FIRE = 15L;
-    
-    public static final long LASER_CANNON_INIT_DAMAGE = 10L; 
-    public static final long LASER_CANNON_INIT_AMMO = 100L;
-    public static final long LASER_CANNON_INIT_RATE_OF_FIRE = 20L;
-    public static final double LASER_BEAM_LENGTH = 1000.0d;
-    public static final double LASER_BEAM_HIT_RADIUS = 10.0d;
-    
-    public static final long NO_WEAPON_INIT_DAMAGE = 0L; 
-    public static final long NO_WEAPON_INIT_AMMO = 0L;
-    public static final long NO_WEAPON_INIT_RATE_OF_FIRE = 0L;
+    public static final long SHOTGUN_INIT_AMMO_COUNT = 400L;
+    public static final long SHOTGUN_INIT_SHOT_COUNT = 10L;
+    public static final double SHOTGUN_INIT_SHOT_ANGLE = 2;
+    public static final double SHOTGUN_INIT_RATE_OF_FIRE = 2.0;
+    public static final double SHOTGUN_RATE_OF_FIRE_BONUS = 0.5;
+
+    public static final long LASER_CANNON_INIT_AMMO_COUNT = 50L;
+    public static final long LASER_CANNON_INIT_SHOT_COUNT = 1L;
+    public static final double LASER_CANNON_INIT_SHOT_ANGLE = 0.0;
+    public static final double LASER_CANNON_INIT_RATE_OF_FIRE = 3.0;
+    public static final double LASER_CANNON_RATE_OF_FIRE_BONUS = 0.5;
+
+    public static final long NO_WEAPON_INIT_AMMO_COUNT = 0;
+	public static final long NO_WEAPON_INIT_SHOT_COUNT = 0;
+	public static final double NO_WEAPON_INIT_SHOT_ANGLE = 0;
+	public static final double NO_WEAPON_INIT_RATE_OF_FIRE = 0;
 }

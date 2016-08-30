@@ -1,37 +1,57 @@
-package game.datatype.bullet;
+package game.datatype.ammo;
 
 import java.awt.geom.Point2D;
 
-import game.config.constant.GameConfig;
+import game.config.constant.AmmoType;
 import game.controller.EventSender;
-import game.interfaces.Bullet;
+import game.interfaces.Ammo;
 import game.interfaces.Spawnable;
 
-public class BulletData implements Bullet {
+public abstract class AmmoParent implements Ammo {
+	private long playerId;
+	private AmmoType type;
     private Point2D coordinate;
     private double angle;
-    private long age = 0L;
-    private long playerId;
-    private long damage;
-
-    @Override
-    public boolean isAgeCounterExpired() {
-        if (age >= GameConfig.BULLET_MAX_AGE) {
-            age = 0;
-            return true;
-        }
-        return false;
+    private double speed;
+    private double age;
+    private double damage;
+    
+    public AmmoParent() {
+    	this.age = 0L;
     }
 
     @Override
+    public AmmoType getType() {
+		return this.type;
+	}
+
+    @Override
+	public void setType(AmmoType type) {
+		this.type = type;
+	}
+
+	@Override
+    public abstract boolean isAgeCounterExpired();
+
+    @Override
     public double getAngle() {
-        return angle;
+        return this.angle;
     }
 
     @Override
     public void setAngle(double angle) {
         this.angle = angle;
     }
+    
+    @Override
+    public double getSpeed() {
+		return speed;
+	}
+
+    @Override
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
 
     @Override
     public long getPlayerId() {
@@ -44,13 +64,18 @@ public class BulletData implements Bullet {
     }
 
     @Override
-    public long getDamage() {
-        return damage;
+    public double getDamage() {
+        return this.damage;
     }
 
     @Override
-    public void setDamage(long damage) {
+    public void setDamage(double damage) {
         this.damage = damage;
+    }
+    
+    @Override
+    public void increaseDamage(double damage) {
+        this.damage += damage;
     }
 
     @Override
@@ -59,12 +84,12 @@ public class BulletData implements Bullet {
     }
 
     @Override
-    public long getAge() {
-        return age;
+    public double getAge() {
+        return this.age;
     }
 
     @Override
-    public void setAge(long age) {
+    public void setAge(double age) {
         this.age = age;
     }
 
@@ -102,12 +127,6 @@ public class BulletData implements Bullet {
     @Override
     public void hitDetected(Spawnable item, EventSender eventSender) {
         eventSender.sendItemHitNotification(item);
-    }
-
-    @Override
-    public String getPhysicalRepresentation() {
-        return new String("{\"shape\": \"circle\", \"startx\": \"" + this.coordinate.getX() + "\", \"starty\": \""
-                + this.coordinate.getY() + "\", \"radius\" : \"15\"}");
     }
 
     @Override

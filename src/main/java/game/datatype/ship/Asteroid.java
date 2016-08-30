@@ -44,8 +44,8 @@ public class Asteroid extends ShipParent {
     }
 
     @Override
-    public void initWeapons() {
-        super.initWeapons();
+    public void initWeaponsAndAmmo() {
+        super.initWeaponsAndAmmo();
         super.addWeapon(WeaponFactory.createWeapon(ShipConfig.ASTEROID.getInitWeapon()));
         super.selectWeapon(0);
     }

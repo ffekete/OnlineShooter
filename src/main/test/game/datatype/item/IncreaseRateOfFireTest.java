@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import game.config.constant.ItemType;
+import game.config.constant.WeaponConfig;
 import game.config.constant.ShipConfig;
 import game.datatype.AIDao;
 import game.datatype.PlayerData;
@@ -24,10 +25,10 @@ public class IncreaseRateOfFireTest {
         aiDao.setIsAsteroid(false);
         PlayerData player = new PlayerData(3L, "P04", ShipConfig.MERCURY, aiDao);
 
-        long initRateOfFire = player.getWeapon().getRateOfFire();
+        double initRateOfFire = player.getWeapon().getRateOfFire();
 
         irf.applyEffect(player);
 
-        Assert.assertEquals(initRateOfFire - 1L, player.getWeapon().getRateOfFire());
+        Assert.assertEquals(initRateOfFire + WeaponConfig.GATLING_GUN_RATE_OF_FIRE_BONUS, player.getWeapon().getRateOfFire());
     }
 }

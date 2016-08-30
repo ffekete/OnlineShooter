@@ -25,8 +25,8 @@ public class PlasmaShieldTest {
         aiDao.setIsAsteroid(false);
         PlayerData player = new PlayerData(0L, "P05", ShipConfig.INTERCEPTOR, aiDao);
 
-        long initProtection = player.getShield().getProtection();
-        long initMaxProtection = player.getShield().getMaxProtectionValue();
+        double initProtection = player.getShield().getProtection();
+        double initMaxProtection = player.getShield().getMaxProtectionValue();
         Assert.assertEquals(initProtection, ShieldConfig.NORMAL_SHIELD_PROTECTION);
         Assert.assertEquals(initMaxProtection, ShieldConfig.NORMAL_SHIELD_PROTECTION);
 

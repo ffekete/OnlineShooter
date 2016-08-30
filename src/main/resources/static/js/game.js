@@ -11,15 +11,26 @@ var STAGE_Y_MAX_LIMIT = 0;
 
 var stompClient = null;
 
-var shootBulletSwitch=false;
+var shootAmmoSwitch = false;
 
 var canvas;
 var canvasContext;
+
+var MINIMAP_WIDTH = 200;
+var MINIMAP_HEIGHT = 200;
+
+var STAGE_MAX_WIDTH = 0;
+var STAGE_MAX_HEIGHT = 0;
+
+var STAGE_HALF_WIDTH = 0;
+var STAGE_HALF_HEIGHT = 0;
 
 /*
  * Array of particles (global variable)
  */
 var particles = [];
+
+var asteroid_rotation = 0;
 
 var playerData = {
 	name: window.sessionStorage.getItem("playerName"), 
@@ -191,13 +202,13 @@ function draw(){
 	drawBackground();
 	drawBorder();
 	
-	
 	if(playerData.respawnTime == 0){
 		drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.name, playerData.hp, playerData.maxHp, playerData.invulnerable, playerData.shieldAmount, playerData.maxShieldAmount, playerData.color, playerData.shipType);
 	}
 	else
 	{
 		canvasContext.save();
+		canvasContext.fillStyle = "white";
 		canvasContext.textAlign ="center";
 		canvasContext.font="40px Arial";
 		canvasContext.fillText("Respawning in seconds: " + parseInt(playerData.respawnTime / 100 + 1), screen_x / 2 + 10, screen_y /2 +10);
@@ -213,9 +224,11 @@ function draw(){
 			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.maxHp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue, actualShip.color, actualShip.shipType);
 		}
 	}
-	drawBullets();
+	
+	drawAmmo();
 	drawItems();
 	drawExplosions();
+	drawMinimap();
 	drawHighScores();
 	drawPlayerData();
 	drawWeaponKeys();
@@ -251,14 +264,14 @@ function messageArrived(message){
 	console.log(message.body);
 }
 
-function shootBullet(){
-	stompClient.send("/app/createBullet", {}, playerData.id);
+function shootAmmo(){
+	stompClient.send("/app/createAmmo", {}, playerData.id);
 }
 
 function playerDataArrived(playerDataFromServer){
 	var parsedPlayerData = JSON.parse(playerDataFromServer.body);
 	playerData.shipAngle = parsedPlayerData.shipAngle;	
-	playerData.bullets = parsedPlayerData.visibleBullets;
+	playerData.ammo = parsedPlayerData.visibleAmmo;
 	playerData.otherPlayers = parsedPlayerData.visiblePlayers;
 	playerData.x = parsedPlayerData.x;
 	playerData.y = parsedPlayerData.y;
@@ -275,30 +288,12 @@ function playerDataArrived(playerDataFromServer){
 	playerData.shipType = parsedPlayerData.shipType;
 	playerData.weapon = parsedPlayerData.weapon;
 	playerData.weapons = parsedPlayerData.weapons;
-}
-
-function drawBorder(){
-	canvasContext.save();
-	
-	canvasContext.fillStyle = "black";
-	canvasContext.moveTo(1,1);
-	canvasContext.lineTo(1, canvas.height);
-	
-	canvasContext.moveTo(1, canvas.height);
-	canvasContext.lineTo(canvas.width, canvas.height);
-	
-	canvasContext.moveTo(canvas.width, canvas.height);
-	canvasContext.lineTo(canvas.width, 1);
-	
-	canvasContext.moveTo(canvas.width, 1);
-	canvasContext.lineTo(1, 1);
-	
-	canvasContext.stroke();
-	
-	canvasContext.restore();
+	playerData.ammoCount = parsedPlayerData.ammoCount;
+	playerData.allPlayersPosition = parsedPlayerData.allPlayersPosition;
 }
 
 function drawHighScores(){
+	canvasContext.fillStyle = "white";
 	canvasContext.fillText("High score table: ", 10 ,25);
 	var y = 35;
 	for(var i in playerData.highScores){
@@ -311,13 +306,14 @@ function drawPlayerData(){
 	var fromLeft = 150;
 	var fromTop = 15;
 	var verticalSpace = 10;
+	canvasContext.fillStyle = "white";
 	canvasContext.fillText("Player details: ", fromLeft, fromTop);
 	canvasContext.fillText("Ship type: " + playerData.shipType, fromLeft, fromTop + verticalSpace);
 	canvasContext.fillText("HP: " + playerData.hp, fromLeft, fromTop + verticalSpace * 2);
 	canvasContext.fillText("Shield amount: " + playerData.shieldAmount, fromLeft, fromTop + verticalSpace * 3);
 	canvasContext.fillText("Weapon: " + playerData.weapon.name, fromLeft, fromTop + verticalSpace * 4);
 	canvasContext.fillText("RoF: " + playerData.weapon.rateOfFire, fromLeft, fromTop + verticalSpace * 5);
-	canvasContext.fillText("Ammo: " + playerData.weapon.ammo, fromLeft, fromTop + verticalSpace * 6);
+	canvasContext.fillText("Ammo: " + playerData.ammoCount[playerData.weapon.ammoType], fromLeft, fromTop + verticalSpace * 6);
 	canvasContext.fillText("Damage: " + playerData.weapon.damage, fromLeft, fromTop + verticalSpace * 7);
 }
 
@@ -325,30 +321,33 @@ function drawWeaponKeys(){
 	var fromLeft = 300;
 	var fromTop = 15;
 	var verticalSpace = 10;
+	canvasContext.fillStyle = "white";
 	$.each(playerData.weapons, function(index, weapon) {
-		canvasContext.fillText("[" + (index + 1) + "]: " + weapon.name +" (" + weapon.ammo + ")", fromLeft, fromTop + verticalSpace * index);
+		canvasContext.fillText("[" + (index + 1) + "]: " + weapon.name +" (" + playerData.ammoCount[weapon.ammoType] + ")", fromLeft, fromTop + verticalSpace * index);
 	});
 }
 
 function drawBackground(){
 	var img = $("#bg")[0];
-	for(var i = -5; i < 10; i++)
-	for(var j = -5; j < 10; j++)
-		{
-		canvasContext.drawImage(img, 0 + j* 250-(playerData.x % 250), 0 + i* 246-(playerData.y % 246));
+	for(var i = -3; i < 3; i++) {
+		for(var j = -3; j < 3; j++) {
+			canvasContext.drawImage(img, j* 1024-(playerData.x % 1024), i* 1024-(playerData.y % 1024));
 		}
+	}
 	
 	canvasContext.fillText("Your score: " + playerData.score, 10,15);
+}
+
+function drawBorder(){
 	canvasContext.save();
-	
 	var dx = Math.abs(playerData.x - STAGE_X_MIN_LIMIT);
 	var dy = Math.abs(playerData.y - STAGE_Y_MIN_LIMIT);
 	
 	var dxm = Math.abs(STAGE_X_MIN_LIMIT) + STAGE_X_MAX_LIMIT;
 	var dym = Math.abs(STAGE_Y_MIN_LIMIT) + STAGE_Y_MAX_LIMIT;
-	
-	
-	canvasContext.rect((screen_x / 2) - dx, (screen_y / 2) - dy, dxm, dym);
+
+	canvasContext.strokeStyle ="white";
+	canvasContext.strokeRect((screen_x / 2) - dx, (screen_y / 2) - dy, dxm, dym);
 	
 	canvasContext.restore();
 }
@@ -362,6 +361,8 @@ function drawItems(){
 		var dx = playerData.x - playerData.itemsOnScreen[items].x;
 		var dy = playerData.y - playerData.itemsOnScreen[items].y;
 		
+		canvasContext.fillStyle = "white";
+		canvasContext.strokeStyle = "white";
 		canvasContext.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 5, 0, 2*Math.PI);
 		canvasContext.stroke();
 		canvasContext.textAlign ="center";
@@ -372,22 +373,22 @@ function drawItems(){
 	canvasContext.restore();
 }
 
-function drawBullets(){
+function drawAmmo(){
 	canvasContext.save();
 	
-	for(var bullets in playerData.bullets){
+	for(var ammo in playerData.ammo){
 		canvasContext.beginPath();
 		
-		var dx = playerData.x - playerData.bullets[bullets].x;
-		var dy = playerData.y - playerData.bullets[bullets].y;
+		var dx = playerData.x - playerData.ammo[ammo].x;
+		var dy = playerData.y - playerData.ammo[ammo].y;
 		
-		var physicalRepresentation = JSON.parse(playerData.bullets[bullets].physicalRepresentation);
+		var physicalRepresentation = JSON.parse(playerData.ammo[ammo].physicalRepresentation);
 		
 		canvasContext.save();
 		
 		if(physicalRepresentation.shape === "circle"){
-			canvasContext.fillStyle = "black";
-			canvasContext.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 2, 0, 2*Math.PI);
+			canvasContext.fillStyle = "white";
+			canvasContext.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, physicalRepresentation.radius, 0, 2*Math.PI);
 			canvasContext.fill();
 		}
 		
@@ -434,7 +435,7 @@ function drawShip(x, y, angle, name, hp, maxHp, invulnerability, shield, maxShie
 	canvasContext.fillRect(-39,-10,5,(21*hp/maxHp));
 	
 	if(invulnerability == false){
-	   	canvasContext.strokeStyle = "black";
+	   	canvasContext.strokeStyle = "white";
 	}
 	else
 	{
@@ -510,9 +511,13 @@ function drawShip(x, y, angle, name, hp, maxHp, invulnerability, shield, maxShie
 	
 	if(type === "Asteroid")
 	{
-		canvasContext.beginPath();
-		canvasContext.arc(0, 0, 15, 0, 2*Math.PI);
-		canvasContext.closePath();
+		var size = 50;
+		var image = new Image();
+		image.src = "../img/asteroid_" + (name.charCodeAt(name.length - 1) % 3 + 1) + "_128.png";
+		image.width = size;
+		image.height = size;
+		canvasContext.rotate(asteroid_rotation++ * Math.PI / 180);
+		canvasContext.drawImage(image, -image.width / 2, -image.height / 2, image.width, image.height);
 	}
 	
 	canvasContext.fillStyle = color;
@@ -543,7 +548,6 @@ function start(){
 	canvas = $("#gameArea")[0];
 	canvasContext = canvas.getContext("2d");
 	
-	drawBorder();
 	connect();
 	setInterval(draw, 5);
 	setInterval(updatePlayerData, 10);
@@ -552,17 +556,17 @@ function start(){
 	canvasContext.rotate(0*Math.PI*180);
 	
 	setInterval(function(){
-		if (shootBulletSwitch){
-			stompClient.send("/app/createBullet", {}, playerData.id);
+		if (shootAmmoSwitch){
+			stompClient.send("/app/createAmmo", {}, playerData.id);
 		}
 	}, 50);
 
 	$('#gameArea').mousedown(function(){
-		shootBulletSwitch = true;
+		shootAmmoSwitch = true;
 	});
 
 	$('#gameArea').mouseup(function(){
-		shootBulletSwitch = false;
+		shootAmmoSwitch = false;
 	});
 	
 	$(document).keypress(function(e){
@@ -584,7 +588,11 @@ function start(){
 	STAGE_X_MAX_LIMIT = stageData.maxCoordinate.x;
 	STAGE_Y_MAX_LIMIT = stageData.maxCoordinate.y;
 	
-	$('#bg').css("display", "none"); // hide the background image
+	STAGE_MAX_WIDTH = STAGE_X_MAX_LIMIT - STAGE_X_MIN_LIMIT;
+	STAGE_MAX_HEIGHT = STAGE_Y_MAX_LIMIT - STAGE_Y_MIN_LIMIT;
+
+	STAGE_HALF_WIDTH = STAGE_MAX_WIDTH / 2;
+	STAGE_HALF_HEIGHT = STAGE_MAX_HEIGHT / 2;
 }
 
 function updateCanwasSize(){
@@ -600,3 +608,40 @@ function updateMouseCoordinates(event){
 											// = 10
 	playerData.mouseY = event.clientY - 10;
 }
+
+function drawMinimap() {
+	canvasContext.save();
+	
+	canvasContext.fillStyle = "white";
+	canvasContext.fillRect(screen_x-10-MINIMAP_WIDTH,screen_y-10-MINIMAP_HEIGHT,MINIMAP_WIDTH,MINIMAP_HEIGHT);
+	canvasContext.fill();
+	
+	canvasContext.strokeStyle = "black";
+	canvasContext.strokeRect(screen_x-10-MINIMAP_WIDTH, screen_y-10-MINIMAP_HEIGHT, MINIMAP_WIDTH, MINIMAP_HEIGHT);
+    canvasContext.stroke();
+
+	canvasContext.restore();
+	
+	if(playerData.allPlayersPosition){
+		for(var i in playerData.allPlayersPosition){
+			var ship = playerData.allPlayersPosition[i];
+			placeOnMinimap(ship.x, ship.y, ship.color);
+		}
+	}
+}
+
+function placeOnMinimap(mX, mY, color){
+	xPercent = (STAGE_HALF_WIDTH  + mX) / STAGE_MAX_WIDTH * 100;
+	yPercent = (STAGE_HALF_HEIGHT + mY) / STAGE_MAX_HEIGHT * 100;
+	
+	canvasContext.save();
+	
+	canvasContext.beginPath();
+	canvasContext.rect(screen_x - 10-MINIMAP_WIDTH + (xPercent*2) - 2, screen_y - 10-MINIMAP_HEIGHT + (yPercent*2) - 2, 4, 4);
+	canvasContext.fillStyle = color;
+	canvasContext.fill();
+	canvasContext.closePath();
+	
+	canvasContext.restore();
+}
+
