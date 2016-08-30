@@ -26,7 +26,8 @@ public class AIHandlerTest extends AbstractTestNGSpringContextTests {
             playerPool.removePlayer(playerPool.get(i));
         }
     }
-
+    
+    //TODO: rendberakni a tesztet
     @Test(enabled = false)
     public void testShouldGiveBackOneAi() {
         aiHandler.updateAIData();

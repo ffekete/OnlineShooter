@@ -52,7 +52,8 @@ public class ItemHandlerTest extends AbstractTestNGSpringContextTests {
 
         Assert.assertEquals(itemPool.poolSize(), 1);
     }
-
+    
+  //TODO: rendberakni a tesztet
     @Test(dataProvider = "coordinatesData", enabled = false)
     public void droppedItemCoordinateShouldBetweenRange(double x, double y) {
         itemHandler.dropCargoToCoordinate(player.getSpaceShip());

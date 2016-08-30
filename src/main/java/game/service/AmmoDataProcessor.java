@@ -19,7 +19,7 @@ public class AmmoDataProcessor implements AmmoDataProcessorInterface {
     private CoordinateHandler coordinateHandler;
 
     private void updateAmmoCoordinates(Ammo ammo) {
-    	ammo.setCoordinate(coordinateHandler.calculateItemCoordinates(ammo, ammo.getSpeed()));
+    	ammo.setCoordinate(coordinateHandler.calculateItemCoordinates(ammo, ammo.getSpeed(), null));
     }
 
     private void processAgeCounter(Ammo ammo) {
