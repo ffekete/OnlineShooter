@@ -153,7 +153,7 @@ public class PlayerData {
     }
 
     public boolean canShootWeapon() {
-        return getSpaceShip().canShoot();
+        return getSpaceShip().canShoot() && this.isSpawned();
     }
 
     public double getScreenHalfWidth() {
