@@ -20,9 +20,7 @@ public class IncreaseScoreTest {
 
     @Test
     public void testShouldIncreaseScore() {
-        AIDao aiDao = new AIDao();
-        aiDao.setIsAi(false);
-        aiDao.setIsAsteroid(false);
+        AIDao aiDao = new AIDao(false, false);
         PlayerData player = new PlayerData(6L, "P00", ShipConfig.INTERCEPTOR, aiDao);
 
         long initScore = player.getScore();

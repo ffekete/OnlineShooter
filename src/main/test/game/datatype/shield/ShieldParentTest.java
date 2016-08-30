@@ -20,9 +20,7 @@ public class ShieldParentTest {
 
     @BeforeMethod
     public void init() {
-        aiDao = new AIDao();
-        aiDao.setIsAi(false);
-        aiDao.setIsAsteroid(false);
+        aiDao = new AIDao(false, false);
 
         player = new PlayerData(1l, "P02", ShipConfig.INTERCEPTOR, aiDao);
 

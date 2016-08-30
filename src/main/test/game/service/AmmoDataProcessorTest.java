@@ -37,10 +37,11 @@ public class AmmoDataProcessorTest extends AbstractTestNGSpringContextTests {
     @BeforeMethod
     public void initTests() {
         ap.clear();
-        AIDao aiDao = new AIDao();
-        aiDao.setIsAi(false);
-        aiDao.setIsAsteroid(false);
+        AIDao aiDao = new AIDao(false, false);
         player = new PlayerData(200L, "P01", ShipConfig.DELTAWING, aiDao);
+        while(player.getRespawnTime() > 0){
+            player.decreasePlayerRespawnTime();            
+        }
     }
 
     @DataProvider(name = "ammoDataInput")

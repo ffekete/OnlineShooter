@@ -20,9 +20,7 @@ public class IncreaseManeuverabilityTest {
 
     @Test
     public void testShouldIncreaseManeuverability() {
-        AIDao aiDao = new AIDao();
-        aiDao.setIsAi(false);
-        aiDao.setIsAsteroid(false);
+        AIDao aiDao = new AIDao(false, false);
         PlayerData player = new PlayerData(5L, "P01", ShipConfig.QUICKSILVER, aiDao);
         double initIm = player.getManeuverability();
 

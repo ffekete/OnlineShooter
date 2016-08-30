@@ -296,6 +296,7 @@ function playerDataArrived(playerDataFromServer){
 }
 
 function drawHighScores(){
+	canvasContext.save();
 	canvasContext.fillStyle = ui_color;
 	canvasContext.fillText("Your score: " + playerData.score, 10,15);
 	canvasContext.fillText("High score table: ", 10, 25);
@@ -304,12 +305,14 @@ function drawHighScores(){
 		canvasContext.fillText(playerData.highScores[i], 10, y);
 		y += 10;
 	}
+	canvasContext.restore();
 }
 
 function drawPlayerData(){
 	var fromLeft = 150;
 	var fromTop = 15;
 	var verticalSpace = 10;
+	canvasContext.save();
 	canvasContext.fillStyle = ui_color;
 	canvasContext.fillText("Player details: ", fromLeft, fromTop);
 	canvasContext.fillText("Ship type: " + playerData.shipType, fromLeft, fromTop + verticalSpace);
@@ -319,36 +322,42 @@ function drawPlayerData(){
 	canvasContext.fillText("RoF: " + playerData.weapon.rateOfFire, fromLeft, fromTop + verticalSpace * 5);
 	canvasContext.fillText("Ammo: " + playerData.ammoCount[playerData.weapon.ammoType], fromLeft, fromTop + verticalSpace * 6);
 	canvasContext.fillText("Damage: " + playerData.weapon.damage, fromLeft, fromTop + verticalSpace * 7);
+	canvasContext.restore();
 }
 
 function drawWeaponKeys(){
 	var fromLeft = 300;
 	var fromTop = 15;
 	var verticalSpace = 10;
+	canvasContext.save();
 	canvasContext.fillStyle = ui_color;
 	$.each(playerData.weapons, function(index, weapon) {
 		canvasContext.fillText("[" + (index + 1) + "]: " + weapon.name +" (" + playerData.ammoCount[weapon.ammoType] + ")", fromLeft, fromTop + verticalSpace * index);
 	});
+	canvasContext.restore();
 }
 
 function drawBackground(){
 	var img = $("#bg")[0];
+	canvasContext.save();
 	for(var i = -3; i < 3; i++) {
 		for(var j = -3; j < 3; j++) {
 			canvasContext.drawImage(img, j* 1024-(playerData.x % 1024), i* 1024-(playerData.y % 1024));
 		}
 	}
+	canvasContext.restore();
 }
 
 function drawBorder(){
-	canvasContext.save();
 	var dx = Math.abs(playerData.x - STAGE_X_MIN_LIMIT);
 	var dy = Math.abs(playerData.y - STAGE_Y_MIN_LIMIT);
 	
 	var dxm = Math.abs(STAGE_X_MIN_LIMIT) + STAGE_X_MAX_LIMIT;
 	var dym = Math.abs(STAGE_Y_MIN_LIMIT) + STAGE_Y_MAX_LIMIT;
 
+	canvasContext.save();
 	canvasContext.strokeStyle = ui_color;
+	
 	canvasContext.strokeRect((screen_x / 2) - dx, (screen_y / 2) - dy, dxm, dym);
 	
 	canvasContext.restore();
@@ -409,8 +418,6 @@ function drawAmmo(){
 			canvasContext.lineTo((screen_x / 2 + 10) - dx2, (screen_y / 2 + 10) - dy2);
 			canvasContext.stroke();
 		}
-		
-		canvasContext.restore();
 	}
 	
 	canvasContext.restore();
@@ -453,6 +460,24 @@ function drawShip(x, y, angle, hitRadius, name, hp, maxHp, invulnerability, shie
 	canvasContext.textAlign ="center";
 	canvasContext.fillStyle = ui_color;
 	canvasContext.fillText(name, 0, hitRadius + 30);
+		canvasContext.lineTo(-4,8);
+		canvasContext.lineTo(0,8);
+		canvasContext.lineTo(0, 11);
+		canvasContext.lineTo(-13,11);
+		canvasContext.lineTo(-16,8);
+		canvasContext.lineTo(-16,4);
+		canvasContext.lineTo(-17,3);
+		canvasContext.lineTo(-17,-3);
+		canvasContext.lineTo(-16,-4);
+		canvasContext.lineTo(-16,-8);
+		canvasContext.lineTo(-13,-11);
+		canvasContext.lineTo(0,-11);
+		canvasContext.lineTo(0,-8);
+		canvasContext.lineTo(-4,-8);
+		canvasContext.lineTo(-4,-3);
+		canvasContext.lineTo(-1,-3);
+		canvasContext.lineTo(0,-4);
+		canvasContext.lineTo(8,-4);
 	
     var image = new Image();
 	
@@ -482,7 +507,6 @@ function drawShip(x, y, angle, hitRadius, name, hp, maxHp, invulnerability, shie
 	image.height =  2 * hitRadius + 20;
 	canvasContext.drawImage(image, -image.width / 2, -image.height / 2, image.width, image.height);
 	
-	canvasContext.restore();
 }
 
 function pollPlayerData(){
@@ -499,6 +523,8 @@ function updatePlayerData(){
 }
 
 function start(){
+	disableScroll();
+	
 	canvas = $("#gameArea")[0];
 	canvasContext = canvas.getContext("2d");
 	
@@ -549,17 +575,40 @@ function start(){
 	STAGE_HALF_HEIGHT = STAGE_MAX_HEIGHT / 2;
 }
 
+var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+
+function preventDefault(e) {
+  e = e || window.event;
+  if (e.preventDefault)
+      e.preventDefault();
+  e.returnValue = false;  
+}
+
+function preventDefaultForScrollKeys(e) {
+    if (keys[e.keyCode]) {
+        preventDefault(e);
+        return false;
+    }
+}
+
+function disableScroll() {
+	if (window.addEventListener) { // older FF
+		window.addEventListener('DOMMouseScroll', preventDefault, false);
+	}
+	window.onwheel = preventDefault; // modern standard
+	window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+	window.ontouchmove  = preventDefault; // mobile
+	document.onkeydown  = preventDefaultForScrollKeys;
+}
+
 function updateCanvasSize(){
 	playerData.canvasHeight = $("#gameArea").height();
 	playerData.canvasWidth = $("#gameArea").width();
 }
 
 function updateMouseCoordinates(event){
-	playerData.mouseX = event.clientX - 10; // -10: the canvas starts with
-											// coordinates
-											// x =
-											// 10,y
-											// = 10
+	// -10: the canvas starts with coordinates x = 10, y = 10
+	playerData.mouseX = event.clientX - 10;
 	playerData.mouseY = event.clientY - 10;
 }
 

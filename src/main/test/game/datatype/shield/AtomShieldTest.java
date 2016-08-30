@@ -20,9 +20,7 @@ public class AtomShieldTest {
 
     @Test
     public void testShouldIncreaseShield() {
-        AIDao aiDao = new AIDao();
-        aiDao.setIsAi(false);
-        aiDao.setIsAsteroid(false);
+        AIDao aiDao = new AIDao(false, false);
         PlayerData player = new PlayerData(0L, "P05", ShipConfig.INTERCEPTOR, aiDao);
 
         double initProtection = player.getShield().getProtection();
