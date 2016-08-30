@@ -22,9 +22,7 @@ public class IncreaseDamageTest {
 
     @Test
     public void testIncreaseDamageShouldIncreaseDamage() {
-        AIDao aiDao = new AIDao();
-        aiDao.setIsAi(false);
-        aiDao.setIsAsteroid(false);
+        AIDao aiDao = new AIDao(false, false);
         PlayerData player = new PlayerData(1L, "P01", ShipConfig.DELTAWING, aiDao);
 
         /* When */

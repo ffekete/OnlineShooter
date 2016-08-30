@@ -26,22 +26,19 @@ public class AmmoPoolTest extends AbstractTestNGSpringContextTests {
     AmmoPoolList<Ammo> ap;
 
     PlayerData player;
+    
+    AIDao aiDao; 
 
     @BeforeMethod
     public void initBulletPool() {
         ap.clear();
-        AIDao aiDao = new AIDao();
-        aiDao.setIsAi(false);
-        aiDao.setIsAsteroid(false);
+        aiDao = new AIDao(false, false);
         player = new PlayerData(200L, "P01", ShipConfig.DELTAWING, aiDao);
     }
 
     @Test
     public void testShouldCreateTwoBulletsForTwoDifferentPlayers() {
         // given
-        AIDao aiDao = new AIDao();
-        aiDao.setIsAi(false);
-        aiDao.setIsAsteroid(false);
         PlayerData player2 = new PlayerData(300L, "P02", ShipConfig.DELTAWING, aiDao);
         player2.setWeapon(new GatlingGun());
         player.setWeapon(new GatlingGun()); // setting this weapon for player

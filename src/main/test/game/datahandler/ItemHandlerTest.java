@@ -34,9 +34,7 @@ public class ItemHandlerTest extends AbstractTestNGSpringContextTests {
 
     @BeforeMethod
     public void initPool() {
-        AIDao aiDao = new AIDao();
-        aiDao.setIsAi(true);
-        aiDao.setIsAsteroid(false);
+        AIDao aiDao = new AIDao(true, false);
         player = new PlayerData(1L, "Test", ShipConfig.CARGOSHIP, aiDao);
         player.getSpaceShip().setCoordinate(0, 0);
         itemPool.clear();
@@ -52,8 +50,8 @@ public class ItemHandlerTest extends AbstractTestNGSpringContextTests {
 
         Assert.assertEquals(itemPool.poolSize(), 1);
     }
-    
-  //TODO: rendberakni a tesztet
+
+    // TODO: rendberakni a tesztet
     @Test(dataProvider = "coordinatesData", enabled = false)
     public void droppedItemCoordinateShouldBetweenRange(double x, double y) {
         itemHandler.dropCargoToCoordinate(player.getSpaceShip());

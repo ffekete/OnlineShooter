@@ -39,12 +39,10 @@ public class AmmoPoolTest extends AbstractTestNGSpringContextTests {
 
         ammoPool.clear();
 
-        aiDao = new AIDao();
-        aiDao.setIsAi(false);
-        aiDao.setIsAsteroid(false);
+        aiDao = new AIDao(false, false);
     }
-    
-  //TODO: rendberakni a tesztet
+
+    // TODO: rendberakni a tesztet
     @Test(enabled = false)
     public void testShouldAddOneAmmo() {
         ammoPool.addAmmo(1L);

@@ -20,9 +20,7 @@ public class IncreaseSpeedTest {
 
     @Test
     public void testShouldIncreaseSpeed() {
-        AIDao aiDao = new AIDao();
-        aiDao.setIsAi(false);
-        aiDao.setIsAsteroid(false);
+        AIDao aiDao = new AIDao(false, false);
         PlayerData player = new PlayerData(3L, "P04", ShipConfig.MERCURY, aiDao);
 
         double initSpeed = player.getSpeed();
