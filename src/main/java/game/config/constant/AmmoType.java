@@ -1,5 +1,7 @@
 package game.config.constant;
 
+import game.util.Rounder;
+
 public enum AmmoType {
 	// Kinetic types
 	BULLET(AmmoConfig.BULLET_INIT_DAMAGE, AmmoConfig.BULLET_DAMAGE_BONUS),
@@ -23,7 +25,11 @@ public enum AmmoType {
 	
 	public double getDamage(long bonus) {
 		if (bonus > 0) {
-			return this.initDamage + this.damageBonus * bonus;
+			double damage = this.initDamage;
+			for(int i = 0; i < bonus; i++) {
+				damage *= 1.1;
+			}
+			return Rounder.round(damage, 2);
 		} else {
 			return this.initDamage;
 		}

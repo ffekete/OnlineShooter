@@ -19,7 +19,7 @@ public enum ItemType {
     PLASMA_SHIELD("plasmaShield", "Plasma Shield"),
     
     // Other
-    HEALTH_PACK("healthPack", "Health Pack +5"),
+    HEALTH_PACK("healthPack", "Health Pack +"),
     INCREASE_SCORE("increaseScore", "Score++"),
     
     NO_SHIELD("noShield", ""),

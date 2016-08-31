@@ -28,6 +28,6 @@ public class IncreaseManeuverabilityTest {
         im.applyEffect(player);
 
         /* Then */
-        Assert.assertEquals(initIm, player.getManeuverability() + ItemConfig.MANEUVERABILITY_INCREASE_VALE);
+        Assert.assertEquals(initIm, player.getManeuverability() + ItemConfig.MANEUVERABILITY_INCREASE_VALUE);
     }
 }

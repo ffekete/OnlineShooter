@@ -201,7 +201,10 @@ function draw(){
 	
 	updateCanvasSize();
 	
-	drawBackground();
+	var img = new Image();
+	img.src = "img/space_background.jpg";
+	
+	drawBackground(img);
 	drawBorder();
 	
 	drawItems();
@@ -338,9 +341,7 @@ function drawWeaponKeys(){
 	canvasContext.restore();
 }
 
-function drawBackground(){
-	var img = new Image();
-	img.src = "img/space_background.jpg";
+function drawBackground(img){
 	canvasContext.save();
 	for(var i = -3; i < 3; i++) {
 		for(var j = -3; j < 3; j++) {

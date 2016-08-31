@@ -13,7 +13,7 @@ public class IncreaseManeuverability extends ItemParent {
 
     @Override
     public void applyEffect(PlayerData player) {
-        player.increaseManeuverablility(ItemConfig.MANEUVERABILITY_INCREASE_VALE);
+        player.increaseManeuverablility(ItemConfig.MANEUVERABILITY_INCREASE_VALUE);
     }
 
 }
