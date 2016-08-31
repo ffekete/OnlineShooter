@@ -3,6 +3,7 @@ package game.datatype.ship;
 import java.awt.geom.Point2D;
 import java.util.List;
 
+import factory.ShieldFactory;
 import factory.WeaponFactory;
 import game.config.constant.ShipConfig;
 import game.interfaces.SpawnableItem;
@@ -14,6 +15,7 @@ public class CargoShip extends ShipParent {
         super.setShipConfig(ShipConfig.CARGOSHIP);
         super.setMaxCargoCapacity(ShipConfig.CARGOSHIP.getCargoCapacity());
         super.setCarriage(carriage);
+        this.initShield();
         this.resetSpeed();
         this.resetManeuverability();
         this.resetHp();
@@ -47,8 +49,13 @@ public class CargoShip extends ShipParent {
 
     @Override
     public void initWeaponsAndAmmo() {
-    	super.initWeaponsAndAmmo();
+        super.initWeaponsAndAmmo();
         super.addWeapon(WeaponFactory.createWeapon(ShipConfig.CARGOSHIP.getInitWeapon()));
         super.selectWeapon(0);
+    }
+
+    @Override
+    public void initShield() {
+        super.setShield(ShieldFactory.createShield(ShipConfig.CARGOSHIP.getInitShield()));
     }
 }

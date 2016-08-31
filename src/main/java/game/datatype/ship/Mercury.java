@@ -2,6 +2,7 @@ package game.datatype.ship;
 
 import java.awt.geom.Point2D;
 
+import factory.ShieldFactory;
 import factory.WeaponFactory;
 import game.config.constant.ShipConfig;
 
@@ -10,6 +11,7 @@ public class Mercury extends ShipParent {
     public Mercury() {
         super.setCoordinate(new Point2D.Double(0, 0));
         super.setShipConfig(ShipConfig.MERCURY);
+        this.initShield();
         this.resetSpeed();
         this.resetManeuverability();
         this.resetHp();
@@ -43,9 +45,13 @@ public class Mercury extends ShipParent {
 
     @Override
     public void initWeaponsAndAmmo() {
-    	super.initWeaponsAndAmmo();
+        super.initWeaponsAndAmmo();
         super.addWeapon(WeaponFactory.createWeapon(ShipConfig.MERCURY.getInitWeapon()));
         super.selectWeapon(0);
     }
 
+    @Override
+    public void initShield() {
+        super.setShield(ShieldFactory.createShield(ShipConfig.MERCURY.getInitShield()));
+    }
 }

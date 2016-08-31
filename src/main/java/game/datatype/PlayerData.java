@@ -97,12 +97,9 @@ public class PlayerData {
         this.getSpaceShip().resetManeuverability();
         this.getSpaceShip().resetSpeed();
         this.score = 0l;
-
+        
         if (shipConfig == ShipConfig.ASTEROID) {
             this.setInvulnerabilityCounter(0L);
-            this.getSpaceShip().setShield(ShieldFactory.createShield(ItemType.NO_SHIELD));
-        } else {
-            this.getSpaceShip().setShield(ShieldFactory.createShield(ItemType.NORMAL_SHIELD));
         }
 
         if(this.isAI){
@@ -136,9 +133,8 @@ public class PlayerData {
         this.getSpaceShip().resetManeuverability();
         this.getSpaceShip().resetSpeed();
         this.score = 0L;
-        this.getSpaceShip().setShield(this.isAsteroid ?
-        		ShieldFactory.createShield(ItemType.NO_SHIELD) :
-        		ShieldFactory.createShield(ItemType.NORMAL_SHIELD));
+        this.getSpaceShip().initShield();
+        
         if(this.isAI){
             this.respawnTime = 1L;
         } else {
