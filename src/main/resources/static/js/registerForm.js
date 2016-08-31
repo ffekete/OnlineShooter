@@ -1,9 +1,9 @@
 var stompClient = null;
 var selectedShip;
 
-function loadShipType() {
-	selectedShip = document.getElementById("shipSelector").value;
-
+function init(){
+	var lang = navigator.language || navigator.userLanguage;
+	
 	updateShipData();
 }
 

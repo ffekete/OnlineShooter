@@ -1,40 +1,42 @@
 package game.config.constant;
 
+import java.util.ResourceBundle;
+
 public enum ItemType {
     // Weapons
-    GATLING_GUN("gatlingGun", "Gatling Gun"),
-    LASER_CANNON("laserCannon", "Laser Cannon"),
-    DOUBLE_GATLING_GUN("doubleGatlingGun", "Double Gatling Gun"),
-    SHOTGUN("shotgun", "Shotgun"),
+    GATLING_GUN("gatlingGun"),
+    LASER_CANNON("laserCannon"),
+    DOUBLE_GATLING_GUN("doubleGatlingGun"),
+    SHOTGUN("shotgun"),
 
     // Power-ups
-    INCREASE_DAMAGE("increaseDamage", "Damage++"),
-    INCRASE_RATE_OF_FIRE("increaseRof","Rate Of Fire++"),
-    INCREASE_MANEUVERABILITY("increaseManeuverability","Maneuverability++"),
-    INCREASE_SPEED("increaseSpeed", "Speed++"),
+    INCREASE_DAMAGE("increaseDamage"),
+    INCRASE_RATE_OF_FIRE("increaseRof"),
+    INCREASE_MANEUVERABILITY("increaseManeuverability"),
+    INCREASE_SPEED("increaseSpeed"),
 
     // Shields
-    NORMAL_SHIELD("normalShield", "Normal Shield"),
-    ATOM_SHIELD("atomShield","Atom Shield"),
-    PLASMA_SHIELD("plasmaShield", "Plasma Shield"),
+    NORMAL_SHIELD("normalShield"),
+    ATOM_SHIELD("atomShield"),
+    PLASMA_SHIELD("plasmaShield"),
     
     // Other
-    HEALTH_PACK("healthPack", "Health Pack +5"),
-    INCREASE_SCORE("increaseScore", "Score++"),
+    HEALTH_PACK("healthPack"),
+    INCREASE_SCORE("increaseScore"),
     
-    NO_SHIELD("noShield", ""),
-    NO_WEAPON("noWeapon", "");
+    NO_SHIELD("noShield"),
+    NO_WEAPON("noWeapon");
+    
+    private static final ResourceBundle res = ResourceBundle.getBundle("com.example.Messages");
     
     private final String id;
-    private final String visibleName;
 
     public static int count() {
         return values().length;
     }
 
-    private ItemType(String id, String visibleName) {
+    private ItemType(String id) {
         this.id = id;
-        this.visibleName = visibleName;
     }
 
     public static ItemType get(int index) {
@@ -43,12 +45,12 @@ public enum ItemType {
         else
             throw new IllegalArgumentException();
     }
-    
-    public String getId(){
+
+    public String getId() {
         return this.id;
     }
-    
+
     public String getVisibleName() {
-        return this.visibleName;
+        return res.getString(name() + ".name");
     }
 }
