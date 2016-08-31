@@ -20,9 +20,7 @@ public class IncreaseRateOfFireTest {
 
     @Test
     public void testShouldIncreasePlayersRateOfFire() {
-        AIDao aiDao = new AIDao();
-        aiDao.setIsAi(false);
-        aiDao.setIsAsteroid(false);
+        AIDao aiDao = new AIDao(false, false);
         PlayerData player = new PlayerData(3L, "P04", ShipConfig.MERCURY, aiDao);
 
         double initRateOfFire = player.getWeapon().getRateOfFire();

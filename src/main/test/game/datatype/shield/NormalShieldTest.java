@@ -21,9 +21,7 @@ public class NormalShieldTest {
 
     @BeforeMethod
     public void init() {
-        aiDao = new AIDao();
-        aiDao.setIsAi(false);
-        aiDao.setIsAsteroid(false);
+        aiDao = new AIDao(false, false);
         player = new PlayerData(0L, "P05", ShipConfig.INTERCEPTOR, aiDao);
     }
 

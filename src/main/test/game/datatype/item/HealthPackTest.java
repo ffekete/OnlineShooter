@@ -16,9 +16,7 @@ public class HealthPackTest {
 
     @BeforeMethod
     public void initFields() {
-        AIDao aiDao = new AIDao();
-        aiDao.setIsAi(false);
-        aiDao.setIsAsteroid(false);
+        AIDao aiDao = new AIDao(false, false);
         player = new PlayerData(0L, "P01", ShipConfig.INTERCEPTOR, aiDao);
 
     }

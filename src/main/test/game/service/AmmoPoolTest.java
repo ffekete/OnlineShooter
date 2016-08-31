@@ -27,26 +27,22 @@ public class AmmoPoolTest extends AbstractTestNGSpringContextTests {
 
     PlayerData player;
 
+    AIDao aiDao;
+
     @BeforeMethod
     public void initBulletPool() {
         ap.clear();
-        AIDao aiDao = new AIDao();
-        aiDao.setIsAi(false);
-        aiDao.setIsAsteroid(false);
-        player = new PlayerData(200L, "P01", ShipConfig.DELTAWING, aiDao);
+        aiDao = new AIDao(false, false);
+        player = new PlayerData(100L, "P01", ShipConfig.DELTAWING, aiDao);
     }
 
     @Test
     public void testShouldCreateTwoBulletsForTwoDifferentPlayers() {
         // given
-        AIDao aiDao = new AIDao();
-        aiDao.setIsAi(false);
-        aiDao.setIsAsteroid(false);
         PlayerData player2 = new PlayerData(300L, "P02", ShipConfig.DELTAWING, aiDao);
         player2.setWeapon(new GatlingGun());
-        player.setWeapon(new GatlingGun()); // setting this weapon for player
-                                            // ship because it will create one
-                                            // bullet
+        // setting this weapon for player ship because it will create one bullet
+        player.setWeapon(new GatlingGun());
         pp.put(200L, player);
         pp.put(300L, player2);
 
@@ -61,9 +57,8 @@ public class AmmoPoolTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testShouldCreateOneBullet_CooldownEffectActivated() {
         // given
-        player.setWeapon(new GatlingGun()); // setting this weapon for player
-                                            // ship because it will create one
-                                            // bullet
+        // setting this weapon for player ship because it will create one bullet
+        player.setWeapon(new GatlingGun());
         pp.put(200L, player);
 
         // when
@@ -77,9 +72,8 @@ public class AmmoPoolTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testShouldCreateOneBullet() {
         // given
-        player.setWeapon(new GatlingGun()); // setting this weapon for player
-                                            // ship because it will create one
-                                            // bullet
+        // setting this weapon for player ship because it will create one bullet
+        player.setWeapon(new GatlingGun());
         pp.put(200L, player);
 
         // when
@@ -92,18 +86,17 @@ public class AmmoPoolTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testShouldClearThePool() {
         // given
-        player.setWeapon(new GatlingGun()); // setting this weapon for player
-                                            // ship because it will create one
-                                            // bullet
-        pp.put(10L, player);
-
-        ap.addAmmo(10L);
+        // setting this weapon for player ship because it will create one bullet
+        player.setWeapon(new GatlingGun());
+        pp.put(player.getId(), player);
+        
+        ap.addAmmo(player.getId());
         Assert.assertEquals(ap.poolSize(), 1);
 
         // get rid of waiting for player to be able to shoot again
         player.getWeapon().decreaseCooldownValue(player.getWeapon().getCooldown());
 
-        ap.addAmmo(10L);
+        ap.addAmmo(player.getId());
         Assert.assertEquals(ap.poolSize(), 2);
 
         ap.clear();

@@ -1,24 +1,25 @@
 package game.datahandler;
 
-import java.awt.geom.Point2D;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import game.config.constant.GameConfig;
 import game.datatype.PlayerData;
 import game.interfaces.ItemPoolList;
 import game.interfaces.Ship;
 import game.interfaces.Spawnable;
 import game.interfaces.SpawnableItem;
-import game.util.RandomGenerator;
+import game.service.CoordinateHandler;
 
 @Component
 public class ItemHandler {
 
     @Autowired
     private ItemPoolList<SpawnableItem> itemPool;
+
+    @Autowired
+    private CoordinateHandler coordinateHandler;
 
     public boolean isItOnScreen(PlayerData player, Spawnable item) {
         boolean result = false;
@@ -31,16 +32,10 @@ public class ItemHandler {
         return result;
     }
 
-    public void dropCargoToCoordinate(Ship ship, Point2D coordinate) {
+    public void dropCargoToCoordinate(Ship ship) {
         List<SpawnableItem> carriage = ship.getCarriage();
         for (SpawnableItem item : carriage) {
-            Point2D itemDropCoordinate = new Point2D.Double();
-            itemDropCoordinate.setLocation(
-                    coordinate.getX() + RandomGenerator.getRandomInRange(-1 * (GameConfig.MAX_ITEM_DROP_DISTANCE),
-                            GameConfig.MAX_ITEM_DROP_DISTANCE),
-                    coordinate.getY() + RandomGenerator.getRandomInRange(-1 * (GameConfig.MAX_ITEM_DROP_DISTANCE),
-                            GameConfig.MAX_ITEM_DROP_DISTANCE));
-            item.setCoordinate(itemDropCoordinate);
+            item.setCoordinate(coordinateHandler.calculateItemCoordinates(item, ship.getSpeed(), ship.getCoordinate()));
             itemPool.add(item);
         }
         ship.resetCarriage();
