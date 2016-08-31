@@ -6,8 +6,8 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 import factory.EventBuilder;
-import game.config.constants.BrokerPaths;
-import game.datatypes.Event;
+import game.config.constant.BrokerPaths;
+import game.datatype.Event;
 import game.interfaces.Spawnable;
 
 @Controller

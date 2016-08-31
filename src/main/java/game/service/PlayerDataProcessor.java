@@ -6,14 +6,16 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import game.config.constants.GameConfig;
-import game.config.constants.Physics;
+import game.config.constant.AmmoType;
+import game.config.constant.GameConfig;
+import game.config.constant.Physics;
 import game.controller.EventSender;
 import game.datahandler.HighScoreTable;
-import game.datatypes.HighScore;
-import game.datatypes.PlayerData;
-import game.interfaces.Bullet;
-import game.interfaces.BulletPoolList;
+import game.datahandler.ItemHandler;
+import game.datatype.HighScore;
+import game.datatype.PlayerData;
+import game.interfaces.Ammo;
+import game.interfaces.AmmoPoolList;
 import game.interfaces.ItemPoolList;
 import game.interfaces.PlayerDataProcessorInterface;
 import game.interfaces.PlayerPoolMap;
@@ -27,7 +29,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
     private PlayerPoolMap<Long, PlayerData> playerPool;
 
     @Autowired
-    private BulletPoolList<Bullet> bulletPool;
+    private AmmoPoolList<Ammo> ammoPool;
 
     @Autowired
     private ItemPoolList<SpawnableItem> itemPool;
@@ -43,6 +45,9 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
 
     @Autowired
     private CoordinateHandler coordinateHandler;
+
+    @Autowired
+    private ItemHandler itemHandler;
 
     /**
      * Calculates an angle using two points.
@@ -80,49 +85,59 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
         return smoothedValue;
     }
 
-    private void checkBulletHits(PlayerData player) {
-        CopyOnWriteArrayList<Bullet> bullets = (CopyOnWriteArrayList<Bullet>) bulletPool.getAllOnScreen(player.getId());
+    private void checkAmmotHits(PlayerData player) {
+        CopyOnWriteArrayList<Ammo> ammo = (CopyOnWriteArrayList<Ammo>) ammoPool.getAllOnScreen(player.getId());
 
-        Iterator<Bullet> bulletIterator = bullets.iterator();
+        Iterator<Ammo> ammoIterator = ammo.iterator();
 
         // true, if player is not invulnerable
         if (player.getInvulnerabilityCounter() < 1L == false) {
-            // player is invulnerable, no need to check against the bullets
+            // player is invulnerable, no need to check against the ammo
             return;
         }
 
-        while (bulletIterator.hasNext()) {
-            Bullet actualBullet = bulletIterator.next();
+        while (ammoIterator.hasNext()) {
+            Ammo actualAmmo = ammoIterator.next();
 
-            // the player who shot the bullet cannot hit itself
-            if (actualBullet.getPlayerId() != player.getId()) {
-                // true, if bullet hits player
-                if (actualBullet.hits(player.getSpaceShip())) {
-                    actualBullet.hitDetected(player.getSpaceShip(), eventSender);
+            // the player who shot the ammo cannot hit itself
+            if (actualAmmo.getPlayerId() != player.getId()) {
+                // true, if ammo hits player
+                if (actualAmmo.hits(player.getSpaceShip()) && !actualAmmo.isAlreadyHit()) {
+                    actualAmmo.hitDetected(player.getSpaceShip(), eventSender);
                     // true if player is dead
-                    if (player.decreaseHp(actualBullet.getDamage()) < 1L) {
+                    if (player.decreaseHp(actualAmmo.getDamage()) < 1L) {
 
                         // populate death event to client side
                         eventSender.sendItemDestroyedNotification(player.getSpaceShip());
 
-                        PlayerData playerWhoKilledMe = playerPool.get(actualBullet.getPlayerId());
-                        playerWhoKilledMe.increaseScore(GameConfig.PLAYER_SCORE_VALUE);
-                        /*
-                         * Save the killed player only if he/she has more than 0
-                         * points
-                         */
-                        if (player.getScore() > 0L) {
-                            highScores.addScore(new HighScore(player.getScore(), player.getName()));
-                            highScores.KeepTopThreePlayersInHighScoreTable();
+                        PlayerData playerWhoKilledMe = playerPool.get(actualAmmo.getPlayerId());
+                        if (player.getIsAI()) {
+                            if (player.getIsAsteroid()) {
+                                playerWhoKilledMe.increaseScore(GameConfig.ASTEROID_SCORE_VALUE);
+                            } else {
+                                playerWhoKilledMe.increaseScore(GameConfig.AI_SCORE_VALUE);
+                            }
+                        } else {
+                            /*
+                             * Save the killed player only if he/she has more
+                             * than 0 points
+                             */
+                            if (player.getScore() > 0L) {
+                                highScores.addScore(new HighScore(player.getScore(), player.getName()));
+                            }
+                            playerWhoKilledMe.increaseScore(GameConfig.PLAYER_SCORE_VALUE);
                         }
-
                         highScores.addScore(new HighScore(playerWhoKilledMe.getScore(), playerWhoKilledMe.getName()));
-
+                        itemHandler.dropCargoToCoordinate(player.getSpaceShip());
                         player.kill();
                     } else {
                         eventSender.sendItemHitNotification(player.getSpaceShip());
                     }
-                    bulletPool.remove(actualBullet);
+                    if(actualAmmo.getType() != AmmoType.LASER_BEAM) {
+                        ammoPool.remove(actualAmmo);
+                    } else {
+                    	actualAmmo.setAlreadyHit(true);
+                    }
                 }
             }
         }
@@ -136,9 +151,15 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
         double actualDistanceFromScreenMidpoint = Math
                 .sqrt(horizontalDistanceFromMidPoint * horizontalDistanceFromMidPoint
                         + verticalDistanceFromMidPoint * verticalDistanceFromMidPoint)
-                / 2.0d;
+                * GameConfig.MOUSE_SPEED_SENSITIVITY_PERCENT;
 
-        double maxDistance = Math.sqrt(canvasHalfWidth * canvasHalfWidth + canvasHalfHeight * canvasHalfHeight) / 2.0d;
+        double shorterCanvasValue = canvasHalfWidth > canvasHalfHeight ? canvasHalfHeight : canvasHalfWidth;
+
+        double maxDistance = shorterCanvasValue * GameConfig.MOUSE_SPEED_SENSITIVITY_PERCENT;
+
+        if (actualDistanceFromScreenMidpoint > maxDistance) {
+            actualDistanceFromScreenMidpoint = maxDistance;
+        }
 
         double limitation = (actualDistanceFromScreenMidpoint / maxDistance);
 
@@ -167,10 +188,10 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
                 updatePlayerCoordinates(player);
                 updatePlayerSpeed(player);
                 updatePlayerCollisions(player);
-                checkBulletHits(player);
+                checkAmmotHits(player);
                 checkIfPlayerGetsAnItem(player);
                 player.decreaseInvulnerabilityCounter(1L);
-                player.getWeapon().decreaseRateOfFireCooldownValue(1L);
+                player.getWeapon().decreaseCooldownValue(1L);
                 if (taskScheduler.getTimer() == 0) {
                     // increases shield value in every 5th loop
                     player.increaseShieldPower();
@@ -198,12 +219,19 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
 
         while (itemIterator.hasNext()) {
             SpawnableItem actualItem = itemIterator.next();
-            boolean areaCheck = Math.abs(actualItem.getX() - player.getX()) < 10.0d
-                    && Math.abs(actualItem.getY() - player.getY()) < 10.0d;
+            boolean areaCheck = Math.abs(actualItem.getX() - player.getX()) < player.getHitRadius()
+                    && Math.abs(actualItem.getY() - player.getY()) < player.getHitRadius();
 
             if (areaCheck) {
-                actualItem.applyEffect(player);
-                itemPool.remove(actualItem);
+                if (player.getIsAI() && !player.getIsAsteroid()) {
+                    player.getSpaceShip().addItemToCargo(actualItem);
+                } else if (!player.getIsAsteroid()) {
+                    actualItem.applyEffect(player);
+                }
+
+                if (!player.getIsAsteroid()) {
+                    itemPool.remove(actualItem);
+                }
             }
         }
     }
@@ -211,18 +239,21 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
     private void updatePlayerCollisions(PlayerData player1) {
         for (Long j : playerPool.getAll()) {
             PlayerData player2 = playerPool.get(j);
+            double hitDistance = player1.getHitRadius() + player2.getHitRadius();
             if (player2.isSpawned() && player1.getId() != player2.getId()
-                    && Math.abs(player1.getX() - player2.getX()) <= 15
-                    && Math.abs(player1.getY() - player2.getY()) <= 15) {
+                    && Math.abs(player1.getX() - player2.getX()) <= hitDistance
+                    && Math.abs(player1.getY() - player2.getY()) <= hitDistance) {
                 player1.setShieldProtection(0L);
                 if (player1.decreaseHp(Physics.COLLISION_STRENGTH) < 0L) {
                     eventSender.sendItemDestroyedNotification(player1.getSpaceShip());
+                    itemHandler.dropCargoToCoordinate(player1.getSpaceShip());
                     player1.kill();
 
                 }
                 player2.setShieldProtection(0L);
                 if (player2.decreaseHp(Physics.COLLISION_STRENGTH) < 1L) {
                     eventSender.sendItemDestroyedNotification(player2.getSpaceShip());
+                    itemHandler.dropCargoToCoordinate(player2.getSpaceShip());
                     player2.kill();
                 }
             }
@@ -233,6 +264,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
      * Updates a given players coordinate.
      */
     private void updatePlayerCoordinates(PlayerData player) {
-        player.setCoordinate(coordinateHandler.calculateItemCoordinates(player.getSpaceShip(), player.getSpeed()));
+        player.setCoordinate(
+                coordinateHandler.calculateItemCoordinates(player.getSpaceShip(), player.getSpeed(), null));
     }
 }

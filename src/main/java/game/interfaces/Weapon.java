@@ -1,33 +1,56 @@
-package game.interfaces;
+ package game.interfaces;
 
 import java.util.List;
 
-import game.datatypes.PlayerData;
+import game.config.constant.AmmoType;
+import game.config.constant.ItemType;
+import game.datatype.PlayerData;
 
 public interface Weapon {
-    public long getDamage();
+	
+	public ItemType getType();
+	
+	public void setType(ItemType type);
+	
+    public AmmoType getAmmoType();
 
-    public void decreaseAmmo(long value);
+	public void setAmmoType(AmmoType ammoType);
+	
+	public long getInitAmmoCount();
 
-    public boolean hasAmmo();
+    public double getRateOfFire();
 
-    public long getRateOfFire();
+    public void setRateOfFire(double value);
+    
+    public void increaseRateOfFire(long bonus);
+    
+    public void increaseDamage(long bonus);
+    
+    public double getCooldown();
 
-    public void setRateOfFire(long value);
+    public void decreaseCooldownValue(double value);
 
-    public void decreaseRateOfFireCooldownValue(long value);
+    public void startCooldownEffect();
+    
+    boolean isReadyToShoot();
 
-    public void startShootingRateCooldownEffect();
+	long getShotCount();
 
-    public boolean canShoot();
+	void setShotCount(long shotCount);
 
-    public void increaseDamage(long amount);
+	double getShotAngle();
 
-    public void increaseRateOfFire(long amount);
+	void setShotAngle(double shotAngle);
 
-    public long getAmmo();
+	void setCooldown(double cooldown);
+	
+	public double getDamage();
+	
+	void setDamage(double damage);
 
-    public long getRateOfFireCooldown();
+	List<Ammo> createAmmo(PlayerData player);
 
-    public List<Bullet> createBullet(PlayerData player);
+	public void applyBonuses(PlayerData playerData);
+	
+	public double getPower();
 }

@@ -2,7 +2,7 @@ package game.interfaces;
 
 import java.util.Iterator;
 
-import game.datatypes.RegistrationData;
+import game.datatype.RegistrationData;
 
 public interface PlayerPoolMap<T1, T2> extends PoolMap<T1, T2> {
     public void resetInactivityOfPlayer(T1 t1);
@@ -12,4 +12,8 @@ public interface PlayerPoolMap<T1, T2> extends PoolMap<T1, T2> {
     public void updatePlayerPoolData();
 
     public Iterator<T1> getKeySetIterator();
+
+    public boolean hasAIOnScreen();
+
+    public int numberOfAsteroidsOnScreen();
 }

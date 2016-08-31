@@ -11,29 +11,42 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.stereotype.Component;
 
-import game.datatypes.HighScore;
+import game.datatype.HighScore;
 import game.service.HighScoreComparator;
 
 @Path("/highScore")
 @Component
 public class HighScoreTable {
-    private List<HighScore> highScore;
+    private List<HighScore> highScores;
 
     public HighScoreTable() {
-        highScore = new ArrayList<>();
+        highScores = new ArrayList<>();
     }
 
-    public void KeepTopThreePlayersInHighScoreTable() {
-        Collections.sort(highScore, new HighScoreComparator());
-        if (highScore.size() > 3) {
-            for (int i = 3; i < highScore.size(); i++) {
-                highScore.remove(i);
+    public void keepTopThreePlayersInHighScoreTable() {
+        Collections.sort(highScores, new HighScoreComparator());
+        if (highScores.size() > 3) {
+            for (int i = 3; i < highScores.size(); i++) {
+                highScores.remove(i);
             }
         }
     }
 
-    public void addScore(HighScore hs) {
-        highScore.add(hs);
+    public void addScore(HighScore newHs) {
+    	HighScore remove = null;
+    	for(HighScore hs : highScores) {
+	    	if (newHs.getName().equals(hs.getName())) {
+	    		if(newHs.getScore() > hs.getScore()) {
+	    			remove = hs;
+	    			break;
+	    		} else {
+	    			return;
+	    		}
+	    	}
+    	}
+    	highScores.remove(remove);
+    	highScores.add(newHs);
+    	keepTopThreePlayersInHighScoreTable();
     }
 
     @GET
@@ -42,8 +55,8 @@ public class HighScoreTable {
     public List<String> getThreeBestScores() {
         ArrayList<String> scores = new ArrayList<>();
 
-        for (int i = 0; i < highScore.size() && i < 3; i++) {
-            scores.add(highScore.get(i).toString());
+        for (int i = 0; i < highScores.size() && i < 3; i++) {
+            scores.add(highScores.get(i).toString());
         }
 
         return scores;

@@ -5,9 +5,9 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
-import game.config.constants.BrokerPaths;
-import game.config.constants.EndpointPaths;
-import game.datatypes.PlayerData;
+import game.config.constant.BrokerPaths;
+import game.config.constant.EndpointPaths;
+import game.datatype.PlayerData;
 import game.interfaces.PlayerPoolMap;
 import game.model.SentPlayerData;
 import game.transformer.PlayerDataToSentPlayerDataTransformer;

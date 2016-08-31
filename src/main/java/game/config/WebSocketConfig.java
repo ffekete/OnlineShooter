@@ -7,8 +7,8 @@ import org.springframework.web.socket.config.annotation.AbstractWebSocketMessage
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
-import game.config.constants.BrokerPaths;
-import game.config.constants.EndpointPaths;
+import game.config.constant.BrokerPaths;
+import game.config.constant.EndpointPaths;
 
 @Configuration
 @EnableWebSocketMessageBroker
@@ -50,7 +50,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
         registry.addEndpoint(EndpointPaths.REQUEST_PLAYER_DATA+"8").withSockJS();
         registry.addEndpoint(EndpointPaths.REQUEST_PLAYER_DATA+"9").withSockJS();
         registry.addEndpoint(EndpointPaths.REQUEST_PLAYER_DATA+"10").withSockJS();
-        registry.addEndpoint(EndpointPaths.CREATE_BULLET).withSockJS();
+        registry.addEndpoint(EndpointPaths.CREATE_AMMO).withSockJS();
     }
 
 }

@@ -3,8 +3,8 @@ package game.transformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import game.datatypes.PlayerData;
-import game.datatypes.ReceivedPlayerData;
+import game.datatype.PlayerData;
+import game.datatype.ReceivedPlayerData;
 import game.interfaces.PlayerPoolMap;
 
 @Component
@@ -20,7 +20,6 @@ public class ReceivedPlayerDataToPlayerDataTransformer {
             playerData.setMouseY(receivedPlayerData.getMouseY());
             playerData.updateCanvasProperties(receivedPlayerData.getCanvasX(), receivedPlayerData.getCanvasY(),
                     receivedPlayerData.getCanvasHeight(), receivedPlayerData.getCanvasWidth());
-
         }
         return playerData;
     }

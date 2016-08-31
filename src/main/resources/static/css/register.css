@@ -1,0 +1,16 @@
+@CHARSET "ISO-8859-1";
+
+#shipDetails {
+	text-align: left;
+}
+
+#shipDetails img, #shipDetails ul {
+	display: inline-block;
+}
+
+#shipDetails ul {
+	list-style-type: none;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}

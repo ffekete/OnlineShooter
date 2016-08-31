@@ -2,32 +2,21 @@ package factory;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
-import game.config.constants.ShipConfig;
 import game.datahandler.ItemCreationHandler;
 import game.interfaces.SpawnableItem;
 
 public class CarriageBuilder {
 
-    public static List<SpawnableItem> buildRandomCargo() {
+    public static List<SpawnableItem> buildHalfCargo(int cargoSize) {
         LinkedList<SpawnableItem> cargo = new LinkedList<>();
 
-        int cargoSize = pickRandomSizeForCargo();
+        int maxItem = cargoSize / 2;
 
-        for (int i = 0; i < cargoSize; i++) {
-            cargo.add(createOneRandomItem());
+        for (int i = 0; i < maxItem; i++) {
+            cargo.add(new ItemCreationHandler().createRandomItem());
         }
 
         return cargo;
-    }
-
-    private static int pickRandomSizeForCargo() {
-        Random random = new Random();
-        return random.nextInt(ShipConfig.CARGO_SHIP_MAX_CAPACITY_DURING_CREATION - 1) + 1; // 1..CARGO_SHIP_MAX_CAPACITY_DURING_CREATION
-    }
-
-    private static SpawnableItem createOneRandomItem() {
-        return new ItemCreationHandler().createItem(new Random().nextInt(15));
     }
 }

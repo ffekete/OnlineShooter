@@ -1,6 +1,6 @@
 package game.interfaces;
 
-import game.datatypes.PlayerData;
+import game.datatype.PlayerData;
 
 public interface PlayerDataProcessorInterface {
 

@@ -1,46 +1,63 @@
 package game.model;
 
+import java.awt.geom.Point2D;
 import java.util.List;
+import java.util.Map;
 
-import game.datatypes.PlayerData;
-import game.interfaces.Bullet;
+import game.config.constant.AmmoType;
+import game.datatype.MinimapDao;
+import game.datatype.PlayerData;
+import game.interfaces.Ammo;
 import game.interfaces.SpawnableItem;
 import game.interfaces.Weapon;
 
 public class SentPlayerData {
     private Long id;
-    private double x;
-    private double y;
-    
+    private Point2D coordinate;
+
     List<String> scores;
-    
+
     private long respawnTime;
-    
+
     private String color;
-    
+
     private String shipType;
-    
+
     private long score;
-    
+
     private List<SpawnableItem> items;
-    
+
     private Double shipAngle;
     
+    private Double hitRadius;
+
     private Long connectionId;
-    
-    private Long shipHp;
-    
+
+    private double shipHp;
+
+    private double shipMaxHp;
+
     private boolean invulnerable;
-    
-    private long shieldAmount;
-    
-    private long maxShieldAmount;
-    
+
+    private double shieldAmount;
+
+    private double maxShieldAmount;
+
+    private boolean isAI;
+
+    private boolean isAsteroid;
+
     Weapon weapon;
-    
+
+    List<Weapon> weapons;
+	
+	Map<AmmoType, Long> ammoCount;
+
     List<PlayerData> visiblePlayers;
-    
-    List<Bullet> visibleBullets;
+
+    List<Ammo> visibleAmmo;
+
+    List<MinimapDao> allPlayersPosition;
 
     public Long getId() {
         return id;
@@ -54,7 +71,23 @@ public class SentPlayerData {
         this.weapon = weapon;
     }
 
-    public boolean isInvulnerable() {
+    public List<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public void setWeapons(List<Weapon> weapons) {
+        this.weapons = weapons;
+    }
+
+    public Map<AmmoType, Long> getAmmoCount() {
+		return ammoCount;
+	}
+
+	public void setAmmoCount(Map<AmmoType, Long> ammoCount) {
+		this.ammoCount = ammoCount;
+	}
+
+	public boolean isInvulnerable() {
         return invulnerable;
     }
 
@@ -63,7 +96,7 @@ public class SentPlayerData {
     }
 
     public String getShipType() {
-        return shipType;
+        return this.shipType;
     }
 
     public void setShipType(String shipType) {
@@ -94,19 +127,27 @@ public class SentPlayerData {
         this.color = color;
     }
 
-    public Long getShipHp() {
+    public double getShipHp() {
         return shipHp;
     }
 
-    public void setShipHp(Long shipHp) {
+    public void setShipHp(double shipHp) {
         this.shipHp = shipHp;
     }
 
-    public long getMaxShieldAmount() {
+    public double getShipMaxHp() {
+        return this.shipMaxHp;
+    }
+
+    public void setShipMaxHp(Long shipMaxHp) {
+        this.shipMaxHp = shipMaxHp;
+    }
+
+    public double getMaxShieldAmount() {
         return maxShieldAmount;
     }
 
-    public void setMaxShieldAmount(long maxShieldAmount) {
+    public void setMaxShieldAmount(double maxShieldAmount) {
         this.maxShieldAmount = maxShieldAmount;
     }
 
@@ -122,12 +163,20 @@ public class SentPlayerData {
         this.scores = scores;
     }
 
+    public void setCoordinate(double x, double y) {
+        this.coordinate = new Point2D.Double(x, y);
+    }
+
+    public void setCoordinate(Point2D coordinate) {
+        this.coordinate = coordinate;
+    }
+
     public double getX() {
-        return x;
+        return this.coordinate.getX();
     }
 
     public void setX(double x) {
-        this.x = x;
+        this.setCoordinate(x, this.coordinate.getY());
     }
 
     public long getRespawnTime() {
@@ -139,11 +188,11 @@ public class SentPlayerData {
     }
 
     public double getY() {
-        return y;
+        return this.coordinate.getY();
     }
 
     public void setY(double y) {
-        this.y = y;
+        this.setCoordinate(this.coordinate.getX(), y);
     }
 
     public Double getShipAngle() {
@@ -154,7 +203,15 @@ public class SentPlayerData {
         this.shipAngle = shipAngle;
     }
 
-    public Long getConnectionId() {
+    public Double getHitRadius() {
+		return hitRadius;
+	}
+
+	public void setHitRadius(Double hitRadius) {
+		this.hitRadius = hitRadius;
+	}
+
+	public Long getConnectionId() {
         return connectionId;
     }
 
@@ -162,19 +219,19 @@ public class SentPlayerData {
         this.connectionId = connectionId;
     }
 
-    public List<Bullet> getVisibleBullets() {
-        return visibleBullets;
+    public List<Ammo> getVisibleAmmo() {
+        return visibleAmmo;
     }
-    
+
     public List<PlayerData> getVisiblePlayers() {
         return visiblePlayers;
     }
 
-    public long getShieldAmount() {
+    public double getShieldAmount() {
         return shieldAmount;
     }
 
-    public void setShieldAmount(long shieldAmount) {
+    public void setShieldAmount(double shieldAmount) {
         this.shieldAmount = shieldAmount;
     }
 
@@ -182,7 +239,31 @@ public class SentPlayerData {
         this.visiblePlayers = visiblePlayers;
     }
 
-    public void setVisibleBullets(List<Bullet> visibleBullets) {
-        this.visibleBullets = visibleBullets;
+    public void setVisibleAmmo(List<Ammo> visibleAmmo) {
+        this.visibleAmmo = visibleAmmo;
+    }
+
+    public boolean getIsAI() {
+        return isAI;
+    }
+
+    public void setIsAI(boolean isAI) {
+        this.isAI = isAI;
+    }
+
+    public boolean getIsAsteroid() {
+        return this.isAsteroid;
+    }
+
+    public void setIsAsteroid(boolean isAsteroid) {
+        this.isAsteroid = isAsteroid;
+    }
+
+    public List<MinimapDao> getAllPlayersPosition() {
+        return this.allPlayersPosition;
+    }
+
+    public void setAllPlayersPosition(List<MinimapDao> allPlayersPosition) {
+        this.allPlayersPosition = allPlayersPosition;
     }
 }

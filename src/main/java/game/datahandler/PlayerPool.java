@@ -10,11 +10,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import game.config.constants.ConnectionPreferences;
+import game.config.constant.ConnectionPreferences;
+import game.config.constant.ShipConfig;
 import game.connection.ConnectionPool;
-import game.datatypes.HighScore;
-import game.datatypes.PlayerData;
-import game.datatypes.RegistrationData;
+import game.datatype.HighScore;
+import game.datatype.MinimapDao;
+import game.datatype.PlayerData;
+import game.datatype.RegistrationData;
 import game.interfaces.PlayerPoolMap;
 import game.transformer.RegistrationDataToPlayerDataTransformer;
 
@@ -58,21 +60,19 @@ public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
 
     @Override
     public boolean registerPlayer(Long id, RegistrationData data) {
-        return storePlayer(id, data);
-    }
-
-    public boolean storePlayer(Long newPlayerId, RegistrationData data) {
-        if (playerPool.containsKey(newPlayerId)) {
+        if (playerPool.containsKey(id)) {
             return false;
         } else {
-            PlayerData newPlayerData = registrationDataToPlayerDataTransformer.transform(data, newPlayerId);
-            Long connectionId = connectionPool.registerNewConnection(newPlayerId);
+            PlayerData newPlayerData = registrationDataToPlayerDataTransformer.transform(data, id);
+            Long connectionId = connectionPool.registerNewConnection(id);
 
             if (connectionId != null) {
                 newPlayerData.setConnectionId(connectionId);
                 newPlayerData.setColor(data.getColor());
-                newPlayerData.setShipType(data.getShipType());
-                this.put(newPlayerId, newPlayerData);
+                newPlayerData.setShipConfig(ShipConfig.getSpecificConfig(data.getShipType()));
+                newPlayerData.setIsAI(data.getIsAI());
+                newPlayerData.setIsAsteroid(data.getIsAsteroid());
+                this.put(id, newPlayerData);
                 return true;
             }
             return false;
@@ -82,8 +82,9 @@ public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
     private void increasePlayerInactivityCounters() {
         for (long i : this.getAll()) {
             PlayerData currentPlayer = this.get(i);
-
-            currentPlayer.increaseInactivityCounter();
+            if (!currentPlayer.getIsAI()) {
+                currentPlayer.increaseInactivityCounter();
+            }
         }
     }
 
@@ -101,7 +102,6 @@ public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
 
             if (currentPlayer.getInactivityCounter() >= ConnectionPreferences.PLAYER_INACTIVITY_LIMIT) {
                 highScores.addScore(new HighScore(currentPlayer.getScore(), currentPlayer.getName()));
-                highScores.KeepTopThreePlayersInHighScoreTable();
                 connectionPool.removeConnectionNode(i);
                 System.out.println("Removing inactive player with id " + i + ".");
                 this.remove(i);
@@ -136,6 +136,18 @@ public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
         return visiblePlayers;
     }
 
+    public List<MinimapDao> getAllPlayersPosition() {
+        ArrayList<MinimapDao> allPlayers = new ArrayList<MinimapDao>();
+
+        for (Long id : this.getAll()) {
+            PlayerData currentPlayer = this.get(id);
+            MinimapDao mDao = new MinimapDao(currentPlayer.getX(), currentPlayer.getY(), currentPlayer.getColor());
+            allPlayers.add(mDao);
+        }
+
+        return allPlayers;
+    }
+
     @Override
     public void put(Long id, PlayerData player) {
         playerPool.put(id, player);
@@ -149,5 +161,31 @@ public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
     @Override
     public PlayerData get(Long playerId) {
         return playerPool.get(playerId);
+    }
+
+    public boolean hasAIOnScreen() {
+        boolean result = false;
+
+        for (long i : this.getAll()) {
+            PlayerData currentPlayer = this.get(i);
+            if (currentPlayer.getIsAI() && !currentPlayer.getIsAsteroid()) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    @Override
+    public int numberOfAsteroidsOnScreen() {
+        int result = 0;
+        for (long i : this.getAll()) {
+            PlayerData currentPlayer = this.get(i);
+            if (currentPlayer.getIsAsteroid()) {
+                result++;
+            }
+        }
+        return result;
     }
 }

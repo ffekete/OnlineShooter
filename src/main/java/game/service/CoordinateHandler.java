@@ -4,31 +4,47 @@ import java.awt.geom.Point2D;
 
 import org.springframework.stereotype.Component;
 
-import game.config.constants.GameConfig;
+import game.config.constant.GameConfig;
 import game.interfaces.Spawnable;
+import game.util.RandomGenerator;
 
 @Component
 public class CoordinateHandler {
 
-    public Point2D calculateItemCoordinates(Spawnable item, double speed) {
-        double resultX;
-        double resultY;
+    public Point2D calculateItemCoordinates(Spawnable item, double speed, Point2D shipCoordinate) {
+        Point2D coordinate;
+        if (shipCoordinate == null) {
+            double angle = item.getAngle() * Math.PI / 180.0d;
+            coordinate = new Point2D.Double((double) item.getX() + speed * Math.cos(angle),
+                    (double) item.getY() + speed * Math.sin(angle));
+        } else {
+            double randomX = shipCoordinate.getX() + RandomGenerator
+                    .getRandomInRange(-1 * (GameConfig.MAX_ITEM_DROP_DISTANCE), GameConfig.MAX_ITEM_DROP_DISTANCE);
+            double randomY = shipCoordinate.getY() + RandomGenerator
+                    .getRandomInRange(-1 * (GameConfig.MAX_ITEM_DROP_DISTANCE), GameConfig.MAX_ITEM_DROP_DISTANCE);
+            coordinate = new Point2D.Double(randomX, randomY);
+        }
 
-        double angle = item.getAngle() * Math.PI / 180.0d;
+        if (coordinate.getX() > GameConfig.STAGE_POS_LIMIT_X) {
+            coordinate.setLocation(GameConfig.STAGE_NEG_LIMIT_X + (coordinate.getX() - GameConfig.STAGE_POS_LIMIT_X),
+                    coordinate.getY());
+        }
 
-        resultX = (double) item.getX() + speed * Math.cos(angle);
-        resultY = (double) item.getY() + speed * Math.sin(angle);
+        if (coordinate.getX() < GameConfig.STAGE_NEG_LIMIT_X) {
+            coordinate.setLocation(GameConfig.STAGE_POS_LIMIT_X + (coordinate.getX() + GameConfig.STAGE_POS_LIMIT_X),
+                    coordinate.getY());
+        }
 
-        if (resultX > GameConfig.STAGE_POS_LIMIT_X)
-            resultX = GameConfig.STAGE_NEG_LIMIT_X + (resultX - GameConfig.STAGE_POS_LIMIT_X);
-        if (resultX < GameConfig.STAGE_NEG_LIMIT_X)
-            resultX = GameConfig.STAGE_POS_LIMIT_X + (resultX + GameConfig.STAGE_POS_LIMIT_X);
+        if (coordinate.getY() > GameConfig.STAGE_POS_LIMIT_Y) {
+            coordinate.setLocation(coordinate.getX(),
+                    GameConfig.STAGE_NEG_LIMIT_Y + (coordinate.getY() - GameConfig.STAGE_POS_LIMIT_Y));
+        }
 
-        if (resultY > GameConfig.STAGE_POS_LIMIT_Y)
-            resultY = GameConfig.STAGE_NEG_LIMIT_Y + (resultY - GameConfig.STAGE_POS_LIMIT_Y);
-        if (resultY < GameConfig.STAGE_NEG_LIMIT_Y)
-            resultY = GameConfig.STAGE_POS_LIMIT_Y + (resultY + GameConfig.STAGE_NEG_LIMIT_Y);
+        if (coordinate.getY() < GameConfig.STAGE_NEG_LIMIT_Y) {
+            coordinate.setLocation(coordinate.getX(),
+                    GameConfig.STAGE_POS_LIMIT_Y + (coordinate.getY() + GameConfig.STAGE_POS_LIMIT_Y));
+        }
 
-        return new Point2D.Double(resultX, resultY);
+        return coordinate;
     }
 }

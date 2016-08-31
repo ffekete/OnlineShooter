@@ -1,11 +1,17 @@
 package game.interfaces;
 
 import java.awt.geom.Point2D;
+import java.util.List;
+import java.util.Map;
+
+import game.config.constant.AmmoType;
+
+import game.config.constant.ShipConfig;
 
 public interface Ship extends Spawnable {
-    public void initWeapon();
+    public void initWeaponsAndAmmo();
 
-    public long decreaseHp(long value);
+    public double decreaseHp(double value);
 
     public String getColor();
 
@@ -33,9 +39,37 @@ public interface Ship extends Spawnable {
 
     public void setHp(long hp);
 
+    public long getMaxHp();
+
+    public void setMaxHp(long maxHp);
+
     public Weapon getWeapon();
 
     public void setWeapon(Weapon weapon);
+
+    public List<Weapon> getWeapons();
+
+    public void setWeapons(List<Weapon> weapons);
+
+    public void addWeapon(Weapon weapon);
+
+    public void selectWeapon(int index);
+	
+	public Map<AmmoType, Long> getAmmoCount();
+
+	public void setAmmoCount(Map<AmmoType, Long> ammo);
+	
+	public long getActualAmmoCount();
+	
+	public long getAmmoCount(AmmoType ammoType);
+	
+	public void addActualAmmoCount(long ammoAdd);
+
+	public void addAmmoCount(AmmoType ammoType, long ammoAdd);
+
+	public boolean hasAmmoLeft();
+	
+	public void decreaseAmmoCount();
 
     public double getManeuverability();
 
@@ -55,9 +89,9 @@ public interface Ship extends Spawnable {
 
     public void setY(double y);
 
-    public String getShipType();
+    public ShipConfig getShipConfig();
 
-    public void setShipType(String shipType);
+    public void setShipConfig(ShipConfig shipType);
 
     public void increaseShieldPower();
 
@@ -68,4 +102,18 @@ public interface Ship extends Spawnable {
     public void resetManeuverability();
 
     public void resetSpeed();
+
+    public List<SpawnableItem> getCarriage();
+
+    public void setCarriage(List<SpawnableItem> carriage);
+
+    public void addItemToCargo(SpawnableItem item);
+
+    boolean canShoot();
+    
+    public void resetCarriage();
+
+    int getMaxCargoCapacity();
+
+    void setMaxCargoCapacity(int maxCargoCapacity);
 }

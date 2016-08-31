@@ -4,10 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import game.config.constants.TimerValues;
+import game.config.constant.TimerValues;
 import game.datahandler.HighScoreTable;
-import game.datatypes.PlayerData;
-import game.interfaces.BulletDataProcessorInterface;
+import game.datatype.PlayerData;
+import game.interfaces.AIBase;
+import game.interfaces.AmmoDataProcessorInterface;
 import game.interfaces.ItemProcessorInterface;
 import game.interfaces.PlayerDataProcessorInterface;
 import game.interfaces.PlayerPoolMap;
@@ -28,7 +29,7 @@ public class TaskScheduler {
     ItemProcessorInterface itemProcessor;
 
     @Autowired
-    BulletDataProcessorInterface bulletDataProcessor;
+    AmmoDataProcessorInterface bulletDataProcessor;
 
     @Autowired
     PlayerPoolMap<Long, PlayerData> playerPool;
@@ -39,6 +40,9 @@ public class TaskScheduler {
     @Autowired
     HighScoreTable highScoreTable;
 
+    @Autowired
+    AIBase ai;
+
     /** Main game loop. */
     @Scheduled(fixedRate = TimerValues.GAME_MAIN_PERIOD_IN_MS)
     public void run() throws InterruptedException {
@@ -47,12 +51,18 @@ public class TaskScheduler {
 
         itemProcessor.updateItemData();
 
-        bulletDataProcessor.updateBulletData();
+        bulletDataProcessor.updateAmmoData();
 
-        /* handle player inactivity counters */
+        // AI ship creation handler
+        ai.updateAIData();
+        
+        // Asteroid ship creation handler
+        ai.updateAsteroidData();
+
+        // handle player inactivity counters
         playerPool.updatePlayerPoolData();
 
-        /* Do the math */
+        // Do the math
         playerDataPrcessor.updatePlayerData();
 
         if (timer == 0) {
