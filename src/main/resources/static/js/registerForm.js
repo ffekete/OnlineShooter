@@ -18,24 +18,28 @@ function connect() {
 	});
 }
 
+function updateShipDetails() {
+	updateShipImage(selectedShip);
+	updateShipData(selectedShip);
+}
+
 function updateShipImage() {
 	selectedShip = document.getElementById("shipSelector").value;
-
+	
 	switch (selectedShip) {
 		case "Quicksilver" :
-		document.getElementById("shipImage").src = "img/ship_1_128.png";
+			document.getElementById("shipImage").src = "img/ship_1_128.png";
 			break;
 		case "Mercury" :
-		document.getElementById("shipImage").src = "img/ship_2_128.png";
+			document.getElementById("shipImage").src = "img/ship_2_128.png";
 			break;
 		case "Interceptor" :
-		document.getElementById("shipImage").src = "img/ship_3_128.png";
+			document.getElementById("shipImage").src = "img/ship_3_128.png";
 			break;
 		case "Deltawing" :
-		document.getElementById("shipImage").src = "img/ship_4_128.png";
+			document.getElementById("shipImage").src = "img/ship_4_128.png";
 			break;
 	}
-	updateShipData();
 }
 
 function updateShipData() {
