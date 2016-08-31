@@ -8,10 +8,10 @@ public enum ItemType {
     SHOTGUN("shotgun", "Shotgun"),
 
     // Power-ups
-    INCREASE_DAMAGE("increaseDamage", "Damage +1"),
-    INCRASE_RATE_OF_FIRE("increaseRof","Rate Of Fire +1"),
-    INCREASE_MANEUVERABILITY("increaseManeuverability","Maneuverability +1"),
-    INCREASE_SPEED("increaseSpeed", "Speed +1"),
+    INCREASE_DAMAGE("increaseDamage", "Damage++"),
+    INCRASE_RATE_OF_FIRE("increaseRof","Rate Of Fire++"),
+    INCREASE_MANEUVERABILITY("increaseManeuverability","Maneuverability++"),
+    INCREASE_SPEED("increaseSpeed", "Speed++"),
 
     // Shields
     NORMAL_SHIELD("normalShield", "Normal Shield"),

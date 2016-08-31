@@ -32,6 +32,8 @@ var particles = [];
 
 var asteroid_rotation = 0;
 
+var ui_color = "white";
+
 var playerData = {
 	name: window.sessionStorage.getItem("playerName"), 
 	id: window.sessionStorage.getItem("playerId"),
@@ -191,26 +193,29 @@ function drawExplosions(){
 }
 
 function draw(){
-	canvasContext.canvas.width  = window.innerWidth-20;
+	canvasContext.canvas.width = window.innerWidth-20;
 	canvasContext.canvas.height = window.innerHeight-20;
 	  
 	screen_x = $("#gameArea").width();
 	screen_y = $("#gameArea").height();
 	
-	updateCanwasSize();
+	updateCanvasSize();
 	
 	drawBackground();
 	drawBorder();
 	
+	drawItems();
+	drawAmmo();
+	
 	if(playerData.respawnTime == 0){
-		drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.name, playerData.hp, playerData.maxHp, playerData.invulnerable, playerData.shieldAmount, playerData.maxShieldAmount, playerData.color, playerData.shipType);
+		drawShip(screen_x / 2 + 10, screen_y /2 +10, playerData.shipAngle, playerData.hitRadius, playerData.name, playerData.hp, playerData.maxHp, playerData.invulnerable, playerData.shieldAmount, playerData.maxShieldAmount, playerData.color, playerData.shipType);
 	}
 	else
 	{
 		canvasContext.save();
-		canvasContext.fillStyle = "white";
-		canvasContext.textAlign ="center";
-		canvasContext.font="40px Arial";
+		canvasContext.fillStyle = ui_color;
+		canvasContext.textAlign = "center";
+		canvasContext.font= "40px Arial";
 		canvasContext.fillText("Respawning in seconds: " + parseInt(playerData.respawnTime / 100 + 1), screen_x / 2 + 10, screen_y /2 +10);
 		canvasContext.restore();
 	}
@@ -221,12 +226,10 @@ function draw(){
 			
 			var dx = playerData.x - actualShip.x;
 			var dy = playerData.y - actualShip.y;
-			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.name, actualShip.hp, actualShip.maxHp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue, actualShip.color, actualShip.shipType);
+			drawShip((screen_x / 2 + 10)-dx,(screen_y / 2 + 10)-dy, actualShip.shipAngle, actualShip.hitRadius, actualShip.name, actualShip.hp, actualShip.maxHp, actualShip.invulnerable, actualShip.shield.protection, actualShip.shield.maxProtectionValue, actualShip.color, actualShip.shipType);
 		}
 	}
 	
-	drawAmmo();
-	drawItems();
 	drawExplosions();
 	drawMinimap();
 	drawHighScores();
@@ -270,7 +273,8 @@ function shootAmmo(){
 
 function playerDataArrived(playerDataFromServer){
 	var parsedPlayerData = JSON.parse(playerDataFromServer.body);
-	playerData.shipAngle = parsedPlayerData.shipAngle;	
+	playerData.shipAngle = parsedPlayerData.shipAngle;
+	playerData.hitRadius = parsedPlayerData.hitRadius;
 	playerData.ammo = parsedPlayerData.visibleAmmo;
 	playerData.otherPlayers = parsedPlayerData.visiblePlayers;
 	playerData.x = parsedPlayerData.x;
@@ -294,8 +298,9 @@ function playerDataArrived(playerDataFromServer){
 
 function drawHighScores(){
 	canvasContext.save();
-	canvasContext.fillStyle = "white";
-	canvasContext.fillText("High score table: ", 10 ,25);
+	canvasContext.fillStyle = ui_color;
+	canvasContext.fillText("Your score: " + playerData.score, 10,15);
+	canvasContext.fillText("High score table: ", 10, 25);
 	var y = 35;
 	for(var i in playerData.highScores){
 		canvasContext.fillText(playerData.highScores[i], 10, y);
@@ -309,7 +314,7 @@ function drawPlayerData(){
 	var fromTop = 15;
 	var verticalSpace = 10;
 	canvasContext.save();
-	canvasContext.fillStyle = "white";
+	canvasContext.fillStyle = ui_color;
 	canvasContext.fillText("Player details: ", fromLeft, fromTop);
 	canvasContext.fillText("Ship type: " + playerData.shipType, fromLeft, fromTop + verticalSpace);
 	canvasContext.fillText("HP: " + playerData.hp, fromLeft, fromTop + verticalSpace * 2);
@@ -326,7 +331,7 @@ function drawWeaponKeys(){
 	var fromTop = 15;
 	var verticalSpace = 10;
 	canvasContext.save();
-	canvasContext.fillStyle = "white";
+	canvasContext.fillStyle = ui_color;
 	$.each(playerData.weapons, function(index, weapon) {
 		canvasContext.fillText("[" + (index + 1) + "]: " + weapon.name +" (" + playerData.ammoCount[weapon.ammoType] + ")", fromLeft, fromTop + verticalSpace * index);
 	});
@@ -334,15 +339,14 @@ function drawWeaponKeys(){
 }
 
 function drawBackground(){
-	var img = $("#bg")[0];
+	var img = new Image();
+	img.src = "img/space_background.jpg";
 	canvasContext.save();
 	for(var i = -3; i < 3; i++) {
 		for(var j = -3; j < 3; j++) {
 			canvasContext.drawImage(img, j* 1024-(playerData.x % 1024), i* 1024-(playerData.y % 1024));
 		}
 	}
-	
-	canvasContext.fillText("Your score: " + playerData.score, 10,15);
 	canvasContext.restore();
 }
 
@@ -354,8 +358,8 @@ function drawBorder(){
 	var dym = Math.abs(STAGE_Y_MIN_LIMIT) + STAGE_Y_MAX_LIMIT;
 
 	canvasContext.save();
+	canvasContext.strokeStyle = ui_color;
 	
-	canvasContext.strokeStyle ="white";
 	canvasContext.strokeRect((screen_x / 2) - dx, (screen_y / 2) - dy, dxm, dym);
 	
 	canvasContext.restore();
@@ -365,18 +369,19 @@ function drawItems(){
 	canvasContext.save();
 	
 	for(var items in playerData.itemsOnScreen){
-		canvasContext.beginPath();
 		
 		var dx = playerData.x - playerData.itemsOnScreen[items].x;
 		var dy = playerData.y - playerData.itemsOnScreen[items].y;
 		
-		canvasContext.fillStyle = "white";
-		canvasContext.strokeStyle = "white";
+		canvasContext.fillStyle = ui_color;
+		canvasContext.strokeStyle = ui_color;
+		canvasContext.beginPath();
 		canvasContext.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, 5, 0, 2*Math.PI);
+		canvasContext.closePath();
 		canvasContext.stroke();
 		canvasContext.textAlign ="center";
 		canvasContext.font="15px Arial";
-		canvasContext.fillText(playerData.itemsOnScreen[items].name, (screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy + 15);
+		canvasContext.fillText(playerData.itemsOnScreen[items].name, (screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy + 20);
 	}
 	
 	canvasContext.restore();
@@ -386,18 +391,17 @@ function drawAmmo(){
 	canvasContext.save();
 	
 	for(var ammo in playerData.ammo){
-		canvasContext.beginPath();
 		
 		var dx = playerData.x - playerData.ammo[ammo].x;
 		var dy = playerData.y - playerData.ammo[ammo].y;
 		
 		var physicalRepresentation = JSON.parse(playerData.ammo[ammo].physicalRepresentation);
 		
-		canvasContext.save();
-		
 		if(physicalRepresentation.shape === "circle"){
-			canvasContext.fillStyle = "white";
+			canvasContext.fillStyle = ui_color;
+			canvasContext.beginPath();
 			canvasContext.arc((screen_x / 2 + 10) - dx,(screen_y / 2 + 10) - dy, physicalRepresentation.radius, 0, 2*Math.PI);
+			canvasContext.closePath();
 			canvasContext.fill();
 		}
 		
@@ -410,6 +414,7 @@ function drawAmmo(){
 			var dx2 = playerData.x - physicalRepresentation.endx;
 			var dy2 = playerData.y - physicalRepresentation.endy;
 			
+			canvasContext.beginPath();
 			canvasContext.moveTo((screen_x / 2 + 10) - dx1, (screen_y / 2 + 10) - dy1);
 			canvasContext.lineTo((screen_x / 2 + 10) - dx2, (screen_y / 2 + 10) - dy2);
 			canvasContext.stroke();
@@ -424,131 +429,67 @@ function drawExplosion(x, y){
 	canvasContext.translate(x,y);
 	canvasContext.beginPath();
 	canvasContext.arc(-5, 0, 17, 0, 2*Math.PI);
+	canvasContext.closePath();
 	canvasContext.stroke();
 	canvasContext.restore();
 }
 
-function drawShip(x, y, angle, name, hp, maxHp, invulnerability, shield, maxShield, color, type){
+function drawShip(x, y, angle, hitRadius, name, hp, maxHp, invulnerability, shield, maxShield, color, type){
 	canvasContext.save();
 	
-	canvasContext.fillStyle = "red";
-	canvasContext.translate(x,y);
+	canvasContext.translate(x, y);
 	canvasContext.rotate(angle * Math.PI / 180);
 	
-	canvasContext.fillStyle = "red";
-	canvasContext.fillRect(-41,-11,8,22);
-	
-	canvasContext.fillStyle = "green";
-	canvasContext.fillRect(-39,-10,5,(21*hp/maxHp));
-	
-	if(invulnerability == false){
-	   	canvasContext.strokeStyle = "white";
-	}
-	else
-	{
-		canvasContext.strokeStyle = "aqua";
-	}
-	
 	if(type != "Asteroid"){
-	    canvasContext.beginPath();
-	    canvasContext.arc(-5, 0, 17, 0, (2 * shield / maxShield)*Math.PI);
+		if(invulnerability == false){
+		   	canvasContext.strokeStyle = color;
+		} else {
+			canvasContext.strokeStyle = "red";
+		}
+		var arc = (2 * shield / maxShield) * Math.PI;
+		canvasContext.beginPath();
+	    canvasContext.arc(-5, 0, hitRadius + 15, -arc / 2, arc / 2);
 	    canvasContext.stroke();
 	}
 	
-	if(type === "Mercury")
-	{
-		canvasContext.beginPath();
-		canvasContext.moveTo(-15, -10);
-		canvasContext.lineTo(-5, 0);
-		canvasContext.lineTo(-15, 10);
-		canvasContext.lineTo(10, 0);
-		canvasContext.lineTo(-15, -10);	
-		canvasContext.closePath();
-	}
-	if(type === "Quicksilver")
-	{
-		canvasContext.beginPath();
-		canvasContext.moveTo(-13, -10);
-		canvasContext.lineTo(-18, 0);
-		canvasContext.lineTo(-13, 10);
-		canvasContext.lineTo(10, 0);
-		canvasContext.lineTo(-13, -10);	
-		canvasContext.closePath();
-	}
-	
-	if(type === "Interceptor")
-	{
-		canvasContext.beginPath();
-		canvasContext.moveTo(-15, -15);
-		canvasContext.lineTo(-5, -8);
-		canvasContext.lineTo(10, -5);
-		canvasContext.lineTo(5, -2);
-		canvasContext.lineTo(5, 2);
-		canvasContext.lineTo(10, 5);
-		canvasContext.lineTo(-5, 8);
-		canvasContext.lineTo(-15, 15);
-		canvasContext.lineTo(-20, 0);
-		canvasContext.closePath();
-	}
-	
-	if(type === "Deltawing")
-	{
-		canvasContext.beginPath();
-		canvasContext.moveTo(-15, 0);
-		canvasContext.lineTo(-7, -15);
-		canvasContext.lineTo(-7, -3);
-		canvasContext.bezierCurveTo(-15,-3,15,-3,15,0);
-		canvasContext.bezierCurveTo(15,3,-15,3,-7,3);
-		canvasContext.lineTo(-7, 15);
-		canvasContext.closePath();
-	}
-	
-	if(type === "Cargoship")
-	{
-		canvasContext.beginPath();
-		canvasContext.moveTo(8,-4);
-		canvasContext.lineTo(8, 4);
-		canvasContext.lineTo(0,4);
-		canvasContext.lineTo(-1,3);
-		canvasContext.lineTo(-4,3);
-		canvasContext.lineTo(-4,8);
-		canvasContext.lineTo(0,8);
-		canvasContext.lineTo(0, 11);
-		canvasContext.lineTo(-13,11);
-		canvasContext.lineTo(-16,8);
-		canvasContext.lineTo(-16,4);
-		canvasContext.lineTo(-17,3);
-		canvasContext.lineTo(-17,-3);
-		canvasContext.lineTo(-16,-4);
-		canvasContext.lineTo(-16,-8);
-		canvasContext.lineTo(-13,-11);
-		canvasContext.lineTo(0,-11);
-		canvasContext.lineTo(0,-8);
-		canvasContext.lineTo(-4,-8);
-		canvasContext.lineTo(-4,-3);
-		canvasContext.lineTo(-1,-3);
-		canvasContext.lineTo(0,-4);
-		canvasContext.lineTo(8,-4);
-		canvasContext.closePath();
-	}
-	
-	if(type === "Asteroid")
-	{
-		var size = 50;
-		var image = new Image();
-		image.src = "../img/asteroid_" + (name.charCodeAt(name.length - 1) % 3 + 1) + "_128.png";
-		image.width = size;
-		image.height = size;
-		canvasContext.rotate(asteroid_rotation++ * Math.PI / 180);
-		canvasContext.drawImage(image, -image.width / 2, -image.height / 2, image.width, image.height);
-	}
-	
-	canvasContext.fillStyle = color;
-	canvasContext.fill();
+	canvasContext.fillStyle = "red";
+	canvasContext.fillRect(-(hitRadius + 40), -20, 5, 40);
+	canvasContext.fillStyle = "green";
+	canvasContext.fillRect(-(hitRadius + 40), -20, 5, (40 * hp / maxHp));
 	
 	canvasContext.rotate(90 * Math.PI / 180);
 	canvasContext.textAlign ="center";
-	canvasContext.fillText(name, 0, 29);
+	canvasContext.fillStyle = ui_color;
+	canvasContext.fillText(name, 0, hitRadius + 30);
+	
+    var image = new Image();
+	
+	switch(type) {
+	case "Quicksilver":
+		image.src = "img/ship_1_128.png";
+		break;
+	case "Mercury":
+		image.src = "img/ship_2_128.png";
+		break;
+	case "Interceptor":
+		image.src = "img/ship_3_128.png";
+		break;
+	case "Deltawing":
+		image.src = "img/ship_4_128.png";
+		break;
+	case "Cargoship":
+		image.src = "img/cargo_ship_120.png";
+		break;
+	case "Asteroid":
+		image.src = "img/asteroid_" + (name.charCodeAt(name.length - 1) % 3 + 1) + "_128.png";
+		canvasContext.rotate(asteroid_rotation++ * Math.PI / 180);
+		break;
+	}
+	
+	image.width = 2 * hitRadius + 20;
+	image.height =  2 * hitRadius + 20;
+	canvasContext.drawImage(image, -image.width / 2, -image.height / 2, image.width, image.height);
+	
 	canvasContext.restore();
 }
 
@@ -644,7 +585,7 @@ function disableScroll() {
 	document.onkeydown  = preventDefaultForScrollKeys;
 }
 
-function updateCanwasSize(){
+function updateCanvasSize(){
 	playerData.canvasHeight = $("#gameArea").height();
 	playerData.canvasWidth = $("#gameArea").width();
 }
@@ -660,11 +601,9 @@ function drawMinimap() {
 	
 	canvasContext.fillStyle = "white";
 	canvasContext.fillRect(screen_x-10-MINIMAP_WIDTH,screen_y-10-MINIMAP_HEIGHT,MINIMAP_WIDTH,MINIMAP_HEIGHT);
-	canvasContext.fill();
 	
 	canvasContext.strokeStyle = "black";
 	canvasContext.strokeRect(screen_x-10-MINIMAP_WIDTH, screen_y-10-MINIMAP_HEIGHT, MINIMAP_WIDTH, MINIMAP_HEIGHT);
-    canvasContext.stroke();
 
 	canvasContext.restore();
 	
@@ -682,11 +621,8 @@ function placeOnMinimap(mX, mY, color){
 	
 	canvasContext.save();
 	
-	canvasContext.beginPath();
-	canvasContext.rect(screen_x - 10-MINIMAP_WIDTH + (xPercent*2) - 2, screen_y - 10-MINIMAP_HEIGHT + (yPercent*2) - 2, 4, 4);
 	canvasContext.fillStyle = color;
-	canvasContext.fill();
-	canvasContext.closePath();
+	canvasContext.fillRect(screen_x - 10-MINIMAP_WIDTH + (xPercent*2) - 2, screen_y - 10-MINIMAP_HEIGHT + (yPercent*2) - 2, 4, 4);
 	
 	canvasContext.restore();
 }

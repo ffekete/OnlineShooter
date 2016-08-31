@@ -16,4 +16,8 @@ public interface Spawnable {
     public double getY();
 
     public double getAngle();
+    
+    double getHitRadius();
+
+	void setHitRadius(double hitRadius);
 }

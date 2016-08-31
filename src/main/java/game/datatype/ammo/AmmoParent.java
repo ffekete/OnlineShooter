@@ -15,9 +15,11 @@ public abstract class AmmoParent implements Ammo {
     private double speed;
     private double age;
     private double damage;
+    private boolean alreadyHit;
     
     public AmmoParent() {
     	this.age = 0L;
+    	this.alreadyHit = false;
     }
 
     @Override
@@ -110,8 +112,8 @@ public abstract class AmmoParent implements Ammo {
 
     @Override
     public boolean hits(Spawnable item) {
-        return (Math.abs(this.coordinate.getX() - item.getX()) < 10.0d
-                && (Math.abs(this.coordinate.getY() - item.getY())) < 10.0d);
+        return (Math.abs(this.coordinate.getX() - item.getX()) < item.getHitRadius())
+                && (Math.abs(this.coordinate.getY() - item.getY())) < item.getHitRadius();
     }
 
     @Override
@@ -121,8 +123,16 @@ public abstract class AmmoParent implements Ammo {
 
     @Override
     public void hitDetected(Spawnable item) {
-        // TODO Auto-generated method stub
     }
+    
+    @Override
+	public double getHitRadius() {
+		return 0;
+	}
+
+	@Override
+	public void setHitRadius(double hitRadius) {
+	}
 
     @Override
     public void hitDetected(Spawnable item, EventSender eventSender) {
@@ -143,4 +153,12 @@ public abstract class AmmoParent implements Ammo {
     public Point2D getCoordinate() {
         return this.coordinate;
     }
+    
+    public boolean isAlreadyHit() {
+		return alreadyHit;
+	}
+
+	public void setAlreadyHit(boolean alreadyHit) {
+		this.alreadyHit = alreadyHit;
+	}
 }

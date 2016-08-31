@@ -46,4 +46,8 @@ public interface Ammo extends Spawnable {
     void hitDetected(Spawnable item, EventSender eventSender);
 
     boolean isAgeCounterExpired();
+    
+    public boolean isAlreadyHit();
+
+	public void setAlreadyHit(boolean alreadyHit);
 }

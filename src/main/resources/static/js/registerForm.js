@@ -23,16 +23,16 @@ function updateShipImage() {
 
 	switch (selectedShip) {
 		case "Quicksilver" :
-			document.getElementById("shipImage").src = "img/ship01.png";
+		document.getElementById("shipImage").src = "img/ship_1_128.png";
 			break;
 		case "Mercury" :
-			document.getElementById("shipImage").src = "img/ship02.png";
+		document.getElementById("shipImage").src = "img/ship_2_128.png";
 			break;
 		case "Interceptor" :
-			document.getElementById("shipImage").src = "img/ship03.png";
+		document.getElementById("shipImage").src = "img/ship_3_128.png";
 			break;
 		case "Deltawing" :
-			document.getElementById("shipImage").src = "img/ship04.png";
+		document.getElementById("shipImage").src = "img/ship_4_128.png";
 			break;
 	}
 	updateShipData();

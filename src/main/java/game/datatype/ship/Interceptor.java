@@ -14,6 +14,7 @@ public class Interceptor extends ShipParent {
         this.resetManeuverability();
         this.resetHp();
         this.setMaxHp(ShipConfig.INTERCEPTOR.getMaxHP());
+        this.setHitRadius(ShipConfig.INTERCEPTOR.getHitRadius());
     }
 
     @Override
