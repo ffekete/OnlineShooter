@@ -5,12 +5,8 @@
 <script type="text/javascript" src="jquery-3.1.0.js"></script>
 <script type="text/javascript" src="sockjs-0.3.4.js"></script>
 <script type="text/javascript" src="stomp.js"></script>
-<script type="text/javascript" src="js/registerForm.js">
-	
-</script>
-
-<style type="text/css">
-</style>
+<script type="text/javascript" src="js/registerForm.js"></script>
+<link rel="stylesheet" type="text/css" href="css/register.css">
 </head>
 <body onload="loadShipType()">
 	<noscript>
@@ -18,24 +14,36 @@
 			Javascript! Websocket relies on Javascript being enabled. Please
 			enable Javascript and reload this page!</h2>
 	</noscript>
+	<h1>Online Shooter</h1>
 	<div>
 		<div id="conversationDiv">
-			<label>What is your name?</label> <input type="text" id="name" />
-			<button id="connect" onclick="connect();">Connect</button>
+			<input type="text" id="name" placeholder="Enter your name here" />
 			<p id="response"></p>
 		</div>
-		Select your color: <input type="color" name="favcolor" id="colorPicker"><br> 
-		
-		Select ship: <br>
+		<h2>Select your color</h2>
+		<input type="color" name="favcolor" id="colorPicker">
+		<h2>Select ship</h2>
 		<select onchange="updateShipImage()" id="shipSelector">
-			<option value="Quicksilver" >Quicksilver</option>
+			<option value="Quicksilver">Quicksilver</option>
 			<option value="Mercury">Mercury</option>
 			<option value="Interceptor">Interceptor</option>
 			<option value="Deltawing">Deltawing</option>
 		</select>
-		<br>
-		<img src="img/ship01.png" id="ship">
-		
+		<div id="shipDetails">
+			<img src="img/ship01.png" id="shipImage">
+			<ul id="shipData">
+				<li>Weapon: <span id="weaponName"></span></li>
+				<li>Speed: <span id="speedValue"></span></li>
+				<li>Health: <span id="healthValue"></span></li>
+				<li>Maneuverability: <span id="maneuverabilityValue"></span></li>
+				<li>Cargo capacity: <span id="cargoCapacity"></span></li>
+			</ul>
+		</div>
+		<button id="connect" onclick="connect();">Connect</button>
 	</div>
 </body>
 </html>
+
+
+
+
