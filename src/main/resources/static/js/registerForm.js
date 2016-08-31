@@ -48,29 +48,29 @@ function updateShipData() {
 	switch (selectedShip) {
 		case "Quicksilver" :
 			document.getElementById("weaponName").innerHTML = "Shotgun";
-			document.getElementById("speedValue").innerHTML = "15";
-			document.getElementById("healthValue").innerHTML = "6";
+			document.getElementById("healthValue").innerHTML = "30";
+			document.getElementById("speedValue").innerHTML = "6";
 			document.getElementById("maneuverabilityValue").innerHTML = "10";
 			document.getElementById("cargoCapacity").innerHTML = "0";
 			break;
 		case "Mercury" :
 			document.getElementById("weaponName").innerHTML = "Gatling Gun";
-			document.getElementById("speedValue").innerHTML = "25";
-			document.getElementById("healthValue").innerHTML = "5";
+			document.getElementById("healthValue").innerHTML = "50";
+			document.getElementById("speedValue").innerHTML = "5";
 			document.getElementById("maneuverabilityValue").innerHTML = "12";
 			document.getElementById("cargoCapacity").innerHTML = "0";
 			break;
 		case "Interceptor" :
 			document.getElementById("weaponName").innerHTML = "Laser Cannon";
-			document.getElementById("speedValue").innerHTML = "20";
-			document.getElementById("healthValue").innerHTML = "7";
+			document.getElementById("healthValue").innerHTML = "40";
+			document.getElementById("speedValue").innerHTML = "7";
 			document.getElementById("maneuverabilityValue").innerHTML = "14";
 			document.getElementById("cargoCapacity").innerHTML = "0";
 			break;
 		case "Deltawing" :
 			document.getElementById("weaponName").innerHTML = "Double Gatling Gun";
-			document.getElementById("speedValue").innerHTML = "11";
-			document.getElementById("healthValue").innerHTML = "9";
+			document.getElementById("healthValue").innerHTML = "25";
+			document.getElementById("speedValue").innerHTML = "9";
 			document.getElementById("maneuverabilityValue").innerHTML = "16";
 			document.getElementById("cargoCapacity").innerHTML = "0";
 			break;
