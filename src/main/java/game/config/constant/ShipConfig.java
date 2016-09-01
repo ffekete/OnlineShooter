@@ -4,7 +4,7 @@ public enum ShipConfig {
     QUICKSILVER("Quicksilver", 30L, 6.0D, 6.0D, 10.0D, ItemType.SHOTGUN, 0, 15.0, ItemType.NORMAL_SHIELD), 
     MERCURY("Mercury", 50L, 5.0D, 5.0D, 12.0D, ItemType.GATLING_GUN, 0, 15, ItemType.NORMAL_SHIELD),
     INTERCEPTOR("Interceptor", 40L, 7.0D, 7.0D, 14.0D, ItemType.LASER_CANNON, 0, 15.0, ItemType.NORMAL_SHIELD),
-    DELTAWING("Deltawing", 25L, 9.0D, 9.0D, 16.0D, ItemType.DOUBLE_GATLING_GUN, 0, 15.0, ItemType.NORMAL_SHIELD),
+    DELTAWING("Deltawing", 25L, 9.0D, 9.0D, 16.0D, ItemType.MISSILE_LAUNCHER, 0, 15.0, ItemType.NORMAL_SHIELD),
     CARGOSHIP("Cargoship", 80L, 3.0D, 3.0D, 10.0D, ItemType.NO_WEAPON, 10, 20.0, ItemType.NORMAL_SHIELD),
     ASTEROID("Asteroid", 100L, 3.0D, 7.0D, 1.0D, ItemType.NO_WEAPON, 0, 20.0, ItemType.NO_SHIELD);
 

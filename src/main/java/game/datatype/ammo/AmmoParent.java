@@ -8,31 +8,31 @@ import game.interfaces.Ammo;
 import game.interfaces.Spawnable;
 
 public abstract class AmmoParent implements Ammo {
-	private long playerId;
-	private AmmoType type;
+    private long playerId;
+    private AmmoType type;
     private Point2D coordinate;
     private double angle;
     private double speed;
     private double age;
     private double damage;
     private boolean alreadyHit;
-    
+
     public AmmoParent() {
-    	this.age = 0L;
-    	this.alreadyHit = false;
+        this.age = 0L;
+        this.alreadyHit = false;
     }
 
     @Override
     public AmmoType getType() {
-		return this.type;
-	}
+        return this.type;
+    }
 
     @Override
-	public void setType(AmmoType type) {
-		this.type = type;
-	}
+    public void setType(AmmoType type) {
+        this.type = type;
+    }
 
-	@Override
+    @Override
     public abstract boolean isAgeCounterExpired();
 
     @Override
@@ -44,16 +44,16 @@ public abstract class AmmoParent implements Ammo {
     public void setAngle(double angle) {
         this.angle = angle;
     }
-    
-    @Override
-    public double getSpeed() {
-		return speed;
-	}
 
     @Override
-	public void setSpeed(double speed) {
-		this.speed = speed;
-	}
+    public double getSpeed() {
+        return speed;
+    }
+
+    @Override
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
 
     @Override
     public long getPlayerId() {
@@ -74,7 +74,7 @@ public abstract class AmmoParent implements Ammo {
     public void setDamage(double damage) {
         this.damage = damage;
     }
-    
+
     @Override
     public void increaseDamage(double damage) {
         this.damage += damage;
@@ -124,15 +124,15 @@ public abstract class AmmoParent implements Ammo {
     @Override
     public void hitDetected(Spawnable item) {
     }
-    
-    @Override
-	public double getHitRadius() {
-		return 0;
-	}
 
-	@Override
-	public void setHitRadius(double hitRadius) {
-	}
+    @Override
+    public double getHitRadius() {
+        return 0;
+    }
+
+    @Override
+    public void setHitRadius(double hitRadius) {
+    }
 
     @Override
     public void hitDetected(Spawnable item, EventSender eventSender) {
@@ -153,12 +153,12 @@ public abstract class AmmoParent implements Ammo {
     public Point2D getCoordinate() {
         return this.coordinate;
     }
-    
-    public boolean isAlreadyHit() {
-		return alreadyHit;
-	}
 
-	public void setAlreadyHit(boolean alreadyHit) {
-		this.alreadyHit = alreadyHit;
-	}
+    public boolean isAlreadyHit() {
+        return alreadyHit;
+    }
+
+    public void setAlreadyHit(boolean alreadyHit) {
+        this.alreadyHit = alreadyHit;
+    }
 }

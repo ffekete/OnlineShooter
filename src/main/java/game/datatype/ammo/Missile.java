@@ -8,6 +8,14 @@ public class Missile extends Explosive {
         this.setType(AmmoType.MISSILE);
         this.setSpeed(AmmoType.MISSILE.getInitSpeed());
     }
+    
+    @Override
+    public void updateSpeed() {
+        this.setSpeed(this.getSpeed() + AmmoType.MISSILE.getAcceleration());
+        if (this.getSpeed() > AmmoType.MISSILE.getMaxSpeed()) {
+            this.setSpeed(AmmoType.MISSILE.getMaxSpeed());
+        }
+    }
 
     @Override
     public boolean isAgeCounterExpired() {

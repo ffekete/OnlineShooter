@@ -1,13 +1,20 @@
 package game.datatype.ammo;
 
 import game.config.constant.AmmoType;
-import game.datatype.ammo.type.Explosive;
 
 public class HeatSeekingMissile extends Missile {
 
     public HeatSeekingMissile() {
         this.setType(AmmoType.HEAT_SEEKING_MISSILE);
         this.setSpeed(AmmoType.HEAT_SEEKING_MISSILE.getInitSpeed());
+    }
+
+    @Override
+    public void updateSpeed() {
+        this.setSpeed(this.getSpeed() + AmmoType.HEAT_SEEKING_MISSILE.getAcceleration());
+        if (this.getSpeed() > AmmoType.HEAT_SEEKING_MISSILE.getMaxSpeed()) {
+            this.setSpeed(AmmoType.HEAT_SEEKING_MISSILE.getMaxSpeed());
+        }
     }
 
     @Override

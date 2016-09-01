@@ -44,7 +44,15 @@ public class Beam extends Energy {
                 getEndPoint().getY(), item.getX(), item.getY());
         return Math.abs(distance) <= (AmmoType.LASER_BEAM.getInitHitRadius() + item.getHitRadius());
     }
-
+    
+    @Override
+    public void updateSpeed() {
+        this.setSpeed(this.getSpeed() + AmmoType.LASER_BEAM.getAcceleration());
+        if (this.getSpeed() > AmmoType.LASER_BEAM.getMaxSpeed()) {
+            this.setSpeed(AmmoType.LASER_BEAM.getMaxSpeed());
+        }
+    }
+    
     @Override
     public String getPhysicalRepresentation() {
         return "{\"shape\" : \"line\", \"startx\": \"" + getStartPoint().getX() + "\", \"starty\" :\""

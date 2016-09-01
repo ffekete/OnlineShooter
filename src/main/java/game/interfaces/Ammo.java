@@ -50,4 +50,6 @@ public interface Ammo extends Spawnable {
     public boolean isAlreadyHit();
 
 	public void setAlreadyHit(boolean alreadyHit);
+	
+	public void updateSpeed();
 }

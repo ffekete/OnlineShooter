@@ -21,6 +21,14 @@ public class Bullet extends Kinetic {
     }
 
     @Override
+    public void updateSpeed() {
+        this.setSpeed(this.getSpeed() + AmmoType.BULLET.getAcceleration());
+        if (this.getSpeed() > AmmoType.BULLET.getMaxSpeed()) {
+            this.setSpeed(AmmoType.BULLET.getMaxSpeed());
+        }
+    }
+
+    @Override
     public String getPhysicalRepresentation() {
         return new String("{\"shape\": \"circle\", \"startx\": \"" + this.getCoordinate().getX() + "\", \"starty\": \""
                 + this.getCoordinate().getY() + "\", \"radius\" : \"2\"}");
