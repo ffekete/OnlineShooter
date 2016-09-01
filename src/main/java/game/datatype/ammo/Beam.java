@@ -4,11 +4,12 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
 import game.config.constant.AmmoType;
+import game.datatype.ammo.type.Energy;
 import game.interfaces.Spawnable;
 
-public class LaserBeam extends Energy {
+public class Beam extends Energy {
 
-    public LaserBeam(Point2D coordinate, double angle, long playerId, long damage) {
+    public Beam(Point2D coordinate, double angle, long playerId, long damage) {
         super.setType(AmmoType.LASER_BEAM);
         super.setCoordinate(coordinate);
         super.setAngle(angle);

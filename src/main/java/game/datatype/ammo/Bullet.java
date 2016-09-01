@@ -1,6 +1,7 @@
 package game.datatype.ammo;
 
 import game.config.constant.AmmoType;
+import game.datatype.ammo.type.Kinetic;
 
 public class Bullet extends Kinetic {
 

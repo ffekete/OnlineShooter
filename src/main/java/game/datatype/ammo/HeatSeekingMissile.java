@@ -1,8 +1,9 @@
 package game.datatype.ammo;
 
 import game.config.constant.AmmoType;
+import game.datatype.ammo.type.Explosive;
 
-public class HeatSeekingMissile extends Explosive {
+public class HeatSeekingMissile extends Missile {
 
     public HeatSeekingMissile() {
         this.setType(AmmoType.HEAT_SEEKING_MISSILE);
@@ -17,11 +18,5 @@ public class HeatSeekingMissile extends Explosive {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getPhysicalRepresentation() {
-        return new String("{\"shape\": \"circle\", \"startx\": \"" + this.getCoordinate().getX() + "\", \"starty\": \""
-                + this.getCoordinate().getY() + "\", \"radius\" : \"5\"}");
     }
 }

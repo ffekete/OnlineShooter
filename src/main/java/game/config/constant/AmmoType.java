@@ -9,6 +9,7 @@ public enum AmmoType {
     LASER_BEAM(10.0, 2.0, 5.0, 0.0, 5.0, 1000.0),
 
     // Explosive types
+    MISSILE(20.0, 4.0, 200.0, 5.0, 50.0, 0.0),
     HEAT_SEEKING_MISSILE(20.0, 4.0, 200.0, 5.0, 50.0, 0.0),
 
     NO_AMMO(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);

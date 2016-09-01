@@ -5,6 +5,7 @@ public enum WeaponConfig {
     DOUBLE_GATLING_GUN(400L, 2L, 0.5, 20.0, 2.0, 60.0),
     SHOTGUN(400L, 10L, 2.0, 2.0, 0.5, 60.0),
     LASER_CANNON(50L, 1L, 0.0, 3.0, 0.5, 60.0),
+    MISSILE_LAUNCHER(200L, 1L, 0.0, 3.0, 0.5, 60.0),
     NO_WEAPON(0L, 0L, 0.0, 0.0, 0.0, 0.0);
 
     private Long initAmmoCount;
