@@ -12,15 +12,15 @@ public class GatlingGun extends WeaponParent {
         super.setName(ItemType.GATLING_GUN.getVisibleName());
         super.setType(ItemType.GATLING_GUN);
 		super.setAmmoType(AmmoType.BULLET);
-		super.setShotCount(WeaponConfig.GATLING_GUN_INIT_SHOT_COUNT);
-		super.setShotAngle(WeaponConfig.GATLING_GUN_INIT_SHOT_ANGLE);
-		super.setRateOfFire(WeaponConfig.GATLING_GUN_INIT_RATE_OF_FIRE);
+		super.setShotCount(WeaponConfig.GATLING_GUN.getInitShotCount());
+		super.setShotAngle(WeaponConfig.GATLING_GUN.getInitShotAngle());
+		super.setRateOfFire(WeaponConfig.GATLING_GUN.getInitRateOfFire());
 		super.setDamage(AmmoType.BULLET.getDamage(0));
 	}
 	
 	@Override
     public void increaseRateOfFire(long bonus) {
-        this.setRateOfFire(WeaponConfig.GATLING_GUN_INIT_RATE_OF_FIRE + WeaponConfig.GATLING_GUN_RATE_OF_FIRE_BONUS * bonus);
+        this.setRateOfFire(WeaponConfig.GATLING_GUN.getInitRateOfFire() + WeaponConfig.GATLING_GUN.getRateOfFireBonus() * bonus);
     }
     
     @Override
@@ -30,6 +30,11 @@ public class GatlingGun extends WeaponParent {
     
     @Override
 	public long getInitAmmoCount() {
-		return WeaponConfig.GATLING_GUN_INIT_AMMO_COUNT;
+		return WeaponConfig.GATLING_GUN.getInitAmmoCount();
 	}
+    
+    @Override
+    public void startCooldownEffect() {
+        this.setCooldown(WeaponConfig.GATLING_GUN.getRateOfFireTimeesCooldown() / this.getRateOfFire());
+    }
 }

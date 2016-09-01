@@ -95,11 +95,6 @@ public abstract class WeaponParent extends ItemParent implements Weapon {
     }
 
     @Override
-    public void startCooldownEffect() {
-        this.cooldown = WeaponConfig.RATE_OF_FIRE_TIMES_COOLDOWN / this.getRateOfFire();
-    }
-
-    @Override
     public void decreaseCooldownValue(double value) {
         if (cooldown > 0L) {
             cooldown -= value;
