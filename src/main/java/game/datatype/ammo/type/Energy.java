@@ -1,6 +1,8 @@
-package game.datatype.ammo;
+package game.datatype.ammo.type;
 
 import java.awt.geom.Point2D;
+
+import game.datatype.ammo.AmmoParent;
 
 public abstract class Energy extends AmmoParent {
 	private double hitRadius;

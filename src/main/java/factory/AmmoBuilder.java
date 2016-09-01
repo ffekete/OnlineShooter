@@ -8,7 +8,7 @@ import game.config.constant.AmmoType;
 import game.datatype.ammo.Bullet;
 import game.datatype.ammo.Canister;
 import game.datatype.ammo.HeatSeekingMissile;
-import game.datatype.ammo.LaserBeam;
+import game.datatype.ammo.Beam;
 import game.interfaces.Ammo;
 
 @Component
@@ -67,7 +67,7 @@ public class AmmoBuilder {
         	ammo.setDamage(AmmoType.CANISTER.getDamage(damageBonus));
         	break;
         case LASER_BEAM:
-        	ammo = new LaserBeam(this.coordinate, this.angle, this.playerId, 0);
+        	ammo = new Beam(this.coordinate, this.angle, this.playerId, 0);
         	ammo.setDamage(AmmoType.LASER_BEAM.getDamage(damageBonus));
         	break;
         case HEAT_SEEKING_MISSILE:
