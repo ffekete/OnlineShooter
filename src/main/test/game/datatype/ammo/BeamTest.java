@@ -11,7 +11,7 @@ import game.config.constant.AmmoType;
 import game.config.constant.ShipConfig;
 import game.interfaces.Ship;
 
-public class LaserBeamTest {
+public class BeamTest {
 
     /*
      * ************************************** Beam creation related tests
@@ -36,7 +36,7 @@ public class LaserBeamTest {
     @Test(dataProvider = "angleSourceForX")
     public void testLaserBeam_shouldCreateLaserBeam_XCoordinate(double x, double y, double angle,
             double expectedXCoordinate) {
-        LaserBeam laserBeam = new LaserBeam(new Point2D.Double(x, y), angle, 0, 0);
+        Beam laserBeam = new Beam(new Point2D.Double(x, y), angle, 0, 0);
 
         Point2D endPoint = laserBeam.getEndPoint();
 
@@ -46,7 +46,7 @@ public class LaserBeamTest {
     @Test(dataProvider = "angleSourceForY")
     public void testLaserBeam_shouldCreateLaserBeam_YCoordinate(double x, double y, double angle,
             double expectedYCoordinate) {
-        LaserBeam laserBeam = new LaserBeam(new Point2D.Double(x, y), angle, 0, 0);
+        Beam laserBeam = new Beam(new Point2D.Double(x, y), angle, 0, 0);
 
         Point2D endPoint = laserBeam.getEndPoint();
 
@@ -142,7 +142,7 @@ public class LaserBeamTest {
     @Test(dataProvider = "hitCheckerInputList")
     public void testHitCheckerForLaserBeam(double beamStartX, double beamStartY, double angle, double objectX,
             double objectY, boolean expHitDetected) {
-        LaserBeam laserBeam = new LaserBeam(new Point2D.Double(beamStartX, beamStartY), angle, 0, 0);
+        Beam laserBeam = new Beam(new Point2D.Double(beamStartX, beamStartY), angle, 0, 0);
 
         Ship ship = ShipFactory.createShip(ShipConfig.INTERCEPTOR);
         ship.setCoordinate(objectX, objectY);
@@ -153,7 +153,7 @@ public class LaserBeamTest {
     @Test
     public void testPhysicalRepresentation() {
 
-        LaserBeam laserBeam = new LaserBeam(new Point2D.Double(0.0, 0.0), 0.0, 0, 0);
+        Beam laserBeam = new Beam(new Point2D.Double(0.0, 0.0), 0.0, 0, 0);
 
         Assert.assertEquals(laserBeam.getPhysicalRepresentation(),
                 "{\"shape\" : \"line\", \"startx\": \"0.0\", \"starty\" :\"0.0\", \"endx\": \"1000.0\", \"endy\": \"0.0\"}");
