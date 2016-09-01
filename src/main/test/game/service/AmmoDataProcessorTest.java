@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import game.config.constant.AmmoConfig;
+import game.config.constant.AmmoType;
 import game.config.constant.GameConfig;
 import game.config.constant.ShipConfig;
 import game.datatype.AIDao;
@@ -39,8 +39,8 @@ public class AmmoDataProcessorTest extends AbstractTestNGSpringContextTests {
         ap.clear();
         AIDao aiDao = new AIDao(false, false);
         player = new PlayerData(200L, "P01", ShipConfig.DELTAWING, aiDao);
-        while(player.getRespawnTime() > 0){
-            player.decreasePlayerRespawnTime();            
+        while (player.getRespawnTime() > 0) {
+            player.decreasePlayerRespawnTime();
         }
     }
 
@@ -48,12 +48,12 @@ public class AmmoDataProcessorTest extends AbstractTestNGSpringContextTests {
     Object[][] ammoDataInput() {
         return new Object[][] {
                 // x,y,angle,number of cycles to count, expectedX, expectedY
-                { 0.0d, 0.0d, 0.0d, 1, AmmoConfig.BULLET_INIT_SPEED, 0.0D },
-                { 0.0d, 0.0d, 0.0d, 3, 3 * AmmoConfig.BULLET_INIT_SPEED, 0.0D },
+                { 0.0d, 0.0d, 0.0d, 1, AmmoType.BULLET.getInitSpeed(), 0.0D },
+                { 0.0d, 0.0d, 0.0d, 3, 3 * AmmoType.BULLET.getInitSpeed(), 0.0D },
                 { GameConfig.STAGE_POS_LIMIT_X, 0.0d, 0.0d, 1,
-                        GameConfig.STAGE_NEG_LIMIT_X + AmmoConfig.BULLET_INIT_SPEED, 0.0D },
+                        GameConfig.STAGE_NEG_LIMIT_X + AmmoType.BULLET.getInitSpeed(), 0.0D },
                 { GameConfig.STAGE_NEG_LIMIT_X, 0.0d, 180.0d, 1,
-                        GameConfig.STAGE_POS_LIMIT_X - AmmoConfig.BULLET_INIT_SPEED, 0.0D }, };
+                        GameConfig.STAGE_POS_LIMIT_X - AmmoType.BULLET.getInitSpeed(), 0.0D }, };
     }
 
     @Test(dataProvider = "ammoDataInput")
