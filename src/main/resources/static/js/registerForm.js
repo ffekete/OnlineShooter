@@ -11,7 +11,8 @@ function getShipDetails() {
 	stompClient = Stomp.over(socket);
 
 	stompClient.connect({}, function(frame) {
-		stompClient.subscribe('/sendShipsDetails', responseArrivedForGetShipDetails);
+		stompClient.subscribe('/sendShipsDetails',
+				responseArrivedForGetShipDetails);
 		updateShipDetailsWithShipDetails();
 	});
 }
@@ -31,7 +32,7 @@ function connect() {
 	stompClient.connect({}, function(frame) {
 		console.log('Connected: ' + frame);
 		stompClient.subscribe('/playerRegistered',
-			responseArrivedForRegisterPlayer);
+				responseArrivedForRegisterPlayer);
 		registerPlayerWithName();
 	});
 }
@@ -108,7 +109,7 @@ function responseArrivedForRegisterPlayer(playerStatus) {
 		var name = document.getElementById('name').value;
 		window.sessionStorage.setItem("playerName", name);
 		window.sessionStorage.setItem("stageData", JSON
-			.stringify(QualifiedPlayerData.stageData));
+				.stringify(QualifiedPlayerData.stageData));
 
 		document.getElementById("response").innerHTML = "Redirecting to game area, please wait...";
 		window.location.replace("/game_area.html");
