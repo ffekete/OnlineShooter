@@ -1,29 +1,40 @@
 package game.datatype.weapon;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import game.config.constant.AmmoType;
+import game.config.constant.ItemType;
 import game.config.constant.WeaponConfig;
-import game.datatype.PlayerData;
-import game.datatype.bullet.LaserBeam;
-import game.interfaces.Bullet;
 import game.service.Spawner;
 
 public class LaserCannon extends WeaponParent {
 
-    public List<Bullet> createBullet(PlayerData player) {
-        ArrayList<Bullet> bulletsToCreate = new ArrayList<>();
-
-        bulletsToCreate.add(new LaserBeam(player.getCoordinate(), player.getShipAngle(), player.getId(),
-                player.getWeapon().getDamage()));
-        return bulletsToCreate;
-    }
-
     public LaserCannon() {
         Spawner.spawn(this);
-        super.setDamage(WeaponConfig.LASER_CANNON_INIT_DAMAGE);
-        super.setAmmo(WeaponConfig.LASER_CANNON_INIT_AMMO);
-        super.setName("Laser cannon");
-        super.setRateOfFire(WeaponConfig.LASER_CANNON_INIT_RATE_OF_FIRE);
+        super.setName(ItemType.LASER_CANNON.getVisibleName());
+        super.setType(ItemType.LASER_CANNON);
+		super.setAmmoType(AmmoType.LASER_BEAM);
+		super.setShotCount(WeaponConfig.LASER_CANNON.getInitShotCount());
+		super.setShotAngle(WeaponConfig.LASER_CANNON.getInitShotAngle());
+		super.setRateOfFire(WeaponConfig.LASER_CANNON.getInitRateOfFire());
+		super.setDamage(AmmoType.LASER_BEAM.getDamage(0));
+    }
+    
+    @Override
+    public void increaseRateOfFire(long bonus) {
+        this.setRateOfFire(WeaponConfig.LASER_CANNON.getInitRateOfFire() + WeaponConfig.LASER_CANNON.getRateOfFireBonus() * bonus);
+    }
+    
+    @Override
+    public void increaseDamage(long bonus) {
+        super.setDamage(AmmoType.LASER_BEAM.getDamage(bonus));
+    }
+    
+    @Override
+	public long getInitAmmoCount() {
+		return WeaponConfig.LASER_CANNON.getInitAmmoCount();
+	}
+    
+    @Override
+    public void startCooldownEffect() {
+        this.setCooldown(WeaponConfig.LASER_CANNON.getRateOfFireTimeesCooldown() / this.getRateOfFire());
     }
 }

@@ -18,7 +18,6 @@ public class ReceivedPlayerDataToPlayerDataTransformer {
             playerData.setMouseY(receivedPlayerData.getMouseY());
             playerData.updateCanvasProperties(receivedPlayerData.getCanvasX(), receivedPlayerData.getCanvasY(),
                     receivedPlayerData.getCanvasHeight(), receivedPlayerData.getCanvasWidth());
-
         }
         return playerData;
     }

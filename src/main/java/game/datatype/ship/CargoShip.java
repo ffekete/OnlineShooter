@@ -3,54 +3,59 @@ package game.datatype.ship;
 import java.awt.geom.Point2D;
 import java.util.List;
 
+import factory.ShieldFactory;
 import factory.WeaponFactory;
 import game.config.constant.ShipConfig;
 import game.interfaces.SpawnableItem;
 
 public class CargoShip extends ShipParent {
 
-    private List<SpawnableItem> carriage;
-
     public CargoShip(List<SpawnableItem> carriage) {
         super.setCoordinate(new Point2D.Double(0, 0));
-        this.setHp(ShipConfig.CARGO_SHIP_INIT_HP);
-        super.setSpeed(ShipConfig.CARGO_SHIP_INIT_SPEED);
-        super.setMaxSpeed(ShipConfig.CARGO_SHIP_INIT_SPEED);
-        super.setManeuverability(ShipConfig.CARGO_SHIP_INIT_MANEUVERABILITY);
-        super.setShipType(ShipConfig.SHIP_TYPE_CARGOSHIP);
-        this.carriage = carriage;
+        super.setShipConfig(ShipConfig.CARGOSHIP);
+        super.setMaxCargoCapacity(ShipConfig.CARGOSHIP.getCargoCapacity());
+        super.setCarriage(carriage);
+        this.initShield();
+        this.resetSpeed();
+        this.resetManeuverability();
+        this.resetHp();
+        this.setMaxHp(ShipConfig.CARGOSHIP.getMaxHP());
+        this.setHitRadius(ShipConfig.CARGOSHIP.getHitRadius());
     }
 
     @Override
     public void setHp(long hp) {
         long hpToSet = hp;
-        if (hpToSet > ShipConfig.CARGO_SHIP_INIT_HP)
-            hpToSet = ShipConfig.CARGO_SHIP_INIT_HP;
+        if (hpToSet > ShipConfig.CARGOSHIP.getMaxHP())
+            hpToSet = ShipConfig.CARGOSHIP.getMaxHP();
         super.setHp(hpToSet);
     }
 
     @Override
     public void resetHp() {
-        this.setHp(ShipConfig.CARGO_SHIP_INIT_HP);
+        this.setHp(ShipConfig.CARGOSHIP.getMaxHP());
     }
 
     @Override
     public void resetManeuverability() {
-        super.setManeuverability(ShipConfig.CARGO_SHIP_INIT_MANEUVERABILITY);
+        super.setManeuverability(ShipConfig.CARGOSHIP.getInitManeuverability());
     }
 
     @Override
     public void resetSpeed() {
-        super.setSpeed(ShipConfig.CARGO_SHIP_INIT_SPEED);
-        super.setMaxSpeed(ShipConfig.CARGO_SHIP_INIT_SPEED);
+        super.setSpeed(ShipConfig.CARGOSHIP.getInitMaxSpeed());
+        super.setMaxSpeed(ShipConfig.CARGOSHIP.getInitMaxSpeed());
     }
 
     @Override
-    public void initWeapon() {
-        super.setWeapon(WeaponFactory.createWeapon(ShipConfig.CARGO_SHIP_INIT_WEAPON));
+    public void initWeaponsAndAmmo() {
+        super.initWeaponsAndAmmo();
+        super.addWeapon(WeaponFactory.createWeapon(ShipConfig.CARGOSHIP.getInitWeapon()));
+        super.selectWeapon(0);
     }
 
-    public List<SpawnableItem> dropItem() {
-        return this.carriage;
+    @Override
+    public void initShield() {
+        super.setShield(ShieldFactory.createShield(ShipConfig.CARGOSHIP.getInitShield()));
     }
 }

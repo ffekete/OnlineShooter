@@ -10,12 +10,17 @@ public abstract class ItemParent implements SpawnableItem {
     private double angle;
 
     @Override
-    public void setLocation(double x, double y) {
+    public Point2D getCoordinate() {
+        return this.coordinate;
+    }
+
+    @Override
+    public void setCoordinate(double x, double y) {
         this.coordinate.setLocation(x, y);
     }
 
     @Override
-    public void setLocation(Point2D coordinate) {
+    public void setCoordinate(Point2D coordinate) {
         this.coordinate = coordinate;
     }
 
@@ -44,4 +49,13 @@ public abstract class ItemParent implements SpawnableItem {
     public double getAngle() {
         return this.angle;
     }
+    
+    @Override
+	public double getHitRadius() {
+		return 0;
+	}
+
+    @Override
+	public void setHitRadius(double hitRadius) {
+	}
 }

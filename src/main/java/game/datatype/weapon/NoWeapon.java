@@ -1,25 +1,40 @@
 package game.datatype.weapon;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import game.config.constant.AmmoType;
+import game.config.constant.ItemType;
 import game.config.constant.WeaponConfig;
-import game.datatype.PlayerData;
-import game.interfaces.Bullet;
 import game.service.Spawner;
 
 public class NoWeapon extends WeaponParent {
+
     public NoWeapon() {
         Spawner.spawn(this);
-        super.setDamage(WeaponConfig.NO_WEAPON_INIT_DAMAGE);
-        super.setAmmo(WeaponConfig.NO_WEAPON_INIT_AMMO);
-        super.setName("No_weapon");
-        super.setRateOfFire(WeaponConfig.NO_WEAPON_INIT_RATE_OF_FIRE);
+        super.setName(ItemType.NO_WEAPON.getVisibleName());
+        super.setType(ItemType.NO_WEAPON);
+        super.setAmmoType(AmmoType.NO_AMMO);
+        super.setShotCount(WeaponConfig.NO_WEAPON.getInitShotCount());
+        super.setShotAngle(WeaponConfig.NO_WEAPON.getInitShotAngle());
+        super.setRateOfFire(WeaponConfig.NO_WEAPON.getInitRateOfFire());
+        super.setDamage(AmmoType.NO_AMMO.getDamage(0));
     }
 
-    public List<Bullet> createBullet(PlayerData player) {
-        ArrayList<Bullet> bulletsToCreate = new ArrayList<>();
+    @Override
+    public void increaseRateOfFire(long bonus) {
+        return;
+    }
 
-        return bulletsToCreate;
+    @Override
+    public void increaseDamage(long bonus) {
+        return;
+    }
+
+    @Override
+    public long getInitAmmoCount() {
+        return WeaponConfig.NO_WEAPON.getInitAmmoCount();
+    }
+    
+    @Override
+    public void startCooldownEffect() {
+        this.setCooldown(WeaponConfig.NO_WEAPON.getRateOfFireTimeesCooldown() / this.getRateOfFire());
     }
 }

@@ -2,40 +2,65 @@
 <html>
 <head>
 <title>Online Shooter</title>
-<script type="text/javascript" src="jquery-3.1.0.js"></script>
-<script type="text/javascript" src="sockjs-0.3.4.js"></script>
-<script type="text/javascript" src="stomp.js"></script>
-<script type="text/javascript" src="js/registerForm.js">
-	
-</script>
-
-<style type="text/css">
-</style>
+<script type="text/javascript" src="js/jquery-3.1.0.js"></script>
+<script type="text/javascript" src="js/sockjs-0.3.4.js"></script>
+<script type="text/javascript" src="js/stomp.js"></script>
+<script type="text/javascript" src="js/registerForm.js"></script>
+<link rel="stylesheet" type="text/css" href="css/register.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
 </head>
 <body onload="loadShipType()">
-	<noscript>
-		<h2 style="color: #ff0000">Seems your browser doesn't support
-			Javascript! Websocket relies on Javascript being enabled. Please
-			enable Javascript and reload this page!</h2>
-	</noscript>
-	<div>
-		<div id="conversationDiv">
-			<label>What is your name?</label> <input type="text" id="name" />
-			<button id="connect" onclick="connect();">Connect</button>
+	<div class="container">
+		<div class="row">
+			<noscript>
+				<h2 style="color: #ff0000">Seems your browser doesn't support
+					Javascript! Websocket relies on Javascript being enabled. Please
+					enable Javascript and reload this page!</h2>
+			</noscript>
+		</div>
+		<div class="row">
+			<h1>Online Shooter</h1>
+		</div>
+		<div class="row">
+			<input type="text" id="name" placeholder="Enter your name here" />
 			<p id="response"></p>
 		</div>
-		Select your color: <input type="color" name="favcolor" id="colorPicker"><br> 
-		
-		Select ship: <br>
-		<select onchange="updateShipImage()" id="shipSelector">
-			<option value="Quicksilver" >Quicksilver</option>
-			<option value="Mercury">Mercury</option>
-			<option value="Interceptor">Interceptor</option>
-			<option value="Deltawing">Deltawing</option>
-		</select>
-		<br>
-		<img src="ship01.png" id="ship">
-		
+		<div class="row">
+			<h2>Select your shield color</h2>
+			<input type="color" name="favcolor" id="colorPicker">
+		</div>
+		<div class="row">
+			<h2>Select ship</h2>
+			<select class="shipSelect" onchange="updateShipDetails()"
+				id="shipSelector">
+				<option value="Quicksilver">Quicksilver</option>
+				<option value="Mercury">Mercury</option>
+				<option value="Interceptor">Interceptor</option>
+				<option value="Deltawing">Deltawing</option>
+			</select>
+		</div>
+		<div class="row">
+			<div class="shipDetails">
+				<img class="inl-bl" src="img/ship_1_128.png" id="shipImage">
+				<ul class="inl-bl" id="shipData">
+					<li>Weapon: <span id="weaponName"></span></li>
+					<li>Speed: <span id="speedValue"></span></li>
+					<li>Health: <span id="healthValue"></span></li>
+					<li>Maneuverability: <span id="maneuverabilityValue"></span></li>
+					<li>Cargo capacity: <span id="cargoCapacity"></span></li>
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			<button class="btn btn-success" id="connect" onclick="connect();">Connect</button>
+		</div>
 	</div>
 </body>
 </html>
+
+
+
+

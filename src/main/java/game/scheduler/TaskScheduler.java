@@ -4,7 +4,7 @@ import game.config.constant.TimerValues;
 import game.datahandler.HighScoreTable;
 import game.datatype.PlayerData;
 import game.interfaces.AIBase;
-import game.interfaces.BulletDataProcessorInterface;
+import game.interfaces.AmmoDataProcessorInterface;
 import game.interfaces.ItemProcessorInterface;
 import game.interfaces.PlayerDataProcessorInterface;
 import game.interfaces.PlayerPoolMap;
@@ -27,7 +27,7 @@ public class TaskScheduler {
     ItemProcessorInterface itemProcessor;
 
     @Autowired
-    BulletDataProcessorInterface bulletDataProcessor;
+    AmmoDataProcessorInterface bulletDataProcessor;
 
     @Autowired
     PlayerPoolMap<Long, PlayerData> playerPool;
@@ -49,10 +49,13 @@ public class TaskScheduler {
 
         itemProcessor.updateItemData();
 
-        bulletDataProcessor.updateBulletData();
+        bulletDataProcessor.updateAmmoData();
 
-        // AI ship handler
+        // AI ship creation handler
         ai.updateAIData();
+        
+        // Asteroid ship creation handler
+        ai.updateAsteroidData();
 
         // handle player inactivity counters
         playerPool.updatePlayerPoolData();

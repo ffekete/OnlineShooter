@@ -16,7 +16,8 @@ import game.config.constant.EndpointPaths;
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker(BrokerPaths.PLAYER_REGISTERED_STATUS, 
+        config.enableSimpleBroker(BrokerPaths.PLAYER_REGISTERED_STATUS,
+                BrokerPaths.SEND_SHIPS_DETAILS,
                 BrokerPaths.PROVIDE_PLAYER_DATA + 0,
                 BrokerPaths.PROVIDE_PLAYER_DATA + 1,
                 BrokerPaths.PROVIDE_PLAYER_DATA + 2,
@@ -38,6 +39,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint(EndpointPaths.REGISTER_PLAYER).withSockJS();
+        registry.addEndpoint(EndpointPaths.GET_SHIP_DETAILS).withSockJS();
         registry.addEndpoint(EndpointPaths.UPDATE_PLAYER_DATA).withSockJS();
         registry.addEndpoint(EndpointPaths.REQUEST_PLAYER_DATA+"0").withSockJS();
         registry.addEndpoint(EndpointPaths.REQUEST_PLAYER_DATA+"1").withSockJS();
@@ -50,7 +52,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
         registry.addEndpoint(EndpointPaths.REQUEST_PLAYER_DATA+"8").withSockJS();
         registry.addEndpoint(EndpointPaths.REQUEST_PLAYER_DATA+"9").withSockJS();
         registry.addEndpoint(EndpointPaths.REQUEST_PLAYER_DATA+"10").withSockJS();
-        registry.addEndpoint(EndpointPaths.CREATE_BULLET).withSockJS();
+        registry.addEndpoint(EndpointPaths.CREATE_AMMO).withSockJS();
     }
 
 }

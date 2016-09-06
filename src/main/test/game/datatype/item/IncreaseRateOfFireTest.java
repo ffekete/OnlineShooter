@@ -3,26 +3,31 @@ package game.datatype.item;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import game.config.constant.ItemType;
+import game.config.constant.WeaponConfig;
+import game.config.constant.ShipConfig;
+import game.datatype.AIDao;
 import game.datatype.PlayerData;
-import game.datatype.item.IncreaseRateOfFire;
 
 public class IncreaseRateOfFireTest {
 
-    final IncreaseRateOfFire  irf = new IncreaseRateOfFire();
-    
+    final IncreaseRateOfFire irf = new IncreaseRateOfFire();
+
     @Test
-    public void testShouldCreateIrf(){
-        Assert.assertEquals(irf.getName(), "Rate of fire +1");
+    public void testShouldCreateIrf() {
+        Assert.assertEquals(irf.getName(), ItemType.INCRASE_RATE_OF_FIRE.getVisibleName());
     }
-    
+
     @Test
-    public void testShouldIncreasePlayersRateOfFire(){
-        PlayerData player = new PlayerData(3L, "P04", "Mercury", false);
-        
-        long initRateOfFire = player.getWeapon().getRateOfFire();
-        
+    public void testShouldIncreasePlayersRateOfFire() {
+        AIDao aiDao = new AIDao(false, false);
+        PlayerData player = new PlayerData(3L, "P04", ShipConfig.MERCURY, aiDao);
+
+        double initRateOfFire = player.getWeapon().getRateOfFire();
+
         irf.applyEffect(player);
-        
-        Assert.assertEquals(initRateOfFire - 1L, player.getWeapon().getRateOfFire());
+
+        Assert.assertEquals(initRateOfFire + WeaponConfig.GATLING_GUN.getInitRateOfFire(),
+                player.getWeapon().getRateOfFire());
     }
 }

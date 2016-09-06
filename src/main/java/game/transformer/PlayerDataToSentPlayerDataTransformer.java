@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import game.datahandler.HighScoreTable;
 import game.datatype.PlayerData;
-import game.interfaces.Bullet;
-import game.interfaces.BulletPoolList;
+import game.interfaces.Ammo;
+import game.interfaces.AmmoPoolList;
 import game.interfaces.ItemPoolList;
 import game.interfaces.PlayerPoolMap;
 import game.interfaces.SpawnableItem;
@@ -17,7 +17,7 @@ public class PlayerDataToSentPlayerDataTransformer {
     PlayerPoolMap<Long, PlayerData> playerPool;
 
     @Autowired
-    BulletPoolList<Bullet> bulletPool;
+    AmmoPoolList<Ammo> ammoPool;
 
     @Autowired
     ItemPoolList<SpawnableItem> itemPool;
@@ -33,12 +33,16 @@ public class PlayerDataToSentPlayerDataTransformer {
         sentPlayerData.setConnectionId(playerData.getConnectionId());
         sentPlayerData.setId(playerId);
         sentPlayerData.setShipAngle(playerData.getShipAngle());
-        sentPlayerData.setVisibleBullets(bulletPool.getAllOnScreen(playerId));
+        sentPlayerData.setHitRadius(playerData.getHitRadius());
+        sentPlayerData.setVisibleAmmo(ammoPool.getAllOnScreen(playerId));
         sentPlayerData.setCoordinate(playerData.getCoordinate());
         sentPlayerData.setVisiblePlayers(playerPool.getAllOnScreen(playerId));
         sentPlayerData.setShipHp(playerData.getHp());
+        sentPlayerData.setShipMaxHp(playerData.getSpaceShip().getMaxHp());
         sentPlayerData.setInvulnerable(playerData.isInvulnerable());
         sentPlayerData.setWeapon(playerData.getWeapon());
+        sentPlayerData.setWeapons(playerData.getSpaceShip().getWeapons());
+        sentPlayerData.setAmmoCount(playerData.getSpaceShip().getAmmoCount());
         sentPlayerData.setItems(itemPool.getAllOnScreen(playerId));
         sentPlayerData.setScore(playerData.getScore());
         sentPlayerData.setScores(highScoreTable.getThreeBestScores());
@@ -46,8 +50,10 @@ public class PlayerDataToSentPlayerDataTransformer {
         sentPlayerData.setMaxShieldAmount(playerData.getShield().getMaxProtectionValue());
         sentPlayerData.setRespawnTime(playerData.getRespawnTime());
         sentPlayerData.setColor(playerData.getColor());
-        sentPlayerData.setShipType(playerData.getShipType());
+        sentPlayerData.setShipType(playerData.getShipConfig().getType());
         sentPlayerData.setIsAI(playerData.getIsAI());
+        sentPlayerData.setIsAsteroid(playerData.getIsAsteroid());
+        sentPlayerData.setAllPlayersPosition(playerPool.getAllPlayersPosition());
         return sentPlayerData;
     }
 }

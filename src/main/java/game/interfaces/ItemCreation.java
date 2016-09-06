@@ -1,7 +1,7 @@
 package game.interfaces;
 
-import game.config.constant.SpawnableItemType;
+import game.config.constant.ItemType;
 
 public interface ItemCreation {
-    public SpawnableItem createItem(SpawnableItemType id);
+    public SpawnableItem createItem(ItemType id);
 }

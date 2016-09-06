@@ -31,5 +31,4 @@ public class HighScore {
     public String toString(){
         return "" + name + " " + score; 
     }
-    
 }

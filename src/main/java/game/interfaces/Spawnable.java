@@ -3,9 +3,11 @@ package game.interfaces;
 import java.awt.geom.Point2D;
 
 public interface Spawnable {
-    public void setLocation(double x, double y);
+    public void setCoordinate(double x, double y);
 
-    public void setLocation(Point2D coordinate);
+    public void setCoordinate(Point2D coordinate);
+
+    public Point2D getCoordinate();
 
     public void setAngle(double angle);
 
@@ -14,4 +16,8 @@ public interface Spawnable {
     public double getY();
 
     public double getAngle();
+    
+    double getHitRadius();
+
+	void setHitRadius(double hitRadius);
 }

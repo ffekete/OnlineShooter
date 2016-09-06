@@ -4,34 +4,31 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import game.config.constant.ItemType;
+import game.config.constant.ShipConfig;
+import game.datatype.AIDao;
 import game.datatype.PlayerData;
-import game.datatype.item.IncreaseDamage;
 
 public class IncreaseDamageTest {
 
     IncreaseDamage id = new IncreaseDamage();
     
-    @BeforeMethod
-    public void initPlayer(){
-        
-    }
-    
-    @Test 
-    public void testShouldCreateInitDamage(){
-        Assert.assertEquals(id.getName(), "Damage +1");
-    }
-    
+    PlayerData player;
+
     @Test
-    public void testIncreaseDamageShouldIncreaseDamage(){
-        PlayerData player = new PlayerData(1L, "P01", "Deltawing", false); 
-        
-        /* Given*/
-        long initDamage = player.getWeapon().getDamage();
-        
+    public void testShouldCreateInitDamage() {
+        Assert.assertEquals(id.getName(), ItemType.INCREASE_DAMAGE.getVisibleName());
+    }
+
+    @Test
+    public void testIncreaseDamageShouldIncreaseDamage() {
+        AIDao aiDao = new AIDao(false, false);
+        PlayerData player = new PlayerData(1L, "P01", ShipConfig.DELTAWING, aiDao);
+
         /* When */
         id.applyEffect(player);
-        
+
         /* Then */
-        Assert.assertEquals(player.getWeapon().getDamage(), initDamage + 1L);
+        Assert.assertEquals(player.getWeapon().getDamage(), player.getWeapon().getAmmoType().getDamage(1));
     }
 }

@@ -1,38 +1,78 @@
 package game.config.constant;
 
-import game.config.WeaponId;
+public enum ShipConfig {
+    QUICKSILVER("Quicksilver", 30L, 6.0D, 6.0D, 10.0D, ItemType.SHOTGUN, 0, 15.0, ItemType.NORMAL_SHIELD), 
+    MERCURY("Mercury", 50L, 5.0D, 5.0D, 12.0D, ItemType.GATLING_GUN, 0, 15, ItemType.NORMAL_SHIELD),
+    INTERCEPTOR("Interceptor", 40L, 7.0D, 7.0D, 14.0D, ItemType.LASER_CANNON, 0, 15.0, ItemType.NORMAL_SHIELD),
+    DELTAWING("Deltawing", 25L, 9.0D, 9.0D, 16.0D, ItemType.MISSILE_LAUNCHER, 0, 15.0, ItemType.NORMAL_SHIELD),
+    CARGOSHIP("Cargoship", 80L, 3.0D, 3.0D, 10.0D, ItemType.NO_WEAPON, 10, 20.0, ItemType.NORMAL_SHIELD),
+    ASTEROID("Asteroid", 100L, 3.0D, 7.0D, 1.0D, ItemType.NO_WEAPON, 0, 20.0, ItemType.NO_SHIELD);
 
-public class ShipConfig {
-    public final static String   SHIP_TYPE_CARGOSHIP = "Cargoship";
-    public final static String   SHIP_TYPE_DELTAWING = "Deltawing";
-    public final static String   SHIP_TYPE_INTERCEPTOR = "Interceptor";
-    public final static String   SHIP_TYPE_MERCURY = "Mercury";
-    public final static String   SHIP_TYPE_QUICKSILVER = "Quicksilver";
-    
-    public final static long     QUICKSILVER_INIT_HP = 15L;
-    public final static double   QUICKSILVER_INIT_SPEED = 6.0D;
-    public final static double   QUICKSILVER_INIT_MANEUVERABILITY = 10.0D;
-    public final static WeaponId QUICKSILVER_INIT_WEAPON = WeaponId.SHOTGUN;
-    
-    public final static long     MERCURY_INIT_HP = 25L;
-    public final static double   MERCURY_INIT_SPEED = 5.0D;
-    public final static double   MERCURY_INIT_MANEUVERABILITY = 12.0D;
-    public final static WeaponId MERCURY_INIT_WEAPON = WeaponId.MACHINEGUN;
-    
-    public final static long     INTERCEPTOR_INIT_HP = 20L;
-    public final static double   INTERCEPTOR_INIT_SPEED = 7.0D;
-    public final static double   INTERCEPTOR_INIT_MANEUVERABILITY = 14.0D;
-    public final static WeaponId INTERCEPTOR_INIT_WEAPON = WeaponId.LASER_CANNON;
-    
-    public final static long     DELTAWING_INIT_HP = 11L;
-    public final static double   DELTAWING_INIT_SPEED = 9.0D;
-    public final static double   DELTAWING_INIT_MANEUVERABILITY = 16.0D;
-    public final static WeaponId DELTAWING_INIT_WEAPON = WeaponId.DOUBLE_GATLING;
-    
-    public final static long     CARGO_SHIP_INIT_HP = 40L;
-    public final static double   CARGO_SHIP_INIT_SPEED = 3.0D;
-    public final static double   CARGO_SHIP_INIT_MANEUVERABILITY = 16.0D;
-    public final static WeaponId CARGO_SHIP_INIT_WEAPON = WeaponId.NO_WEAPON;
-    public final static int      CARGO_SHIP_MAX_CAPACITY_DURING_CREATION = 5;
-    
+    private final String type;
+    private final Long maxHP;
+    private final double initMinSpeed;
+    private final double initMaxSpeed;
+    private final double initManeuverability;
+    private final ItemType initWeapon;
+    private final int cargoCapacity;
+    private final double hitRadius;
+    private final ItemType initShield;
+
+    private ShipConfig(String type, Long maxHP, double initMinSpeed, double initMaxSpeed, double initManeuverability,
+            ItemType initWeapon, int cargoCapacity, double hitRadius, ItemType initShield) {
+        this.type = type;
+        this.maxHP = maxHP;
+        this.initMaxSpeed = initMaxSpeed;
+        this.initMinSpeed = initMinSpeed;
+        this.initManeuverability = initManeuverability;
+        this.initWeapon = initWeapon;
+        this.cargoCapacity = cargoCapacity;
+        this.hitRadius = hitRadius;
+        this.initShield = initShield;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public Long getMaxHP() {
+        return this.maxHP;
+    }
+
+    public double getInitMinSpeed() {
+        return this.initMinSpeed;
+    }
+
+    public double getInitMaxSpeed() {
+        return this.initMaxSpeed;
+    }
+
+    public double getInitManeuverability() {
+        return this.initManeuverability;
+    }
+
+    public ItemType getInitWeapon() {
+        return this.initWeapon;
+    }
+
+    public int getCargoCapacity() {
+        return this.cargoCapacity;
+    }
+
+    public double getHitRadius() {
+        return hitRadius;
+    }
+
+    public ItemType getInitShield() {
+        return this.initShield;
+    }
+
+    public static ShipConfig getSpecificConfig(String shipType) {
+        for (ShipConfig sc : values()) {
+            if (shipType.equals(sc.getType())) {
+                return sc;
+            }
+        }
+        throw new NullPointerException("Bad ship type! (" + shipType + ")");
+    }
 }

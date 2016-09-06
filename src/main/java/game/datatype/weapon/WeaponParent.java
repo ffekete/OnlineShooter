@@ -3,111 +3,144 @@ package game.datatype.weapon;
 import java.util.ArrayList;
 import java.util.List;
 
-import factory.BulletBuilder;
+import factory.AmmoBuilder;
+import game.config.constant.AmmoType;
+import game.config.constant.Bonuses;
+import game.config.constant.ItemType;
 import game.datatype.PlayerData;
 import game.datatype.item.ItemParent;
-import game.interfaces.Bullet;
+import game.interfaces.Ammo;
 import game.interfaces.Weapon;
 
 public abstract class WeaponParent extends ItemParent implements Weapon {
-    private long rateOfFireCooldown;
-    private long rateOfFire;
-    private long ammo;
-    private long damage;
+    private ItemType type;
+    private AmmoType ammoType;
+    private long shotCount;
+    private double shotAngle;
+    private double rateOfFire;
+    private double cooldown;
+    private double damage;
+
+    @Override
+    public ItemType getType() {
+        return this.type;
+    }
+
+    @Override
+    public void setType(ItemType type) {
+        this.type = type;
+    }
+
+    @Override
+    public AmmoType getAmmoType() {
+        return ammoType;
+    }
+
+    @Override
+    public void setAmmoType(AmmoType ammoType) {
+        this.ammoType = ammoType;
+    }
 
     @Override
     public void applyEffect(PlayerData player) {
-        player.setWeapon(this);
+        player.addWeapon(this);
     }
 
     @Override
-    public void increaseDamage(long amount) {
-        this.setDamage(this.getDamage() + amount);
+    public boolean isReadyToShoot() {
+        return this.cooldown < 1L;
     }
 
     @Override
-    public void increaseRateOfFire(long amount) {
-        long rof = this.getRateOfFire();
-
-        this.setRateOfFire(rof - amount);
-    }
-
-    public boolean canShoot() {
-        return this.hasAmmo() && this.rateOfFireCooldown < 1L;
+    public long getShotCount() {
+        return shotCount;
     }
 
     @Override
-    public long getDamage() {
-        return this.damage;
+    public void setShotCount(long shotCount) {
+        this.shotCount = shotCount;
     }
 
     @Override
-    public void decreaseAmmo(long value) {
-        if (this.ammo > 0L) {
-            this.ammo -= value;
-            if (this.ammo < 0L)
-                this.ammo = 0L;
-        }
+    public double getShotAngle() {
+        return shotAngle;
     }
 
     @Override
-    public boolean hasAmmo() {
-        return this.ammo > 0L;
+    public void setShotAngle(double shotAngle) {
+        this.shotAngle = shotAngle;
     }
 
-    public long getAmmo() {
-        return ammo;
-    }
-
-    public void setAmmo(long ammo) {
-        this.ammo = ammo;
-    }
-
-    public void setDamage(long damage) {
-        this.damage = damage;
-    }
-
-    public long getRateOfFire() {
+    @Override
+    public double getRateOfFire() {
         return rateOfFire;
     }
 
-    public void setRateOfFire(long rateOfFire) {
+    @Override
+    public void setRateOfFire(double rateOfFire) {
         this.rateOfFire = rateOfFire;
         if (rateOfFire < 1L)
             rateOfFire = 1L;
     }
 
-    public long getRateOfFireCooldown() {
-        return rateOfFireCooldown;
+    @Override
+    public double getCooldown() {
+        return this.cooldown;
     }
 
-    public void setRateOfFireCooldown(long rateOfFireCooldown) {
-        this.rateOfFireCooldown = rateOfFireCooldown;
+    @Override
+    public void setCooldown(double cooldown) {
+        this.cooldown = cooldown;
     }
 
-    public void startShootingRateCooldownEffect() {
-        rateOfFireCooldown = this.getRateOfFire();
-    }
-
-    public void decreaseRateOfFireCooldownValue(long value) {
-        if (rateOfFireCooldown > 0L) {
-            rateOfFireCooldown -= value;
-            if (rateOfFireCooldown < 0L)
-                rateOfFireCooldown = 0L;
+    @Override
+    public void decreaseCooldownValue(double value) {
+        if (cooldown > 0L) {
+            cooldown -= value;
+            if (cooldown < 0L)
+                cooldown = 0L;
         }
     }
 
-    public List<Bullet> createBullet(PlayerData player) {
-        ArrayList<Bullet> bulletsToCreate = new ArrayList<>();
+    @Override
+    public double getDamage() {
+        return damage;
+    }
 
-        bulletsToCreate.add(new BulletBuilder()
-                            .setCoordinate(player.getCoordinate())
-                            .setAngle(player.getShipAngle())
-                            .setPlayerId(player.getId())
-                            .setDamage(player.getWeapon().getDamage())
-                            .build());
+    @Override
+    public void setDamage(double damage) {
+        this.damage = damage;
+    }
+
+    @Override
+    public void applyBonuses(PlayerData playerData) {
+        increaseRateOfFire(playerData.getRateOfFireBonus());
+        increaseDamage(playerData.getDamageBonus());
+    }
+
+    @Override
+    public List<Ammo> createAmmo(PlayerData player) {
+        ArrayList<Ammo> bulletsToCreate = new ArrayList<>();
+
+        if (this.shotCount % 2 == 1) {
+            for (long i = -this.shotCount / 2; i <= this.shotCount / 2; i++) {
+                bulletsToCreate.add(new AmmoBuilder().setCoordinate(player.getCoordinate())
+                        .setAngle(player.getShipAngle() + i * this.shotAngle).setPlayerId(player.getId())
+                        .setDamageBonus(player.getBonuses().get(Bonuses.DAMAGE)).build(this.ammoType));
+            }
+        } else {
+            for (long i = -this.shotCount + 1; i <= this.shotCount - 1; i += 2) {
+                bulletsToCreate.add(new AmmoBuilder().setCoordinate(player.getCoordinate())
+                        .setAngle(player.getShipAngle() + i * this.shotAngle / 2).setPlayerId(player.getId())
+                        .setDamageBonus(player.getBonuses().get(Bonuses.DAMAGE)).build(this.ammoType));
+            }
+        }
 
         return bulletsToCreate;
     }
 
+    @Override
+    public double getPower() {
+        return this.getDamage() * this.getShotCount() * this.getRateOfFire();
+    }
 }

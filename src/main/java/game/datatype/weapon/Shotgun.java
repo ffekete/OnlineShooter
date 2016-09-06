@@ -1,57 +1,41 @@
 package game.datatype.weapon;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import factory.BulletBuilder;
+import game.config.constant.AmmoType;
+import game.config.constant.ItemType;
 import game.config.constant.WeaponConfig;
-import game.datatype.PlayerData;
-import game.interfaces.Bullet;
 import game.service.Spawner;
 
 public class Shotgun extends WeaponParent {
 
-    public List<Bullet> createBullet(PlayerData player) {
-        ArrayList<Bullet> bulletsToCreate = new ArrayList<>();
-
-        bulletsToCreate.add(new BulletBuilder()
-                            .setCoordinate(player.getCoordinate())
-                            .setAngle(player.getShipAngle() + 15.0d).setPlayerId(player.getId())
-                            .setDamage(player.getWeapon().getDamage())
-                            .build());
-
-        bulletsToCreate.add(new BulletBuilder()
-                            .setCoordinate(player.getCoordinate())
-                            .setAngle(player.getShipAngle() + 5.0d).setPlayerId(player.getId())
-                            .setDamage(player.getWeapon().getDamage())
-                            .build());
-
-        bulletsToCreate.add(new BulletBuilder()
-                            .setCoordinate(player.getCoordinate())
-                            .setAngle(player.getShipAngle()).setPlayerId(player.getId())
-                            .setDamage(player.getWeapon().getDamage())
-                            .build());
-
-        bulletsToCreate.add(new BulletBuilder()
-                            .setCoordinate(player.getCoordinate())
-                            .setAngle(player.getShipAngle() - 5.0d).setPlayerId(player.getId())
-                            .setDamage(player.getWeapon().getDamage())
-                            .build());
-
-        bulletsToCreate.add(new BulletBuilder()
-                            .setCoordinate(player.getCoordinate())
-                            .setAngle(player.getShipAngle() - 15.0d).setPlayerId(player.getId())
-                            .setDamage(player.getWeapon().getDamage())
-                            .build());
-
-        return bulletsToCreate;
-    }
-
     public Shotgun() {
         Spawner.spawn(this);
-        super.setDamage(WeaponConfig.SHOTGUN_INIT_DAMAGE);
-        super.setAmmo(WeaponConfig.SHOTGUN_INIT_AMMO);
-        super.setName("Shotgun");
-        super.setRateOfFire(WeaponConfig.SHOTGUN_INIT_RATE_OF_FIRE);
+        super.setName(ItemType.SHOTGUN.getVisibleName());
+        super.setType(ItemType.SHOTGUN);
+        super.setAmmoType(AmmoType.CANISTER);
+        super.setShotCount(WeaponConfig.SHOTGUN.getInitShotCount());
+        super.setShotAngle(WeaponConfig.SHOTGUN.getInitShotAngle());
+        super.setRateOfFire(WeaponConfig.SHOTGUN.getInitRateOfFire());
+        super.setDamage(AmmoType.CANISTER.getDamage(0));
+    }
+
+    @Override
+    public void increaseRateOfFire(long bonus) {
+        this.setRateOfFire(
+                WeaponConfig.SHOTGUN.getInitRateOfFire() + WeaponConfig.SHOTGUN.getRateOfFireBonus() * bonus);
+    }
+
+    @Override
+    public void increaseDamage(long bonus) {
+        super.setDamage(AmmoType.CANISTER.getDamage(bonus));
+    }
+
+    @Override
+    public long getInitAmmoCount() {
+        return WeaponConfig.SHOTGUN.getInitAmmoCount();
+    }
+
+    @Override
+    public void startCooldownEffect() {
+        this.setCooldown(WeaponConfig.SHOTGUN.getRateOfFireTimeesCooldown() / this.getRateOfFire());
     }
 }

@@ -3,6 +3,8 @@ package game.interfaces;
 import java.util.List;
 import java.util.Set;
 
+import game.datatype.MinimapDao;
+
 public interface PoolMap<T1, T2> {
     public Set<T1> getAll();
 
@@ -13,4 +15,6 @@ public interface PoolMap<T1, T2> {
     public T2 get(T1 t1);
 
     public List<T2> getAllOnScreen(T1 t1);
+
+    public List<MinimapDao> getAllPlayersPosition();
 }

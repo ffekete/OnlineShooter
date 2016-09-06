@@ -2,9 +2,12 @@ package game.model;
 
 import java.awt.geom.Point2D;
 import java.util.List;
+import java.util.Map;
 
+import game.config.constant.AmmoType;
+import game.datatype.MinimapDao;
 import game.datatype.PlayerData;
-import game.interfaces.Bullet;
+import game.interfaces.Ammo;
 import game.interfaces.SpawnableItem;
 import game.interfaces.Weapon;
 
@@ -25,24 +28,36 @@ public class SentPlayerData {
     private List<SpawnableItem> items;
 
     private Double shipAngle;
+    
+    private Double hitRadius;
 
     private Long connectionId;
 
-    private Long shipHp;
+    private double shipHp;
+
+    private double shipMaxHp;
 
     private boolean invulnerable;
 
-    private long shieldAmount;
+    private double shieldAmount;
 
-    private long maxShieldAmount;
+    private double maxShieldAmount;
 
     private boolean isAI;
 
+    private boolean isAsteroid;
+
     Weapon weapon;
+
+    List<Weapon> weapons;
+	
+	Map<AmmoType, Long> ammoCount;
 
     List<PlayerData> visiblePlayers;
 
-    List<Bullet> visibleBullets;
+    List<Ammo> visibleAmmo;
+
+    List<MinimapDao> allPlayersPosition;
 
     public Long getId() {
         return id;
@@ -56,7 +71,23 @@ public class SentPlayerData {
         this.weapon = weapon;
     }
 
-    public boolean isInvulnerable() {
+    public List<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public void setWeapons(List<Weapon> weapons) {
+        this.weapons = weapons;
+    }
+
+    public Map<AmmoType, Long> getAmmoCount() {
+		return ammoCount;
+	}
+
+	public void setAmmoCount(Map<AmmoType, Long> ammoCount) {
+		this.ammoCount = ammoCount;
+	}
+
+	public boolean isInvulnerable() {
         return invulnerable;
     }
 
@@ -65,7 +96,7 @@ public class SentPlayerData {
     }
 
     public String getShipType() {
-        return shipType;
+        return this.shipType;
     }
 
     public void setShipType(String shipType) {
@@ -96,19 +127,27 @@ public class SentPlayerData {
         this.color = color;
     }
 
-    public Long getShipHp() {
+    public double getShipHp() {
         return shipHp;
     }
 
-    public void setShipHp(Long shipHp) {
+    public void setShipHp(double shipHp) {
         this.shipHp = shipHp;
     }
 
-    public long getMaxShieldAmount() {
+    public double getShipMaxHp() {
+        return this.shipMaxHp;
+    }
+
+    public void setShipMaxHp(Long shipMaxHp) {
+        this.shipMaxHp = shipMaxHp;
+    }
+
+    public double getMaxShieldAmount() {
         return maxShieldAmount;
     }
 
-    public void setMaxShieldAmount(long maxShieldAmount) {
+    public void setMaxShieldAmount(double maxShieldAmount) {
         this.maxShieldAmount = maxShieldAmount;
     }
 
@@ -164,7 +203,15 @@ public class SentPlayerData {
         this.shipAngle = shipAngle;
     }
 
-    public Long getConnectionId() {
+    public Double getHitRadius() {
+		return hitRadius;
+	}
+
+	public void setHitRadius(Double hitRadius) {
+		this.hitRadius = hitRadius;
+	}
+
+	public Long getConnectionId() {
         return connectionId;
     }
 
@@ -172,19 +219,19 @@ public class SentPlayerData {
         this.connectionId = connectionId;
     }
 
-    public List<Bullet> getVisibleBullets() {
-        return visibleBullets;
+    public List<Ammo> getVisibleAmmo() {
+        return visibleAmmo;
     }
 
     public List<PlayerData> getVisiblePlayers() {
         return visiblePlayers;
     }
 
-    public long getShieldAmount() {
+    public double getShieldAmount() {
         return shieldAmount;
     }
 
-    public void setShieldAmount(long shieldAmount) {
+    public void setShieldAmount(double shieldAmount) {
         this.shieldAmount = shieldAmount;
     }
 
@@ -192,8 +239,8 @@ public class SentPlayerData {
         this.visiblePlayers = visiblePlayers;
     }
 
-    public void setVisibleBullets(List<Bullet> visibleBullets) {
-        this.visibleBullets = visibleBullets;
+    public void setVisibleAmmo(List<Ammo> visibleAmmo) {
+        this.visibleAmmo = visibleAmmo;
     }
 
     public boolean getIsAI() {
@@ -202,5 +249,21 @@ public class SentPlayerData {
 
     public void setIsAI(boolean isAI) {
         this.isAI = isAI;
+    }
+
+    public boolean getIsAsteroid() {
+        return this.isAsteroid;
+    }
+
+    public void setIsAsteroid(boolean isAsteroid) {
+        this.isAsteroid = isAsteroid;
+    }
+
+    public List<MinimapDao> getAllPlayersPosition() {
+        return this.allPlayersPosition;
+    }
+
+    public void setAllPlayersPosition(List<MinimapDao> allPlayersPosition) {
+        this.allPlayersPosition = allPlayersPosition;
     }
 }

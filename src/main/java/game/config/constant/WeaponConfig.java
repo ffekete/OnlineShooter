@@ -1,25 +1,51 @@
 package game.config.constant;
 
-public class WeaponConfig {
-    public static final long MACHINEGUN_INIT_DAMAGE = 2L; 
-    public static final long MACHINEGUN_INIT_AMMO = 200L;
-    public static final long MACHINEGUN_INIT_RATE_OF_FIRE = 5L;
-        
-    public static final long GATLING_GUN_INIT_DAMAGE = 1L; 
-    public static final long GATLING_GUN_INIT_AMMO = 1000L;
-    public static final long GATLING_GUN_INIT_RATE_OF_FIRE = 2L;
+public enum WeaponConfig {
+    GATLING_GUN(400L, 1L, 0.0, 20.0, 2.0, 60.0),
+    DOUBLE_GATLING_GUN(400L, 2L, 0.5, 20.0, 2.0, 60.0),
+    SHOTGUN(400L, 10L, 2.0, 2.0, 0.5, 60.0),
+    LASER_CANNON(50L, 1L, 0.0, 3.0, 0.5, 60.0),
+    MISSILE_LAUNCHER(200L, 1L, 0.0, 3.0, 0.5, 60.0),
+    NO_WEAPON(0L, 0L, 0.0, 0.0, 0.0, 0.0);
 
-    public static final long SHOTGUN_INIT_DAMAGE = 5L; 
-    public static final long SHOTGUN_INIT_AMMO = 50L;
-    public static final long SHOTGUN_INIT_RATE_OF_FIRE = 15L;
-    
-    public static final long LASER_CANNON_INIT_DAMAGE = 10L; 
-    public static final long LASER_CANNON_INIT_AMMO = 100L;
-    public static final long LASER_CANNON_INIT_RATE_OF_FIRE = 20L;
-    public static final double LASER_BEAM_LENGTH = 1000.0d;
-    public static final double LASER_BEAM_HIT_RADIUS = 10.0d;
-    
-    public static final long NO_WEAPON_INIT_DAMAGE = 0L; 
-    public static final long NO_WEAPON_INIT_AMMO = 0L;
-    public static final long NO_WEAPON_INIT_RATE_OF_FIRE = 0L;
+    private Long initAmmoCount;
+    private Long initShotCount;
+    private double initShotAngle;
+    private double initRateOfFire;
+    private double rateOfFireBonus;
+    private double rateOfFireTimeesCooldown;
+
+    private WeaponConfig(Long initAmmoCount, Long initShotCount, double initShotAngle, double initRateOfFire,
+            double rateOfFireBonus, double rateOfFireTimeesCooldown) {
+        this.initAmmoCount = initAmmoCount;
+        this.initShotCount = initShotCount;
+        this.initShotAngle = initShotAngle;
+        this.initRateOfFire = initRateOfFire;
+        this.rateOfFireBonus = rateOfFireBonus;
+        this.rateOfFireTimeesCooldown = rateOfFireTimeesCooldown;
+    }
+
+    public Long getInitAmmoCount() {
+        return initAmmoCount;
+    }
+
+    public Long getInitShotCount() {
+        return initShotCount;
+    }
+
+    public double getInitShotAngle() {
+        return initShotAngle;
+    }
+
+    public double getInitRateOfFire() {
+        return initRateOfFire;
+    }
+
+    public double getRateOfFireBonus() {
+        return rateOfFireBonus;
+    }
+
+    public double getRateOfFireTimeesCooldown() {
+        return rateOfFireTimeesCooldown;
+    }
 }
