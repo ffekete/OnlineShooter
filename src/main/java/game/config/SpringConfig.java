@@ -4,13 +4,13 @@ import factory.ConnectionNodeBuilder;
 import factory.EventBuilder;
 import game.connection.ConnectionPool;
 import game.datahandler.AIHandler;
-import game.datahandler.BulletPool;
+import game.datahandler.AmmoPool;
 import game.datahandler.HighScoreTable;
 import game.datahandler.ItemHandler;
 import game.datahandler.ItemPool;
 import game.datahandler.PlayerPool;
 import game.scheduler.TaskScheduler;
-import game.service.BulletDataProcessor;
+import game.service.AmmoDataProcessor;
 import game.service.CoordinateHandler;
 import game.service.ItemProcessor;
 import game.service.PlayerDataProcessor;
@@ -18,6 +18,7 @@ import game.transformer.PlayerDataToRegistrationAnswerTransformer;
 import game.transformer.PlayerDataToSentPlayerDataTransformer;
 import game.transformer.ReceivedPlayerDataToPlayerDataTransformer;
 import game.transformer.RegistrationDataToPlayerDataTransformer;
+import game.transformer.ShipConfigToShipsDetailsTransformer;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,8 +32,8 @@ public class SpringConfig {
     }
 
     @Bean
-    public BulletPool bulletPool() {
-        return new BulletPool();
+    public AmmoPool ammmoPool() {
+        return new AmmoPool();
     }
 
     @Bean
@@ -61,8 +62,8 @@ public class SpringConfig {
     }
 
     @Bean
-    public BulletDataProcessor bulletDataProcessor() {
-        return new BulletDataProcessor();
+    public AmmoDataProcessor ammoDataProcessor() {
+        return new AmmoDataProcessor();
     }
 
     @Bean
@@ -113,6 +114,11 @@ public class SpringConfig {
     @Bean
     public RegistrationDataToPlayerDataTransformer registrationDataToPlayerDataTransformer() {
         return new RegistrationDataToPlayerDataTransformer();
+    }
+
+    @Bean
+    public ShipConfigToShipsDetailsTransformer shipConfigToShipsDetailsTransformer() {
+        return new ShipConfigToShipsDetailsTransformer();
     }
 
 }

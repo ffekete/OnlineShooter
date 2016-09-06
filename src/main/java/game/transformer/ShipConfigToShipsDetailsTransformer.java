@@ -4,12 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import game.config.constant.ShipConfig;
 import game.datatype.ShipDetails;
 
-@Component
 @Scope("prototype")
 public class ShipConfigToShipsDetailsTransformer {
     public Map<String, ShipDetails> transform() {
