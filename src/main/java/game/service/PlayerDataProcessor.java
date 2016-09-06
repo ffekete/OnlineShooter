@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import game.config.constant.AmmoType;
 import game.config.constant.GameConfig;
@@ -23,7 +22,6 @@ import game.interfaces.SpawnableItem;
 import game.scheduler.TaskScheduler;
 
 /** Basic class to calculate player related values e.g. ship angles,... */
-@Component
 public class PlayerDataProcessor implements PlayerDataProcessorInterface {
     @Autowired
     private PlayerPoolMap<Long, PlayerData> playerPool;

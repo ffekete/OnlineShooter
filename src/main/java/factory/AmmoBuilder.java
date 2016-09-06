@@ -5,10 +5,11 @@ import java.awt.geom.Point2D;
 import org.springframework.stereotype.Component;
 
 import game.config.constant.AmmoType;
+import game.datatype.ammo.Beam;
 import game.datatype.ammo.Bullet;
 import game.datatype.ammo.Canister;
 import game.datatype.ammo.HeatSeekingMissile;
-import game.datatype.ammo.LaserBeam;
+import game.datatype.ammo.Missile;
 import game.interfaces.Ammo;
 
 @Component
@@ -27,10 +28,10 @@ public class AmmoBuilder {
         this.angle = angle;
         return this;
     }
-    
+
     public AmmoBuilder setDamageBonus(long damageBonus) {
-    	this.damageBonus = damageBonus;
-    	return this;
+        this.damageBonus = damageBonus;
+        return this;
     }
 
     public AmmoBuilder setPlayerId(long playerId) {
@@ -46,7 +47,7 @@ public class AmmoBuilder {
         if (this.angle == null) {
             throw new NullPointerException("(E) angle cannot be null!");
         }
-        
+
         if (this.damageBonus == null) {
             throw new NullPointerException("(E) damage bonus cannot be null!");
         }
@@ -54,28 +55,32 @@ public class AmmoBuilder {
         if (this.playerId == null) {
             throw new NullPointerException("(E) playerId cannot be null!");
         }
-        
+
         Ammo ammo;
 
-        switch(type) {
+        switch (type) {
         case BULLET:
-        	ammo = new Bullet();
-        	ammo.setDamage(AmmoType.BULLET.getDamage(damageBonus));
-        	break;
+            ammo = new Bullet();
+            ammo.setDamage(AmmoType.BULLET.getDamage(damageBonus));
+            break;
         case CANISTER:
-        	ammo = new Canister();
-        	ammo.setDamage(AmmoType.CANISTER.getDamage(damageBonus));
-        	break;
+            ammo = new Canister();
+            ammo.setDamage(AmmoType.CANISTER.getDamage(damageBonus));
+            break;
         case LASER_BEAM:
-        	ammo = new LaserBeam(this.coordinate, this.angle, this.playerId, 0);
-        	ammo.setDamage(AmmoType.LASER_BEAM.getDamage(damageBonus));
-        	break;
+            ammo = new Beam(this.coordinate, this.angle, this.playerId, 0);
+            ammo.setDamage(AmmoType.LASER_BEAM.getDamage(damageBonus));
+            break;
+        case MISSILE:
+            ammo = new Missile();
+            ammo.setDamage(AmmoType.MISSILE.getDamage(damageBonus));
+            break;
         case HEAT_SEEKING_MISSILE:
-        	ammo = new HeatSeekingMissile();
-        	ammo.setDamage(AmmoType.HEAT_SEEKING_MISSILE.getDamage(damageBonus));
-        	break;
+            ammo = new HeatSeekingMissile();
+            ammo.setDamage(AmmoType.HEAT_SEEKING_MISSILE.getDamage(damageBonus));
+            break;
         default:
-        	throw new RuntimeException("Unknownw ammo type!");
+            throw new RuntimeException("Unknownw ammo type!");
         }
 
         ammo.setCoordinate(this.coordinate);

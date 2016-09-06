@@ -1,7 +1,6 @@
 package game.datahandler;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import game.config.constant.AIConfig;
 import game.config.constant.ShipConfig;
@@ -11,7 +10,6 @@ import game.interfaces.AIBase;
 import game.interfaces.PlayerPoolMap;
 import game.util.RandomGenerator;
 
-@Component
 public class AIHandler implements AIBase {
 
     @Autowired

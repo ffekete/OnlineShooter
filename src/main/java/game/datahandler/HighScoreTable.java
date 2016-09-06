@@ -4,18 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
-import org.springframework.stereotype.Component;
-
 import game.datatype.HighScore;
 import game.service.HighScoreComparator;
 
-@Path("/highScore")
-@Component
 public class HighScoreTable {
     private List<HighScore> highScores;
 
@@ -49,9 +40,6 @@ public class HighScoreTable {
     	keepTopThreePlayersInHighScoreTable();
     }
 
-    @GET
-    @Path("/scores")
-    @Produces(MediaType.APPLICATION_JSON)
     public List<String> getThreeBestScores() {
         ArrayList<String> scores = new ArrayList<>();
 

@@ -1,10 +1,7 @@
 package factory;
 
-import org.springframework.stereotype.Component;
-
 import game.datatype.Event;
 
-@Component
 public class EventBuilder {
 
     private String eventCommand = null;

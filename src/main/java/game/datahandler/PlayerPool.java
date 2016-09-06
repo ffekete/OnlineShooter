@@ -8,7 +8,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import game.config.constant.ConnectionPreferences;
 import game.config.constant.ShipConfig;
@@ -20,7 +19,6 @@ import game.datatype.RegistrationData;
 import game.interfaces.PlayerPoolMap;
 import game.transformer.RegistrationDataToPlayerDataTransformer;
 
-@Component
 public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
 
     @Autowired
@@ -64,18 +62,15 @@ public class PlayerPool implements PlayerPoolMap<Long, PlayerData> {
             return false;
         } else {
             PlayerData newPlayerData = registrationDataToPlayerDataTransformer.transform(data, id);
-            Long connectionId = connectionPool.registerNewConnection(id);
-
-            if (connectionId != null) {
-                newPlayerData.setConnectionId(connectionId);
-                newPlayerData.setColor(data.getColor());
-                newPlayerData.setShipConfig(ShipConfig.getSpecificConfig(data.getShipType()));
-                newPlayerData.setIsAI(data.getIsAI());
-                newPlayerData.setIsAsteroid(data.getIsAsteroid());
-                this.put(id, newPlayerData);
-                return true;
+            if (!newPlayerData.getIsAI()) {
+                newPlayerData.setConnectionId(connectionPool.registerNewConnection(id));
             }
-            return false;
+            newPlayerData.setColor(data.getColor());
+            newPlayerData.setShipConfig(ShipConfig.getSpecificConfig(data.getShipType()));
+            newPlayerData.setIsAI(data.getIsAI());
+            newPlayerData.setIsAsteroid(data.getIsAsteroid());
+            this.put(id, newPlayerData);
+            return true;
         }
     }
 

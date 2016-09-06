@@ -9,7 +9,7 @@ import game.interfaces.Ammo;
 import game.interfaces.AmmoPoolList;
 
 @Controller
-public class NewAmmoHandler {
+public class NewAmmoHandler implements ControllerBase {
 
     @Autowired
     AmmoPoolList<Ammo> ammoPool;

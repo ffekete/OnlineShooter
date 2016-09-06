@@ -10,7 +10,7 @@ import game.datatype.ReceivedPlayerData;
 import game.transformer.ReceivedPlayerDataToPlayerDataTransformer;
 
 @Controller
-public class PlayerDataUpdateHandler {
+public class PlayerDataUpdateHandler implements ControllerBase {
 
     @Autowired
     ReceivedPlayerDataToPlayerDataTransformer receivedPlayerDataToPlayerDataTransformer;

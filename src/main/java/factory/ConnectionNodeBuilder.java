@@ -1,10 +1,7 @@
 package factory;
 
-import org.springframework.stereotype.Component;
-
 import game.connection.ConnectionNode;
 
-@Component
 public class ConnectionNodeBuilder {
 
     private String providePlayerDataPath = null;

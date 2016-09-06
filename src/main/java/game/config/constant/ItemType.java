@@ -6,6 +6,7 @@ public enum ItemType {
     LASER_CANNON("laserCannon", "Laser Cannon"),
     DOUBLE_GATLING_GUN("doubleGatlingGun", "Double Gatling Gun"),
     SHOTGUN("shotgun", "Shotgun"),
+    MISSILE_LAUNCHER("missileLauncher", "Missile Launcher"),
 
     // Power-ups
     INCREASE_DAMAGE("increaseDamage", "Damage++"),

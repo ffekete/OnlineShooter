@@ -1,16 +1,37 @@
 @CHARSET "ISO-8859-1";
 
-#shipDetails {
+html, body {
+	margin: 0px;
+	overflow: hidden;
+}
+
+body {
+	background: url("../img/registration_background.jpg") no-repeat center
+		center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.container {
+	text-align: center;
+	color: white;
+}
+
+.shipDetails img, .shipDetails ul {
+	vertical-align: middle;
+}
+
+.shipDetails ul {
+	list-style-type: none;
 	text-align: left;
 }
 
-#shipDetails img, #shipDetails ul {
-	display: inline-block;
+.shipSelect {
+	color: black;
 }
 
-#shipDetails ul {
-	list-style-type: none;
-	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
+.inl-bl {
+	display: inline-block;
 }

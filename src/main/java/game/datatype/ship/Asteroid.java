@@ -2,6 +2,7 @@ package game.datatype.ship;
 
 import java.awt.geom.Point2D;
 
+import factory.ShieldFactory;
 import factory.WeaponFactory;
 import game.config.constant.ShipConfig;
 import game.util.RandomGenerator;
@@ -12,6 +13,7 @@ public class Asteroid extends ShipParent {
     public Asteroid() {
         super.setCoordinate(new Point2D.Double(0, 0));
         super.setShipConfig(ShipConfig.ASTEROID);
+        this.initShield();
         this.resetSpeed();
         this.resetManeuverability();
         this.resetHp();
@@ -54,5 +56,10 @@ public class Asteroid extends ShipParent {
     private double generateRandomSpeed() {
         return RandomGenerator.getRandomInRange(ShipConfig.ASTEROID.getInitMinSpeed(),
                 ShipConfig.ASTEROID.getInitMaxSpeed());
+    }
+
+    @Override
+    public void initShield() {
+        super.setShield(ShieldFactory.createShield(ShipConfig.ASTEROID.getInitShield()));
     }
 }

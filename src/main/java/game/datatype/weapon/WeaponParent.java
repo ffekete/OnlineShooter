@@ -7,7 +7,6 @@ import factory.AmmoBuilder;
 import game.config.constant.AmmoType;
 import game.config.constant.Bonuses;
 import game.config.constant.ItemType;
-import game.config.constant.WeaponConfig;
 import game.datatype.PlayerData;
 import game.datatype.item.ItemParent;
 import game.interfaces.Ammo;
@@ -21,59 +20,59 @@ public abstract class WeaponParent extends ItemParent implements Weapon {
     private double rateOfFire;
     private double cooldown;
     private double damage;
-    
+
     @Override
     public ItemType getType() {
-    	return this.type;
+        return this.type;
     }
-    
+
     @Override
     public void setType(ItemType type) {
-    	this.type = type;
+        this.type = type;
     }
 
     @Override
     public AmmoType getAmmoType() {
-		return ammoType;
-	}
+        return ammoType;
+    }
 
     @Override
-	public void setAmmoType(AmmoType ammoType) {
-		this.ammoType = ammoType;
-	}
+    public void setAmmoType(AmmoType ammoType) {
+        this.ammoType = ammoType;
+    }
 
-	@Override
+    @Override
     public void applyEffect(PlayerData player) {
         player.addWeapon(this);
     }
-	
-	@Override
-	public boolean isReadyToShoot() {
+
+    @Override
+    public boolean isReadyToShoot() {
         return this.cooldown < 1L;
     }
 
     @Override
     public long getShotCount() {
-		return shotCount;
-	}
+        return shotCount;
+    }
 
     @Override
-	public void setShotCount(long shotCount) {
-		this.shotCount = shotCount;
-	}
+    public void setShotCount(long shotCount) {
+        this.shotCount = shotCount;
+    }
 
     @Override
-	public double getShotAngle() {
-		return shotAngle;
-	}
+    public double getShotAngle() {
+        return shotAngle;
+    }
 
     @Override
-	public void setShotAngle(double shotAngle) {
-		this.shotAngle = shotAngle;
-	}
+    public void setShotAngle(double shotAngle) {
+        this.shotAngle = shotAngle;
+    }
 
     @Override
-	public double getRateOfFire() {
+    public double getRateOfFire() {
         return rateOfFire;
     }
 
@@ -95,11 +94,6 @@ public abstract class WeaponParent extends ItemParent implements Weapon {
     }
 
     @Override
-    public void startCooldownEffect() {
-        this.cooldown = WeaponConfig.RATE_OF_FIRE_TIMES_COOLDOWN / this.getRateOfFire();
-    }
-
-    @Override
     public void decreaseCooldownValue(double value) {
         if (cooldown > 0L) {
             cooldown -= value;
@@ -107,52 +101,46 @@ public abstract class WeaponParent extends ItemParent implements Weapon {
                 cooldown = 0L;
         }
     }
-    
+
     @Override
     public double getDamage() {
-		return damage;
-	}
+        return damage;
+    }
 
     @Override
-	public void setDamage(double damage) {
-		this.damage = damage;
-	}
-	
-	@Override
-	public void applyBonuses(PlayerData playerData) {
-		increaseRateOfFire(playerData.getRateOfFireBonus());
-		increaseDamage(playerData.getDamageBonus());
-	}
+    public void setDamage(double damage) {
+        this.damage = damage;
+    }
 
-	@Override
+    @Override
+    public void applyBonuses(PlayerData playerData) {
+        increaseRateOfFire(playerData.getRateOfFireBonus());
+        increaseDamage(playerData.getDamageBonus());
+    }
+
+    @Override
     public List<Ammo> createAmmo(PlayerData player) {
         ArrayList<Ammo> bulletsToCreate = new ArrayList<>();
-        
-        if(this.shotCount % 2 == 1) {
-	        for(long i = -this.shotCount / 2; i <= this.shotCount / 2; i++) {
-	        	bulletsToCreate.add(new AmmoBuilder()
-	        		.setCoordinate(player.getCoordinate())
-	    			.setAngle(player.getShipAngle() + i * this.shotAngle)
-	    			.setPlayerId(player.getId())
-	    			.setDamageBonus(player.getBonuses().get(Bonuses.DAMAGE))
-	    			.build(this.ammoType));
-	        }
+
+        if (this.shotCount % 2 == 1) {
+            for (long i = -this.shotCount / 2; i <= this.shotCount / 2; i++) {
+                bulletsToCreate.add(new AmmoBuilder().setCoordinate(player.getCoordinate())
+                        .setAngle(player.getShipAngle() + i * this.shotAngle).setPlayerId(player.getId())
+                        .setDamageBonus(player.getBonuses().get(Bonuses.DAMAGE)).build(this.ammoType));
+            }
         } else {
-        	for(long i = -this.shotCount + 1; i <= this.shotCount - 1; i += 2) {
-	        	bulletsToCreate.add(new AmmoBuilder()
-	        		.setCoordinate(player.getCoordinate())
-	    			.setAngle(player.getShipAngle() + i * this.shotAngle / 2)
-	    			.setPlayerId(player.getId())
-	    			.setDamageBonus(player.getBonuses().get(Bonuses.DAMAGE))
-    				.build(this.ammoType));
-	        }
+            for (long i = -this.shotCount + 1; i <= this.shotCount - 1; i += 2) {
+                bulletsToCreate.add(new AmmoBuilder().setCoordinate(player.getCoordinate())
+                        .setAngle(player.getShipAngle() + i * this.shotAngle / 2).setPlayerId(player.getId())
+                        .setDamageBonus(player.getBonuses().get(Bonuses.DAMAGE)).build(this.ammoType));
+            }
         }
 
         return bulletsToCreate;
     }
-	
-	@Override
-	public double getPower(){
-		return this.getDamage() * this.getShotCount() * this.getRateOfFire();
-	}
+
+    @Override
+    public double getPower() {
+        return this.getDamage() * this.getShotCount() * this.getRateOfFire();
+    }
 }

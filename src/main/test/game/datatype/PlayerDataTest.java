@@ -81,7 +81,7 @@ public class PlayerDataTest {
     @Test
     public void testShouldGivebackProperCooldown() {
         pD.startShootingRateCooldownEffect();
-        Assert.assertTrue(pD.getWeapon().getCooldown() == WeaponConfig.RATE_OF_FIRE_TIMES_COOLDOWN
+        Assert.assertTrue(pD.getWeapon().getCooldown() == WeaponConfig.SHOTGUN.getRateOfFireTimeesCooldown()
                 / pD.getWeapon().getRateOfFire());
     }
 }

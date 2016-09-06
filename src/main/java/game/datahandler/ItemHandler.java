@@ -3,8 +3,6 @@ package game.datahandler;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import game.datatype.PlayerData;
 import game.interfaces.ItemPoolList;
 import game.interfaces.Ship;
@@ -12,7 +10,6 @@ import game.interfaces.Spawnable;
 import game.interfaces.SpawnableItem;
 import game.service.CoordinateHandler;
 
-@Component
 public class ItemHandler {
 
     @Autowired

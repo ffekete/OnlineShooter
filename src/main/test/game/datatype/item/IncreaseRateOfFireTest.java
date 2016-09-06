@@ -27,6 +27,7 @@ public class IncreaseRateOfFireTest {
 
         irf.applyEffect(player);
 
-        Assert.assertEquals(initRateOfFire + WeaponConfig.GATLING_GUN_RATE_OF_FIRE_BONUS, player.getWeapon().getRateOfFire());
+        Assert.assertEquals(initRateOfFire + WeaponConfig.GATLING_GUN.getInitRateOfFire(),
+                player.getWeapon().getRateOfFire());
     }
 }

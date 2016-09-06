@@ -1,10 +1,29 @@
 var stompClient = null;
 var selectedShip;
+var shipsDetails;
 
 function loadShipType() {
-	selectedShip = document.getElementById("shipSelector").value;
+	getShipDetails();
+}
 
+function getShipDetails() {
+	var socket = new SockJS('/getShipDetails');
+	stompClient = Stomp.over(socket);
+
+	stompClient.connect({}, function(frame) {
+		stompClient.subscribe('/sendShipsDetails',
+				responseArrivedForGetShipDetails);
+		updateShipDetailsWithShipDetails();
+	});
+}
+
+function responseArrivedForGetShipDetails(message) {
+	shipsDetails = JSON.parse(message.body);
 	updateShipData();
+}
+
+function updateShipDetailsWithShipDetails() {
+	stompClient.send("/app/getShipDetails", {});
 }
 
 function connect() {
@@ -19,13 +38,13 @@ function connect() {
 }
 
 function updateShipDetails() {
-	updateShipImage(selectedShip);
-	updateShipData(selectedShip);
+	updateShipImage();
+	updateShipData();
 }
 
 function updateShipImage() {
 	selectedShip = document.getElementById("shipSelector").value;
-	
+
 	switch (selectedShip) {
 		case "Quicksilver" :
 			document.getElementById("shipImage").src = "img/ship_1_128.png";
@@ -47,32 +66,32 @@ function updateShipData() {
 
 	switch (selectedShip) {
 		case "Quicksilver" :
-			document.getElementById("weaponName").innerHTML = "Shotgun";
-			document.getElementById("speedValue").innerHTML = "15";
-			document.getElementById("healthValue").innerHTML = "6";
-			document.getElementById("maneuverabilityValue").innerHTML = "10";
-			document.getElementById("cargoCapacity").innerHTML = "0";
+			document.getElementById("weaponName").innerHTML = shipsDetails.Quicksilver.weapon;
+			document.getElementById("speedValue").innerHTML = shipsDetails.Quicksilver.speed;
+			document.getElementById("healthValue").innerHTML = shipsDetails.Quicksilver.hp;
+			document.getElementById("maneuverabilityValue").innerHTML = shipsDetails.Quicksilver.maneuverability;
+			document.getElementById("cargoCapacity").innerHTML = shipsDetails.Quicksilver.cargoCapacity;
 			break;
 		case "Mercury" :
-			document.getElementById("weaponName").innerHTML = "Gatling Gun";
-			document.getElementById("speedValue").innerHTML = "25";
-			document.getElementById("healthValue").innerHTML = "5";
-			document.getElementById("maneuverabilityValue").innerHTML = "12";
-			document.getElementById("cargoCapacity").innerHTML = "0";
+			document.getElementById("weaponName").innerHTML = shipsDetails.Mercury.weapon;
+			document.getElementById("speedValue").innerHTML = shipsDetails.Mercury.speed;
+			document.getElementById("healthValue").innerHTML = shipsDetails.Mercury.hp;
+			document.getElementById("maneuverabilityValue").innerHTML = shipsDetails.Mercury.maneuverability;
+			document.getElementById("cargoCapacity").innerHTML = shipsDetails.Mercury.cargoCapacity;
 			break;
 		case "Interceptor" :
-			document.getElementById("weaponName").innerHTML = "Laser Cannon";
-			document.getElementById("speedValue").innerHTML = "20";
-			document.getElementById("healthValue").innerHTML = "7";
-			document.getElementById("maneuverabilityValue").innerHTML = "14";
-			document.getElementById("cargoCapacity").innerHTML = "0";
+			document.getElementById("weaponName").innerHTML = shipsDetails.Interceptor.weapon;
+			document.getElementById("speedValue").innerHTML = shipsDetails.Interceptor.speed;
+			document.getElementById("healthValue").innerHTML = shipsDetails.Interceptor.hp;
+			document.getElementById("maneuverabilityValue").innerHTML = shipsDetails.Interceptor.maneuverability;
+			document.getElementById("cargoCapacity").innerHTML = shipsDetails.Interceptor.cargoCapacity;
 			break;
 		case "Deltawing" :
-			document.getElementById("weaponName").innerHTML = "Double Gatling Gun";
-			document.getElementById("speedValue").innerHTML = "11";
-			document.getElementById("healthValue").innerHTML = "9";
-			document.getElementById("maneuverabilityValue").innerHTML = "16";
-			document.getElementById("cargoCapacity").innerHTML = "0";
+			document.getElementById("weaponName").innerHTML = shipsDetails.Deltawing.weapon;
+			document.getElementById("speedValue").innerHTML = shipsDetails.Deltawing.speed;
+			document.getElementById("healthValue").innerHTML = shipsDetails.Deltawing.hp;
+			document.getElementById("maneuverabilityValue").innerHTML = shipsDetails.Deltawing.maneuverability;
+			document.getElementById("cargoCapacity").innerHTML = shipsDetails.Deltawing.cargoCapacity;
 			break;
 	}
 }
@@ -112,5 +131,4 @@ function registerPlayerWithName() {
 }
 
 function clearWrongInput() {
-
 }

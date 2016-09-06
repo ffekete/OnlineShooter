@@ -1,11 +1,8 @@
 package game.transformer;
 
-import org.springframework.stereotype.Component;
-
 import game.datatype.PlayerData;
 import game.model.RegistrationAnswer;
 
-@Component
 public class PlayerDataToRegistrationAnswerTransformer {
 
     public RegistrationAnswer tranform(PlayerData playerData, boolean registrartionStatus) {

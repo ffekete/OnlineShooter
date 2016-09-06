@@ -5,4 +5,5 @@ public class BrokerPaths {
     public static final String PLAYER_REGISTERED_STATUS = "/playerRegistered";
     public static final String MESSAGE_BROKER = "/messages";
     public static final String EVENT_BROKER = "/events";
+    public static final String SEND_SHIPS_DETAILS = "/sendShipsDetails";
 }

@@ -15,7 +15,7 @@ import game.model.RegistrationAnswer;
 import game.transformer.PlayerDataToRegistrationAnswerTransformer;
 
 @Controller
-public class PlayerRegisterController {
+public class PlayerRegisterController implements ControllerBase {
 
     @Autowired
     MessageSender messageSender;

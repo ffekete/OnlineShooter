@@ -31,6 +31,9 @@ public class ItemCreationHandler implements ItemCreation {
         case SHOTGUN:
             item = (SpawnableItem) WeaponFactory.createWeapon(ItemType.SHOTGUN);
             break;
+        case MISSILE_LAUNCHER:
+            item = (SpawnableItem) WeaponFactory.createWeapon(ItemType.MISSILE_LAUNCHER);
+            break;
         // power up-s
         case INCREASE_DAMAGE:
             item = (SpawnableItem) new IncreaseDamage();
@@ -61,8 +64,8 @@ public class ItemCreationHandler implements ItemCreation {
         case INCREASE_SCORE:
             item = (SpawnableItem) new IncreaseScore();
             break;
-		default:
-			break;
+        default:
+            break;
         }
         return item;
     }

@@ -4,6 +4,7 @@ import game.config.constant.ItemType;
 import game.datatype.weapon.DoubleGatlingGun;
 import game.datatype.weapon.GatlingGun;
 import game.datatype.weapon.LaserCannon;
+import game.datatype.weapon.MissileLauncher;
 import game.datatype.weapon.NoWeapon;
 import game.datatype.weapon.Shotgun;
 import game.interfaces.Weapon;
@@ -20,6 +21,8 @@ public class WeaponFactory {
             return new DoubleGatlingGun();
         case SHOTGUN:
             return new Shotgun();
+        case MISSILE_LAUNCHER:
+            return new MissileLauncher();
         case NO_WEAPON:
             return new NoWeapon();
         default:

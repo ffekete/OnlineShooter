@@ -81,6 +81,8 @@ public interface Ship extends Spawnable {
 
     public void setShield(Shield shield);
 
+    public void initShield();
+    
     public double getX();
 
     public void setX(double x);
