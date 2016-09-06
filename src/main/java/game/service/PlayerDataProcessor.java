@@ -146,8 +146,9 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
         double canvasHalfHeight = player.getCanvas().getHalfHeight();
         double horizontalDistanceFromMidPoint = Math.abs(player.getMouseX() - canvasHalfWidth);
         double verticalDistanceFromMidPoint = Math.abs(player.getMouseY() - canvasHalfHeight);
-        double actualDistanceFromScreenMidpoint = Math.sqrt(horizontalDistanceFromMidPoint * horizontalDistanceFromMidPoint
-                + verticalDistanceFromMidPoint * verticalDistanceFromMidPoint)
+        double actualDistanceFromScreenMidpoint = Math
+                .sqrt(horizontalDistanceFromMidPoint * horizontalDistanceFromMidPoint
+                        + verticalDistanceFromMidPoint * verticalDistanceFromMidPoint)
                 * GameConfig.MOUSE_SPEED_SENSITIVITY_PERCENT;
 
         double shorterCanvasValue = canvasHalfWidth > canvasHalfHeight ? canvasHalfHeight : canvasHalfWidth;
@@ -168,7 +169,8 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
     }
 
     private void updateShipAngles(PlayerData player) throws InterruptedException {
-        double angle = calculateAngleAndFilterIt(player, (double) player.getCanvas().getHalfWidth(), (double) player.getCanvas().getHalfHeight());
+        double angle = calculateAngleAndFilterIt(player, (double) player.getCanvas().getHalfWidth(),
+                (double) player.getCanvas().getHalfHeight());
         player.setPreviousAngle(player.getShipAngle());
         player.setShipAngle(angle);
     }
@@ -208,7 +210,8 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
      */
     @Override
     public void checkIfPlayerGetsAnItem(PlayerData player) {
-        CopyOnWriteArrayList<SpawnableItem> items = (CopyOnWriteArrayList<SpawnableItem>) itemPool.getAllOnScreen(player.getId());
+        CopyOnWriteArrayList<SpawnableItem> items = (CopyOnWriteArrayList<SpawnableItem>) itemPool
+                .getAllOnScreen(player.getId());
 
         Iterator<SpawnableItem> itemIterator = items.iterator();
 
@@ -235,6 +238,7 @@ public class PlayerDataProcessor implements PlayerDataProcessorInterface {
         for (Long j : playerPool.getAll()) {
             PlayerData player2 = playerPool.get(j);
             double hitDistance = player1.getHitRadius() + player2.getHitRadius();
+            if (player2.isSpawned() && player1.getId() != player2.getId()
                     && Math.abs(player1.getX() - player2.getX()) <= hitDistance
                     && Math.abs(player1.getY() - player2.getY()) <= hitDistance) {
                 player1.setShieldProtection(0L);
