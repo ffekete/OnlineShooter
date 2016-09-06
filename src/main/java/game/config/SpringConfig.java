@@ -1,5 +1,15 @@
 package game.config;
 
+import java.util.Locale;
+
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+
 import factory.ConnectionNodeBuilder;
 import factory.EventBuilder;
 import game.connection.ConnectionPool;
@@ -19,9 +29,6 @@ import game.transformer.PlayerDataToSentPlayerDataTransformer;
 import game.transformer.ReceivedPlayerDataToPlayerDataTransformer;
 import game.transformer.RegistrationDataToPlayerDataTransformer;
 import game.transformer.ShipConfigToShipsDetailsTransformer;
-
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SpringConfig {
@@ -121,4 +128,26 @@ public class SpringConfig {
         return new ShipConfigToShipsDetailsTransformer();
     }
 
+    @Bean
+    public LocaleChangeInterceptor localeChangeInterceptor() {
+        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+        localeChangeInterceptor.setParamName("language");
+        return localeChangeInterceptor;
+    }
+
+    @Bean(name = "localeResolver")
+    public LocaleResolver sessionLocaleResolver() {
+        SessionLocaleResolver localeResolver = new SessionLocaleResolver();
+        localeResolver.setDefaultLocale(new Locale("en"));
+
+        return localeResolver;
+    }
+
+    @Bean
+    public MessageSource messageSource() {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:localization/messages");
+        messageSource.setDefaultEncoding("UTF-8");
+        return messageSource;
+    }
 }

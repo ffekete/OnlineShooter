@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,40 +24,56 @@
 			</noscript>
 		</div>
 		<div class="row">
-			<h1>Online Shooter</h1>
+			<h1>
+				<spring:message code="label.selectShieldColor" />
+			</h1>
 		</div>
 		<div class="row">
 			<input type="text" id="name" placeholder="Enter your name here" />
 			<p id="response"></p>
 		</div>
 		<div class="row">
-			<h2>Select your shield color</h2>
+			<h2>
+				<spring:message code="label.selectShieldColor" />
+			</h2>
 			<input type="color" name="favcolor" id="colorPicker">
 		</div>
 		<div class="row">
-			<h2>Select ship</h2>
+			<h2>
+				<spring:message code="label.selectShip" />
+			</h2>
 			<select class="shipSelect" onchange="updateShipDetails()"
 				id="shipSelector">
-				<option value="Quicksilver">Quicksilver</option>
-				<option value="Mercury">Mercury</option>
-				<option value="Interceptor">Interceptor</option>
-				<option value="Deltawing">Deltawing</option>
+				<option value="Quicksilver"><spring:message
+						code="ship.quicksilver" /></option>
+				<option value="Mercury"><spring:message code="ship.mercury" /></option>
+				<option value="Interceptor"><spring:message
+						code="ship.interceptor" /></option>
+				<option value="Deltawing"><spring:message
+						code="ship.deltawing" /></option>
 			</select>
 		</div>
 		<div class="row">
 			<div class="shipDetails">
 				<img class="inl-bl" src="img/ship_1_128.png" id="shipImage">
 				<ul class="inl-bl" id="shipData">
-					<li>Weapon: <span id="weaponName"></span></li>
-					<li>Speed: <span id="speedValue"></span></li>
-					<li>Health: <span id="healthValue"></span></li>
-					<li>Maneuverability: <span id="maneuverabilityValue"></span></li>
-					<li>Cargo capacity: <span id="cargoCapacity"></span></li>
+					<li><spring:message code="label.weapon" /><span
+						id="weaponName"></span></li>
+					<li><spring:message code="label.speed" /><span
+						id="speedValue"></span></li>
+					<li><spring:message code="label.health" /><span
+						id="healthValue"></span></li>
+					<li><spring:message code="label.maneuverability" /><span
+						id="maneuverabilityValue"></span></li>
+					<li><spring:message code="label.cargoCapacity" /><span
+						id="cargoCapacity"></span></li>
 				</ul>
 			</div>
 		</div>
 		<div class="row">
-			<button class="btn btn-success" id="connect" onclick="connect();">Connect</button>
+			<button class="btn btn-success" id="connect" onclick="connect();">
+				<spring:message code="label.connect" />
+			</button>
 		</div>
 	</div>
 </body>
